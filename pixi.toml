@@ -16,6 +16,7 @@ numpy = "*"
 matplotlib = "*"
 requests = "*"
 flopy = "*"
+gcovr = "*"
 
 [tasks]
 # meson build
@@ -24,3 +25,6 @@ build = "meson install -C"
 # get ostag for system
 get-ostag = { cmd = "python -c 'from modflow_devtools.ostags import get_ostag; print(get_ostag())'"}
 autotest = { cmd = "pytest -v ./autotest" }
+build-solution = "python scripts/build_solution.py"
+test-solution = "python scripts/test_solution.py"
+coverage = "python scripts/coverage.py"
