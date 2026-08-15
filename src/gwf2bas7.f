@@ -1251,6 +1251,11 @@ C2B-----FOUND, SET APPROPRIATE FLAGS.
             ELSE IF(LINE(ISTART:ISTOP).EQ.'FORMAT') THEN
                CALL URWORD(LINE,LLOC,ISTART,ISTOP,0,N,R,IOUT,INOC)
                CHEDFM=LINE(ISTART:ISTOP)
+               I=INDEX(CHEDFM,'1X1P')
+               IF(I.GT.0) THEN
+                  CHEDFM(I+3:20)=CHEDFM(I+2:19)
+                  CHEDFM(I+2:I+2)=','
+               END IF
                WRITE(IOUT,103) CHEDFM
   103          FORMAT(1X,'HEADS WILL BE SAVED WITH FORMAT: ',A)
                CALL URWORD(LINE,LLOC,ISTART,ISTOP,1,N,R,IOUT,INOC)
@@ -1282,6 +1287,11 @@ C2C-----IF FOUND, SET APPROPRIATE FLAGS
             ELSE IF(LINE(ISTART:ISTOP).EQ.'FORMAT') THEN
                CALL URWORD(LINE,LLOC,ISTART,ISTOP,0,N,R,IOUT,INOC)
                CDDNFM=LINE(ISTART:ISTOP)
+               I=INDEX(CDDNFM,'1X1P')
+               IF(I.GT.0) THEN
+                  CDDNFM(I+3:20)=CDDNFM(I+2:19)
+                  CDDNFM(I+2:I+2)=','
+               END IF
                WRITE(IOUT,105) CDDNFM
   105          FORMAT(1X,'DRAWDOWN WILL BE SAVED WITH FORMAT: ',A)
                CALL URWORD(LINE,LLOC,ISTART,ISTOP,1,N,R,IOUT,INOC)
