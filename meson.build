@@ -23,6 +23,9 @@ message('Profile:', profile)
 is_double = get_option('double')
 message('Double precision:', is_double)
 
+warning_audit = get_option('warning_audit')
+message('Warning audit:', warning_audit)
+
 # parse compiler options
 fc = meson.get_compiler('fortran')
 fc_id = fc.get_id()
@@ -48,6 +51,19 @@ if fc_id == 'gcc'
                    '-Wno-maybe-uninitialized',   # "Uninitialized" flags produce false positives with allocatables
                    '-Wno-uninitialized',
                    ]
+  if warning_audit
+    compile_args += [
+                     '-Wall',
+                     '-Wextra',
+                     '-Wpedantic',
+                     '-Wimplicit-interface',
+                     '-Wtabs',
+                     '-Wsurprising',
+                     '-Wconversion',
+                     '-fcheck=all',
+                     '-fbacktrace',
+                    ]
+  endif
   if is_double
     compile_args += [
                      '-fdefault-real-8',
@@ -100,6 +116,12 @@ elif fc_id == 'intel' or fc_id == 'intel-llvm'
                    '-diag-disable:7025',  # f2008 warning
                    '-diag-disable:5268',  # Line too long
                   ]
+  if warning_audit
+    compile_args += ['-warn', 'all',
+             '-stand', 'f18',
+             '-check', 'all',
+                    ]
+  endif
   link_args += '-static-intel'
 
   if is_double
@@ -137,9 +159,27 @@ compile_args = []
 link_args = []
 if cc_id == 'gcc'
   compile_args += ['-Wno-unused-but-set-variable']
+  if warning_audit
+    compile_args += [
+                     '-Wall',
+                     '-Wextra',
+                     '-Wpedantic',
+                     '-Wshadow',
+                     '-Wconversion',
+                    ]
+  endif
 elif cc_id == 'intel'
   compile_args += ['-frtti', '-diag-disable=10441']
   link_args += ['-diag-disable=10441']
+elif cc_id == 'intel-llvm'
+  if warning_audit
+    compile_args += ['-Wall',
+                     '-Wextra',
+                     '-Wpedantic',
+                     '-Wshadow',
+                     '-Wconversion',
+                    ]
+  endif
 endif
 
 add_project_arguments(cc.get_supported_arguments(compile_args), language: 'c')

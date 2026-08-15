@@ -1,1 +1,2 @@
 option('double', type: 'boolean', value: false, description: 'Build double precision version')
+option('warning_audit', type: 'boolean', value: false, description: 'Enable strict compiler warnings and runtime checks')
