@@ -23,7 +23,9 @@ pixi run test-solution double --buildtype debug
 pixi run coverage double --buildtype debugoptimized
 ```
 
-The coverage task defaults to the `debug` build type, adds GCC coverage
+The coverage task defaults to the `release` build type, adds GCC coverage
 instrumentation, runs the selected executable through the autotests, and
-writes an HTML report for the Fortran and C sources. Use `--coverage` with
-`test-solution` when testing a previously built coverage variant.
+writes a detailed HTML report plus a JSON summary for the Fortran and C
+sources. The HTML report includes source details, decision coverage, call
+coverage, and uncovered-code sorting. Use `--coverage` with `test-solution`
+when testing a previously built coverage variant.
