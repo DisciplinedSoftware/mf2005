@@ -26,8 +26,7 @@ Release/
 *.pyc
 **/__pycache__/
 
-bin/
-build-*/
+builds/
 coverage*.html
 *.gcda
 *.gcno

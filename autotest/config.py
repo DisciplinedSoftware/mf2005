@@ -4,7 +4,7 @@ import platform
 from pathlib import Path
 from shutil import rmtree
 
-testdir = "temp"
+testdir = os.path.join("autotest", "temp")
 releasedir = os.path.join(testdir, "release")
 retain = False
 target_dict = {}
@@ -58,7 +58,7 @@ testpaths = (
 program = "mf2005"
 srcdir = os.path.join("..", "src")
 target = program + exe_ext
-target_dict[program] = os.path.abspath(os.path.join(_parent_dir, "bin", target))
+target_dict[program] = os.path.abspath(os.path.join(_parent_dir, "builds", "bin", target))
 target_dict[program] = os.environ.get("MF2005_EXECUTABLE", target_dict[program])
 
 # Release version information

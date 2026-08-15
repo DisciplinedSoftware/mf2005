@@ -23,13 +23,13 @@ def main():
     args = parser.parse_args()
 
     coverage_name = "-coverage" if args.coverage else ""
-    build_dir = ROOT / f"build-{args.buildtype}-{args.precision}{coverage_name}"
+    build_dir = ROOT / "builds" / f"build-{args.buildtype}-{args.precision}{coverage_name}"
     double_option = "true" if args.precision == "double" else "false"
-    executable = ROOT / "bin" / ("mf2005dbl" if args.precision == "double" else "mf2005")
+    executable = ROOT / "builds" / "bin" / ("mf2005dbl" if args.precision == "double" else "mf2005")
 
     setup = [
         "meson", "setup", "--wipe", ".", str(build_dir),
-        f"--prefix={ROOT}", "--bindir=bin", f"--buildtype={args.buildtype}",
+        f"--prefix={ROOT / 'builds'}", "--bindir=bin", f"--buildtype={args.buildtype}",
         f"-Ddouble={double_option}",
     ]
     if args.coverage:

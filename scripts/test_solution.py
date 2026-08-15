@@ -21,7 +21,7 @@ def main():
 
     environment = os.environ.copy()
     coverage_name = "-coverage" if args.coverage else ""
-    build_dir = ROOT / f"build-{args.buildtype}-{args.precision}{coverage_name}"
+    build_dir = ROOT / "builds" / f"build-{args.buildtype}-{args.precision}{coverage_name}"
     executable_name = "mf2005dbl" if args.precision == "double" else "mf2005"
     executable = build_dir / "src" / executable_name
     if not executable.exists():
