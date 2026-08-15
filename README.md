@@ -29,3 +29,11 @@ writes a detailed HTML report plus a JSON summary for the Fortran and C
 sources. The HTML report includes source details, decision coverage, call
 coverage, and uncovered-code sorting. Use `--coverage` with `test-solution`
 when testing a previously built coverage variant.
+
+The code audit defaults to GCC across all build types and precisions. Select a
+specific warning-audit configuration with `--build-type` and `--precision`, or
+use `--compiler all` to include every compiler. Coverage is independent and
+opt-in with `pixi run code-audit --coverage`; use
+`--coverage-build-type` and `--coverage-precision` to select its configuration.
+Coverage uses GCC/gcovr; audit-generated HTML coverage reports are written
+alongside the audit HTML report.
