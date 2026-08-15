@@ -46,6 +46,13 @@ PREPROCESSOR_DIRECTIVES = (
     "define", "if", "ifdef", "ifndef", "elif", "else", "endif", "include", "pragma",
 )
 
+# Intel/DEC compiler-directive comments: the comment marker immediately
+# followed by DEC$ or DIR$ (no space) turns an ordinary Fortran comment line
+# into a directive the compiler acts on (e.g. attribute or vectorization
+# hints). Lexically indistinguishable from a plain comment except for this
+# prefix, so they must be pulled out before falling into comment_lines.
+FORTRAN_COMPILER_DIRECTIVES = ("dec$", "dir$")
+
 
 def is_comment(line, free_form, is_c_file=False):
     if is_c_file:
@@ -54,6 +61,18 @@ def is_comment(line, free_form, is_c_file=False):
     if free_form:
         return line.lstrip().startswith("!")
     return bool(line) and line[0] in "Cc*"
+
+
+def fortran_directive_comment(line, free_form):
+    """Return the DEC$/DIR$ keyword if this comment line is actually an
+    Intel/DEC compiler directive, else None. Assumes is_comment() is True.
+    """
+    body = line.lstrip()[1:] if free_form else line[1:]
+    body = body.lower()
+    for keyword in FORTRAN_COMPILER_DIRECTIVES:
+        if body.startswith(keyword):
+            return keyword
+    return None
 
 
 def strip_inline_comment(statement):
@@ -105,6 +124,10 @@ def scan_file(path, stats):
         if is_comment(raw_line, free_form, is_c_file=is_c_file):
             stats["comment_lines"] += 1
             form["comment_lines"] += 1
+            if not is_c_file:
+                keyword = fortran_directive_comment(raw_line, free_form)
+                if keyword is not None:
+                    stats["directives"]["fortran"][keyword] += 1
             continue
 
         stripped = raw_line.strip()
@@ -187,7 +210,9 @@ def compute_statistics():
         "includes": 0,
         "procedures": [],
         "directives": {
-            "fortran": {directive: 0 for directive in PREPROCESSOR_DIRECTIVES} | {"other": 0},
+            "fortran": {directive: 0 for directive in PREPROCESSOR_DIRECTIVES}
+            | {directive: 0 for directive in FORTRAN_COMPILER_DIRECTIVES}
+            | {"other": 0},
             "c": {directive: 0 for directive in PREPROCESSOR_DIRECTIVES} | {"other": 0},
         },
         "by_form": {
@@ -334,6 +359,8 @@ def render_statistics_body(stats, heading_level=2, title="Code Statistics"):
         directive_rows.append(
             (directive, stats["directives"]["fortran"][directive], stats["directives"]["c"][directive])
         )
+    for directive in FORTRAN_COMPILER_DIRECTIVES:
+        directive_rows.append((f"{directive} (compiler directive)", stats["directives"]["fortran"][directive], 0))
     directive_table = html_table(
         ["Directive", "Fortran", "C"], directive_rows, numeric_columns=(1, 2), sortable=False
     )
@@ -376,7 +403,12 @@ def render_statistics_body(stats, heading_level=2, title="Code Statistics"):
         f"<{hh}>Source Size</{hh}>{source_size_table}"
         f"<{hh}>Source Size by Form</{hh}>{by_form_table}"
         f"<{hh}>Program Structure</{hh}>{structure_table}"
-        f"<{hh}>Preprocessor Directives</{hh}>{directive_table}"
+        f"<{hh}>Preprocessor Directives</{hh}>"
+        "<p>The two \"compiler directive\" rows are Fortran comments that the Intel/DEC "
+        "convention (comment marker immediately followed by <code>DEC$</code> or "
+        "<code>DIR$</code>, no space) turns into compiler directives rather than prose; "
+        "they have no C equivalent, so their C column is always 0.</p>"
+        f"{directive_table}"
         f"<{hh}>Complexity</{hh}>{complexity_table}<p>{html.escape(highest_note)}</p>"
         f"<{hh}>Top 10 Cyclomatic Complexity</{hh}>{top_cyclomatic_table}"
         f"<{hh}>Top 10 Cognitive Complexity</{hh}>{top_cognitive_table}"

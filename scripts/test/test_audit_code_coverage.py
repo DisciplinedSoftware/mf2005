@@ -3,7 +3,13 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from scripts.audit_code import CATEGORIES, build_category_rows, collect_unique_warnings, summarize_coverage
+from scripts.audit_code import (
+    CATEGORIES,
+    build_category_rows,
+    collect_unique_warnings,
+    summarize_coverage,
+    warning_counts,
+)
 
 
 def test_build_category_rows_includes_total_warning_count():
@@ -117,3 +123,42 @@ def test_collect_unique_warnings_includes_independent_config_tags(tmp_path):
         "build-type:release",
         "precision:single",
     }
+
+
+def test_warning_counts_parses_intel_fortran_diagnostics(tmp_path):
+    log_file = tmp_path / "intel.log"
+    log_file.write_text(
+        "../../src/utl7.f(1650): warning #6717: This name has not been given an explicit type.   [J]\n"
+        "      ICRL= (K-1)*NROW*NCOL + (I-1)*NCOL + J\n"
+        "-------------------------------------------^\n"
+        "../../src/utl7.f(1670): warning #7346: The CHARACTER* form of a CHARACTER declaration is an "
+        "obsolescent feature in Fortran 2018.\n"
+        "      CHARACTER*(*) TEXT1,TEXT2\n"
+        "-----------------^\n",
+        encoding="utf-8",
+    )
+
+    counts = warning_counts(log_file)
+
+    assert counts["warnings"] == 2
+    assert counts["obsolescent"] == 1
+    assert counts["implicit_interface"] == 1
+
+
+def test_warning_counts_parses_back_to_back_c_diagnostics(tmp_path):
+    log_file = tmp_path / "c_warnings.log"
+    log_file.write_text(
+        "../../src/ccfd.c:59:32: warning: implicit conversion changes signedness: "
+        "'int' to 'unsigned long' [-Wsign-conversion]\n"
+        "   59 |   CCFD_ptr->DD=(double*)calloc(neq,sizeof(double));\n"
+        "      |                         ~~~~~~ ^~~\n"
+        "../../src/ccfd.c:62:11: warning: implicit conversion changes signedness: "
+        "'unsigned long' to 'int' [-Wsign-conversion]\n"
+        "   62 |   size=neq*sizeof(double);\n"
+        "      |       ~~~~^~~~~~~~~~~~~~~\n",
+        encoding="utf-8",
+    )
+
+    counts = warning_counts(log_file)
+
+    assert counts["warnings"] == 2

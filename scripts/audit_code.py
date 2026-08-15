@@ -69,12 +69,27 @@ FORTRAN_DIAGNOSTIC_BLOCK = re.compile(
     r"(?P<severity>Warning|Error):\s*(?P<message>.+)"
 )
 
-# Matches a GCC-style C diagnostic: "<file>:<line>:<col>: warning: <message>"
-# on one line, followed immediately by the source context.
+# Matches a GCC/Clang-style single-line C diagnostic (GCC's gcc and Intel
+# LLVM's icx both use this): "<file>:<line>:<col>: warning: <message>",
+# anchored per-line rather than bounded by a following blank line, since
+# both compilers emit back-to-back diagnostics within the same file with no
+# separating blank line.
 C_DIAGNOSTIC_BLOCK = re.compile(
-    r"(?P<file>[\w./\\-]+\.(?:c|h|C)):(?P<line>\d+):\d+:\s*(?P<severity>warning|error):\s*(?P<message>.+)\n"
-    r"(?P<context>(?:.*\n){1,4}?)(?=\n|\Z)"
+    r"^(?P<file>[\w./\\-]+\.(?:c|h|C)):(?P<line>\d+):\d+:\s*(?P<severity>warning|error):\s*(?P<message>.+)\n"
+    r"(?P<context>(?:(?!^[\w./\\-]+\.(?:c|h|C):\d+:\d+:).*\n){0,4})",
+    re.MULTILINE,
 )
+
+# Matches an Intel Fortran (ifx/ifort) diagnostic: "<file>(<line>): warning
+# #<code>: <message>", likewise anchored per-line since Intel emits these
+# back-to-back with no blank-line separator either.
+INTEL_FORTRAN_DIAGNOSTIC_BLOCK = re.compile(
+    r"^(?P<file>[\w./\\-]+\.(?:f90|f|F90|F))\((?P<line>\d+)\):\s*(?P<severity>warning|error)\s*#\d+:\s*(?P<message>.+)\n"
+    r"(?P<context>(?:(?!^[\w./\\-]+\.(?:f90|f|F90|F)\(\d+\):).*\n){0,4})",
+    re.MULTILINE,
+)
+
+DIAGNOSTIC_BLOCKS = (FORTRAN_DIAGNOSTIC_BLOCK, INTEL_FORTRAN_DIAGNOSTIC_BLOCK, C_DIAGNOSTIC_BLOCK)
 
 
 @dataclass(frozen=True)
@@ -149,17 +164,18 @@ def iter_diagnostic_records(log_file):
         return []
     text = log_file.read_text(encoding="utf-8", errors="replace")
     records = []
-    for match in (*FORTRAN_DIAGNOSTIC_BLOCK.finditer(text), *C_DIAGNOSTIC_BLOCK.finditer(text)):
-        severity = match.group("severity").title()
-        message = match.group("message").strip()
-        category = next((key for key, _, pattern in CATEGORIES if pattern.search(message)), None)
-        records.append({
-            "file": match.group("file"),
-            "line": match.group("line"),
-            "severity": severity,
-            "message": message,
-            "category": category,
-        })
+    for block_pattern in DIAGNOSTIC_BLOCKS:
+        for match in block_pattern.finditer(text):
+            severity = match.group("severity").title()
+            message = match.group("message").strip()
+            category = next((key for key, _, pattern in CATEGORIES if pattern.search(message)), None)
+            records.append({
+                "file": match.group("file"),
+                "line": match.group("line"),
+                "severity": severity,
+                "message": message,
+                "category": category,
+            })
     return records
 
 
@@ -315,7 +331,7 @@ def find_examples(log_files):
             continue
         text = log_file.read_text(encoding="utf-8", errors="replace")
         matches = sorted(
-            (*FORTRAN_DIAGNOSTIC_BLOCK.finditer(text), *C_DIAGNOSTIC_BLOCK.finditer(text)),
+            (match for pattern in DIAGNOSTIC_BLOCKS for match in pattern.finditer(text)),
             key=lambda m: m.start(),
         )
         for match in matches:
