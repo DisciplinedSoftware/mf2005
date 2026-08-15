@@ -1,6 +1,6 @@
 ---
 name: modflow-build
-description: "Use when building, testing, or measuring code coverage for MODFLOW-2005 with Pixi and Meson. Supports single or double precision, release/debug/debugoptimized/plain/minsize/custom build types, coverage instrumentation, autotests, and gcovr reports."
+description: "Use when building MODFLOW-2005 with Pixi and Meson. Supports GCC or Intel LLVM compilers, single or double precision, release/debug/debugoptimized/plain/minsize/custom build types, and the optional strict warning audit."
 ---
 
 # MODFLOW-2005 Build Workflow
@@ -15,12 +15,13 @@ cd /home/pluck/Documents/DisciplinedSoftware/Modernization/Code/mf2005
 
 Every native build is selected by these independent dimensions:
 
+- Compiler: GCC (default environment) or Intel LLVM (`ifx`/`icx`)
 - Precision: `single` or `double` (default: `single`)
-- Meson build type: `release`, `debug`, `debugoptimized`, `plain`, `minsize`, or `custom` (default: `release` for builds and tests)
-- Coverage: normal or instrumented (enabled by `--coverage`)
+- Meson build type: `release`, `debug`, `debugoptimized`, `plain`, `minsize`, or `custom` (default: `release`)
+- Warning audit: `false` (default) or `true` for strict compiler warnings and Fortran runtime checks
 
 The single-precision executable is `mf2005`; double precision is `mf2005dbl`.
-Use a distinct combination for each build. The task scripts create variant-specific build directories and tests run the executable from the selected build directory, avoiding collisions in `bin/`.
+Use a distinct combination for each build. The task scripts create variant-specific build directories under a common `builds/` folder and install the executable to `builds/bin/` while avoiding collisions.
 
 ## Build
 
@@ -43,53 +44,42 @@ pixi run build-solution single --buildtype custom
 
 The task runs Meson setup, compile, and install. It uses `-Ddouble=true` only for the double-precision variant.
 
-## Tests
-
-Run the full MODFLOW-2005 autotest suite against a built variant:
-
-```bash
-pixi run test-solution single
-pixi run test-solution double --buildtype debug
-```
-
-For a coverage-instrumented build, pass `--coverage` to select the matching executable:
-
-```bash
-pixi run test-solution single --buildtype debug --coverage
-```
-
-The test task uses `pytest -v ./autotest`. Add normal pytest arguments after the task options, for example:
-
-```bash
-pixi run test-solution single --buildtype debug -k sfr
-pixi run test-solution double --buildtype release --collect-only -q
-```
-
-If the selected executable has not been built, build the same precision, build type, and coverage combination first. The task reports the expected executable path when it is missing.
-
-## Coverage
-
-Build, run tests, and create an HTML native Fortran/C coverage report in one step:
-
-```bash
-pixi run coverage single
-pixi run coverage double --buildtype debugoptimized
-pixi run coverage double --buildtype release --output coverage-double.html
-```
-
-Coverage defaults to the `debug` Meson build type and uses `gcovr`. The report filters source files under `src/`. The generated HTML report and GCC `.gcda`/`.gcno` files are ignored by Git.
+The Pixi build task does not currently expose `warning_audit`; use the direct Meson workflow below for an audit build.
 
 ## Direct Meson fallback
 
 If Pixi is unavailable, use the equivalent explicit Meson command:
 
 ```bash
-meson setup --wipe . build-debug-single \
-  --prefix="$(pwd)" --bindir=bin \
-  --buildtype=debug -Ddouble=false -Db_coverage=true
-meson compile -C build-debug-single
-meson install -C build-debug-single
+meson setup --wipe . builds/build-debug-single \
+  --prefix="$(pwd)/builds" --bindir=bin \
+  --buildtype=debug -Ddouble=false
+meson compile -C builds/build-debug-single
+meson install -C builds/build-debug-single
 ```
+
+Build the strict warning-audit configuration:
+
+```bash
+meson setup --wipe . builds/build-warning-audit \
+  --prefix="$(pwd)/builds" --bindir=bin \
+  --buildtype=debug -Ddouble=false -Dwarning_audit=true
+meson compile -C builds/build-warning-audit
+```
+
+The audit option can be combined with the existing precision and build-type dimensions. For example, a double-precision release audit uses `-Ddouble=true -Dwarning_audit=true --buildtype=release` and should use its own build directory.
+
+Build with Intel oneAPI on Linux:
+
+```bash
+source /opt/intel/oneapi/setvars.sh
+FC=ifx CC=icx meson setup --wipe . builds/build-warning-audit-intel-debug-single \
+  --prefix="$(pwd)/builds" --bindir=bin \
+  --buildtype=debug -Ddouble=false -Dwarning_audit=true
+FC=ifx CC=icx meson compile -C builds/build-warning-audit-intel-debug-single
+```
+
+The Intel audit matrix uses the same six Meson build types and both precision modes as the GCC matrix. Use a distinct `builds/build-warning-audit-intel-<buildtype>-<precision>` directory for each combination. Intel diagnostics are recorded under `builds/build-logs/warning-audit-intel/`.
 
 Prefer the Pixi tasks because they keep build directory naming and executable selection consistent.
 
@@ -97,8 +87,6 @@ Prefer the Pixi tasks because they keep build directory naming and executable se
 
 After changing task scripts or build configuration:
 
-1. Run `python -m py_compile scripts/build_solution.py scripts/test_solution.py scripts/coverage.py`.
-2. Run the relevant task with `--help`.
+1. Run `python -m py_compile scripts/build_solution.py`.
+2. Run `pixi run build-solution --help`.
 3. Build the requested variant.
-4. Run `pixi run test-solution ... --collect-only -q` before the full suite when checking task routing.
-5. For coverage, confirm the HTML report is created and inspect the gcovr summary.
