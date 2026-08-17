@@ -27,7 +27,6 @@ Release/
 **/__pycache__/
 
 builds/
-coverage*.html
 *.gcda
 *.gcno
 .idea/
@@ -39,5 +38,3 @@ autotest/.cache/
 .ipynb_checkpoints/
 
 msvs/.vs/
-
-doc/reports/

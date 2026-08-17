@@ -71,8 +71,17 @@ The Intel environment must be initialized before running the script because
 
 Raw logs are written to a unique run directory under `builds/build-logs/code-audit/`
 and are not committed. The HTML report is written to
-`doc/reports/code-audit-report.html` by default and is a self-contained
-modernization status snapshot:
+`doc/reports/code-audit-report.html` by default. When `--coverage` is enabled
+without an explicit `--report`, it is written to
+`doc/reports/coverage_{datetime}/coverage_{datetime}.html`, where `{datetime}` uses the format
+`%Y-%m-%d_%Hh%Mm%S` (for example,
+`doc/reports/coverage_2026-08-16_14h05m09/coverage_2026-08-16_14h05m09.html`). The
+Each variant coverage report is stored in its own
+`<compiler>-<configuration>-<precision>` subfolder under the timestamped
+folder, for example
+`doc/reports/coverage_2026-08-16_14h05m09/gcc-release-single/coverage-gcc-release-single.html`.
+An explicit `--report` path always takes precedence. The report is a
+self-contained modernization status snapshot:
 
 - Embedded dynamic source statistics (source size, program structure, complexity
   summary, top 10 cyclomatic/cognitive complexity procedures, and a

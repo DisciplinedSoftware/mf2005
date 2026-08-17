@@ -379,7 +379,8 @@ def run_coverage(compiler, build_types, precisions, log_dir, report_dir):
             variant = f"{compiler.name}-{build_type}-{precision}"
             progress.step(variant, "running")
             log_file = log_dir / f"{variant}-coverage.log"
-            coverage_report = report_dir / f"coverage-{variant}.html"
+            variant_report_dir = report_dir / variant
+            coverage_report = variant_report_dir / f"coverage-{variant}.html"
             command = [
                 sys.executable,
                 "scripts/coverage.py",
@@ -404,6 +405,17 @@ def run_coverage(compiler, build_types, precisions, log_dir, report_dir):
             progress.finish(variant, status)
             coverage_codes.append((variant, completed.returncode))
     return coverage_codes
+
+
+def default_report_path_audit_report():
+    """Return the default warning-audit report path."""
+    return ROOT / "doc" / "reports" / "code-audit-report.html"
+
+
+def default_report_path_coverage_folder():
+    """Return a timestamped folder for coverage audit reports."""
+    timestamp = datetime.now().strftime("%Y-%m-%d_%Hh%Mm%S")
+    return ROOT / "doc" / "reports" / f"coverage_{timestamp}"
 
 
 def main():
@@ -457,13 +469,17 @@ def main():
         default=ROOT / "builds" / "build-logs" / "code-audit",
         help="Directory for raw logs and the generated report.",
     )
+    default_report = default_report_path_audit_report()
     parser.add_argument(
         "--report",
         type=Path,
-        default=ROOT / "doc" / "reports" / "code-audit-report.html",
+        default=default_report,
         help="HTML report path (default: doc/reports/code-audit-report.html).",
     )
     args = parser.parse_args()
+    if args.report == default_report and args.coverage:
+        coverage_folder = default_report_path_coverage_folder()
+        args.report = coverage_folder / f"{coverage_folder.name}.html"
 
     compilers = available_compilers(args.compiler)
     build_types = BUILD_TYPES if args.build_type == "all" else (args.build_type,)

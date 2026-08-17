@@ -1,4 +1,5 @@
 import argparse
+import datetime
 import subprocess
 from pathlib import Path
 
@@ -41,7 +42,9 @@ def main():
     build_dir = ROOT / "builds" / f"build-{args.buildtype}-{args.precision}-coverage"
     report = Path(args.output)
     if not report.is_absolute():
-        report = ROOT / report
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%Hh%Mm%S")
+        report = ROOT / "doc" / "reports" / f"coverage_{timestamp}" 
+    report.parent.mkdir(parents=True, exist_ok=True)
     summary = report.with_suffix(".json")
     run([
         "gcovr", "--root", ".", "--object-directory", str(build_dir),

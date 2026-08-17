@@ -1,12 +1,17 @@
 from pathlib import Path
+from types import SimpleNamespace
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from scripts.audit_code import (
     CATEGORIES,
+    Compiler,
     build_category_rows,
     collect_unique_warnings,
+    default_report_path_audit_report,
+    default_report_path_coverage_folder,
+    run_coverage,
     summarize_coverage,
     warning_counts,
 )
@@ -99,6 +104,50 @@ def test_summarize_coverage_handles_gcovr_summary():
         "function_total": 20,
         "function_percent": 70.0,
     }
+
+
+def test_default_report_path_coverage_folder_uses_timestamped_name(monkeypatch):
+    class FixedDateTime:
+        @classmethod
+        def now(cls):
+            from datetime import datetime
+
+            return datetime(2026, 8, 16, 14, 5, 9)
+
+    monkeypatch.setattr("scripts.audit_code.datetime", FixedDateTime)
+
+    assert default_report_path_coverage_folder().name == "coverage_2026-08-16_14h05m09"
+
+
+def test_default_report_path_audit_report_is_stable():
+    assert default_report_path_audit_report().name == "code-audit-report.html"
+
+
+def test_run_coverage_places_each_variant_in_named_folder(tmp_path, monkeypatch):
+    commands = []
+    log_dir = tmp_path / "logs"
+    log_dir.mkdir()
+
+    def fake_run(command, **kwargs):
+        commands.append(command)
+        return SimpleNamespace(returncode=0)
+
+    monkeypatch.setattr("scripts.audit_code.subprocess.run", fake_run)
+
+    run_coverage(
+        Compiler("gcc", "gfortran", "gcc"),
+        ("release",),
+        ("single",),
+        log_dir,
+        tmp_path / "coverage_2026-08-16_14h05m09",
+    )
+
+    assert commands[0][-1] == str(
+        tmp_path
+        / "coverage_2026-08-16_14h05m09"
+        / "gcc-release-single"
+        / "coverage-gcc-release-single.html"
+    )
 
 
 def test_collect_unique_warnings_includes_independent_config_tags(tmp_path):
