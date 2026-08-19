@@ -1,1 +1,4 @@
 coverage*/
+coverage*.html
+coverage*.css
+coverage*.json
