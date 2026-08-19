@@ -8,7 +8,7 @@ description: "Use when building MODFLOW-2005 with Pixi and Meson. Supports GCC o
 Use the repository root as the working directory:
 
 ```bash
-cd /home/pluck/Documents/DisciplinedSoftware/Modernization/Code/mf2005
+cd /home/pluck/Documents/DisciplinedSoftware/Modernization/code/mf2005
 ```
 
 ## Variant model

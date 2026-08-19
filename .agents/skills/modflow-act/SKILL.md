@@ -8,7 +8,7 @@ description: "Use when running the MODFLOW-2005 GitHub Actions workflow locally 
 Use the repository root as the working directory:
 
 ```bash
-cd /home/pluck/Documents/DisciplinedSoftware/Modernization/Code/mf2005
+cd /home/pluck/Documents/DisciplinedSoftware/Modernization/code/mf2005
 ```
 
 ## Prerequisites
