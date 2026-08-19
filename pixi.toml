@@ -17,6 +17,7 @@ matplotlib = "*"
 requests = "*"
 flopy = "*"
 gcovr = "*"
+uv = "*"
 
 [tasks]
 # meson build
@@ -27,5 +28,5 @@ get-ostag = { cmd = "python -c 'from modflow_devtools.ostags import get_ostag; p
 autotest = { cmd = "pytest -v ./autotest" }
 build-solution = "python scripts/build_solution.py"
 test-solution = "python scripts/test_solution.py"
-coverage = "python scripts/coverage.py"
-code-audit = "python scripts/audit_code.py"
+dscoverage = "uv run --project ../../tools/dscoverage dscoverage"
+dsaudit = "uv run --project ../../tools/dsaudit dsaudit"
