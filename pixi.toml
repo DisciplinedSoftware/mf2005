@@ -17,7 +17,6 @@ matplotlib = "*"
 requests = "*"
 flopy = "*"
 gcovr = "*"
-uv = "*"
 
 [tasks]
 # meson build
@@ -28,9 +27,3 @@ get-ostag = { cmd = "python -c 'from modflow_devtools.ostags import get_ostag; p
 autotest = { cmd = "pytest -v ./autotest" }
 build-solution = "python scripts/build_solution.py"
 test-solution = "python scripts/test_solution.py"
-# dsmodern modernization tools (the ../../tools uv workspace); they read
-# ./dsmodern.toml from this directory
-dsaudit = "uv run --project ../../tools dsmodern audit"
-dscoverage = "uv run --project ../../tools dsmodern coverage"
-dsfixed2free = "uv run --project ../../tools dsmodern fixed2free"
-dsmutate = "uv run --project ../../tools dsmodern mutate"
