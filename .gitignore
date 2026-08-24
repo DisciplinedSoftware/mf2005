@@ -38,8 +38,3 @@ autotest/.cache/
 .ipynb_checkpoints/
 
 msvs/.vs/
-
-
-# Real per-checkout config for the dsmodern modernization tools (../../tools);
-# see dsmodern.example.toml in that repo for the schema
-dsmodern.toml
