@@ -13340,7 +13340,7 @@
 !
 !
       CHARACTER (LEN=10) FUNCTION SSWR_SCCHAR(R) RESULT(value)
-        USE GWFSWRMODULE, ONLY: IKND, DZERO
+        USE GWFSWRMODULE, ONLY: DZERO
         IMPLICIT NONE
 !     + + + DUMMY ARGUMENTS + + +
         REAL, INTENT(IN) :: R
@@ -13348,15 +13348,13 @@
         DOUBLEPRECISION :: t
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
-        IF (IKND.EQ.4) THEN
-          t = ABS(R)
-          IF( t.GT.9.99999D5 .OR. t.LT.0.01 ) THEN
-            WRITE(value,'(1PE10.3)') R
-          ELSE
-            WRITE(value,'(F10.3)') R
-          END IF
+!       A LIST-DIRECTED WRITE OF A PROMOTED (8-BYTE) REAL OVERFLOWS THE
+!       10-CHARACTER RESULT, SO USE EXPLICIT FORMATS FOR EVERY REAL KIND
+        t = ABS(R)
+        IF( t.GT.9.99999D5 .OR. t.LT.0.01 ) THEN
+          WRITE(value,'(1PE10.3)') R
         ELSE
-          WRITE(value,*) R
+          WRITE(value,'(F10.3)') R
         END IF
 !---------RETURN
         RETURN
