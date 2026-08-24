@@ -1,0 +1,641 @@
+{
+  "generated": "2026-08-20T02:42:10-04:00",
+  "tool": "dsfixed2free 0.1.0",
+  "project_root": "mf2005",
+  "configs": [
+    {
+      "name": "gcc-release-single",
+      "build_dir": "mf2005/builds/build-release-single",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-std=legacy",
+        "-O3",
+        "-fall-intrinsics",
+        "-pedantic",
+        "-cpp",
+        "-ffree-line-length-none",
+        "-Wcharacter-truncation",
+        "-Wno-unused-dummy-argument",
+        "-Wno-intrinsic-shadow",
+        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",
+        "-D__linux__"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": true
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "gcc-release-double",
+      "build_dir": "mf2005/builds/build-release-double",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-std=legacy",
+        "-O3",
+        "-fall-intrinsics",
+        "-pedantic",
+        "-cpp",
+        "-ffree-line-length-none",
+        "-Wcharacter-truncation",
+        "-Wno-unused-dummy-argument",
+        "-Wno-intrinsic-shadow",
+        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",
+        "-fdefault-real-8",
+        "-fdefault-double-8",
+        "-D__linux__"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": true
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "gcc-debug-single",
+      "build_dir": "mf2005/builds/build-dsfixed2free-gcc-debug-single",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-std=legacy",
+        "-O0",
+        "-g",
+        "-fall-intrinsics",
+        "-pedantic",
+        "-cpp",
+        "-ffree-line-length-none",
+        "-Wcharacter-truncation",
+        "-Wno-unused-dummy-argument",
+        "-Wno-intrinsic-shadow",
+        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",
+        "-D__linux__"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": true
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "gcc-debug-double",
+      "build_dir": "mf2005/builds/build-dsfixed2free-gcc-debug-double",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-std=legacy",
+        "-O0",
+        "-g",
+        "-fall-intrinsics",
+        "-pedantic",
+        "-cpp",
+        "-ffree-line-length-none",
+        "-Wcharacter-truncation",
+        "-Wno-unused-dummy-argument",
+        "-Wno-intrinsic-shadow",
+        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",
+        "-fdefault-real-8",
+        "-fdefault-double-8",
+        "-D__linux__"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": true
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "gcc-debugoptimized-single",
+      "build_dir": "mf2005/builds/build-dsfixed2free-gcc-debugoptimized-single",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-std=legacy",
+        "-O2",
+        "-g",
+        "-fall-intrinsics",
+        "-pedantic",
+        "-cpp",
+        "-ffree-line-length-none",
+        "-Wcharacter-truncation",
+        "-Wno-unused-dummy-argument",
+        "-Wno-intrinsic-shadow",
+        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",
+        "-D__linux__"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": true
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "gcc-debugoptimized-double",
+      "build_dir": "mf2005/builds/build-dsfixed2free-gcc-debugoptimized-double",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-std=legacy",
+        "-O2",
+        "-g",
+        "-fall-intrinsics",
+        "-pedantic",
+        "-cpp",
+        "-ffree-line-length-none",
+        "-Wcharacter-truncation",
+        "-Wno-unused-dummy-argument",
+        "-Wno-intrinsic-shadow",
+        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",
+        "-fdefault-real-8",
+        "-fdefault-double-8",
+        "-D__linux__"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": true
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "gcc-plain-single",
+      "build_dir": "mf2005/builds/build-dsfixed2free-gcc-plain-single",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-std=legacy",
+        "-fall-intrinsics",
+        "-pedantic",
+        "-cpp",
+        "-ffree-line-length-none",
+        "-Wcharacter-truncation",
+        "-Wno-unused-dummy-argument",
+        "-Wno-intrinsic-shadow",
+        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",
+        "-D__linux__"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": true
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "gcc-plain-double",
+      "build_dir": "mf2005/builds/build-dsfixed2free-gcc-plain-double",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-std=legacy",
+        "-fall-intrinsics",
+        "-pedantic",
+        "-cpp",
+        "-ffree-line-length-none",
+        "-Wcharacter-truncation",
+        "-Wno-unused-dummy-argument",
+        "-Wno-intrinsic-shadow",
+        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",
+        "-fdefault-real-8",
+        "-fdefault-double-8",
+        "-D__linux__"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": true
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "gcc-minsize-single",
+      "build_dir": "mf2005/builds/build-dsfixed2free-gcc-minsize-single",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-std=legacy",
+        "-Os",
+        "-g",
+        "-fall-intrinsics",
+        "-pedantic",
+        "-cpp",
+        "-ffree-line-length-none",
+        "-Wcharacter-truncation",
+        "-Wno-unused-dummy-argument",
+        "-Wno-intrinsic-shadow",
+        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",
+        "-D__linux__"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": true
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "gcc-minsize-double",
+      "build_dir": "mf2005/builds/build-dsfixed2free-gcc-minsize-double",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-std=legacy",
+        "-Os",
+        "-g",
+        "-fall-intrinsics",
+        "-pedantic",
+        "-cpp",
+        "-ffree-line-length-none",
+        "-Wcharacter-truncation",
+        "-Wno-unused-dummy-argument",
+        "-Wno-intrinsic-shadow",
+        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",
+        "-fdefault-real-8",
+        "-fdefault-double-8",
+        "-D__linux__"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": true
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "gcc-custom-single",
+      "build_dir": "mf2005/builds/build-dsfixed2free-gcc-custom-single",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-std=legacy",
+        "-O3",
+        "-fall-intrinsics",
+        "-pedantic",
+        "-cpp",
+        "-ffree-line-length-none",
+        "-Wcharacter-truncation",
+        "-Wno-unused-dummy-argument",
+        "-Wno-intrinsic-shadow",
+        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",
+        "-D__linux__"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": true
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "gcc-custom-double",
+      "build_dir": "mf2005/builds/build-dsfixed2free-gcc-custom-double",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-std=legacy",
+        "-O3",
+        "-fall-intrinsics",
+        "-pedantic",
+        "-cpp",
+        "-ffree-line-length-none",
+        "-Wcharacter-truncation",
+        "-Wno-unused-dummy-argument",
+        "-Wno-intrinsic-shadow",
+        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",
+        "-fdefault-real-8",
+        "-fdefault-double-8",
+        "-D__linux__"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": true
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "intel-release-single",
+      "build_dir": "mf2005/builds/build-dsfixed2free-intel-release-single",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-warn",
+        "general",
+        "-warn",
+        "truncated_source",
+        "-stand=none",
+        "-O3",
+        "-fpe0",
+        "-no-heap-arrays",
+        "-traceback",
+        "-diag-disable:7416",
+        "-diag-disable:7025",
+        "-diag-disable:5268"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": false
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "intel-release-double",
+      "build_dir": "mf2005/builds/build-dsfixed2free-intel-release-double",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-warn",
+        "general",
+        "-warn",
+        "truncated_source",
+        "-stand=none",
+        "-O3",
+        "-fpe0",
+        "-no-heap-arrays",
+        "-traceback",
+        "-diag-disable:7416",
+        "-diag-disable:7025",
+        "-diag-disable:5268",
+        "-r8",
+        "-autodouble"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": false
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "intel-debug-single",
+      "build_dir": "mf2005/builds/build-dsfixed2free-intel-debug-single",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-warn",
+        "general",
+        "-warn",
+        "truncated_source",
+        "-stand=none",
+        "-O0",
+        "-g",
+        "-traceback",
+        "-fpe0",
+        "-no-heap-arrays",
+        "-traceback",
+        "-diag-disable:7416",
+        "-diag-disable:7025",
+        "-diag-disable:5268"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": false
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "intel-debug-double",
+      "build_dir": "mf2005/builds/build-dsfixed2free-intel-debug-double",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-warn",
+        "general",
+        "-warn",
+        "truncated_source",
+        "-stand=none",
+        "-O0",
+        "-g",
+        "-traceback",
+        "-fpe0",
+        "-no-heap-arrays",
+        "-traceback",
+        "-diag-disable:7416",
+        "-diag-disable:7025",
+        "-diag-disable:5268",
+        "-r8",
+        "-autodouble"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": false
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "intel-debugoptimized-single",
+      "build_dir": "mf2005/builds/build-dsfixed2free-intel-debugoptimized-single",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-warn",
+        "general",
+        "-warn",
+        "truncated_source",
+        "-stand=none",
+        "-O2",
+        "-g",
+        "-traceback",
+        "-fpe0",
+        "-no-heap-arrays",
+        "-traceback",
+        "-diag-disable:7416",
+        "-diag-disable:7025",
+        "-diag-disable:5268"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": false
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "intel-debugoptimized-double",
+      "build_dir": "mf2005/builds/build-dsfixed2free-intel-debugoptimized-double",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-warn",
+        "general",
+        "-warn",
+        "truncated_source",
+        "-stand=none",
+        "-O2",
+        "-g",
+        "-traceback",
+        "-fpe0",
+        "-no-heap-arrays",
+        "-traceback",
+        "-diag-disable:7416",
+        "-diag-disable:7025",
+        "-diag-disable:5268",
+        "-r8",
+        "-autodouble"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": false
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "intel-plain-single",
+      "build_dir": "mf2005/builds/build-dsfixed2free-intel-plain-single",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-warn",
+        "general",
+        "-warn",
+        "truncated_source",
+        "-stand=none",
+        "-fpe0",
+        "-no-heap-arrays",
+        "-traceback",
+        "-diag-disable:7416",
+        "-diag-disable:7025",
+        "-diag-disable:5268"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": false
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "intel-plain-double",
+      "build_dir": "mf2005/builds/build-dsfixed2free-intel-plain-double",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-warn",
+        "general",
+        "-warn",
+        "truncated_source",
+        "-stand=none",
+        "-fpe0",
+        "-no-heap-arrays",
+        "-traceback",
+        "-diag-disable:7416",
+        "-diag-disable:7025",
+        "-diag-disable:5268",
+        "-r8",
+        "-autodouble"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": false
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "intel-minsize-single",
+      "build_dir": "mf2005/builds/build-dsfixed2free-intel-minsize-single",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-warn",
+        "general",
+        "-warn",
+        "truncated_source",
+        "-stand=none",
+        "-Os",
+        "-g",
+        "-traceback",
+        "-fpe0",
+        "-no-heap-arrays",
+        "-traceback",
+        "-diag-disable:7416",
+        "-diag-disable:7025",
+        "-diag-disable:5268"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": false
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "intel-minsize-double",
+      "build_dir": "mf2005/builds/build-dsfixed2free-intel-minsize-double",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-warn",
+        "general",
+        "-warn",
+        "truncated_source",
+        "-stand=none",
+        "-Os",
+        "-g",
+        "-traceback",
+        "-fpe0",
+        "-no-heap-arrays",
+        "-traceback",
+        "-diag-disable:7416",
+        "-diag-disable:7025",
+        "-diag-disable:5268",
+        "-r8",
+        "-autodouble"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": false
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "intel-custom-single",
+      "build_dir": "mf2005/builds/build-dsfixed2free-intel-custom-single",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-warn",
+        "general",
+        "-warn",
+        "truncated_source",
+        "-stand=none",
+        "-O3",
+        "-fpe0",
+        "-no-heap-arrays",
+        "-traceback",
+        "-diag-disable:7416",
+        "-diag-disable:7025",
+        "-diag-disable:5268"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": false
+      },
+      "skipped_reason": null
+    },
+    {
+      "name": "intel-custom-double",
+      "build_dir": "mf2005/builds/build-dsfixed2free-intel-custom-double",
+      "fortran_flags": [
+        "-D_FILE_OFFSET_BITS=64",
+        "-warn",
+        "general",
+        "-warn",
+        "truncated_source",
+        "-stand=none",
+        "-O3",
+        "-fpe0",
+        "-no-heap-arrays",
+        "-traceback",
+        "-diag-disable:7416",
+        "-diag-disable:7025",
+        "-diag-disable:5268",
+        "-r8",
+        "-autodouble"
+      ],
+      "semantics": {
+        "line_length": 72,
+        "pad": false
+      },
+      "skipped_reason": null
+    }
+  ],
+  "files": [],
+  "includes": [
+    {
+      "path": "openspec.inc",
+      "includers": []
+    }
+  ],
+  "summary": {}
+}

@@ -39,8 +39,7 @@ autotest/.cache/
 
 msvs/.vs/
 
-# Real per-checkout config for the dsaudit/dscoverage tools (tools/dsaudit,
-# tools/dscoverage); see dsaudit.example.toml / dscoverage.example.toml in
-# each tool's repo for the schema.
-dsaudit.toml
-dscoverage.toml
+
+# Real per-checkout config for the dsmodern modernization tools (../../tools);
+# see dsmodern.example.toml in that repo for the schema
+dsmodern.toml

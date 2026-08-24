@@ -16,32 +16,6 @@ pixi install
 pixi run build-solution single
 pixi run build-solution double
 pixi run test-solution single
-pixi run dscoverage single
-pixi run dscoverage double --output coverage-double.html
 pixi run build-solution double --buildtype debug
 pixi run test-solution double --buildtype debug
-pixi run dscoverage double --buildtype debugoptimized
 ```
-
-Coverage and the code audit are provided by two standalone tools,
-[dsaudit](../../tools/dsaudit) and [dscoverage](../../tools/dscoverage),
-each configured for this checkout via a gitignored `dsaudit.toml` /
-`dscoverage.toml` at the repository root (copy `dsaudit.example.toml` /
-`dscoverage.example.toml` from each tool's own repo to get started). The
-`dsaudit`/`dscoverage` Pixi tasks shell out to those tools via `uv run
---project ../../tools/<name>`, so a sibling `tools/` checkout is required.
-
-The `dscoverage` task defaults to the `release` build type, adds GCC coverage
-instrumentation, runs the selected executable through the autotests, and
-writes a detailed HTML report plus a JSON summary for the Fortran and C
-sources. The HTML report includes source details, decision coverage, call
-coverage, and uncovered-code sorting. Use `--coverage` with `test-solution`
-when testing a previously built coverage variant.
-
-The code audit (`pixi run dsaudit`) defaults to GCC across all build types and
-precisions. Select a specific warning-audit configuration with `--build-type`
-and `--precision`, or use `--compiler all` to include every compiler. Coverage
-is independent and opt-in with `pixi run dsaudit --coverage`; use
-`--coverage-build-type` and `--coverage-precision` to select its configuration.
-Coverage uses GCC/gcovr (via `dscoverage`); audit-generated HTML coverage
-reports are written alongside the audit HTML report.

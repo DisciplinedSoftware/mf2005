@@ -1,0 +1,124 @@
+[
+ {
+  "date": "2026-08-20",
+  "timestamp": "2026-08-20T01:46:07",
+  "sha": "f557c40",
+  "dirty": false,
+  "signature": {
+   "compilers": [
+    "gcc",
+    "intel"
+   ],
+   "build_types": [
+    "release",
+    "debug",
+    "debugoptimized",
+    "plain",
+    "minsize",
+    "custom"
+   ],
+   "precisions": [
+    "single",
+    "double"
+   ]
+  },
+  "metrics": {
+   "code_lines": 77239,
+   "physical_lines": 102355,
+   "procedures": 804,
+   "modules": 60,
+   "common_statements": 22,
+   "census": {
+    "assign": 0,
+    "arithmetic_if": 9,
+    "format_statements": 1821,
+    "data_statements": 237,
+    "block_data": 0,
+    "equivalence": 0,
+    "entry": 0,
+    "pause": 0,
+    "implicit_none": 281,
+    "computed_goto": 5,
+    "goto": 1140,
+    "character_star": 337,
+    "statement_labels": 3354,
+    "fixed_continuations": 6447
+   },
+   "files_missing_implicit_none": 41,
+   "total_cyclomatic": 13635,
+   "total_cognitive": 37144,
+   "unique_warnings_total": 6551,
+   "warnings_per_kloc": 84.81,
+   "coverage": null,
+   "duplication_percent": 8.95,
+   "dead_code_candidates": 16,
+   "call_edges": 1621,
+   "module_cycles": 0,
+   "call_cycles": 0,
+   "mutation_score_percent": null,
+   "variants_total": 24,
+   "variants_passed": 24
+  }
+ },
+ {
+  "date": "2026-08-20",
+  "timestamp": "2026-08-20T01:57:17",
+  "sha": "afd9bce",
+  "dirty": true,
+  "signature": {
+   "compilers": [
+    "gcc",
+    "intel"
+   ],
+   "build_types": [
+    "release",
+    "debug",
+    "debugoptimized",
+    "plain",
+    "minsize",
+    "custom"
+   ],
+   "precisions": [
+    "single",
+    "double"
+   ]
+  },
+  "metrics": {
+   "code_lines": 75871,
+   "physical_lines": 102355,
+   "procedures": 804,
+   "modules": 60,
+   "common_statements": 22,
+   "census": {
+    "assign": 0,
+    "arithmetic_if": 9,
+    "format_statements": 1821,
+    "data_statements": 237,
+    "block_data": 0,
+    "equivalence": 0,
+    "entry": 0,
+    "pause": 0,
+    "implicit_none": 281,
+    "computed_goto": 5,
+    "goto": 1140,
+    "character_star": 337,
+    "statement_labels": 3354,
+    "fixed_continuations": 0
+   },
+   "files_missing_implicit_none": 41,
+   "total_cyclomatic": 13637,
+   "total_cognitive": 37125,
+   "unique_warnings_total": 6633,
+   "warnings_per_kloc": 87.42,
+   "coverage": null,
+   "duplication_percent": 9.01,
+   "dead_code_candidates": 16,
+   "call_edges": 1621,
+   "module_cycles": 0,
+   "call_cycles": 0,
+   "mutation_score_percent": null,
+   "variants_total": 24,
+   "variants_passed": 24
+  }
+ }
+]

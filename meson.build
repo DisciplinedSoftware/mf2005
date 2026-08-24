@@ -44,7 +44,7 @@ if fc_id == 'gcc'
                    '-fall-intrinsics',
                    '-pedantic',
                    '-cpp',
-                   '-ffixed-line-length-none',
+                   '-ffree-line-length-none',
                    '-Wcharacter-truncation',
                    '-Wno-unused-dummy-argument', # This makes problems with OOP
                    '-Wno-intrinsic-shadow',      # We shadow intrinsics with methods, which should be fine
@@ -90,7 +90,6 @@ if fc_id == 'intel-cl'
                    '/heap-arrays:0',
                    '/traceback',
                    '/fpp',                # Activate preprocessing
-                   '/extend-source',
                    '/Qdiag-disable:7416', # f2008 warning
                    '/Qdiag-disable:7025', # f2008 warning
                    '/Qdiag-disable:5268', # Line too long
@@ -111,7 +110,6 @@ elif fc_id == 'intel' or fc_id == 'intel-llvm'
   compile_args += ['-fpe0',              # Activate all floating point exceptions
                    '-no-heap-arrays',
                    '-traceback',
-                   '-extend-source',
                    '-diag-disable:7416',  # f2008 warning
                    '-diag-disable:7025',  # f2008 warning
                    '-diag-disable:5268',  # Line too long
@@ -137,7 +135,6 @@ elif fc_id == 'intel-llvm-cl'
   compile_args += ['/fpe:0',              # Activate all floating point exceptions
                    '/heap-arrays:0',
                    '/traceback',
-                   '/extend-source',
                    '/fpp',                # Activate preprocessing
                    '/Qdiag-disable:7416', # f2008 warning
                    '/Qdiag-disable:7025', # f2008 warning

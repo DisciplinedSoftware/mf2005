@@ -1,4 +1,4 @@
 # Build standalone utility programs
 hydfmt = executable('hydfmt',
-                    'hydfmt.f',
+                    'hydfmt.f90',
                     install: true)

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="utf-8">
+     <title>Fixed-form to free-form conversion report</title>
+     <style>
+          body {
+               font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+               margin: 2rem;
+               color: #1b1f24;
+          }
+
+          h1,
+          h2,
+          h3 {
+               border-bottom: 1px solid #d0d7de;
+               padding-bottom: .3rem;
+          }
+
+          table {
+               border-collapse: collapse;
+               margin: 0.5rem 0 1.5rem;
+               width: 100%;
+               max-width: 900px;
+          }
+
+          th,
+          td {
+               border: 1px solid #d0d7de;
+               padding: .35rem .6rem;
+               text-align: right;
+          }
+
+          th:first-child,
+          td:first-child {
+               text-align: left;
+          }
+
+          th {
+               background: #f6f8fa;
+               cursor: pointer;
+               user-select: none;
+          }
+
+          th.sortable::after {
+               content: " \2195";
+               color: #999;
+          }
+
+          tr:nth-child(even) {
+               background: #fafbfc;
+          }
+
+          details {
+               margin: 1rem 0;
+          }
+
+          summary {
+               cursor: pointer;
+               font-weight: 600;
+               padding: .4rem 0;
+          }
+
+          input.filter {
+               padding: .3rem .5rem;
+               width: 100%;
+               max-width: 400px;
+               margin-bottom: .5rem;
+          }
+
+          pre {
+               background: #f6f8fa;
+               padding: .6rem;
+               overflow-x: auto;
+               border: 1px solid #d0d7de;
+          }
+
+          .muted {
+               color: #57606a;
+          }
+
+          .matrix-wrap {
+               overflow-x: auto;
+          }
+
+          table.matrix {
+               max-width: none;
+          }
+
+          table.matrix th,
+          table.matrix td {
+               text-align: center;
+               white-space: nowrap;
+               padding: .25rem .45rem;
+          }
+
+          table.matrix th:first-child,
+          table.matrix td:first-child {
+               text-align: left;
+          }
+
+          td.st-full {
+               background: #d3f3d4;
+               color: #116329;
+          }
+
+          td.st-o0 {
+               background: #fff3c2;
+               color: #7a5901;
+               font-weight: 600;
+          }
+
+          td.st-bad {
+               background: #ffd7d5;
+               color: #a40e26;
+               font-weight: 700;
+          }
+
+          td.st-skip {
+               background: #f0f2f4;
+               color: #57606a;
+          }
+
+          .legend span {
+               display: inline-block;
+               padding: .1rem .5rem;
+               margin-right: .5rem;
+               border: 1px solid #d0d7de;
+          }
+     </style>
+</head>
+
+<body>
+     <h1>Fixed-form → free-form conversion report</h1>
+     <p class="muted">Generated 2026-08-20T02:42:10-04:00 by dsfixed2free — project modflow 2005. Object validation
+          compares stripped objects fixed vs free under each configuration's exact introspected flags.</p>
+     <h2>1. Summary</h2>
+     <table class="">
+          <thead>
+               <tr>
+                    <th data-numeric="0">Outcome</th>
+                    <th data-numeric="1">Cells</th>
+               </tr>
+          </thead>
+          <tbody>
+               <tr>
+                    <td>identical at full flags</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>identical only at -O0/no-LTO (objects DIFFER at full flags)</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>objects DIFFER at this no-optimization triplet — accepted as proven compiler form-asymmetry
+                         (identical at every optimizing triplet)</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>free-form compile failed</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>objects differ even at -O0/no-LTO</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>baseline/orchestration error</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>configuration skipped</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>total cells</td>
+                    <td>0</td>
+               </tr>
+          </tbody>
+     </table>
+     <p><strong>All conversions proven.</strong></p>
+     <h2>2. Per-configuration summary</h2>
+     <table class="sortable-table" id="config-table">
+          <thead>
+               <tr>
+                    <th data-numeric="0">Configuration</th>
+                    <th data-numeric="1">Full</th>
+                    <th data-numeric="1">O0-only</th>
+                    <th data-numeric="1">Asymmetry</th>
+                    <th data-numeric="1">Failing</th>
+                    <th data-numeric="1">Skipped</th>
+                    <th data-numeric="1">Seconds</th>
+               </tr>
+          </thead>
+          <tbody>
+               <tr>
+                    <td>gcc-release-single</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>gcc-release-double</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>gcc-debug-single</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>gcc-debug-double</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>gcc-debugoptimized-single</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>gcc-debugoptimized-double</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>gcc-plain-single</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>gcc-plain-double</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>gcc-minsize-single</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>gcc-minsize-double</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>gcc-custom-single</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>gcc-custom-double</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>intel-release-single</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>intel-release-double</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>intel-debug-single</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>intel-debug-double</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>intel-debugoptimized-single</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>intel-debugoptimized-double</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>intel-plain-single</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>intel-plain-double</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>intel-minsize-single</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>intel-minsize-double</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>intel-custom-single</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+               <tr>
+                    <td>intel-custom-double</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+               </tr>
+          </tbody>
+     </table>
+     <h2>3. File × configuration matrix</h2><input class="filter" data-target="matrix-table"
+          placeholder="Filter files..." aria-label="Filter files">
+     <div class="matrix-wrap">
+          <table class="matrix" id="matrix-table">
+               <thead>
+                    <tr>
+                         <th>File</th>
+                         <th>gcc-release-single</th>
+                         <th>gcc-release-double</th>
+                         <th>gcc-debug-single</th>
+                         <th>gcc-debug-double</th>
+                         <th>gcc-debugoptimized-single</th>
+                         <th>gcc-debugoptimized-double</th>
+                         <th>gcc-plain-single</th>
+                         <th>gcc-plain-double</th>
+                         <th>gcc-minsize-single</th>
+                         <th>gcc-minsize-double</th>
+                         <th>gcc-custom-single</th>
+                         <th>gcc-custom-double</th>
+                         <th>intel-release-single</th>
+                         <th>intel-release-double</th>
+                         <th>intel-debug-single</th>
+                         <th>intel-debug-double</th>
+                         <th>intel-debugoptimized-single</th>
+                         <th>intel-debugoptimized-double</th>
+                         <th>intel-plain-single</th>
+                         <th>intel-plain-double</th>
+                         <th>intel-minsize-single</th>
+                         <th>intel-minsize-double</th>
+                         <th>intel-custom-single</th>
+                         <th>intel-custom-double</th>
+                    </tr>
+               </thead>
+               <tbody></tbody>
+          </table>
+     </div>
+     <p class="legend"><span class="st-full">✓ identical at full flags</span><span class="st-o0">O0 identical only at
+               -O0/no-LTO (objects DIFFER at full flags)</span><span class="st-o0">A objects DIFFER at this
+               no-optimization triplet — accepted as proven compiler form-asymmetry (identical at every optimizing
+               triplet)</span><span class="st-bad">CF free-form compile failed</span><span class="st-bad">✗ objects
+               differ even at -O0/no-LTO</span><span class="st-bad">E baseline/orchestration error</span><span
+               class="st-skip">– configuration skipped</span></p>
+     <h2>4. Objects differing at full optimization</h2>
+     <p>These cells passed only after dropping compile-time optimization and link-time optimization (<code>-O0</code>,
+          no LTO) — the objects <em>differ</em> under the configuration's full flags and are reported here even though
+          the conversion is proven at the Process.md bar.</p>
+     <p class="muted">None.</p>
+     <h2>5. Compiler form asymmetry (accepted with evidence)</h2>
+     <p>At these no-optimization triplets the objects <em>differ</em>, and the difference is proven to be the compiler's
+          own form-dependent code generation, not the conversion: the same fixed/free pair is byte-identical at every
+          optimizing triplet of the same compiler and precision, and compiling identical source bytes as fixed vs free
+          reproduces the difference with zero edits (reproducer: dsfixed2free
+          upstream/gfortran-fixed-free-o0-asymmetry). Full instruction-level diffs below.</p>
+     <p class="muted">None.</p>
+     <h2>6. Failing cells</h2>
+     <p class="muted">None.</p>
+     <h2>7. Conversions</h2>
+     <table class="sortable-table" id="conversion-table">
+          <thead>
+               <tr>
+                    <th data-numeric="0">File</th>
+                    <th data-numeric="0">Free-form name</th>
+                    <th data-numeric="0">Backend</th>
+                    <th data-numeric="0">cpp</th>
+                    <th data-numeric="0">MFNWT</th>
+                    <th data-numeric="0">Includes</th>
+                    <th data-numeric="0">Note</th>
+               </tr>
+          </thead>
+          <tbody>
+               <tr>
+                    <td>openspec.inc</td>
+                    <td>openspec.inc</td>
+                    <td>deterministic</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>proven via 0 includer(s): </td>
+               </tr>
+          </tbody>
+     </table>
+     <h2>8. Flag provenance</h2>
+     <details>
+          <summary>gcc-release-single — mf2005/builds/build-release-single</summary>
+          <p class="muted">record semantics: line length 72, padded</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -Wall -std=legacy -O3 -fall-intrinsics -pedantic -cpp -ffree-line-length-none -Wcharacter-truncation -Wno-unused-dummy-argument -Wno-intrinsic-shadow -Wno-maybe-uninitialized -Wno-uninitialized -D__linux__</pre>
+     </details>
+     <details>
+          <summary>gcc-release-double — mf2005/builds/build-release-double</summary>
+          <p class="muted">record semantics: line length 72, padded</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -Wall -std=legacy -O3 -fall-intrinsics -pedantic -cpp -ffree-line-length-none -Wcharacter-truncation -Wno-unused-dummy-argument -Wno-intrinsic-shadow -Wno-maybe-uninitialized -Wno-uninitialized -fdefault-real-8 -fdefault-double-8 -D__linux__</pre>
+     </details>
+     <details>
+          <summary>gcc-debug-single — mf2005/builds/build-dsfixed2free-gcc-debug-single</summary>
+          <p class="muted">record semantics: line length 72, padded</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -Wall -std=legacy -O0 -g -fall-intrinsics -pedantic -cpp -ffree-line-length-none -Wcharacter-truncation -Wno-unused-dummy-argument -Wno-intrinsic-shadow -Wno-maybe-uninitialized -Wno-uninitialized -D__linux__</pre>
+     </details>
+     <details>
+          <summary>gcc-debug-double — mf2005/builds/build-dsfixed2free-gcc-debug-double</summary>
+          <p class="muted">record semantics: line length 72, padded</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -Wall -std=legacy -O0 -g -fall-intrinsics -pedantic -cpp -ffree-line-length-none -Wcharacter-truncation -Wno-unused-dummy-argument -Wno-intrinsic-shadow -Wno-maybe-uninitialized -Wno-uninitialized -fdefault-real-8 -fdefault-double-8 -D__linux__</pre>
+     </details>
+     <details>
+          <summary>gcc-debugoptimized-single — mf2005/builds/build-dsfixed2free-gcc-debugoptimized-single</summary>
+          <p class="muted">record semantics: line length 72, padded</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -Wall -std=legacy -O2 -g -fall-intrinsics -pedantic -cpp -ffree-line-length-none -Wcharacter-truncation -Wno-unused-dummy-argument -Wno-intrinsic-shadow -Wno-maybe-uninitialized -Wno-uninitialized -D__linux__</pre>
+     </details>
+     <details>
+          <summary>gcc-debugoptimized-double — mf2005/builds/build-dsfixed2free-gcc-debugoptimized-double</summary>
+          <p class="muted">record semantics: line length 72, padded</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -Wall -std=legacy -O2 -g -fall-intrinsics -pedantic -cpp -ffree-line-length-none -Wcharacter-truncation -Wno-unused-dummy-argument -Wno-intrinsic-shadow -Wno-maybe-uninitialized -Wno-uninitialized -fdefault-real-8 -fdefault-double-8 -D__linux__</pre>
+     </details>
+     <details>
+          <summary>gcc-plain-single — mf2005/builds/build-dsfixed2free-gcc-plain-single</summary>
+          <p class="muted">record semantics: line length 72, padded</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -Wall -std=legacy -fall-intrinsics -pedantic -cpp -ffree-line-length-none -Wcharacter-truncation -Wno-unused-dummy-argument -Wno-intrinsic-shadow -Wno-maybe-uninitialized -Wno-uninitialized -D__linux__</pre>
+     </details>
+     <details>
+          <summary>gcc-plain-double — mf2005/builds/build-dsfixed2free-gcc-plain-double</summary>
+          <p class="muted">record semantics: line length 72, padded</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -Wall -std=legacy -fall-intrinsics -pedantic -cpp -ffree-line-length-none -Wcharacter-truncation -Wno-unused-dummy-argument -Wno-intrinsic-shadow -Wno-maybe-uninitialized -Wno-uninitialized -fdefault-real-8 -fdefault-double-8 -D__linux__</pre>
+     </details>
+     <details>
+          <summary>gcc-minsize-single — mf2005/builds/build-dsfixed2free-gcc-minsize-single</summary>
+          <p class="muted">record semantics: line length 72, padded</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -Wall -std=legacy -Os -g -fall-intrinsics -pedantic -cpp -ffree-line-length-none -Wcharacter-truncation -Wno-unused-dummy-argument -Wno-intrinsic-shadow -Wno-maybe-uninitialized -Wno-uninitialized -D__linux__</pre>
+     </details>
+     <details>
+          <summary>gcc-minsize-double — mf2005/builds/build-dsfixed2free-gcc-minsize-double</summary>
+          <p class="muted">record semantics: line length 72, padded</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -Wall -std=legacy -Os -g -fall-intrinsics -pedantic -cpp -ffree-line-length-none -Wcharacter-truncation -Wno-unused-dummy-argument -Wno-intrinsic-shadow -Wno-maybe-uninitialized -Wno-uninitialized -fdefault-real-8 -fdefault-double-8 -D__linux__</pre>
+     </details>
+     <details>
+          <summary>gcc-custom-single — mf2005/builds/build-dsfixed2free-gcc-custom-single</summary>
+          <p class="muted">record semantics: line length 72, padded</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -Wall -std=legacy -O3 -fall-intrinsics -pedantic -cpp -ffree-line-length-none -Wcharacter-truncation -Wno-unused-dummy-argument -Wno-intrinsic-shadow -Wno-maybe-uninitialized -Wno-uninitialized -D__linux__</pre>
+     </details>
+     <details>
+          <summary>gcc-custom-double — mf2005/builds/build-dsfixed2free-gcc-custom-double</summary>
+          <p class="muted">record semantics: line length 72, padded</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -Wall -std=legacy -O3 -fall-intrinsics -pedantic -cpp -ffree-line-length-none -Wcharacter-truncation -Wno-unused-dummy-argument -Wno-intrinsic-shadow -Wno-maybe-uninitialized -Wno-uninitialized -fdefault-real-8 -fdefault-double-8 -D__linux__</pre>
+     </details>
+     <details>
+          <summary>intel-release-single — mf2005/builds/build-dsfixed2free-intel-release-single</summary>
+          <p class="muted">record semantics: line length 72, no padding</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -warn general -warn truncated_source -stand=none -O3 -fpe0 -no-heap-arrays -traceback -diag-disable:7416 -diag-disable:7025 -diag-disable:5268</pre>
+     </details>
+     <details>
+          <summary>intel-release-double — mf2005/builds/build-dsfixed2free-intel-release-double</summary>
+          <p class="muted">record semantics: line length 72, no padding</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -warn general -warn truncated_source -stand=none -O3 -fpe0 -no-heap-arrays -traceback -diag-disable:7416 -diag-disable:7025 -diag-disable:5268 -r8 -autodouble</pre>
+     </details>
+     <details>
+          <summary>intel-debug-single — mf2005/builds/build-dsfixed2free-intel-debug-single</summary>
+          <p class="muted">record semantics: line length 72, no padding</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -warn general -warn truncated_source -stand=none -O0 -g -traceback -fpe0 -no-heap-arrays -traceback -diag-disable:7416 -diag-disable:7025 -diag-disable:5268</pre>
+     </details>
+     <details>
+          <summary>intel-debug-double — mf2005/builds/build-dsfixed2free-intel-debug-double</summary>
+          <p class="muted">record semantics: line length 72, no padding</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -warn general -warn truncated_source -stand=none -O0 -g -traceback -fpe0 -no-heap-arrays -traceback -diag-disable:7416 -diag-disable:7025 -diag-disable:5268 -r8 -autodouble</pre>
+     </details>
+     <details>
+          <summary>intel-debugoptimized-single — mf2005/builds/build-dsfixed2free-intel-debugoptimized-single</summary>
+          <p class="muted">record semantics: line length 72, no padding</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -warn general -warn truncated_source -stand=none -O2 -g -traceback -fpe0 -no-heap-arrays -traceback -diag-disable:7416 -diag-disable:7025 -diag-disable:5268</pre>
+     </details>
+     <details>
+          <summary>intel-debugoptimized-double — mf2005/builds/build-dsfixed2free-intel-debugoptimized-double</summary>
+          <p class="muted">record semantics: line length 72, no padding</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -warn general -warn truncated_source -stand=none -O2 -g -traceback -fpe0 -no-heap-arrays -traceback -diag-disable:7416 -diag-disable:7025 -diag-disable:5268 -r8 -autodouble</pre>
+     </details>
+     <details>
+          <summary>intel-plain-single — mf2005/builds/build-dsfixed2free-intel-plain-single</summary>
+          <p class="muted">record semantics: line length 72, no padding</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -warn general -warn truncated_source -stand=none -fpe0 -no-heap-arrays -traceback -diag-disable:7416 -diag-disable:7025 -diag-disable:5268</pre>
+     </details>
+     <details>
+          <summary>intel-plain-double — mf2005/builds/build-dsfixed2free-intel-plain-double</summary>
+          <p class="muted">record semantics: line length 72, no padding</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -warn general -warn truncated_source -stand=none -fpe0 -no-heap-arrays -traceback -diag-disable:7416 -diag-disable:7025 -diag-disable:5268 -r8 -autodouble</pre>
+     </details>
+     <details>
+          <summary>intel-minsize-single — mf2005/builds/build-dsfixed2free-intel-minsize-single</summary>
+          <p class="muted">record semantics: line length 72, no padding</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -warn general -warn truncated_source -stand=none -Os -g -traceback -fpe0 -no-heap-arrays -traceback -diag-disable:7416 -diag-disable:7025 -diag-disable:5268</pre>
+     </details>
+     <details>
+          <summary>intel-minsize-double — mf2005/builds/build-dsfixed2free-intel-minsize-double</summary>
+          <p class="muted">record semantics: line length 72, no padding</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -warn general -warn truncated_source -stand=none -Os -g -traceback -fpe0 -no-heap-arrays -traceback -diag-disable:7416 -diag-disable:7025 -diag-disable:5268 -r8 -autodouble</pre>
+     </details>
+     <details>
+          <summary>intel-custom-single — mf2005/builds/build-dsfixed2free-intel-custom-single</summary>
+          <p class="muted">record semantics: line length 72, no padding</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -warn general -warn truncated_source -stand=none -O3 -fpe0 -no-heap-arrays -traceback -diag-disable:7416 -diag-disable:7025 -diag-disable:5268</pre>
+     </details>
+     <details>
+          <summary>intel-custom-double — mf2005/builds/build-dsfixed2free-intel-custom-double</summary>
+          <p class="muted">record semantics: line length 72, no padding</p>
+          <pre>-D_FILE_OFFSET_BITS=64 -warn general -warn truncated_source -stand=none -O3 -fpe0 -no-heap-arrays -traceback -diag-disable:7416 -diag-disable:7025 -diag-disable:5268 -r8 -autodouble</pre>
+     </details>
+     <script>
+          function sortTable(table, columnIndex, numeric) {
+               const tbody = table.tBodies[0];
+               const rows = Array.from(tbody.rows);
+               const asc = table.dataset.sortCol == columnIndex && table.dataset.sortDir !== "asc";
+               rows.sort((a, b) => {
+                    let x = a.cells[columnIndex].textContent.trim();
+                    let y = b.cells[columnIndex].textContent.trim();
+                    if (numeric) { x = parseFloat(x.replace(/,/g, "")) || 0; y = parseFloat(y.replace(/,/g, "")) || 0; }
+                    if (x < y) return asc ? -1 : 1;
+                    if (x > y) return asc ? 1 : -1;
+                    return 0;
+               });
+               rows.forEach(r => tbody.appendChild(r));
+               table.dataset.sortCol = columnIndex;
+               table.dataset.sortDir = asc ? "asc" : "desc";
+          }
+
+          document.querySelectorAll("table.sortable-table").forEach(table => {
+               table.querySelectorAll("th").forEach((th, index) => {
+                    th.classList.add("sortable");
+                    const numeric = th.dataset.numeric === "1";
+                    th.addEventListener("click", () => sortTable(table, index, numeric));
+               });
+          });
+
+          document.querySelectorAll("input.filter").forEach(input => {
+               input.addEventListener("input", () => {
+                    const term = input.value.toLowerCase();
+                    document.querySelectorAll(`#${input.dataset.target} tbody tr`).forEach(row => {
+                         row.style.display = row.textContent.toLowerCase().includes(term) ? "" : "none";
+                    });
+               });
+          });
+     </script>
+</body>
+
+</html>
