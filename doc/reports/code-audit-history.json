@@ -203,5 +203,88 @@
    "lint_findings_total": 30806,
    "lint_rules_hit": 37
   }
+ },
+ {
+  "date": "2026-08-24",
+  "timestamp": "2026-08-24T22:04:20",
+  "sha": "1748ab1",
+  "dirty": false,
+  "signature": {
+   "compilers": [
+    "gcc",
+    "intel"
+   ],
+   "build_types": [
+    "release",
+    "debug",
+    "debugoptimized",
+    "plain",
+    "minsize",
+    "custom"
+   ],
+   "precisions": [
+    "single",
+    "double"
+   ]
+  },
+  "metrics": {
+   "code_lines": 75867,
+   "physical_lines": 102353,
+   "procedures": 804,
+   "modules": 60,
+   "common_statements": 22,
+   "census": {
+    "assign": 0,
+    "arithmetic_if": 9,
+    "format_statements": 1821,
+    "data_statements": 237,
+    "block_data": 0,
+    "equivalence": 0,
+    "entry": 0,
+    "pause": 0,
+    "implicit_none": 281,
+    "computed_goto": 5,
+    "goto": 1140,
+    "character_star": 337,
+    "statement_labels": 3354,
+    "fixed_continuations": 0
+   },
+   "files_missing_implicit_none": 41,
+   "total_cyclomatic": 13636,
+   "total_cognitive": 37123,
+   "unique_warnings_total": 6633,
+   "warnings_per_kloc": 87.43,
+   "coverage": null,
+   "duplication_percent": 9.01,
+   "dead_code_candidates": 16,
+   "call_edges": 1621,
+   "module_cycles": 0,
+   "call_cycles": 0,
+   "mutation_score_percent": null,
+   "variants_total": 24,
+   "variants_passed": 24,
+   "procedures_in_modules": 39,
+   "in_module_percent": 4.9304677623261695,
+   "explicit_interface_percent": 2.1104903786468032,
+   "common_blocks": 9,
+   "common_block_members": 37,
+   "inconsistent_common_blocks": 0,
+   "save_statements": 4,
+   "module_variables": 1386,
+   "global_state_variables": 1423,
+   "assumed_size_dummies": 23,
+   "adjustable_array_dummies": 674,
+   "char_star_dummies": 41,
+   "unkinded_real_literals_in_dp_files": 1845,
+   "real_equality_comparisons": 158,
+   "hardcoded_io_units": 0,
+   "console_writes": 80,
+   "open_statements": 29,
+   "implicit_typed_symbols": 2606,
+   "implicit_typing_files": 42,
+   "conformance_diagnostics": 286,
+   "lint_findings_total": 32205,
+   "lint_rules_hit": 36
+  }
  }
 ]
