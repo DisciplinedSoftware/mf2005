@@ -1,18 +1,19 @@
 # Code representations report
 
-Generated 2026-08-28T18:34:54-04:00 at commit 54615a1 for mf2005: 793 program units in 54 files (0 skipped).
+Generated 2026-08-29T00:44:17-04:00 at commit 00510a6 for mf2005: 793 program units in 54 files (0 skipped).
 
 ## Overview
 
 | Representation | Group | Status | Headline |
 | --- | --- | --- | --- |
+| Abstract syntax tree | Whole program | ok | Units with a tree: 793; AST nodes (untruncated total): 740,007; Truncated (over the per-unit node budget): 0 |
 | Control-flow graph | Control and data flow (per unit) | ok | Units with a graph: 793; Structured: 581; Reducible (GOTO): 212 |
 | Dominator tree and loop nest tree | Control and data flow (per unit) | ok | Units: 793; Loops: 2,972; Counted DO / DO WHILE: 2,803 / 98 |
-| Reaching definitions, def-use chains, and SSA summary | Control and data flow (per unit) | ok | Units: 793; Variables: 20,864; Definitions / uses: 33,683 / 93,991 |
-| Call graph with MOD/REF summaries | Whole program | ok | Units: 793; Call edges: 1,652; External callees (c / intrinsic / dummy / source / unknown): 25 (6 / 9 / 2 / 0 / 8) |
-| State ownership graph | Whole program | ok | Globals: 1,744; Module variables: 1,369; COMMON members: 37 |
-| Program dependence graph and slicing | Whole program | ok | Units: 793; Nodes (statement lines): 42,042; Data-dependence edges: 113,286 |
-| Storage association model | Whole program | ok | COMMON blocks: 9 (0 not consistent); EQUIVALENCE sets: 0; Sequence-association sites: 367 (26 possible) |
+| Reaching definitions, def-use chains, and SSA summary | Control and data flow (per unit) | ok | Units: 793; Variables: 20,886; Definitions / uses: 33,695 / 94,072 |
+| Call graph with MOD/REF summaries | Whole program | ok | Units: 793; Call edges: 1,642; External callees (c / intrinsic / dummy / source / unknown): 17 (6 / 9 / 2 / 0 / 0) |
+| State ownership graph | Whole program | ok | Globals: 1,750; Module variables: 1,375; COMMON members: 37 |
+| Program dependence graph and slicing | Whole program | ok | Units: 793; Nodes (statement lines): 42,058; Data-dependence edges: 113,321 |
+| Storage association model | Whole program | ok | COMMON blocks: 9 (0 not consistent); EQUIVALENCE sets: 0; Sequence-association sites: 371 (26 possible) |
 | Affine loop access summaries | Array and numeric semantics | ok | Loops: 2,904; Loop nests (top-level): 1,408; Max nesting depth: 6 |
 | Kind propagation | Array and numeric semantics | ok | Sites: 3,738; Mixed arithmetic: 1,277; Narrowing / widening: 916 / 844 |
 | Reduction sites and reassociation sensitivity | Array and numeric semantics | ok | Sites: 1,249; Order-sensitive (fp-reassociation): 636; Exact: 613 |
@@ -20,7 +21,8 @@ Generated 2026-08-28T18:34:54-04:00 at commit 54615a1 for mf2005: 793 program un
 | Phase protocol and package matrix | Non-code models | ok | Packages: 56; Phases: 19; Protocol calls: 244 |
 | Configuration space | Non-code models | ok | Files with directives: 9 of 63; Directive lines: 46; Macros referenced: 15 |
 | Clone classes (identifier-normalized) | Non-code models | ok | Clone classes: 939; Occurrences: 3,023; Statements covered: 21,626 of 54,477 (39.7%) |
-| Coverage overlay on the control-flow graph | Dynamic and external | partial | Source: doc/reports/coverage_2026-08-20_02h45m42/gcc-release-single/coverage-gcc-release-single.json; Build variant: gcc-release-single; Report time: 2026-08-20T02:51:30 |
+| Coverage overlay on the control-flow graph | Dynamic and external | partial | Source: doc/reports/coverage_plain-double_2026-08-29_00h40m08/coverage_plain-double_2026-08-29_00h40m08.full.json; Build variant: plain-double; Report time: 2026-08-29T00:40:26 |
+| Coverage differences across the build matrix | Dynamic and external | ok | Build configs compared: 12; Configs: custom-double, custom-single, debug-double, debug-single, debugoptimized-double, debugoptimized-single, minsize-double, minsize-single, plain-double, plain-single, release-double, release-single; Files with a coverage difference: 43 |
 | Linkage ground truth | Dynamic and external | ok | Objects: 58 (54 Fortran, 4 C); Files matched: 54 of 54 Fortran objects agree fully; Definition agreement: 100.0% (2,099 matched, 0 missing, 0 extra) |
 | External IR readiness | Dynamic and external | partial | lfortran: available (0.64.0); flang: not found; psyclone: not found |
 
@@ -94,12 +96,12 @@ For every program unit: which assignment reaches which read (reaching definition
 | Metric | Value |
 | --- | ---: |
 | Units | 793 |
-| Variables | 20,864 |
-| Definitions / uses | 33,683 / 93,991 |
-| Def-use edges | 163,194 |
-| Phi nodes (SSA) | 48,564 |
-| Single-assignment | 2,872 (13.8%) |
-| Loop-carried | 2,840 |
+| Variables | 20,886 |
+| Definitions / uses | 33,695 / 94,072 |
+| Def-use edges | 163,201 |
+| Phi nodes (SSA) | 48,579 |
+| Single-assignment | 2,873 (13.8%) |
+| Loop-carried | 2,847 |
 | Dead stores | 670 |
 
 Assumptions and policies:
@@ -121,6 +123,26 @@ Assumptions and policies:
 
 Interprocedural structures: what calls what, who owns which state, what depends on what, and what Fortran storage tricks Rust cannot express.
 
+### Abstract syntax tree (`ast`)
+
+Status: **ok**
+
+The parsed fparser2 tree of every program unit, one collapsible node per syntax construct down to names and literals. Whole-program structure (which unit's tree calls into which) is the call graph above, since a CALL statement is itself a node in the caller's tree; this view is where that graph's per-unit detail bottoms out.
+
+**For the port:** The tree is the ground truth a mechanical translator consumes: every construct it doesn't special-case needs a manual rule. Units flagged truncated below are large enough that the port likely wants a sub-procedure split before translation, independent of any dialect issue.
+
+| Metric | Value |
+| --- | ---: |
+| Units with a tree | 793 |
+| AST nodes (untruncated total) | 740,007 |
+| Truncated (over the per-unit node budget) | 0 |
+
+Assumptions and policies:
+
+- Only units the front end lowered are shown (the same corpus as every other per-unit view); a unit with no lowering has no tree here either.
+- A construct with no children of its own (a Name, a literal, a bare keyword) folds its reconstructed source text onto its own line instead of a separate leaf, so 'Name: hnew' reads as one node, not two.
+- Trees are capped at a node budget per unit so one pathological unit cannot blow up the report; a truncated tree keeps its first nodes in traversal order and says so.
+
 ### Call graph with MOD/REF summaries (`callgraph`)
 
 Status: **ok**
@@ -132,8 +154,8 @@ Every program unit as a node, every CALL statement and function reference as an 
 | Metric | Value |
 | --- | ---: |
 | Units | 793 |
-| Call edges | 1,652 |
-| External callees (c / intrinsic / dummy / source / unknown) | 25 (6 / 9 / 2 / 0 / 8) |
+| Call edges | 1,642 |
+| External callees (c / intrinsic / dummy / source / unknown) | 17 (6 / 9 / 2 / 0 / 0) |
 | Recursion cycles | 0 |
 | Unreachable units | 13 |
 | Max call depth | 6 |
@@ -155,7 +177,7 @@ Assumptions and policies:
 
 Status: **ok**
 
-15 variable(s) are exported by more than one used module (see the ambiguous column).
+12 variable(s) are exported by more than one used module (see the ambiguous column).
 
 Every persistent variable of the program (module variable, COMMON member, SAVEd or DATA-initialised local) with its declaring container, owner package, type, and the program units that write it (directly, through a call argument, or by allocation) and read it, each tagged with the protocol phase it runs in; the variables are classified by how ownership is shared across packages and phases.
 
@@ -163,13 +185,13 @@ Every persistent variable of the program (module variable, COMMON member, SAVEd 
 
 | Metric | Value |
 | --- | ---: |
-| Globals | 1,744 |
-| Module variables | 1,369 |
+| Globals | 1,750 |
+| Module variables | 1,375 |
 | COMMON members | 37 |
 | SAVE locals | 338 |
-| Shared-mutable | 99 |
-| Shared-read | 118 |
-| Package-private | 625 |
+| Shared-mutable | 98 |
+| Shared-read | 121 |
+| Package-private | 629 |
 | Allocated-immutable | 813 |
 
 Assumptions and policies:
@@ -193,10 +215,10 @@ For every program unit, a graph whose nodes are source lines and whose edges are
 | Metric | Value |
 | --- | ---: |
 | Units | 793 |
-| Nodes (statement lines) | 42,042 |
-| Data-dependence edges | 113,286 |
-| Control-dependence edges | 34,174 |
-| Call sites | 3,418 |
+| Nodes (statement lines) | 42,058 |
+| Data-dependence edges | 113,321 |
+| Control-dependence edges | 34,190 |
+| Call sites | 3,399 |
 | Max in-degree | 218 |
 
 Assumptions and policies:
@@ -224,7 +246,7 @@ Every site where the program relies on Fortran storage or sequence association r
 | --- | ---: |
 | COMMON blocks | 9 (0 not consistent) |
 | EQUIVALENCE sets | 0 |
-| Sequence-association sites | 367 (26 possible) |
+| Sequence-association sites | 371 (26 possible) |
 | Assumed-size dummies | 23 (+38 assumed-shape) |
 | Adjustable dummies | 678 |
 | Character sites | 190 |
@@ -257,10 +279,10 @@ Every DO loop (counted, DO WHILE, shared-termination) with its index, bounds, de
 | Loops | 2,904 |
 | Loop nests (top-level) | 1,408 |
 | Max nesting depth | 6 |
-| Order-independent | 1,360 (46.8%) |
-| Carried | 149 |
-| Scalar-carried | 583 |
-| Unknown | 812 |
+| Order-independent | 1,359 (46.8%) |
+| Carried | 151 |
+| Scalar-carried | 581 |
+| Unknown | 813 |
 | Loops with indirect subscripts | 287 |
 
 Assumptions and policies:
@@ -464,7 +486,7 @@ Ground truth from builds, runs, and other front ends that audits the static repr
 
 Status: **partial**
 
-doc/reports/coverage_2026-08-20_02h45m42/gcc-release-single/coverage-gcc-release-single.json is a summary report (per-file totals only), so the overlay stops at file level. For the block overlay produce a full line-level JSON report in the same folder: `gcovr --root <project> --object-directory <coverage build dir> --filter src/ --json <folder>/coverage.json` (or add `--json <file>` to [coverage] extra_args so `dsmodern coverage` writes it). 1 corpus file(s) have no entry in the report.
+1 corpus file(s) have no line data in doc/reports/coverage_plain-double_2026-08-29_00h40m08/coverage_plain-double_2026-08-29_00h40m08.full.json; their units are not overlaid.
 
 Line and branch execution counts from the newest coverage report of a test run, mapped onto every program unit and onto the blocks of its control-flow graph: covered (some line ran), uncovered (instrumented, never ran), or unknown (no instrumented line). Per unit it gives the share of blocks and lines executed, the share of branches taken, and whether the unit ran at all.
 
@@ -472,14 +494,14 @@ Line and branch execution counts from the newest coverage report of a test run, 
 
 | Metric | Value |
 | --- | ---: |
-| Source | doc/reports/coverage_2026-08-20_02h45m42/gcc-release-single/coverage-gcc-release-single.json |
-| Build variant | gcc-release-single |
-| Report time | 2026-08-20T02:51:30 |
-| Files | 53 of 54 corpus files (57 in report) |
-| Units executed | file level only |
+| Source | doc/reports/coverage_plain-double_2026-08-29_00h40m08/coverage_plain-double_2026-08-29_00h40m08.full.json |
+| Build variant | plain-double |
+| Report time | 2026-08-29T00:40:26 |
+| Files | 53 of 54 corpus files |
+| Units executed | 533 of 793 |
 | Lines covered | 60.8% |
-| Branches taken | 45.3% |
-| Files never executed | 14 |
+| Branches taken | 46.5% |
+| Units never executed | 260 |
 
 Assumptions and policies:
 
@@ -490,6 +512,28 @@ Assumptions and policies:
 - Line coverage counts only lines the compiler instrumented; declarations and comments are not lines.
 - Branch percentages come from the compiler's branch counters on those lines and are not the same as edges of the control-flow graph.
 - A build variant is reported only when the report's file name or its sibling HTML title states it.
+
+### Coverage differences across the build matrix (`configdiff`)
+
+Status: **ok**
+
+Every full (line-level) coverage report under [repr] coverage_glob, grouped by the build config named in its file name or its HTML title (compiler-build_type-precision), projected onto source lines: a line covered under some configs and not others is a config-sensitive line. The newest report per config wins when a config ran more than once.
+
+**For the port:** A line covered only under some configs is exercising config-specific behavior the port must reproduce per configuration, not average over: a precision-dependent code path, a build-type-only crash masking coverage of everything after it, or a compiler-specific branch. Lines that go from covered to uncovered under a config that otherwise passes its tests are the most direct evidence of where the port needs an explicit per-config test, not just per-unit ones.
+
+| Metric | Value |
+| --- | ---: |
+| Build configs compared | 12 |
+| Configs | custom-double, custom-single, debug-double, debug-single, debugoptimized-double, debugoptimized-single, minsize-double, minsize-single, plain-double, plain-single, release-double, release-single |
+| Files with a coverage difference | 43 |
+| Config-sensitive lines | 2,946 |
+
+Assumptions and policies:
+
+- A build config is identified from its coverage report's file name or sibling HTML title (dscoverage's html_title_template embeds '{build_type} {precision}'); a report with no match is skipped, not guessed at.
+- A line missing from a config's report entirely (the file wasn't instrumented, or that config's run never touched the file) counts neither covered nor uncovered for that config and is excluded from that line's comparison, so it never manufactures a difference by itself.
+- Comparison is per source line, not per branch: a line whose branches differ but whose overall covered/uncovered status agrees across configs is not reported here (see the coverage overlay above for branch percentages of the single newest run).
+- Differing lines are capped per file so one badly-diverged file (a crash partway through the test suite typically leaves everything after it uncovered in that config) cannot blow up the report; the cap is noted when it is hit.
 
 ### Linkage ground truth (`linkage`)
 
@@ -526,7 +570,7 @@ Status: **partial**
 
 flang, psyclone not available; their columns read 'unavailable'.
 
-A per-file matrix of what the external front ends accept: whether a semantic ASR can be built (with legacy dialect switches: implicit typing, implicit interfaces, argument casting), whether LLVM IR can be emitted from it, whether a second compiler front end parses the file, and whether the PSyIR tool chain is importable. Failures carry the first diagnostic so the blocking construct is named.
+A per-file matrix of what the external front ends accept: whether a semantic ASR can be built (with legacy dialect switches: implicit typing, implicit interfaces, argument casting), whether LLVM IR can be emitted from it, whether a second compiler front end parses the file, and whether the PSyIR tool chain is importable. Failures carry the first diagnostic so the blocking construct is named; a file where the front end succeeds carries its actual ASR tree and LLVM IR text too.
 
 **For the port:** Files with an ASR are candidates for mechanical translation and for semantic diffing against the Rust port; LLVM IR gives a reference lowering for numeric semantics. Files the front ends reject list the dialect features the port must handle by hand (or the upstream fixes worth contributing first).
 
@@ -539,7 +583,7 @@ A per-file matrix of what the external front ends accept: whether a semantic ASR
 | ASR ok | 48 of 54 |
 | LLVM IR ok | 37 of 54 |
 | Second front end ok | n/a |
-| Total time | 9.0 s |
+| Total time | 9.5 s |
 
 Assumptions and policies:
 
@@ -549,6 +593,7 @@ Assumptions and policies:
 - 'LLVM ok' means the IR printer finished without error; it does not mean the IR was assembled or linked.
 - The second front end is only asked for a syntax check; PSyclone is probed for importability only (PSyIR construction is a follow-up).
 - Style suggestions are not errors; the first diagnostic line (colour codes stripped, its detail line appended when the message ends with a colon) is the recorded error.
+- The embedded ASR/LLVM IR text is capped per file so one verbose file cannot blow up the report; the capped text is exactly lfortran's own output, unlike the AST view above whose tree is dsrepr's own serialization of the parse (per-unit, not per-file).
 
 ## Interactive views
 
