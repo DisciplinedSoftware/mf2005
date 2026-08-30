@@ -1,0 +1,5429 @@
+{
+  "unit": "GWF2FHB7BD",
+  "kind": "file",
+  "source": "/home/pluck/Documents/DisciplinedSoftware/Modernization/code/mf2005/src/gwf2fhb7.f90",
+  "target": "(per precision)",
+  "test_cmd": "",
+  "operators": [],
+  "mutation_count": 336,
+  "scope": "589-590,598-600,603-608,661-662",
+  "scenarios": [
+    "S1-ubdsv4-naux1.nml",
+    "S2-iauxsv0.nml",
+    "S3-icbcfl1-array.nml",
+    "S4-ifhbcb-negative-listing.nml",
+    "S5-ifhbcb0-no-budget.nml",
+    "S6-nflw0.nml",
+    "S7-inactive-and-recharge.nml",
+    "S8-distinct-values.nml"
+  ],
+  "harness": {
+    "variant": "mocked",
+    "directory": "/home/pluck/Documents/DisciplinedSoftware/Modernization/tools/packages/dsmutation/work/run/gwf2fhb7bd/post-mocked/gcc-release-single/harness/mocked",
+    "sources": [
+      "dsm_state.f90",
+      "dsm_shadow_mf2005.f90",
+      "dsm_shadow_utl7.f90",
+      "dsm_main.f90"
+    ],
+    "mocks": [
+      "UBDSV4",
+      "UBDSVB",
+      "UBUDSV"
+    ],
+    "real_callees": []
+  },
+  "configs": [
+    {
+      "config": "gcc-release-single",
+      "baseline_seconds": 0.005,
+      "error": null,
+      "tally": {
+        "killed": 286,
+        "timeout": 0,
+        "survived": 41,
+        "compile-error": 6,
+        "equivalent": 3
+      },
+      "score": 0.8746,
+      "outcomes": [
+        {
+          "spec": {
+            "id": "dcr-002",
+            "operator": "dcr",
+            "start": 19620,
+            "end": 19638,
+            "line": 589,
+            "col": 17,
+            "original": "' SPECIFIED FLOWS'",
+            "replacement": "' SPECIFIED FLOWx'",
+            "description": "replace ' SPECIFIED FLOWS' with ' SPECIFIED FLOWx' in DATA"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: vbnm(1) expected ' SPECIFIED FLOWS' got ' SPECIFIED FLOWx'; dsm: ubdsv4.text(1) expected ' SPECIFIED FLOWS' got ' SPECIFIED FLOWx'; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "dcr-003",
+            "operator": "dcr",
+            "start": 19620,
+            "end": 19638,
+            "line": 589,
+            "col": 17,
+            "original": "' SPECIFIED FLOWS'",
+            "replacement": "'xSPECIFIED FLOWS'",
+            "description": "replace ' SPECIFIED FLOWS' with 'xSPECIFIED FLOWS' in DATA"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: vbnm(1) expected ' SPECIFIED FLOWS' got 'xSPECIFIED FLOWS'; dsm: ubdsv4.text(1) expected ' SPECIFIED FLOWS' got 'xSPECIFIED FLOWS'; dsm: 2 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "dcr-004",
+            "operator": "dcr",
+            "start": 19658,
+            "end": 19676,
+            "line": 590,
+            "col": 19,
+            "original": "'IFACE           '",
+            "replacement": "'IFACE          x'",
+            "description": "replace 'IFACE           ' with 'IFACE          x' in DATA"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got 'IFACE          x'; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "dcr-005",
+            "operator": "dcr",
+            "start": 19658,
+            "end": 19676,
+            "line": 590,
+            "col": 19,
+            "original": "'IFACE           '",
+            "replacement": "'xFACE           '",
+            "description": "replace 'IFACE           ' with 'xFACE           ' in DATA"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got 'xFACE           '; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "rsr-177",
+            "operator": "rsr",
+            "start": 19884,
+            "end": 19889,
+            "line": 598,
+            "col": 7,
+            "original": "IBD=0",
+            "replacement": "RETURN",
+            "description": "return instead of: IBD = 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: vbvl(2) expected 5.00000000 got 0.00000000; dsm: vbvl(4) expected 5.00000000 got 0.00000000; dsm: bdfv(2) expected -5.00000000 got 0.00000000; dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 9 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "sdl-177",
+            "operator": "sdl",
+            "start": 19884,
+            "end": 19889,
+            "line": 598,
+            "col": 7,
+            "original": "IBD=0",
+            "replacement": "CONTINUE",
+            "description": "delete statement: IBD = 0"
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: ",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "icr-464",
+            "operator": "icr",
+            "start": 19888,
+            "end": 19889,
+            "line": 598,
+            "col": 11,
+            "original": "0",
+            "replacement": "(-1)",
+            "description": "replace 0 with (-1)"
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: ",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "icr-465",
+            "operator": "icr",
+            "start": 19888,
+            "end": 19889,
+            "line": 598,
+            "col": 11,
+            "original": "0",
+            "replacement": "1",
+            "description": "replace 0 with 1"
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: dsm: n_ubudsv expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "vcr-1009",
+            "operator": "vcr",
+            "start": 19888,
+            "end": 19889,
+            "line": 598,
+            "col": 11,
+            "original": "0",
+            "replacement": "IBD",
+            "description": "replace 0 with variable IBD"
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: ",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "svr-771",
+            "operator": "svr",
+            "start": 19899,
+            "end": 19905,
+            "line": 599,
+            "col": 10,
+            "original": "IFHBCB",
+            "replacement": "IBD",
+            "description": "replace variable IFHBCB with IBD"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "svr-772",
+            "operator": "svr",
+            "start": 19899,
+            "end": 19905,
+            "line": 599,
+            "col": 10,
+            "original": "IFHBCB",
+            "replacement": "ICBCFL",
+            "description": "replace variable IFHBCB with ICBCFL"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "vcr-1010",
+            "operator": "vcr",
+            "start": 19899,
+            "end": 19905,
+            "line": 599,
+            "col": 10,
+            "original": "IFHBCB",
+            "replacement": "0",
+            "description": "replace variable IFHBCB with 0"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "vcr-1011",
+            "operator": "vcr",
+            "start": 19899,
+            "end": 19905,
+            "line": 599,
+            "col": 10,
+            "original": "IFHBCB",
+            "replacement": "1",
+            "description": "replace variable IFHBCB with 1"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "cvr-099",
+            "operator": "cvr",
+            "start": 19899,
+            "end": 19928,
+            "line": 599,
+            "col": 10,
+            "original": "IFHBCB.LT.0 .AND. ICBCFL.NE.0",
+            "replacement": ".FALSE.",
+            "description": "replace condition with .FALSE."
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "cvr-100",
+            "operator": "cvr",
+            "start": 19899,
+            "end": 19928,
+            "line": 599,
+            "col": 10,
+            "original": "IFHBCB.LT.0 .AND. ICBCFL.NE.0",
+            "replacement": ".TRUE.",
+            "description": "replace condition with .TRUE."
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: ",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "uoi-050",
+            "operator": "uoi",
+            "start": 19899,
+            "end": 19928,
+            "line": 599,
+            "col": 10,
+            "original": "IFHBCB.LT.0 .AND. ICBCFL.NE.0",
+            "replacement": ".NOT.(IFHBCB.LT.0 .AND. ICBCFL.NE.0)",
+            "description": "negate condition"
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: ",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "ror-281",
+            "operator": "ror",
+            "start": 19905,
+            "end": 19909,
+            "line": 599,
+            "col": 16,
+            "original": ".LT.",
+            "replacement": ".EQ.",
+            "description": "replace .LT. with .EQ."
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: ",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "ror-282",
+            "operator": "ror",
+            "start": 19905,
+            "end": 19909,
+            "line": 599,
+            "col": 16,
+            "original": ".LT.",
+            "replacement": ".GE.",
+            "description": "replace .LT. with .GE."
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: ",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "ror-283",
+            "operator": "ror",
+            "start": 19905,
+            "end": 19909,
+            "line": 599,
+            "col": 16,
+            "original": ".LT.",
+            "replacement": ".GT.",
+            "description": "replace .LT. with .GT."
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.006
+        },
+        {
+          "spec": {
+            "id": "ror-284",
+            "operator": "ror",
+            "start": 19905,
+            "end": 19909,
+            "line": 599,
+            "col": 16,
+            "original": ".LT.",
+            "replacement": ".LE.",
+            "description": "replace .LT. with .LE."
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: ",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "ror-285",
+            "operator": "ror",
+            "start": 19905,
+            "end": 19909,
+            "line": 599,
+            "col": 16,
+            "original": ".LT.",
+            "replacement": ".NE.",
+            "description": "replace .LT. with .NE."
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.006
+        },
+        {
+          "spec": {
+            "id": "icr-466",
+            "operator": "icr",
+            "start": 19909,
+            "end": 19910,
+            "line": 599,
+            "col": 20,
+            "original": "0",
+            "replacement": "(-1)",
+            "description": "replace 0 with (-1)"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "icr-467",
+            "operator": "icr",
+            "start": 19909,
+            "end": 19910,
+            "line": 599,
+            "col": 20,
+            "original": "0",
+            "replacement": "1",
+            "description": "replace 0 with 1"
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: ",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "vcr-1012",
+            "operator": "vcr",
+            "start": 19909,
+            "end": 19910,
+            "line": 599,
+            "col": 20,
+            "original": "0",
+            "replacement": "IBD",
+            "description": "replace 0 with variable IBD"
+          },
+          "status": "equivalent",
+          "detail": "stripped object identical to the original; cannot fail in this configuration",
+          "seconds": 0.0
+        },
+        {
+          "spec": {
+            "id": "vcr-1013",
+            "operator": "vcr",
+            "start": 19909,
+            "end": 19910,
+            "line": 599,
+            "col": 20,
+            "original": "0",
+            "replacement": "ICBCFL",
+            "description": "replace 0 with variable ICBCFL"
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: ",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "vcr-1014",
+            "operator": "vcr",
+            "start": 19909,
+            "end": 19910,
+            "line": 599,
+            "col": 20,
+            "original": "0",
+            "replacement": "IFHBCB",
+            "description": "replace 0 with variable IFHBCB"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "lcr-022",
+            "operator": "lcr",
+            "start": 19911,
+            "end": 19916,
+            "line": 599,
+            "col": 22,
+            "original": ".AND.",
+            "replacement": ".EQV.",
+            "description": "replace .AND. with .EQV."
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.006
+        },
+        {
+          "spec": {
+            "id": "lcr-023",
+            "operator": "lcr",
+            "start": 19911,
+            "end": 19916,
+            "line": 599,
+            "col": 22,
+            "original": ".AND.",
+            "replacement": ".NEQV.",
+            "description": "replace .AND. with .NEQV."
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: ",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "lcr-024",
+            "operator": "lcr",
+            "start": 19911,
+            "end": 19916,
+            "line": 599,
+            "col": 22,
+            "original": ".AND.",
+            "replacement": ".OR.",
+            "description": "replace .AND. with .OR."
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: ",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-773",
+            "operator": "svr",
+            "start": 19917,
+            "end": 19923,
+            "line": 599,
+            "col": 28,
+            "original": "ICBCFL",
+            "replacement": "IBD",
+            "description": "replace variable ICBCFL with IBD"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "svr-774",
+            "operator": "svr",
+            "start": 19917,
+            "end": 19923,
+            "line": 599,
+            "col": 28,
+            "original": "ICBCFL",
+            "replacement": "IFHBCB",
+            "description": "replace variable ICBCFL with IFHBCB"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "vcr-1015",
+            "operator": "vcr",
+            "start": 19917,
+            "end": 19923,
+            "line": 599,
+            "col": 28,
+            "original": "ICBCFL",
+            "replacement": "0",
+            "description": "replace variable ICBCFL with 0"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "vcr-1016",
+            "operator": "vcr",
+            "start": 19917,
+            "end": 19923,
+            "line": 599,
+            "col": 28,
+            "original": "ICBCFL",
+            "replacement": "1",
+            "description": "replace variable ICBCFL with 1"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "ror-286",
+            "operator": "ror",
+            "start": 19923,
+            "end": 19927,
+            "line": 599,
+            "col": 34,
+            "original": ".NE.",
+            "replacement": ".EQ.",
+            "description": "replace .NE. with .EQ."
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "ror-287",
+            "operator": "ror",
+            "start": 19923,
+            "end": 19927,
+            "line": 599,
+            "col": 34,
+            "original": ".NE.",
+            "replacement": ".GE.",
+            "description": "replace .NE. with .GE."
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "ror-288",
+            "operator": "ror",
+            "start": 19923,
+            "end": 19927,
+            "line": 599,
+            "col": 34,
+            "original": ".NE.",
+            "replacement": ".GT.",
+            "description": "replace .NE. with .GT."
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "ror-289",
+            "operator": "ror",
+            "start": 19923,
+            "end": 19927,
+            "line": 599,
+            "col": 34,
+            "original": ".NE.",
+            "replacement": ".LE.",
+            "description": "replace .NE. with .LE."
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "ror-290",
+            "operator": "ror",
+            "start": 19923,
+            "end": 19927,
+            "line": 599,
+            "col": 34,
+            "original": ".NE.",
+            "replacement": ".LT.",
+            "description": "replace .NE. with .LT."
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.007
+        },
+        {
+          "spec": {
+            "id": "icr-468",
+            "operator": "icr",
+            "start": 19927,
+            "end": 19928,
+            "line": 599,
+            "col": 38,
+            "original": "0",
+            "replacement": "(-1)",
+            "description": "replace 0 with (-1)"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "icr-469",
+            "operator": "icr",
+            "start": 19927,
+            "end": 19928,
+            "line": 599,
+            "col": 38,
+            "original": "0",
+            "replacement": "1",
+            "description": "replace 0 with 1"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "vcr-1017",
+            "operator": "vcr",
+            "start": 19927,
+            "end": 19928,
+            "line": 599,
+            "col": 38,
+            "original": "0",
+            "replacement": "IBD",
+            "description": "replace 0 with variable IBD"
+          },
+          "status": "equivalent",
+          "detail": "stripped object identical to the original; cannot fail in this configuration",
+          "seconds": 0.0
+        },
+        {
+          "spec": {
+            "id": "vcr-1018",
+            "operator": "vcr",
+            "start": 19927,
+            "end": 19928,
+            "line": 599,
+            "col": 38,
+            "original": "0",
+            "replacement": "ICBCFL",
+            "description": "replace 0 with variable ICBCFL"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.006
+        },
+        {
+          "spec": {
+            "id": "vcr-1019",
+            "operator": "vcr",
+            "start": 19927,
+            "end": 19928,
+            "line": 599,
+            "col": 38,
+            "original": "0",
+            "replacement": "IFHBCB",
+            "description": "replace 0 with variable IFHBCB"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "svr-775",
+            "operator": "svr",
+            "start": 19930,
+            "end": 19933,
+            "line": 599,
+            "col": 41,
+            "original": "IBD",
+            "replacement": "ICBCFL",
+            "description": "replace variable IBD with ICBCFL"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "svr-776",
+            "operator": "svr",
+            "start": 19930,
+            "end": 19933,
+            "line": 599,
+            "col": 41,
+            "original": "IBD",
+            "replacement": "IFHBCB",
+            "description": "replace variable IBD with IFHBCB"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.006
+        },
+        {
+          "spec": {
+            "id": "vcr-1020",
+            "operator": "vcr",
+            "start": 19930,
+            "end": 19933,
+            "line": 599,
+            "col": 41,
+            "original": "IBD",
+            "replacement": "0",
+            "description": "replace variable IBD with 0"
+          },
+          "status": "compile-error",
+          "detail": "Warning: Possible change of value in conversion from REAL(8) to REAL(4) at (1) [-Wconversion]",
+          "seconds": 0.0
+        },
+        {
+          "spec": {
+            "id": "vcr-1021",
+            "operator": "vcr",
+            "start": 19930,
+            "end": 19933,
+            "line": 599,
+            "col": 41,
+            "original": "IBD",
+            "replacement": "1",
+            "description": "replace variable IBD with 1"
+          },
+          "status": "compile-error",
+          "detail": "Warning: Possible change of value in conversion from REAL(8) to REAL(4) at (1) [-Wconversion]",
+          "seconds": 0.0
+        },
+        {
+          "spec": {
+            "id": "bdl-049",
+            "operator": "bdl",
+            "start": 19930,
+            "end": 19936,
+            "line": 599,
+            "col": 41,
+            "original": "IBD=-1",
+            "replacement": "CONTINUE",
+            "description": "delete IF body: IBD = - 1"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "uor-002",
+            "operator": "uor",
+            "start": 19934,
+            "end": 19935,
+            "line": 599,
+            "col": 45,
+            "original": "-",
+            "replacement": "",
+            "description": "delete unary -"
+          },
+          "status": "killed",
+          "detail": "S4-ifhbcb-negative-listing.nml: dsm: n_ubudsv expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "icr-470",
+            "operator": "icr",
+            "start": 19935,
+            "end": 19936,
+            "line": 599,
+            "col": 46,
+            "original": "1",
+            "replacement": "(-1)",
+            "description": "replace 1 with (-1)"
+          },
+          "status": "killed",
+          "detail": "S4-ifhbcb-negative-listing.nml: dsm: n_ubudsv expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "icr-471",
+            "operator": "icr",
+            "start": 19935,
+            "end": 19936,
+            "line": 599,
+            "col": 46,
+            "original": "1",
+            "replacement": "0",
+            "description": "replace 1 with 0"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "icr-472",
+            "operator": "icr",
+            "start": 19935,
+            "end": 19936,
+            "line": 599,
+            "col": 46,
+            "original": "1",
+            "replacement": "2",
+            "description": "replace 1 with 2"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "vcr-1022",
+            "operator": "vcr",
+            "start": 19935,
+            "end": 19936,
+            "line": 599,
+            "col": 46,
+            "original": "1",
+            "replacement": "IBD",
+            "description": "replace 1 with variable IBD"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "vcr-1023",
+            "operator": "vcr",
+            "start": 19935,
+            "end": 19936,
+            "line": 599,
+            "col": 46,
+            "original": "1",
+            "replacement": "ICBCFL",
+            "description": "replace 1 with variable ICBCFL"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "vcr-1024",
+            "operator": "vcr",
+            "start": 19935,
+            "end": 19936,
+            "line": 599,
+            "col": 46,
+            "original": "1",
+            "replacement": "IFHBCB",
+            "description": "replace 1 with variable IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S4-ifhbcb-negative-listing.nml: dsm: n_ubudsv expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-777",
+            "operator": "svr",
+            "start": 19946,
+            "end": 19952,
+            "line": 600,
+            "col": 10,
+            "original": "IFHBCB",
+            "replacement": "IBD",
+            "description": "replace variable IFHBCB with IBD"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-778",
+            "operator": "svr",
+            "start": 19946,
+            "end": 19952,
+            "line": 600,
+            "col": 10,
+            "original": "IFHBCB",
+            "replacement": "ICBCFL",
+            "description": "replace variable IFHBCB with ICBCFL"
+          },
+          "status": "killed",
+          "detail": "S4-ifhbcb-negative-listing.nml: dsm: n_ubudsv expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "vcr-1025",
+            "operator": "vcr",
+            "start": 19946,
+            "end": 19952,
+            "line": 600,
+            "col": 10,
+            "original": "IFHBCB",
+            "replacement": "0",
+            "description": "replace variable IFHBCB with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "vcr-1026",
+            "operator": "vcr",
+            "start": 19946,
+            "end": 19952,
+            "line": 600,
+            "col": 10,
+            "original": "IFHBCB",
+            "replacement": "1",
+            "description": "replace variable IFHBCB with 1"
+          },
+          "status": "killed",
+          "detail": "S4-ifhbcb-negative-listing.nml: dsm: n_ubudsv expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "cvr-101",
+            "operator": "cvr",
+            "start": 19946,
+            "end": 19957,
+            "line": 600,
+            "col": 10,
+            "original": "IFHBCB.GT.0",
+            "replacement": ".FALSE.",
+            "description": "replace condition with .FALSE."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "cvr-102",
+            "operator": "cvr",
+            "start": 19946,
+            "end": 19957,
+            "line": 600,
+            "col": 10,
+            "original": "IFHBCB.GT.0",
+            "replacement": ".TRUE.",
+            "description": "replace condition with .TRUE."
+          },
+          "status": "killed",
+          "detail": "S4-ifhbcb-negative-listing.nml: dsm: n_ubudsv expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "uoi-051",
+            "operator": "uoi",
+            "start": 19946,
+            "end": 19957,
+            "line": 600,
+            "col": 10,
+            "original": "IFHBCB.GT.0",
+            "replacement": ".NOT.(IFHBCB.GT.0)",
+            "description": "negate condition"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "ror-291",
+            "operator": "ror",
+            "start": 19952,
+            "end": 19956,
+            "line": 600,
+            "col": 16,
+            "original": ".GT.",
+            "replacement": ".EQ.",
+            "description": "replace .GT. with .EQ."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "ror-292",
+            "operator": "ror",
+            "start": 19952,
+            "end": 19956,
+            "line": 600,
+            "col": 16,
+            "original": ".GT.",
+            "replacement": ".GE.",
+            "description": "replace .GT. with .GE."
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: dsm: n_ubdsv4 expected 0 got 1; dsm: n_ubdsvb expected 0 got 1; dsm: 2 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "ror-293",
+            "operator": "ror",
+            "start": 19952,
+            "end": 19956,
+            "line": 600,
+            "col": 16,
+            "original": ".GT.",
+            "replacement": ".LE.",
+            "description": "replace .GT. with .LE."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "ror-294",
+            "operator": "ror",
+            "start": 19952,
+            "end": 19956,
+            "line": 600,
+            "col": 16,
+            "original": ".GT.",
+            "replacement": ".LT.",
+            "description": "replace .GT. with .LT."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "ror-295",
+            "operator": "ror",
+            "start": 19952,
+            "end": 19956,
+            "line": 600,
+            "col": 16,
+            "original": ".GT.",
+            "replacement": ".NE.",
+            "description": "replace .GT. with .NE."
+          },
+          "status": "killed",
+          "detail": "S4-ifhbcb-negative-listing.nml: dsm: n_ubudsv expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "icr-473",
+            "operator": "icr",
+            "start": 19956,
+            "end": 19957,
+            "line": 600,
+            "col": 20,
+            "original": "0",
+            "replacement": "(-1)",
+            "description": "replace 0 with (-1)"
+          },
+          "status": "killed",
+          "detail": "S5-ifhbcb0-no-budget.nml: dsm: n_ubdsv4 expected 0 got 1; dsm: n_ubdsvb expected 0 got 1; dsm: 2 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "icr-474",
+            "operator": "icr",
+            "start": 19956,
+            "end": 19957,
+            "line": 600,
+            "col": 20,
+            "original": "0",
+            "replacement": "1",
+            "description": "replace 0 with 1"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.054
+        },
+        {
+          "spec": {
+            "id": "vcr-1027",
+            "operator": "vcr",
+            "start": 19956,
+            "end": 19957,
+            "line": 600,
+            "col": 20,
+            "original": "0",
+            "replacement": "IBD",
+            "description": "replace 0 with variable IBD"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.006
+        },
+        {
+          "spec": {
+            "id": "vcr-1028",
+            "operator": "vcr",
+            "start": 19956,
+            "end": 19957,
+            "line": 600,
+            "col": 20,
+            "original": "0",
+            "replacement": "ICBCFL",
+            "description": "replace 0 with variable ICBCFL"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "vcr-1029",
+            "operator": "vcr",
+            "start": 19956,
+            "end": 19957,
+            "line": 600,
+            "col": 20,
+            "original": "0",
+            "replacement": "IFHBCB",
+            "description": "replace 0 with variable IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-779",
+            "operator": "svr",
+            "start": 19959,
+            "end": 19962,
+            "line": 600,
+            "col": 23,
+            "original": "IBD",
+            "replacement": "ICBCFL",
+            "description": "replace variable IBD with ICBCFL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-780",
+            "operator": "svr",
+            "start": 19959,
+            "end": 19962,
+            "line": 600,
+            "col": 23,
+            "original": "IBD",
+            "replacement": "IFHBCB",
+            "description": "replace variable IBD with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1030",
+            "operator": "vcr",
+            "start": 19959,
+            "end": 19962,
+            "line": 600,
+            "col": 23,
+            "original": "IBD",
+            "replacement": "0",
+            "description": "replace variable IBD with 0"
+          },
+          "status": "compile-error",
+          "detail": "Warning: Possible change of value in conversion from REAL(8) to REAL(4) at (1) [-Wconversion]",
+          "seconds": 0.0
+        },
+        {
+          "spec": {
+            "id": "vcr-1031",
+            "operator": "vcr",
+            "start": 19959,
+            "end": 19962,
+            "line": 600,
+            "col": 23,
+            "original": "IBD",
+            "replacement": "1",
+            "description": "replace variable IBD with 1"
+          },
+          "status": "compile-error",
+          "detail": "Warning: Possible change of value in conversion from REAL(8) to REAL(4) at (1) [-Wconversion]",
+          "seconds": 0.0
+        },
+        {
+          "spec": {
+            "id": "bdl-050",
+            "operator": "bdl",
+            "start": 19959,
+            "end": 19969,
+            "line": 600,
+            "col": 23,
+            "original": "IBD=ICBCFL",
+            "replacement": "CONTINUE",
+            "description": "delete IF body: IBD = ICBCFL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-781",
+            "operator": "svr",
+            "start": 19963,
+            "end": 19969,
+            "line": 600,
+            "col": 27,
+            "original": "ICBCFL",
+            "replacement": "IBD",
+            "description": "replace variable ICBCFL with IBD"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-782",
+            "operator": "svr",
+            "start": 19963,
+            "end": 19969,
+            "line": 600,
+            "col": 27,
+            "original": "ICBCFL",
+            "replacement": "IFHBCB",
+            "description": "replace variable ICBCFL with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1032",
+            "operator": "vcr",
+            "start": 19963,
+            "end": 19969,
+            "line": 600,
+            "col": 27,
+            "original": "ICBCFL",
+            "replacement": "0",
+            "description": "replace variable ICBCFL with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1033",
+            "operator": "vcr",
+            "start": 19963,
+            "end": 19969,
+            "line": 600,
+            "col": 27,
+            "original": "ICBCFL",
+            "replacement": "1",
+            "description": "replace variable ICBCFL with 1"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: n_ubudsv expected 0 got 1; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "bdl-051",
+            "operator": "bdl",
+            "start": 20046,
+            "end": 20245,
+            "line": 603,
+            "col": 7,
+            "original": "IF(IBD.EQ.2) THEN\n        NAUX=1\n        IF(IAUXSV.EQ.0) NAUX=0\n        CALL UBDSV4(KSTP,KPER,TEXT,NAUX,AUXTXT,IFHBCB,&\n     &          NCOL,NROW,NLAY,NFLW,IOUT,DELT,PERTIM,TOTIM,IBOUND)\n      END IF",
+            "replacement": "CONTINUE\n\n\n\n\n",
+            "description": "delete IF construct at line 603"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: ubdsvb.naux(1) expected 1 got 1788071605; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1034",
+            "operator": "vcr",
+            "start": 20049,
+            "end": 20052,
+            "line": 603,
+            "col": 10,
+            "original": "IBD",
+            "replacement": "0",
+            "description": "replace variable IBD with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: ubdsvb.naux(1) expected 1 got 1788071605; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1035",
+            "operator": "vcr",
+            "start": 20049,
+            "end": 20052,
+            "line": 603,
+            "col": 10,
+            "original": "IBD",
+            "replacement": "1",
+            "description": "replace variable IBD with 1"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: ubdsvb.naux(1) expected 1 got 1788071606; dsm: 2 expectation(s) failed",
+          "seconds": 0.045
+        },
+        {
+          "spec": {
+            "id": "cvr-103",
+            "operator": "cvr",
+            "start": 20049,
+            "end": 20057,
+            "line": 603,
+            "col": 10,
+            "original": "IBD.EQ.2",
+            "replacement": ".FALSE.",
+            "description": "replace condition with .FALSE."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: ubdsvb.naux(1) expected 1 got 1788071606; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "cvr-104",
+            "operator": "cvr",
+            "start": 20049,
+            "end": 20057,
+            "line": 603,
+            "col": 10,
+            "original": "IBD.EQ.2",
+            "replacement": ".TRUE.",
+            "description": "replace condition with .TRUE."
+          },
+          "status": "killed",
+          "detail": "S3-icbcfl1-array.nml: dsm: n_ubdsv4 expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "uoi-052",
+            "operator": "uoi",
+            "start": 20049,
+            "end": 20057,
+            "line": 603,
+            "col": 10,
+            "original": "IBD.EQ.2",
+            "replacement": ".NOT.(IBD.EQ.2)",
+            "description": "negate condition"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: ubdsvb.naux(1) expected 1 got 1788071607; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "ror-296",
+            "operator": "ror",
+            "start": 20052,
+            "end": 20056,
+            "line": 603,
+            "col": 13,
+            "original": ".EQ.",
+            "replacement": ".GE.",
+            "description": "replace .EQ. with .GE."
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "ror-297",
+            "operator": "ror",
+            "start": 20052,
+            "end": 20056,
+            "line": 603,
+            "col": 13,
+            "original": ".EQ.",
+            "replacement": ".GT.",
+            "description": "replace .EQ. with .GT."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: ubdsvb.naux(1) expected 1 got 1788071607; dsm: 2 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "ror-298",
+            "operator": "ror",
+            "start": 20052,
+            "end": 20056,
+            "line": 603,
+            "col": 13,
+            "original": ".EQ.",
+            "replacement": ".LE.",
+            "description": "replace .EQ. with .LE."
+          },
+          "status": "killed",
+          "detail": "S3-icbcfl1-array.nml: dsm: n_ubdsv4 expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "ror-299",
+            "operator": "ror",
+            "start": 20052,
+            "end": 20056,
+            "line": 603,
+            "col": 13,
+            "original": ".EQ.",
+            "replacement": ".LT.",
+            "description": "replace .EQ. with .LT."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: ubdsvb.naux(1) expected 1 got 1788071608; dsm: 2 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "ror-300",
+            "operator": "ror",
+            "start": 20052,
+            "end": 20056,
+            "line": 603,
+            "col": 13,
+            "original": ".EQ.",
+            "replacement": ".NE.",
+            "description": "replace .EQ. with .NE."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: ubdsvb.naux(1) expected 1 got 1788071608; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "icr-475",
+            "operator": "icr",
+            "start": 20056,
+            "end": 20057,
+            "line": 603,
+            "col": 17,
+            "original": "2",
+            "replacement": "(-2)",
+            "description": "replace 2 with (-2)"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: ubdsvb.naux(1) expected 1 got 1788071609; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "icr-476",
+            "operator": "icr",
+            "start": 20056,
+            "end": 20057,
+            "line": 603,
+            "col": 17,
+            "original": "2",
+            "replacement": "0",
+            "description": "replace 2 with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: ubdsvb.naux(1) expected 1 got 1788071609; dsm: 2 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "icr-477",
+            "operator": "icr",
+            "start": 20056,
+            "end": 20057,
+            "line": 603,
+            "col": 17,
+            "original": "2",
+            "replacement": "1",
+            "description": "replace 2 with 1"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: ubdsvb.naux(1) expected 1 got 1788071609; dsm: 2 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "icr-478",
+            "operator": "icr",
+            "start": 20056,
+            "end": 20057,
+            "line": 603,
+            "col": 17,
+            "original": "2",
+            "replacement": "3",
+            "description": "replace 2 with 3"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: ubdsvb.naux(1) expected 1 got 1788071610; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1036",
+            "operator": "vcr",
+            "start": 20056,
+            "end": 20057,
+            "line": 603,
+            "col": 17,
+            "original": "2",
+            "replacement": "IBD",
+            "description": "replace 2 with variable IBD"
+          },
+          "status": "killed",
+          "detail": "S3-icbcfl1-array.nml: dsm: n_ubdsv4 expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "rsr-178",
+            "operator": "rsr",
+            "start": 20072,
+            "end": 20078,
+            "line": 604,
+            "col": 9,
+            "original": "NAUX=1",
+            "replacement": "RETURN",
+            "description": "return instead of: NAUX = 1"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: vbvl(2) expected 5.00000000 got 0.00000000; dsm: vbvl(4) expected 5.00000000 got 0.00000000; dsm: bdfv(2) expected -5.00000000 got 0.00000000; dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 9 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "sdl-178",
+            "operator": "sdl",
+            "start": 20072,
+            "end": 20078,
+            "line": 604,
+            "col": 9,
+            "original": "NAUX=1",
+            "replacement": "CONTINUE",
+            "description": "delete statement: NAUX = 1"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 1788071611; dsm: ubdsv4.auxtxt.n(1) expected 1 got 64; dsm: ubdsvb.naux(1) expected 1 got 1788071611; dsm: 3 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "icr-479",
+            "operator": "icr",
+            "start": 20077,
+            "end": 20078,
+            "line": 604,
+            "col": 14,
+            "original": "1",
+            "replacement": "(-1)",
+            "description": "replace 1 with (-1)"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got -1; dsm: ubdsv4.auxtxt.n(1) expected 1 got 0; dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got '                '; dsm: ubdsvb.naux(1) expected 1 got -1; dsm: 4 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "icr-480",
+            "operator": "icr",
+            "start": 20077,
+            "end": 20078,
+            "line": 604,
+            "col": 14,
+            "original": "1",
+            "replacement": "0",
+            "description": "replace 1 with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 0; dsm: ubdsv4.auxtxt.n(1) expected 1 got 0; dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got '                '; dsm: ubdsvb.naux(1) expected 1 got 0; dsm: 4 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "icr-481",
+            "operator": "icr",
+            "start": 20077,
+            "end": 20078,
+            "line": 604,
+            "col": 14,
+            "original": "1",
+            "replacement": "2",
+            "description": "replace 1 with 2"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 2; dsm: ubdsv4.auxtxt.n(1) expected 1 got 2; dsm: ubdsvb.naux(1) expected 1 got 2; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1037",
+            "operator": "vcr",
+            "start": 20077,
+            "end": 20078,
+            "line": 604,
+            "col": 14,
+            "original": "1",
+            "replacement": "NAUX",
+            "description": "replace 1 with variable NAUX"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 1788071612; dsm: ubdsv4.auxtxt.n(1) expected 1 got 64; dsm: ubdsvb.naux(1) expected 1 got 1788071612; dsm: 3 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-783",
+            "operator": "svr",
+            "start": 20090,
+            "end": 20096,
+            "line": 605,
+            "col": 12,
+            "original": "IAUXSV",
+            "replacement": "NAUX",
+            "description": "replace variable IAUXSV with NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 3 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "vcr-1038",
+            "operator": "vcr",
+            "start": 20090,
+            "end": 20096,
+            "line": 605,
+            "col": 12,
+            "original": "IAUXSV",
+            "replacement": "0",
+            "description": "replace variable IAUXSV with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 0; dsm: ubdsv4.auxtxt.n(1) expected 1 got 0; dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got '                '; dsm: ubdsvb.naux(1) expected 1 got 0; dsm: 4 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1039",
+            "operator": "vcr",
+            "start": 20090,
+            "end": 20096,
+            "line": 605,
+            "col": 12,
+            "original": "IAUXSV",
+            "replacement": "1",
+            "description": "replace variable IAUXSV with 1"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "cvr-105",
+            "operator": "cvr",
+            "start": 20090,
+            "end": 20101,
+            "line": 605,
+            "col": 12,
+            "original": "IAUXSV.EQ.0",
+            "replacement": ".FALSE.",
+            "description": "replace condition with .FALSE."
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "cvr-106",
+            "operator": "cvr",
+            "start": 20090,
+            "end": 20101,
+            "line": 605,
+            "col": 12,
+            "original": "IAUXSV.EQ.0",
+            "replacement": ".TRUE.",
+            "description": "replace condition with .TRUE."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 0; dsm: ubdsv4.auxtxt.n(1) expected 1 got 0; dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got '                '; dsm: ubdsvb.naux(1) expected 1 got 0; dsm: 4 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "uoi-053",
+            "operator": "uoi",
+            "start": 20090,
+            "end": 20101,
+            "line": 605,
+            "col": 12,
+            "original": "IAUXSV.EQ.0",
+            "replacement": ".NOT.(IAUXSV.EQ.0)",
+            "description": "negate condition"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 0; dsm: ubdsv4.auxtxt.n(1) expected 1 got 0; dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got '                '; dsm: ubdsvb.naux(1) expected 1 got 0; dsm: 4 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "ror-301",
+            "operator": "ror",
+            "start": 20096,
+            "end": 20100,
+            "line": 605,
+            "col": 18,
+            "original": ".EQ.",
+            "replacement": ".GE.",
+            "description": "replace .EQ. with .GE."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 0; dsm: ubdsv4.auxtxt.n(1) expected 1 got 0; dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got '                '; dsm: ubdsvb.naux(1) expected 1 got 0; dsm: 4 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "ror-302",
+            "operator": "ror",
+            "start": 20096,
+            "end": 20100,
+            "line": 605,
+            "col": 18,
+            "original": ".EQ.",
+            "replacement": ".GT.",
+            "description": "replace .EQ. with .GT."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 0; dsm: ubdsv4.auxtxt.n(1) expected 1 got 0; dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got '                '; dsm: ubdsvb.naux(1) expected 1 got 0; dsm: 4 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "ror-303",
+            "operator": "ror",
+            "start": 20096,
+            "end": 20100,
+            "line": 605,
+            "col": 18,
+            "original": ".EQ.",
+            "replacement": ".LE.",
+            "description": "replace .EQ. with .LE."
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "ror-304",
+            "operator": "ror",
+            "start": 20096,
+            "end": 20100,
+            "line": 605,
+            "col": 18,
+            "original": ".EQ.",
+            "replacement": ".LT.",
+            "description": "replace .EQ. with .LT."
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "ror-305",
+            "operator": "ror",
+            "start": 20096,
+            "end": 20100,
+            "line": 605,
+            "col": 18,
+            "original": ".EQ.",
+            "replacement": ".NE.",
+            "description": "replace .EQ. with .NE."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 0; dsm: ubdsv4.auxtxt.n(1) expected 1 got 0; dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got '                '; dsm: ubdsvb.naux(1) expected 1 got 0; dsm: 4 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "icr-482",
+            "operator": "icr",
+            "start": 20100,
+            "end": 20101,
+            "line": 605,
+            "col": 22,
+            "original": "0",
+            "replacement": "(-1)",
+            "description": "replace 0 with (-1)"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "icr-483",
+            "operator": "icr",
+            "start": 20100,
+            "end": 20101,
+            "line": 605,
+            "col": 22,
+            "original": "0",
+            "replacement": "1",
+            "description": "replace 0 with 1"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 0; dsm: ubdsv4.auxtxt.n(1) expected 1 got 0; dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got '                '; dsm: ubdsvb.naux(1) expected 1 got 0; dsm: 4 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "vcr-1040",
+            "operator": "vcr",
+            "start": 20100,
+            "end": 20101,
+            "line": 605,
+            "col": 22,
+            "original": "0",
+            "replacement": "IAUXSV",
+            "description": "replace 0 with variable IAUXSV"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 0; dsm: ubdsv4.auxtxt.n(1) expected 1 got 0; dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got '                '; dsm: ubdsvb.naux(1) expected 1 got 0; dsm: 4 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1041",
+            "operator": "vcr",
+            "start": 20100,
+            "end": 20101,
+            "line": 605,
+            "col": 22,
+            "original": "0",
+            "replacement": "NAUX",
+            "description": "replace 0 with variable NAUX"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 0; dsm: ubdsv4.auxtxt.n(1) expected 1 got 0; dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got '                '; dsm: ubdsvb.naux(1) expected 1 got 0; dsm: 4 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-784",
+            "operator": "svr",
+            "start": 20103,
+            "end": 20107,
+            "line": 605,
+            "col": 25,
+            "original": "NAUX",
+            "replacement": "IAUXSV",
+            "description": "replace variable NAUX with IAUXSV"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1042",
+            "operator": "vcr",
+            "start": 20103,
+            "end": 20107,
+            "line": 605,
+            "col": 25,
+            "original": "NAUX",
+            "replacement": "0",
+            "description": "replace variable NAUX with 0"
+          },
+          "status": "compile-error",
+          "detail": "Warning: Possible change of value in conversion from REAL(8) to REAL(4) at (1) [-Wconversion]",
+          "seconds": 0.0
+        },
+        {
+          "spec": {
+            "id": "vcr-1043",
+            "operator": "vcr",
+            "start": 20103,
+            "end": 20107,
+            "line": 605,
+            "col": 25,
+            "original": "NAUX",
+            "replacement": "1",
+            "description": "replace variable NAUX with 1"
+          },
+          "status": "compile-error",
+          "detail": "Warning: Possible change of value in conversion from REAL(8) to REAL(4) at (1) [-Wconversion]",
+          "seconds": 0.0
+        },
+        {
+          "spec": {
+            "id": "bdl-052",
+            "operator": "bdl",
+            "start": 20103,
+            "end": 20109,
+            "line": 605,
+            "col": 25,
+            "original": "NAUX=0",
+            "replacement": "CONTINUE",
+            "description": "delete IF body: NAUX = 0"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 3 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "icr-484",
+            "operator": "icr",
+            "start": 20108,
+            "end": 20109,
+            "line": 605,
+            "col": 30,
+            "original": "0",
+            "replacement": "(-1)",
+            "description": "replace 0 with (-1)"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got -1; dsm: ubdsvb.naux(1) expected 0 got -1; dsm: 2 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "icr-485",
+            "operator": "icr",
+            "start": 20108,
+            "end": 20109,
+            "line": 605,
+            "col": 30,
+            "original": "0",
+            "replacement": "1",
+            "description": "replace 0 with 1"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 3 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "vcr-1044",
+            "operator": "vcr",
+            "start": 20108,
+            "end": 20109,
+            "line": 605,
+            "col": 30,
+            "original": "0",
+            "replacement": "IAUXSV",
+            "description": "replace 0 with variable IAUXSV"
+          },
+          "status": "equivalent",
+          "detail": "stripped object identical to the original; cannot fail in this configuration",
+          "seconds": 0.0
+        },
+        {
+          "spec": {
+            "id": "vcr-1045",
+            "operator": "vcr",
+            "start": 20108,
+            "end": 20109,
+            "line": 605,
+            "col": 30,
+            "original": "0",
+            "replacement": "NAUX",
+            "description": "replace 0 with variable NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "rsr-179",
+            "operator": "rsr",
+            "start": 20118,
+            "end": 20232,
+            "line": 606,
+            "col": 9,
+            "original": "CALL UBDSV4(KSTP,KPER,TEXT,NAUX,AUXTXT,IFHBCB,&\n     &          NCOL,NROW,NLAY,NFLW,IOUT,DELT,PERTIM,TOTIM,IBOUND)",
+            "replacement": "RETURN\n",
+            "description": "return instead of: CALL UBDSV4 ( KSTP ..."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: vbvl(2) expected 5.00000000 got 0.00000000; dsm: vbvl(4) expected 5.00000000 got 0.00000000; dsm: bdfv(2) expected -5.00000000 got 0.00000000; dsm: n_ubdsv4 expected 1 got 0; dsm: n_ubdsvb expected 1 got 0; dsm: 9 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "sdl-179",
+            "operator": "sdl",
+            "start": 20118,
+            "end": 20232,
+            "line": 606,
+            "col": 9,
+            "original": "CALL UBDSV4(KSTP,KPER,TEXT,NAUX,AUXTXT,IFHBCB,&\n     &          NCOL,NROW,NLAY,NFLW,IOUT,DELT,PERTIM,TOTIM,IBOUND)",
+            "replacement": "CONTINUE\n",
+            "description": "delete statement: CALL UBDSV4 ( KSTP ..."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsv4 expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-785",
+            "operator": "svr",
+            "start": 20130,
+            "end": 20134,
+            "line": 606,
+            "col": 21,
+            "original": "KSTP",
+            "replacement": "IFHBCB",
+            "description": "replace variable KSTP with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.kstp(1) expected 1 got 50; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-786",
+            "operator": "svr",
+            "start": 20130,
+            "end": 20134,
+            "line": 606,
+            "col": 21,
+            "original": "KSTP",
+            "replacement": "IOUT",
+            "description": "replace variable KSTP with IOUT"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.kstp(1) expected 1 got 11; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-787",
+            "operator": "svr",
+            "start": 20130,
+            "end": 20134,
+            "line": 606,
+            "col": 21,
+            "original": "KSTP",
+            "replacement": "KPER",
+            "description": "replace variable KSTP with KPER"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.kstp(1) expected 2 got 3; dsm: 1 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "svr-788",
+            "operator": "svr",
+            "start": 20130,
+            "end": 20134,
+            "line": 606,
+            "col": 21,
+            "original": "KSTP",
+            "replacement": "NAUX",
+            "description": "replace variable KSTP with NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.kstp(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "svr-789",
+            "operator": "svr",
+            "start": 20130,
+            "end": 20134,
+            "line": 606,
+            "col": 21,
+            "original": "KSTP",
+            "replacement": "NCOL",
+            "description": "replace variable KSTP with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.kstp(1) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-790",
+            "operator": "svr",
+            "start": 20130,
+            "end": 20134,
+            "line": 606,
+            "col": 21,
+            "original": "KSTP",
+            "replacement": "NFLW",
+            "description": "replace variable KSTP with NFLW"
+          },
+          "status": "killed",
+          "detail": "S6-nflw0.nml: dsm: ubdsv4.kstp(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "svr-791",
+            "operator": "svr",
+            "start": 20130,
+            "end": 20134,
+            "line": 606,
+            "col": 21,
+            "original": "KSTP",
+            "replacement": "NLAY",
+            "description": "replace variable KSTP with NLAY"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.007
+        },
+        {
+          "spec": {
+            "id": "svr-792",
+            "operator": "svr",
+            "start": 20130,
+            "end": 20134,
+            "line": 606,
+            "col": 21,
+            "original": "KSTP",
+            "replacement": "NROW",
+            "description": "replace variable KSTP with NROW"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.kstp(1) expected 2 got 3; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "vcr-1046",
+            "operator": "vcr",
+            "start": 20130,
+            "end": 20134,
+            "line": 606,
+            "col": 21,
+            "original": "KSTP",
+            "replacement": "0",
+            "description": "replace variable KSTP with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.kstp(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1047",
+            "operator": "vcr",
+            "start": 20130,
+            "end": 20134,
+            "line": 606,
+            "col": 21,
+            "original": "KSTP",
+            "replacement": "1",
+            "description": "replace variable KSTP with 1"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.kstp(1) expected 2 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "cas-013",
+            "operator": "cas",
+            "start": 20130,
+            "end": 20139,
+            "line": 606,
+            "col": 21,
+            "original": "KSTP,KPER",
+            "replacement": "KPER, KSTP",
+            "description": "swap arguments KSTP and KPER"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.kstp(1) expected 2 got 3; dsm: ubdsv4.kper(1) expected 3 got 2; dsm: 2 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "svr-793",
+            "operator": "svr",
+            "start": 20135,
+            "end": 20139,
+            "line": 606,
+            "col": 26,
+            "original": "KPER",
+            "replacement": "IFHBCB",
+            "description": "replace variable KPER with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.kper(1) expected 1 got 50; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-794",
+            "operator": "svr",
+            "start": 20135,
+            "end": 20139,
+            "line": 606,
+            "col": 26,
+            "original": "KPER",
+            "replacement": "IOUT",
+            "description": "replace variable KPER with IOUT"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.kper(1) expected 1 got 11; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-795",
+            "operator": "svr",
+            "start": 20135,
+            "end": 20139,
+            "line": 606,
+            "col": 26,
+            "original": "KPER",
+            "replacement": "KSTP",
+            "description": "replace variable KPER with KSTP"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.kper(1) expected 3 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "svr-796",
+            "operator": "svr",
+            "start": 20135,
+            "end": 20139,
+            "line": 606,
+            "col": 26,
+            "original": "KPER",
+            "replacement": "NAUX",
+            "description": "replace variable KPER with NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.kper(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-797",
+            "operator": "svr",
+            "start": 20135,
+            "end": 20139,
+            "line": 606,
+            "col": 26,
+            "original": "KPER",
+            "replacement": "NCOL",
+            "description": "replace variable KPER with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.kper(1) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-798",
+            "operator": "svr",
+            "start": 20135,
+            "end": 20139,
+            "line": 606,
+            "col": 26,
+            "original": "KPER",
+            "replacement": "NFLW",
+            "description": "replace variable KPER with NFLW"
+          },
+          "status": "killed",
+          "detail": "S6-nflw0.nml: dsm: ubdsv4.kper(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "svr-799",
+            "operator": "svr",
+            "start": 20135,
+            "end": 20139,
+            "line": 606,
+            "col": 26,
+            "original": "KPER",
+            "replacement": "NLAY",
+            "description": "replace variable KPER with NLAY"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.kper(1) expected 3 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "svr-800",
+            "operator": "svr",
+            "start": 20135,
+            "end": 20139,
+            "line": 606,
+            "col": 26,
+            "original": "KPER",
+            "replacement": "NROW",
+            "description": "replace variable KPER with NROW"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "vcr-1048",
+            "operator": "vcr",
+            "start": 20135,
+            "end": 20139,
+            "line": 606,
+            "col": 26,
+            "original": "KPER",
+            "replacement": "0",
+            "description": "replace variable KPER with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.kper(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1049",
+            "operator": "vcr",
+            "start": 20135,
+            "end": 20139,
+            "line": 606,
+            "col": 26,
+            "original": "KPER",
+            "replacement": "1",
+            "description": "replace variable KPER with 1"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.kper(1) expected 3 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.054
+        },
+        {
+          "spec": {
+            "id": "svr-801",
+            "operator": "svr",
+            "start": 20145,
+            "end": 20149,
+            "line": 606,
+            "col": 36,
+            "original": "NAUX",
+            "replacement": "IFHBCB",
+            "description": "replace variable NAUX with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 50; dsm: ubdsv4.auxtxt.n(1) expected 1 got 50; dsm: 2 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "svr-802",
+            "operator": "svr",
+            "start": 20145,
+            "end": 20149,
+            "line": 606,
+            "col": 36,
+            "original": "NAUX",
+            "replacement": "IOUT",
+            "description": "replace variable NAUX with IOUT"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 11; dsm: ubdsv4.auxtxt.n(1) expected 1 got 11; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-803",
+            "operator": "svr",
+            "start": 20145,
+            "end": 20149,
+            "line": 606,
+            "col": 36,
+            "original": "NAUX",
+            "replacement": "KPER",
+            "description": "replace variable NAUX with KPER"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-804",
+            "operator": "svr",
+            "start": 20145,
+            "end": 20149,
+            "line": 606,
+            "col": 36,
+            "original": "NAUX",
+            "replacement": "KSTP",
+            "description": "replace variable NAUX with KSTP"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-805",
+            "operator": "svr",
+            "start": 20145,
+            "end": 20149,
+            "line": 606,
+            "col": 36,
+            "original": "NAUX",
+            "replacement": "NCOL",
+            "description": "replace variable NAUX with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 2; dsm: ubdsv4.auxtxt.n(1) expected 1 got 2; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-806",
+            "operator": "svr",
+            "start": 20145,
+            "end": 20149,
+            "line": 606,
+            "col": 36,
+            "original": "NAUX",
+            "replacement": "NFLW",
+            "description": "replace variable NAUX with NFLW"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-807",
+            "operator": "svr",
+            "start": 20145,
+            "end": 20149,
+            "line": 606,
+            "col": 36,
+            "original": "NAUX",
+            "replacement": "NLAY",
+            "description": "replace variable NAUX with NLAY"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-808",
+            "operator": "svr",
+            "start": 20145,
+            "end": 20149,
+            "line": 606,
+            "col": 36,
+            "original": "NAUX",
+            "replacement": "NROW",
+            "description": "replace variable NAUX with NROW"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1050",
+            "operator": "vcr",
+            "start": 20145,
+            "end": 20149,
+            "line": 606,
+            "col": 36,
+            "original": "NAUX",
+            "replacement": "0",
+            "description": "replace variable NAUX with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.naux(1) expected 1 got 0; dsm: ubdsv4.auxtxt.n(1) expected 1 got 0; dsm: ubdsv4.auxtxt(1) expected 'IFACE           ' got '                '; dsm: 3 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "vcr-1051",
+            "operator": "vcr",
+            "start": 20145,
+            "end": 20149,
+            "line": 606,
+            "col": 36,
+            "original": "NAUX",
+            "replacement": "1",
+            "description": "replace variable NAUX with 1"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.naux(1) expected 0 got 1; dsm: ubdsv4.auxtxt.n(1) expected 0 got 1; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-809",
+            "operator": "svr",
+            "start": 20157,
+            "end": 20163,
+            "line": 606,
+            "col": 48,
+            "original": "IFHBCB",
+            "replacement": "IOUT",
+            "description": "replace variable IFHBCB with IOUT"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ibdchn(1) expected 50 got 11; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-810",
+            "operator": "svr",
+            "start": 20157,
+            "end": 20163,
+            "line": 606,
+            "col": 48,
+            "original": "IFHBCB",
+            "replacement": "KPER",
+            "description": "replace variable IFHBCB with KPER"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-811",
+            "operator": "svr",
+            "start": 20157,
+            "end": 20163,
+            "line": 606,
+            "col": 48,
+            "original": "IFHBCB",
+            "replacement": "KSTP",
+            "description": "replace variable IFHBCB with KSTP"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-812",
+            "operator": "svr",
+            "start": 20157,
+            "end": 20163,
+            "line": 606,
+            "col": 48,
+            "original": "IFHBCB",
+            "replacement": "NAUX",
+            "description": "replace variable IFHBCB with NAUX"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-813",
+            "operator": "svr",
+            "start": 20157,
+            "end": 20163,
+            "line": 606,
+            "col": 48,
+            "original": "IFHBCB",
+            "replacement": "NCOL",
+            "description": "replace variable IFHBCB with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ibdchn(1) expected 50 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-814",
+            "operator": "svr",
+            "start": 20157,
+            "end": 20163,
+            "line": 606,
+            "col": 48,
+            "original": "IFHBCB",
+            "replacement": "NFLW",
+            "description": "replace variable IFHBCB with NFLW"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-815",
+            "operator": "svr",
+            "start": 20157,
+            "end": 20163,
+            "line": 606,
+            "col": 48,
+            "original": "IFHBCB",
+            "replacement": "NLAY",
+            "description": "replace variable IFHBCB with NLAY"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-816",
+            "operator": "svr",
+            "start": 20157,
+            "end": 20163,
+            "line": 606,
+            "col": 48,
+            "original": "IFHBCB",
+            "replacement": "NROW",
+            "description": "replace variable IFHBCB with NROW"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "vcr-1052",
+            "operator": "vcr",
+            "start": 20157,
+            "end": 20163,
+            "line": 606,
+            "col": 48,
+            "original": "IFHBCB",
+            "replacement": "0",
+            "description": "replace variable IFHBCB with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ibdchn(1) expected 50 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "vcr-1053",
+            "operator": "vcr",
+            "start": 20157,
+            "end": 20163,
+            "line": 606,
+            "col": 48,
+            "original": "IFHBCB",
+            "replacement": "1",
+            "description": "replace variable IFHBCB with 1"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-817",
+            "operator": "svr",
+            "start": 20182,
+            "end": 20186,
+            "line": 607,
+            "col": 17,
+            "original": "NCOL",
+            "replacement": "IFHBCB",
+            "description": "replace variable NCOL with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ncol(1) expected 2 got 50; dsm: ubdsv4.ibound.size(1) expected 2 got 50; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got -3348907473.0000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-818",
+            "operator": "svr",
+            "start": 20182,
+            "end": 20186,
+            "line": 607,
+            "col": 17,
+            "original": "NCOL",
+            "replacement": "IOUT",
+            "description": "replace variable NCOL with IOUT"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ncol(1) expected 2 got 11; dsm: ubdsv4.ibound.size(1) expected 2 got 11; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 22000.000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-819",
+            "operator": "svr",
+            "start": 20182,
+            "end": 20186,
+            "line": 607,
+            "col": 17,
+            "original": "NCOL",
+            "replacement": "KPER",
+            "description": "replace variable NCOL with KPER"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ncol(1) expected 2 got 1; dsm: ubdsv4.ibound.size(1) expected 2 got 1; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-820",
+            "operator": "svr",
+            "start": 20182,
+            "end": 20186,
+            "line": 607,
+            "col": 17,
+            "original": "NCOL",
+            "replacement": "KSTP",
+            "description": "replace variable NCOL with KSTP"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ncol(1) expected 2 got 1; dsm: ubdsv4.ibound.size(1) expected 2 got 1; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-821",
+            "operator": "svr",
+            "start": 20182,
+            "end": 20186,
+            "line": 607,
+            "col": 17,
+            "original": "NCOL",
+            "replacement": "NAUX",
+            "description": "replace variable NCOL with NAUX"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ncol(1) expected 2 got 1; dsm: ubdsv4.ibound.size(1) expected 2 got 1; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-822",
+            "operator": "svr",
+            "start": 20182,
+            "end": 20186,
+            "line": 607,
+            "col": 17,
+            "original": "NCOL",
+            "replacement": "NFLW",
+            "description": "replace variable NCOL with NFLW"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ncol(1) expected 2 got 1; dsm: ubdsv4.ibound.size(1) expected 2 got 1; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-823",
+            "operator": "svr",
+            "start": 20182,
+            "end": 20186,
+            "line": 607,
+            "col": 17,
+            "original": "NCOL",
+            "replacement": "NLAY",
+            "description": "replace variable NCOL with NLAY"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ncol(1) expected 2 got 1; dsm: ubdsv4.ibound.size(1) expected 2 got 1; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-824",
+            "operator": "svr",
+            "start": 20182,
+            "end": 20186,
+            "line": 607,
+            "col": 17,
+            "original": "NCOL",
+            "replacement": "NROW",
+            "description": "replace variable NCOL with NROW"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ncol(1) expected 2 got 1; dsm: ubdsv4.ibound.size(1) expected 2 got 1; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1054",
+            "operator": "vcr",
+            "start": 20182,
+            "end": 20186,
+            "line": 607,
+            "col": 17,
+            "original": "NCOL",
+            "replacement": "0",
+            "description": "replace variable NCOL with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ncol(1) expected 2 got 0; dsm: ubdsv4.ibound.size(1) expected 2 got 0; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1055",
+            "operator": "vcr",
+            "start": 20182,
+            "end": 20186,
+            "line": 607,
+            "col": 17,
+            "original": "NCOL",
+            "replacement": "1",
+            "description": "replace variable NCOL with 1"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ncol(1) expected 2 got 1; dsm: ubdsv4.ibound.size(1) expected 2 got 1; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "cas-014",
+            "operator": "cas",
+            "start": 20182,
+            "end": 20191,
+            "line": 607,
+            "col": 17,
+            "original": "NCOL,NROW",
+            "replacement": "NROW, NCOL",
+            "description": "swap arguments NCOL and NROW"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.ncol(1) expected 2 got 1; dsm: ubdsv4.nrow(1) expected 1 got 2; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-825",
+            "operator": "svr",
+            "start": 20187,
+            "end": 20191,
+            "line": 607,
+            "col": 22,
+            "original": "NROW",
+            "replacement": "IFHBCB",
+            "description": "replace variable NROW with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nrow(1) expected 1 got 50; dsm: ubdsv4.ibound.size(1) expected 2 got 100; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got -9055771172.0000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-826",
+            "operator": "svr",
+            "start": 20187,
+            "end": 20191,
+            "line": 607,
+            "col": 22,
+            "original": "NROW",
+            "replacement": "IOUT",
+            "description": "replace variable NROW with IOUT"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nrow(1) expected 1 got 11; dsm: ubdsv4.ibound.size(1) expected 2 got 22; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got -3688027221.0000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-827",
+            "operator": "svr",
+            "start": 20187,
+            "end": 20191,
+            "line": 607,
+            "col": 22,
+            "original": "NROW",
+            "replacement": "KPER",
+            "description": "replace variable NROW with KPER"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "svr-828",
+            "operator": "svr",
+            "start": 20187,
+            "end": 20191,
+            "line": 607,
+            "col": 22,
+            "original": "NROW",
+            "replacement": "KSTP",
+            "description": "replace variable NROW with KSTP"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.nrow(1) expected 3 got 2; dsm: ubdsv4.ibound.size(1) expected 12 got 8; dsm: ubdsv4.ibound.sum(1) expected 12.000000000000000 got 8.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "svr-829",
+            "operator": "svr",
+            "start": 20187,
+            "end": 20191,
+            "line": 607,
+            "col": 22,
+            "original": "NROW",
+            "replacement": "NAUX",
+            "description": "replace variable NROW with NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.nrow(1) expected 1 got 0; dsm: ubdsv4.ibound.size(1) expected 2 got 0; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-830",
+            "operator": "svr",
+            "start": 20187,
+            "end": 20191,
+            "line": 607,
+            "col": 22,
+            "original": "NROW",
+            "replacement": "NCOL",
+            "description": "replace variable NROW with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nrow(1) expected 1 got 2; dsm: ubdsv4.ibound.size(1) expected 2 got 4; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-831",
+            "operator": "svr",
+            "start": 20187,
+            "end": 20191,
+            "line": 607,
+            "col": 22,
+            "original": "NROW",
+            "replacement": "NFLW",
+            "description": "replace variable NROW with NFLW"
+          },
+          "status": "killed",
+          "detail": "S6-nflw0.nml: dsm: ubdsv4.nrow(1) expected 1 got 0; dsm: ubdsv4.ibound.size(1) expected 2 got 0; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "svr-832",
+            "operator": "svr",
+            "start": 20187,
+            "end": 20191,
+            "line": 607,
+            "col": 22,
+            "original": "NROW",
+            "replacement": "NLAY",
+            "description": "replace variable NROW with NLAY"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.nrow(1) expected 3 got 2; dsm: ubdsv4.ibound.size(1) expected 12 got 8; dsm: ubdsv4.ibound.sum(1) expected 12.000000000000000 got 8.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "vcr-1056",
+            "operator": "vcr",
+            "start": 20187,
+            "end": 20191,
+            "line": 607,
+            "col": 22,
+            "original": "NROW",
+            "replacement": "0",
+            "description": "replace variable NROW with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nrow(1) expected 1 got 0; dsm: ubdsv4.ibound.size(1) expected 2 got 0; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1057",
+            "operator": "vcr",
+            "start": 20187,
+            "end": 20191,
+            "line": 607,
+            "col": 22,
+            "original": "NROW",
+            "replacement": "1",
+            "description": "replace variable NROW with 1"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.nrow(1) expected 3 got 1; dsm: ubdsv4.ibound.size(1) expected 12 got 4; dsm: ubdsv4.ibound.sum(1) expected 12.000000000000000 got 4.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.054
+        },
+        {
+          "spec": {
+            "id": "cas-015",
+            "operator": "cas",
+            "start": 20187,
+            "end": 20196,
+            "line": 607,
+            "col": 22,
+            "original": "NROW,NLAY",
+            "replacement": "NLAY, NROW",
+            "description": "swap arguments NROW and NLAY"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.nrow(1) expected 3 got 2; dsm: ubdsv4.nlay(1) expected 2 got 3; dsm: 2 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "svr-833",
+            "operator": "svr",
+            "start": 20192,
+            "end": 20196,
+            "line": 607,
+            "col": 27,
+            "original": "NLAY",
+            "replacement": "IFHBCB",
+            "description": "replace variable NLAY with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nlay(1) expected 1 got 50; dsm: ubdsv4.ibound.size(1) expected 2 got 100; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got -10464383165.000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-834",
+            "operator": "svr",
+            "start": 20192,
+            "end": 20196,
+            "line": 607,
+            "col": 27,
+            "original": "NLAY",
+            "replacement": "IOUT",
+            "description": "replace variable NLAY with IOUT"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nlay(1) expected 1 got 11; dsm: ubdsv4.ibound.size(1) expected 2 got 22; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got -57799388.000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-835",
+            "operator": "svr",
+            "start": 20192,
+            "end": 20196,
+            "line": 607,
+            "col": 27,
+            "original": "NLAY",
+            "replacement": "KPER",
+            "description": "replace variable NLAY with KPER"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.nlay(1) expected 2 got 3; dsm: ubdsv4.ibound.size(1) expected 12 got 18; dsm: ubdsv4.ibound.sum(1) expected 12.000000000000000 got 130.00000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.056
+        },
+        {
+          "spec": {
+            "id": "svr-836",
+            "operator": "svr",
+            "start": 20192,
+            "end": 20196,
+            "line": 607,
+            "col": 27,
+            "original": "NLAY",
+            "replacement": "KSTP",
+            "description": "replace variable NLAY with KSTP"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "svr-837",
+            "operator": "svr",
+            "start": 20192,
+            "end": 20196,
+            "line": 607,
+            "col": 27,
+            "original": "NLAY",
+            "replacement": "NAUX",
+            "description": "replace variable NLAY with NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.nlay(1) expected 1 got 0; dsm: ubdsv4.ibound.size(1) expected 2 got 0; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-838",
+            "operator": "svr",
+            "start": 20192,
+            "end": 20196,
+            "line": 607,
+            "col": 27,
+            "original": "NLAY",
+            "replacement": "NCOL",
+            "description": "replace variable NLAY with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nlay(1) expected 1 got 2; dsm: ubdsv4.ibound.size(1) expected 2 got 4; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-839",
+            "operator": "svr",
+            "start": 20192,
+            "end": 20196,
+            "line": 607,
+            "col": 27,
+            "original": "NLAY",
+            "replacement": "NFLW",
+            "description": "replace variable NLAY with NFLW"
+          },
+          "status": "killed",
+          "detail": "S6-nflw0.nml: dsm: ubdsv4.nlay(1) expected 1 got 0; dsm: ubdsv4.ibound.size(1) expected 2 got 0; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-840",
+            "operator": "svr",
+            "start": 20192,
+            "end": 20196,
+            "line": 607,
+            "col": 27,
+            "original": "NLAY",
+            "replacement": "NROW",
+            "description": "replace variable NLAY with NROW"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.nlay(1) expected 2 got 3; dsm: ubdsv4.ibound.size(1) expected 12 got 18; dsm: ubdsv4.ibound.sum(1) expected 12.000000000000000 got 130.00000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "vcr-1058",
+            "operator": "vcr",
+            "start": 20192,
+            "end": 20196,
+            "line": 607,
+            "col": 27,
+            "original": "NLAY",
+            "replacement": "0",
+            "description": "replace variable NLAY with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nlay(1) expected 1 got 0; dsm: ubdsv4.ibound.size(1) expected 2 got 0; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1059",
+            "operator": "vcr",
+            "start": 20192,
+            "end": 20196,
+            "line": 607,
+            "col": 27,
+            "original": "NLAY",
+            "replacement": "1",
+            "description": "replace variable NLAY with 1"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.nlay(1) expected 2 got 1; dsm: ubdsv4.ibound.size(1) expected 12 got 6; dsm: ubdsv4.ibound.sum(1) expected 12.000000000000000 got 6.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "cas-016",
+            "operator": "cas",
+            "start": 20192,
+            "end": 20201,
+            "line": 607,
+            "col": 27,
+            "original": "NLAY,NFLW",
+            "replacement": "NFLW, NLAY",
+            "description": "swap arguments NLAY and NFLW"
+          },
+          "status": "killed",
+          "detail": "S6-nflw0.nml: dsm: ubdsv4.nlay(1) expected 1 got 0; dsm: ubdsv4.nlist(1) expected 0 got 1; dsm: ubdsv4.ibound.size(1) expected 2 got 0; dsm: ubdsv4.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: 4 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "svr-841",
+            "operator": "svr",
+            "start": 20197,
+            "end": 20201,
+            "line": 607,
+            "col": 32,
+            "original": "NFLW",
+            "replacement": "IFHBCB",
+            "description": "replace variable NFLW with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nlist(1) expected 1 got 50; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-842",
+            "operator": "svr",
+            "start": 20197,
+            "end": 20201,
+            "line": 607,
+            "col": 32,
+            "original": "NFLW",
+            "replacement": "IOUT",
+            "description": "replace variable NFLW with IOUT"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nlist(1) expected 1 got 11; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-843",
+            "operator": "svr",
+            "start": 20197,
+            "end": 20201,
+            "line": 607,
+            "col": 32,
+            "original": "NFLW",
+            "replacement": "KPER",
+            "description": "replace variable NFLW with KPER"
+          },
+          "status": "killed",
+          "detail": "S6-nflw0.nml: dsm: ubdsv4.nlist(1) expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "svr-844",
+            "operator": "svr",
+            "start": 20197,
+            "end": 20201,
+            "line": 607,
+            "col": 32,
+            "original": "NFLW",
+            "replacement": "KSTP",
+            "description": "replace variable NFLW with KSTP"
+          },
+          "status": "killed",
+          "detail": "S6-nflw0.nml: dsm: ubdsv4.nlist(1) expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "svr-845",
+            "operator": "svr",
+            "start": 20197,
+            "end": 20201,
+            "line": 607,
+            "col": 32,
+            "original": "NFLW",
+            "replacement": "NAUX",
+            "description": "replace variable NFLW with NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsv4.nlist(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-846",
+            "operator": "svr",
+            "start": 20197,
+            "end": 20201,
+            "line": 607,
+            "col": 32,
+            "original": "NFLW",
+            "replacement": "NCOL",
+            "description": "replace variable NFLW with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nlist(1) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-847",
+            "operator": "svr",
+            "start": 20197,
+            "end": 20201,
+            "line": 607,
+            "col": 32,
+            "original": "NFLW",
+            "replacement": "NLAY",
+            "description": "replace variable NFLW with NLAY"
+          },
+          "status": "killed",
+          "detail": "S6-nflw0.nml: dsm: ubdsv4.nlist(1) expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "svr-848",
+            "operator": "svr",
+            "start": 20197,
+            "end": 20201,
+            "line": 607,
+            "col": 32,
+            "original": "NFLW",
+            "replacement": "NROW",
+            "description": "replace variable NFLW with NROW"
+          },
+          "status": "killed",
+          "detail": "S6-nflw0.nml: dsm: ubdsv4.nlist(1) expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "vcr-1060",
+            "operator": "vcr",
+            "start": 20197,
+            "end": 20201,
+            "line": 607,
+            "col": 32,
+            "original": "NFLW",
+            "replacement": "0",
+            "description": "replace variable NFLW with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nlist(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1061",
+            "operator": "vcr",
+            "start": 20197,
+            "end": 20201,
+            "line": 607,
+            "col": 32,
+            "original": "NFLW",
+            "replacement": "1",
+            "description": "replace variable NFLW with 1"
+          },
+          "status": "killed",
+          "detail": "S6-nflw0.nml: dsm: ubdsv4.nlist(1) expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "cas-017",
+            "operator": "cas",
+            "start": 20197,
+            "end": 20206,
+            "line": 607,
+            "col": 32,
+            "original": "NFLW,IOUT",
+            "replacement": "IOUT, NFLW",
+            "description": "swap arguments NFLW and IOUT"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.nlist(1) expected 1 got 11; dsm: ubdsv4.iout(1) expected 11 got 1; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-849",
+            "operator": "svr",
+            "start": 20202,
+            "end": 20206,
+            "line": 607,
+            "col": 37,
+            "original": "IOUT",
+            "replacement": "IFHBCB",
+            "description": "replace variable IOUT with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.iout(1) expected 11 got 50; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-850",
+            "operator": "svr",
+            "start": 20202,
+            "end": 20206,
+            "line": 607,
+            "col": 37,
+            "original": "IOUT",
+            "replacement": "KPER",
+            "description": "replace variable IOUT with KPER"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.iout(1) expected 11 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-851",
+            "operator": "svr",
+            "start": 20202,
+            "end": 20206,
+            "line": 607,
+            "col": 37,
+            "original": "IOUT",
+            "replacement": "KSTP",
+            "description": "replace variable IOUT with KSTP"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.iout(1) expected 11 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-852",
+            "operator": "svr",
+            "start": 20202,
+            "end": 20206,
+            "line": 607,
+            "col": 37,
+            "original": "IOUT",
+            "replacement": "NAUX",
+            "description": "replace variable IOUT with NAUX"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.iout(1) expected 11 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-853",
+            "operator": "svr",
+            "start": 20202,
+            "end": 20206,
+            "line": 607,
+            "col": 37,
+            "original": "IOUT",
+            "replacement": "NCOL",
+            "description": "replace variable IOUT with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.iout(1) expected 11 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-854",
+            "operator": "svr",
+            "start": 20202,
+            "end": 20206,
+            "line": 607,
+            "col": 37,
+            "original": "IOUT",
+            "replacement": "NFLW",
+            "description": "replace variable IOUT with NFLW"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.iout(1) expected 11 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-855",
+            "operator": "svr",
+            "start": 20202,
+            "end": 20206,
+            "line": 607,
+            "col": 37,
+            "original": "IOUT",
+            "replacement": "NLAY",
+            "description": "replace variable IOUT with NLAY"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.iout(1) expected 11 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-856",
+            "operator": "svr",
+            "start": 20202,
+            "end": 20206,
+            "line": 607,
+            "col": 37,
+            "original": "IOUT",
+            "replacement": "NROW",
+            "description": "replace variable IOUT with NROW"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.iout(1) expected 11 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1062",
+            "operator": "vcr",
+            "start": 20202,
+            "end": 20206,
+            "line": 607,
+            "col": 37,
+            "original": "IOUT",
+            "replacement": "0",
+            "description": "replace variable IOUT with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.iout(1) expected 11 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "vcr-1063",
+            "operator": "vcr",
+            "start": 20202,
+            "end": 20206,
+            "line": 607,
+            "col": 37,
+            "original": "IOUT",
+            "replacement": "1",
+            "description": "replace variable IOUT with 1"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.iout(1) expected 11 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-857",
+            "operator": "svr",
+            "start": 20207,
+            "end": 20211,
+            "line": 607,
+            "col": 42,
+            "original": "DELT",
+            "replacement": "PERTIM",
+            "description": "replace variable DELT with PERTIM"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.delt(1) expected 1.50000000 got 2.50000000; dsm: 1 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "svr-858",
+            "operator": "svr",
+            "start": 20207,
+            "end": 20211,
+            "line": 607,
+            "col": 42,
+            "original": "DELT",
+            "replacement": "TOTIM",
+            "description": "replace variable DELT with TOTIM"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.delt(1) expected 1.50000000 got 4.00000000; dsm: 1 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "vcr-1064",
+            "operator": "vcr",
+            "start": 20207,
+            "end": 20211,
+            "line": 607,
+            "col": 42,
+            "original": "DELT",
+            "replacement": "0.0",
+            "description": "replace variable DELT with 0.0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.delt(1) expected 1.00000000 got 0.00000000; dsm: 1 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "cas-018",
+            "operator": "cas",
+            "start": 20207,
+            "end": 20218,
+            "line": 607,
+            "col": 42,
+            "original": "DELT,PERTIM",
+            "replacement": "PERTIM, DELT",
+            "description": "swap arguments DELT and PERTIM"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.delt(1) expected 1.50000000 got 2.50000000; dsm: ubdsv4.pertim(1) expected 2.50000000 got 1.50000000; dsm: 2 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "svr-859",
+            "operator": "svr",
+            "start": 20212,
+            "end": 20218,
+            "line": 607,
+            "col": 47,
+            "original": "PERTIM",
+            "replacement": "DELT",
+            "description": "replace variable PERTIM with DELT"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.pertim(1) expected 2.50000000 got 1.50000000; dsm: 1 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "svr-860",
+            "operator": "svr",
+            "start": 20212,
+            "end": 20218,
+            "line": 607,
+            "col": 47,
+            "original": "PERTIM",
+            "replacement": "TOTIM",
+            "description": "replace variable PERTIM with TOTIM"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.pertim(1) expected 2.50000000 got 4.00000000; dsm: 1 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "vcr-1065",
+            "operator": "vcr",
+            "start": 20212,
+            "end": 20218,
+            "line": 607,
+            "col": 47,
+            "original": "PERTIM",
+            "replacement": "0.0",
+            "description": "replace variable PERTIM with 0.0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.pertim(1) expected 1.00000000 got 0.00000000; dsm: 1 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "cas-019",
+            "operator": "cas",
+            "start": 20212,
+            "end": 20224,
+            "line": 607,
+            "col": 47,
+            "original": "PERTIM,TOTIM",
+            "replacement": "TOTIM, PERTIM",
+            "description": "swap arguments PERTIM and TOTIM"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.pertim(1) expected 2.50000000 got 4.00000000; dsm: ubdsv4.totim(1) expected 4.00000000 got 2.50000000; dsm: 2 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "svr-861",
+            "operator": "svr",
+            "start": 20219,
+            "end": 20224,
+            "line": 607,
+            "col": 54,
+            "original": "TOTIM",
+            "replacement": "DELT",
+            "description": "replace variable TOTIM with DELT"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.totim(1) expected 4.00000000 got 1.50000000; dsm: 1 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "svr-862",
+            "operator": "svr",
+            "start": 20219,
+            "end": 20224,
+            "line": 607,
+            "col": 54,
+            "original": "TOTIM",
+            "replacement": "PERTIM",
+            "description": "replace variable TOTIM with PERTIM"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsv4.totim(1) expected 4.00000000 got 2.50000000; dsm: 1 expectation(s) failed",
+          "seconds": 0.054
+        },
+        {
+          "spec": {
+            "id": "vcr-1066",
+            "operator": "vcr",
+            "start": 20219,
+            "end": 20224,
+            "line": 607,
+            "col": 54,
+            "original": "TOTIM",
+            "replacement": "0.0",
+            "description": "replace variable TOTIM with 0.0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsv4.totim(1) expected 1.00000000 got 0.00000000; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "rsr-192",
+            "operator": "rsr",
+            "start": 21672,
+            "end": 21767,
+            "line": 661,
+            "col": 9,
+            "original": "CALL UBDSVB(IFHBCB,NCOL,NROW,IC,IR,IL,Q,&\n     &                    XFACE,1,NAUX,1,IBOUND,NLAY)",
+            "replacement": "RETURN\n",
+            "description": "return instead of: CALL UBDSVB ( IFHBCB ..."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: vbnm(1) expected ' SPECIFIED FLOWS' got '                '; dsm: vbvl(2) expected 5.00000000 got 0.00000000; dsm: vbvl(4) expected 5.00000000 got 0.00000000; dsm: bdfv(2) expected -5.00000000 got 0.00000000; dsm: n_ubdsvb expected 1 got 0; dsm: 6 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "sdl-192",
+            "operator": "sdl",
+            "start": 21672,
+            "end": 21767,
+            "line": 661,
+            "col": 9,
+            "original": "CALL UBDSVB(IFHBCB,NCOL,NROW,IC,IR,IL,Q,&\n     &                    XFACE,1,NAUX,1,IBOUND,NLAY)",
+            "replacement": "CONTINUE\n",
+            "description": "delete statement: CALL UBDSVB ( IFHBCB ..."
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: n_ubdsvb expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-911",
+            "operator": "svr",
+            "start": 21684,
+            "end": 21690,
+            "line": 661,
+            "col": 21,
+            "original": "IFHBCB",
+            "replacement": "IC",
+            "description": "replace variable IFHBCB with IC"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "svr-912",
+            "operator": "svr",
+            "start": 21684,
+            "end": 21690,
+            "line": 661,
+            "col": 21,
+            "original": "IFHBCB",
+            "replacement": "IL",
+            "description": "replace variable IFHBCB with IL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-913",
+            "operator": "svr",
+            "start": 21684,
+            "end": 21690,
+            "line": 661,
+            "col": 21,
+            "original": "IFHBCB",
+            "replacement": "IR",
+            "description": "replace variable IFHBCB with IR"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-914",
+            "operator": "svr",
+            "start": 21684,
+            "end": 21690,
+            "line": 661,
+            "col": 21,
+            "original": "IFHBCB",
+            "replacement": "NAUX",
+            "description": "replace variable IFHBCB with NAUX"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-915",
+            "operator": "svr",
+            "start": 21684,
+            "end": 21690,
+            "line": 661,
+            "col": 21,
+            "original": "IFHBCB",
+            "replacement": "NCOL",
+            "description": "replace variable IFHBCB with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibdchn(1) expected 50 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-916",
+            "operator": "svr",
+            "start": 21684,
+            "end": 21690,
+            "line": 661,
+            "col": 21,
+            "original": "IFHBCB",
+            "replacement": "NLAY",
+            "description": "replace variable IFHBCB with NLAY"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-917",
+            "operator": "svr",
+            "start": 21684,
+            "end": 21690,
+            "line": 661,
+            "col": 21,
+            "original": "IFHBCB",
+            "replacement": "NROW",
+            "description": "replace variable IFHBCB with NROW"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "vcr-1148",
+            "operator": "vcr",
+            "start": 21684,
+            "end": 21690,
+            "line": 661,
+            "col": 21,
+            "original": "IFHBCB",
+            "replacement": "0",
+            "description": "replace variable IFHBCB with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibdchn(1) expected 50 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "vcr-1149",
+            "operator": "vcr",
+            "start": 21684,
+            "end": 21690,
+            "line": 661,
+            "col": 21,
+            "original": "IFHBCB",
+            "replacement": "1",
+            "description": "replace variable IFHBCB with 1"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibdchn(1) expected 50 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "cas-020",
+            "operator": "cas",
+            "start": 21684,
+            "end": 21695,
+            "line": 661,
+            "col": 21,
+            "original": "IFHBCB,NCOL",
+            "replacement": "NCOL, IFHBCB",
+            "description": "swap arguments IFHBCB and NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibdchn(1) expected 50 got 2; dsm: ubdsvb.ncol(1) expected 2 got 50; dsm: ubdsvb.ibound.size(1) expected 2 got 50; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got -1855883692.0000000; dsm: 4 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-918",
+            "operator": "svr",
+            "start": 21691,
+            "end": 21695,
+            "line": 661,
+            "col": 28,
+            "original": "NCOL",
+            "replacement": "IC",
+            "description": "replace variable NCOL with IC"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ncol(1) expected 2 got 1; dsm: ubdsvb.ibound.size(1) expected 2 got 1; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "svr-919",
+            "operator": "svr",
+            "start": 21691,
+            "end": 21695,
+            "line": 661,
+            "col": 28,
+            "original": "NCOL",
+            "replacement": "IFHBCB",
+            "description": "replace variable NCOL with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ncol(1) expected 2 got 50; dsm: ubdsvb.ibound.size(1) expected 2 got 50; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got -7425697691.0000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-920",
+            "operator": "svr",
+            "start": 21691,
+            "end": 21695,
+            "line": 661,
+            "col": 28,
+            "original": "NCOL",
+            "replacement": "IL",
+            "description": "replace variable NCOL with IL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ncol(1) expected 2 got 1; dsm: ubdsvb.ibound.size(1) expected 2 got 1; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-921",
+            "operator": "svr",
+            "start": 21691,
+            "end": 21695,
+            "line": 661,
+            "col": 28,
+            "original": "NCOL",
+            "replacement": "IR",
+            "description": "replace variable NCOL with IR"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ncol(1) expected 2 got 1; dsm: ubdsvb.ibound.size(1) expected 2 got 1; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-922",
+            "operator": "svr",
+            "start": 21691,
+            "end": 21695,
+            "line": 661,
+            "col": 28,
+            "original": "NCOL",
+            "replacement": "NAUX",
+            "description": "replace variable NCOL with NAUX"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ncol(1) expected 2 got 1; dsm: ubdsvb.ibound.size(1) expected 2 got 1; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-923",
+            "operator": "svr",
+            "start": 21691,
+            "end": 21695,
+            "line": 661,
+            "col": 28,
+            "original": "NCOL",
+            "replacement": "NLAY",
+            "description": "replace variable NCOL with NLAY"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ncol(1) expected 2 got 1; dsm: ubdsvb.ibound.size(1) expected 2 got 1; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-924",
+            "operator": "svr",
+            "start": 21691,
+            "end": 21695,
+            "line": 661,
+            "col": 28,
+            "original": "NCOL",
+            "replacement": "NROW",
+            "description": "replace variable NCOL with NROW"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ncol(1) expected 2 got 1; dsm: ubdsvb.ibound.size(1) expected 2 got 1; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1150",
+            "operator": "vcr",
+            "start": 21691,
+            "end": 21695,
+            "line": 661,
+            "col": 28,
+            "original": "NCOL",
+            "replacement": "0",
+            "description": "replace variable NCOL with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ncol(1) expected 2 got 0; dsm: ubdsvb.ibound.size(1) expected 2 got 0; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1151",
+            "operator": "vcr",
+            "start": 21691,
+            "end": 21695,
+            "line": 661,
+            "col": 28,
+            "original": "NCOL",
+            "replacement": "1",
+            "description": "replace variable NCOL with 1"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ncol(1) expected 2 got 1; dsm: ubdsvb.ibound.size(1) expected 2 got 1; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 1.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "cas-021",
+            "operator": "cas",
+            "start": 21691,
+            "end": 21700,
+            "line": 661,
+            "col": 28,
+            "original": "NCOL,NROW",
+            "replacement": "NROW, NCOL",
+            "description": "swap arguments NCOL and NROW"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ncol(1) expected 2 got 1; dsm: ubdsvb.nrow(1) expected 1 got 2; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-925",
+            "operator": "svr",
+            "start": 21696,
+            "end": 21700,
+            "line": 661,
+            "col": 33,
+            "original": "NROW",
+            "replacement": "IC",
+            "description": "replace variable NROW with IC"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.nrow(2) expected 1 got 2; dsm: ubdsvb.ibound.size(2) expected 2 got 4; dsm: 2 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "svr-926",
+            "operator": "svr",
+            "start": 21696,
+            "end": 21700,
+            "line": 661,
+            "col": 33,
+            "original": "NROW",
+            "replacement": "IFHBCB",
+            "description": "replace variable NROW with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.nrow(1) expected 1 got 50; dsm: ubdsvb.ibound.size(1) expected 2 got 100; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got -3503970297.0000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-927",
+            "operator": "svr",
+            "start": 21696,
+            "end": 21700,
+            "line": 661,
+            "col": 33,
+            "original": "NROW",
+            "replacement": "IL",
+            "description": "replace variable NROW with IL"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.nrow(1) expected 3 got 2; dsm: ubdsvb.ibound.size(1) expected 12 got 8; dsm: ubdsvb.ibound.sum(1) expected 12.000000000000000 got 8.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "svr-928",
+            "operator": "svr",
+            "start": 21696,
+            "end": 21700,
+            "line": 661,
+            "col": 33,
+            "original": "NROW",
+            "replacement": "IR",
+            "description": "replace variable NROW with IR"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "svr-929",
+            "operator": "svr",
+            "start": 21696,
+            "end": 21700,
+            "line": 661,
+            "col": 33,
+            "original": "NROW",
+            "replacement": "NAUX",
+            "description": "replace variable NROW with NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.nrow(1) expected 1 got 0; dsm: ubdsvb.ibound.size(1) expected 2 got 0; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-930",
+            "operator": "svr",
+            "start": 21696,
+            "end": 21700,
+            "line": 661,
+            "col": 33,
+            "original": "NROW",
+            "replacement": "NCOL",
+            "description": "replace variable NROW with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.nrow(1) expected 1 got 2; dsm: ubdsvb.ibound.size(1) expected 2 got 4; dsm: 2 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-931",
+            "operator": "svr",
+            "start": 21696,
+            "end": 21700,
+            "line": 661,
+            "col": 33,
+            "original": "NROW",
+            "replacement": "NLAY",
+            "description": "replace variable NROW with NLAY"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.nrow(1) expected 3 got 2; dsm: ubdsvb.ibound.size(1) expected 12 got 8; dsm: ubdsvb.ibound.sum(1) expected 12.000000000000000 got 8.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "vcr-1152",
+            "operator": "vcr",
+            "start": 21696,
+            "end": 21700,
+            "line": 661,
+            "col": 33,
+            "original": "NROW",
+            "replacement": "0",
+            "description": "replace variable NROW with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.nrow(1) expected 1 got 0; dsm: ubdsvb.ibound.size(1) expected 2 got 0; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "vcr-1153",
+            "operator": "vcr",
+            "start": 21696,
+            "end": 21700,
+            "line": 661,
+            "col": 33,
+            "original": "NROW",
+            "replacement": "1",
+            "description": "replace variable NROW with 1"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.nrow(1) expected 3 got 1; dsm: ubdsvb.ibound.size(1) expected 12 got 4; dsm: ubdsvb.ibound.sum(1) expected 12.000000000000000 got 4.0000000000000000; dsm: 3 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "cas-022",
+            "operator": "cas",
+            "start": 21696,
+            "end": 21703,
+            "line": 661,
+            "col": 33,
+            "original": "NROW,IC",
+            "replacement": "IC, NROW",
+            "description": "swap arguments NROW and IC"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.nrow(2) expected 1 got 2; dsm: ubdsvb.j(2) expected 2 got 1; dsm: ubdsvb.ibound.size(2) expected 2 got 4; dsm: 3 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "svr-932",
+            "operator": "svr",
+            "start": 21701,
+            "end": 21703,
+            "line": 661,
+            "col": 38,
+            "original": "IC",
+            "replacement": "IFHBCB",
+            "description": "replace variable IC with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.j(1) expected 1 got 50; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-933",
+            "operator": "svr",
+            "start": 21701,
+            "end": 21703,
+            "line": 661,
+            "col": 38,
+            "original": "IC",
+            "replacement": "IL",
+            "description": "replace variable IC with IL"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.j(2) expected 2 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "svr-934",
+            "operator": "svr",
+            "start": 21701,
+            "end": 21703,
+            "line": 661,
+            "col": 38,
+            "original": "IC",
+            "replacement": "IR",
+            "description": "replace variable IC with IR"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.j(2) expected 2 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "svr-935",
+            "operator": "svr",
+            "start": 21701,
+            "end": 21703,
+            "line": 661,
+            "col": 38,
+            "original": "IC",
+            "replacement": "NAUX",
+            "description": "replace variable IC with NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.j(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-936",
+            "operator": "svr",
+            "start": 21701,
+            "end": 21703,
+            "line": 661,
+            "col": 38,
+            "original": "IC",
+            "replacement": "NCOL",
+            "description": "replace variable IC with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.j(1) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "svr-937",
+            "operator": "svr",
+            "start": 21701,
+            "end": 21703,
+            "line": 661,
+            "col": 38,
+            "original": "IC",
+            "replacement": "NLAY",
+            "description": "replace variable IC with NLAY"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.j(2) expected 2 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "svr-938",
+            "operator": "svr",
+            "start": 21701,
+            "end": 21703,
+            "line": 661,
+            "col": 38,
+            "original": "IC",
+            "replacement": "NROW",
+            "description": "replace variable IC with NROW"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.j(2) expected 2 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "vcr-1154",
+            "operator": "vcr",
+            "start": 21701,
+            "end": 21703,
+            "line": 661,
+            "col": 38,
+            "original": "IC",
+            "replacement": "0",
+            "description": "replace variable IC with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.j(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1155",
+            "operator": "vcr",
+            "start": 21701,
+            "end": 21703,
+            "line": 661,
+            "col": 38,
+            "original": "IC",
+            "replacement": "1",
+            "description": "replace variable IC with 1"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.j(2) expected 2 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "cas-023",
+            "operator": "cas",
+            "start": 21701,
+            "end": 21706,
+            "line": 661,
+            "col": 38,
+            "original": "IC,IR",
+            "replacement": "IR, IC",
+            "description": "swap arguments IC and IR"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.j(2) expected 2 got 1; dsm: ubdsvb.i(2) expected 1 got 2; dsm: 2 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "svr-939",
+            "operator": "svr",
+            "start": 21704,
+            "end": 21706,
+            "line": 661,
+            "col": 41,
+            "original": "IR",
+            "replacement": "IC",
+            "description": "replace variable IR with IC"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.i(2) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "svr-940",
+            "operator": "svr",
+            "start": 21704,
+            "end": 21706,
+            "line": 661,
+            "col": 41,
+            "original": "IR",
+            "replacement": "IFHBCB",
+            "description": "replace variable IR with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.i(1) expected 1 got 50; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-941",
+            "operator": "svr",
+            "start": 21704,
+            "end": 21706,
+            "line": 661,
+            "col": 41,
+            "original": "IR",
+            "replacement": "IL",
+            "description": "replace variable IR with IL"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.i(1) expected 3 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "svr-942",
+            "operator": "svr",
+            "start": 21704,
+            "end": 21706,
+            "line": 661,
+            "col": 41,
+            "original": "IR",
+            "replacement": "NAUX",
+            "description": "replace variable IR with NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.i(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-943",
+            "operator": "svr",
+            "start": 21704,
+            "end": 21706,
+            "line": 661,
+            "col": 41,
+            "original": "IR",
+            "replacement": "NCOL",
+            "description": "replace variable IR with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.i(1) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-944",
+            "operator": "svr",
+            "start": 21704,
+            "end": 21706,
+            "line": 661,
+            "col": 41,
+            "original": "IR",
+            "replacement": "NLAY",
+            "description": "replace variable IR with NLAY"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.i(1) expected 3 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "svr-945",
+            "operator": "svr",
+            "start": 21704,
+            "end": 21706,
+            "line": 661,
+            "col": 41,
+            "original": "IR",
+            "replacement": "NROW",
+            "description": "replace variable IR with NROW"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "vcr-1156",
+            "operator": "vcr",
+            "start": 21704,
+            "end": 21706,
+            "line": 661,
+            "col": 41,
+            "original": "IR",
+            "replacement": "0",
+            "description": "replace variable IR with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.i(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "vcr-1157",
+            "operator": "vcr",
+            "start": 21704,
+            "end": 21706,
+            "line": 661,
+            "col": 41,
+            "original": "IR",
+            "replacement": "1",
+            "description": "replace variable IR with 1"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.i(1) expected 3 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.053
+        },
+        {
+          "spec": {
+            "id": "cas-024",
+            "operator": "cas",
+            "start": 21704,
+            "end": 21709,
+            "line": 661,
+            "col": 41,
+            "original": "IR,IL",
+            "replacement": "IL, IR",
+            "description": "swap arguments IR and IL"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.i(1) expected 3 got 2; dsm: ubdsvb.k(1) expected 2 got 3; dsm: 2 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "svr-946",
+            "operator": "svr",
+            "start": 21707,
+            "end": 21709,
+            "line": 661,
+            "col": 44,
+            "original": "IL",
+            "replacement": "IC",
+            "description": "replace variable IL with IC"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.k(2) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "svr-947",
+            "operator": "svr",
+            "start": 21707,
+            "end": 21709,
+            "line": 661,
+            "col": 44,
+            "original": "IL",
+            "replacement": "IFHBCB",
+            "description": "replace variable IL with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.k(1) expected 1 got 50; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-948",
+            "operator": "svr",
+            "start": 21707,
+            "end": 21709,
+            "line": 661,
+            "col": 44,
+            "original": "IL",
+            "replacement": "IR",
+            "description": "replace variable IL with IR"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.k(1) expected 2 got 3; dsm: 1 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "svr-949",
+            "operator": "svr",
+            "start": 21707,
+            "end": 21709,
+            "line": 661,
+            "col": 44,
+            "original": "IL",
+            "replacement": "NAUX",
+            "description": "replace variable IL with NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.k(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-950",
+            "operator": "svr",
+            "start": 21707,
+            "end": 21709,
+            "line": 661,
+            "col": 44,
+            "original": "IL",
+            "replacement": "NCOL",
+            "description": "replace variable IL with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.k(1) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "svr-951",
+            "operator": "svr",
+            "start": 21707,
+            "end": 21709,
+            "line": 661,
+            "col": 44,
+            "original": "IL",
+            "replacement": "NLAY",
+            "description": "replace variable IL with NLAY"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.004
+        },
+        {
+          "spec": {
+            "id": "svr-952",
+            "operator": "svr",
+            "start": 21707,
+            "end": 21709,
+            "line": 661,
+            "col": 44,
+            "original": "IL",
+            "replacement": "NROW",
+            "description": "replace variable IL with NROW"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.k(1) expected 2 got 3; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "vcr-1158",
+            "operator": "vcr",
+            "start": 21707,
+            "end": 21709,
+            "line": 661,
+            "col": 44,
+            "original": "IL",
+            "replacement": "0",
+            "description": "replace variable IL with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.k(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1159",
+            "operator": "vcr",
+            "start": 21707,
+            "end": 21709,
+            "line": 661,
+            "col": 44,
+            "original": "IL",
+            "replacement": "1",
+            "description": "replace variable IL with 1"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.k(1) expected 2 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "vcr-1160",
+            "operator": "vcr",
+            "start": 21710,
+            "end": 21711,
+            "line": 661,
+            "col": 47,
+            "original": "Q",
+            "replacement": "0.0",
+            "description": "replace variable Q with 0.0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.q(1) expected -5.00000000 got 0.00000000; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "icr-531",
+            "operator": "icr",
+            "start": 21746,
+            "end": 21747,
+            "line": 662,
+            "col": 33,
+            "original": "1",
+            "replacement": "(-1)",
+            "description": "replace 1 with (-1)"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.val.size(1) expected 1 got 0; dsm: ubdsvb.val.sum(1) expected 3.0000000000000000 got 0.0000000000000000; dsm: ubdsvb.nvl(1) expected 1 got -1; dsm: 3 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "icr-532",
+            "operator": "icr",
+            "start": 21746,
+            "end": 21747,
+            "line": 662,
+            "col": 33,
+            "original": "1",
+            "replacement": "0",
+            "description": "replace 1 with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.val.size(1) expected 1 got 0; dsm: ubdsvb.val.sum(1) expected 3.0000000000000000 got 0.0000000000000000; dsm: ubdsvb.nvl(1) expected 1 got 0; dsm: 3 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "icr-533",
+            "operator": "icr",
+            "start": 21746,
+            "end": 21747,
+            "line": 662,
+            "col": 33,
+            "original": "1",
+            "replacement": "2",
+            "description": "replace 1 with 2"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.val.size(1) expected 1 got 2; dsm: ubdsvb.nvl(1) expected 1 got 2; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1161",
+            "operator": "vcr",
+            "start": 21746,
+            "end": 21747,
+            "line": 662,
+            "col": 33,
+            "original": "1",
+            "replacement": "IC",
+            "description": "replace 1 with variable IC"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.val.size(2) expected 1 got 2; dsm: ubdsvb.nvl(2) expected 1 got 2; dsm: 2 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "vcr-1162",
+            "operator": "vcr",
+            "start": 21746,
+            "end": 21747,
+            "line": 662,
+            "col": 33,
+            "original": "1",
+            "replacement": "IFHBCB",
+            "description": "replace 1 with variable IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.val.size(1) expected 1 got 50; dsm: ubdsvb.val.sum(1) expected 3.0000000000000000 got 98.974585903455846; dsm: ubdsvb.nvl(1) expected 1 got 50; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1163",
+            "operator": "vcr",
+            "start": 21746,
+            "end": 21747,
+            "line": 662,
+            "col": 33,
+            "original": "1",
+            "replacement": "IL",
+            "description": "replace 1 with variable IL"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.val.size(1) expected 1 got 2; dsm: ubdsvb.nvl(1) expected 1 got 2; dsm: 2 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "vcr-1164",
+            "operator": "vcr",
+            "start": 21746,
+            "end": 21747,
+            "line": 662,
+            "col": 33,
+            "original": "1",
+            "replacement": "IR",
+            "description": "replace 1 with variable IR"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.val.size(1) expected 1 got 3; dsm: ubdsvb.nvl(1) expected 1 got 3; dsm: 2 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "vcr-1165",
+            "operator": "vcr",
+            "start": 21746,
+            "end": 21747,
+            "line": 662,
+            "col": 33,
+            "original": "1",
+            "replacement": "NAUX",
+            "description": "replace 1 with variable NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.val.size(1) expected 1 got 0; dsm: ubdsvb.val.sum(1) expected 3.0000000000000000 got 0.0000000000000000; dsm: ubdsvb.nvl(1) expected 1 got 0; dsm: 3 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "vcr-1166",
+            "operator": "vcr",
+            "start": 21746,
+            "end": 21747,
+            "line": 662,
+            "col": 33,
+            "original": "1",
+            "replacement": "NCOL",
+            "description": "replace 1 with variable NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.val.size(1) expected 1 got 2; dsm: ubdsvb.nvl(1) expected 1 got 2; dsm: 2 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "vcr-1167",
+            "operator": "vcr",
+            "start": 21746,
+            "end": 21747,
+            "line": 662,
+            "col": 33,
+            "original": "1",
+            "replacement": "NLAY",
+            "description": "replace 1 with variable NLAY"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.val.size(1) expected 1 got 2; dsm: ubdsvb.nvl(1) expected 1 got 2; dsm: 2 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "vcr-1168",
+            "operator": "vcr",
+            "start": 21746,
+            "end": 21747,
+            "line": 662,
+            "col": 33,
+            "original": "1",
+            "replacement": "NROW",
+            "description": "replace 1 with variable NROW"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.val.size(1) expected 1 got 3; dsm: ubdsvb.nvl(1) expected 1 got 3; dsm: 2 expectation(s) failed",
+          "seconds": 0.054
+        },
+        {
+          "spec": {
+            "id": "svr-953",
+            "operator": "svr",
+            "start": 21748,
+            "end": 21752,
+            "line": 662,
+            "col": 35,
+            "original": "NAUX",
+            "replacement": "IC",
+            "description": "replace variable NAUX with IC"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "svr-954",
+            "operator": "svr",
+            "start": 21748,
+            "end": 21752,
+            "line": 662,
+            "col": 35,
+            "original": "NAUX",
+            "replacement": "IFHBCB",
+            "description": "replace variable NAUX with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.naux(1) expected 1 got 50; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-955",
+            "operator": "svr",
+            "start": 21748,
+            "end": 21752,
+            "line": 662,
+            "col": 35,
+            "original": "NAUX",
+            "replacement": "IL",
+            "description": "replace variable NAUX with IL"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "svr-956",
+            "operator": "svr",
+            "start": 21748,
+            "end": 21752,
+            "line": 662,
+            "col": 35,
+            "original": "NAUX",
+            "replacement": "IR",
+            "description": "replace variable NAUX with IR"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "svr-957",
+            "operator": "svr",
+            "start": 21748,
+            "end": 21752,
+            "line": 662,
+            "col": 35,
+            "original": "NAUX",
+            "replacement": "NCOL",
+            "description": "replace variable NAUX with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.naux(1) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-958",
+            "operator": "svr",
+            "start": 21748,
+            "end": 21752,
+            "line": 662,
+            "col": 35,
+            "original": "NAUX",
+            "replacement": "NLAY",
+            "description": "replace variable NAUX with NLAY"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "svr-959",
+            "operator": "svr",
+            "start": 21748,
+            "end": 21752,
+            "line": 662,
+            "col": 35,
+            "original": "NAUX",
+            "replacement": "NROW",
+            "description": "replace variable NAUX with NROW"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1169",
+            "operator": "vcr",
+            "start": 21748,
+            "end": 21752,
+            "line": 662,
+            "col": 35,
+            "original": "NAUX",
+            "replacement": "0",
+            "description": "replace variable NAUX with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.naux(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "vcr-1170",
+            "operator": "vcr",
+            "start": 21748,
+            "end": 21752,
+            "line": 662,
+            "col": 35,
+            "original": "NAUX",
+            "replacement": "1",
+            "description": "replace variable NAUX with 1"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.naux(1) expected 0 got 1; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "icr-534",
+            "operator": "icr",
+            "start": 21753,
+            "end": 21754,
+            "line": 662,
+            "col": 40,
+            "original": "1",
+            "replacement": "(-1)",
+            "description": "replace 1 with (-1)"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.laux(1) expected 1 got -1; dsm: 1 expectation(s) failed",
+          "seconds": 0.047
+        },
+        {
+          "spec": {
+            "id": "icr-535",
+            "operator": "icr",
+            "start": 21753,
+            "end": 21754,
+            "line": 662,
+            "col": 40,
+            "original": "1",
+            "replacement": "0",
+            "description": "replace 1 with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.laux(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "icr-536",
+            "operator": "icr",
+            "start": 21753,
+            "end": 21754,
+            "line": 662,
+            "col": 40,
+            "original": "1",
+            "replacement": "2",
+            "description": "replace 1 with 2"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.laux(1) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1171",
+            "operator": "vcr",
+            "start": 21753,
+            "end": 21754,
+            "line": 662,
+            "col": 40,
+            "original": "1",
+            "replacement": "IC",
+            "description": "replace 1 with variable IC"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.laux(2) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.052
+        },
+        {
+          "spec": {
+            "id": "vcr-1172",
+            "operator": "vcr",
+            "start": 21753,
+            "end": 21754,
+            "line": 662,
+            "col": 40,
+            "original": "1",
+            "replacement": "IFHBCB",
+            "description": "replace 1 with variable IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.laux(1) expected 1 got 50; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1173",
+            "operator": "vcr",
+            "start": 21753,
+            "end": 21754,
+            "line": 662,
+            "col": 40,
+            "original": "1",
+            "replacement": "IL",
+            "description": "replace 1 with variable IL"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.laux(1) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.054
+        },
+        {
+          "spec": {
+            "id": "vcr-1174",
+            "operator": "vcr",
+            "start": 21753,
+            "end": 21754,
+            "line": 662,
+            "col": 40,
+            "original": "1",
+            "replacement": "IR",
+            "description": "replace 1 with variable IR"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.laux(1) expected 1 got 3; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "vcr-1175",
+            "operator": "vcr",
+            "start": 21753,
+            "end": 21754,
+            "line": 662,
+            "col": 40,
+            "original": "1",
+            "replacement": "NAUX",
+            "description": "replace 1 with variable NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.laux(1) expected 1 got 0; dsm: 1 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "vcr-1176",
+            "operator": "vcr",
+            "start": 21753,
+            "end": 21754,
+            "line": 662,
+            "col": 40,
+            "original": "1",
+            "replacement": "NCOL",
+            "description": "replace 1 with variable NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.laux(1) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.046
+        },
+        {
+          "spec": {
+            "id": "vcr-1177",
+            "operator": "vcr",
+            "start": 21753,
+            "end": 21754,
+            "line": 662,
+            "col": 40,
+            "original": "1",
+            "replacement": "NLAY",
+            "description": "replace 1 with variable NLAY"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.laux(1) expected 1 got 2; dsm: 1 expectation(s) failed",
+          "seconds": 0.054
+        },
+        {
+          "spec": {
+            "id": "vcr-1178",
+            "operator": "vcr",
+            "start": 21753,
+            "end": 21754,
+            "line": 662,
+            "col": 40,
+            "original": "1",
+            "replacement": "NROW",
+            "description": "replace 1 with variable NROW"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.laux(1) expected 1 got 3; dsm: 1 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "svr-960",
+            "operator": "svr",
+            "start": 21762,
+            "end": 21766,
+            "line": 662,
+            "col": 49,
+            "original": "NLAY",
+            "replacement": "IC",
+            "description": "replace variable NLAY with IC"
+          },
+          "status": "killed",
+          "detail": "S7-inactive-and-recharge.nml: dsm: ubdsvb.ibound.size(2) expected 2 got 4; dsm: ubdsvb.nlay(2) expected 1 got 2; dsm: 2 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "svr-961",
+            "operator": "svr",
+            "start": 21762,
+            "end": 21766,
+            "line": 662,
+            "col": 49,
+            "original": "NLAY",
+            "replacement": "IFHBCB",
+            "description": "replace variable NLAY with IFHBCB"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibound.size(1) expected 2 got 100; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 2590942282.0000000; dsm: ubdsvb.nlay(1) expected 1 got 50; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-962",
+            "operator": "svr",
+            "start": 21762,
+            "end": 21766,
+            "line": 662,
+            "col": 49,
+            "original": "NLAY",
+            "replacement": "IL",
+            "description": "replace variable NLAY with IL"
+          },
+          "status": "survived",
+          "detail": "",
+          "seconds": 0.005
+        },
+        {
+          "spec": {
+            "id": "svr-963",
+            "operator": "svr",
+            "start": 21762,
+            "end": 21766,
+            "line": 662,
+            "col": 49,
+            "original": "NLAY",
+            "replacement": "IR",
+            "description": "replace variable NLAY with IR"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.ibound.size(1) expected 12 got 18; dsm: ubdsvb.ibound.sum(1) expected 12.000000000000000 got 130.00000000000000; dsm: ubdsvb.nlay(1) expected 2 got 3; dsm: 3 expectation(s) failed",
+          "seconds": 0.05
+        },
+        {
+          "spec": {
+            "id": "svr-964",
+            "operator": "svr",
+            "start": 21762,
+            "end": 21766,
+            "line": 662,
+            "col": 49,
+            "original": "NLAY",
+            "replacement": "NAUX",
+            "description": "replace variable NLAY with NAUX"
+          },
+          "status": "killed",
+          "detail": "S2-iauxsv0.nml: dsm: ubdsvb.ibound.size(1) expected 2 got 0; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: ubdsvb.nlay(1) expected 1 got 0; dsm: 3 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-965",
+            "operator": "svr",
+            "start": 21762,
+            "end": 21766,
+            "line": 662,
+            "col": 49,
+            "original": "NLAY",
+            "replacement": "NCOL",
+            "description": "replace variable NLAY with NCOL"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibound.size(1) expected 2 got 4; dsm: ubdsvb.nlay(1) expected 1 got 2; dsm: 2 expectation(s) failed",
+          "seconds": 0.048
+        },
+        {
+          "spec": {
+            "id": "svr-966",
+            "operator": "svr",
+            "start": 21762,
+            "end": 21766,
+            "line": 662,
+            "col": 49,
+            "original": "NLAY",
+            "replacement": "NROW",
+            "description": "replace variable NLAY with NROW"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.ibound.size(1) expected 12 got 18; dsm: ubdsvb.ibound.sum(1) expected 12.000000000000000 got 130.00000000000000; dsm: ubdsvb.nlay(1) expected 2 got 3; dsm: 3 expectation(s) failed",
+          "seconds": 0.051
+        },
+        {
+          "spec": {
+            "id": "vcr-1179",
+            "operator": "vcr",
+            "start": 21762,
+            "end": 21766,
+            "line": 662,
+            "col": 49,
+            "original": "NLAY",
+            "replacement": "0",
+            "description": "replace variable NLAY with 0"
+          },
+          "status": "killed",
+          "detail": "S1-ubdsv4-naux1.nml: dsm: ubdsvb.ibound.size(1) expected 2 got 0; dsm: ubdsvb.ibound.sum(1) expected 2.0000000000000000 got 0.0000000000000000; dsm: ubdsvb.nlay(1) expected 1 got 0; dsm: 3 expectation(s) failed",
+          "seconds": 0.049
+        },
+        {
+          "spec": {
+            "id": "vcr-1180",
+            "operator": "vcr",
+            "start": 21762,
+            "end": 21766,
+            "line": 662,
+            "col": 49,
+            "original": "NLAY",
+            "replacement": "1",
+            "description": "replace variable NLAY with 1"
+          },
+          "status": "killed",
+          "detail": "S8-distinct-values.nml: dsm: ubdsvb.ibound.size(1) expected 12 got 6; dsm: ubdsvb.ibound.sum(1) expected 12.000000000000000 got 6.0000000000000000; dsm: ubdsvb.nlay(1) expected 2 got 1; dsm: 3 expectation(s) failed",
+          "seconds": 0.053
+        }
+      ]
+    }
+  ]
+}
