@@ -585,7 +585,9 @@
       DOUBLE PRECISION RATIN,RATOUT,QQ
 !
       DIMENSION XFACE(1)
+      CHARACTER*16 AUXTXT(1)
       DATA TEXT/' SPECIFIED FLOWS'/
+      DATA AUXTXT/'IFACE           '/
 !     ------------------------------------------------------------------
       CALL SGWF2FHB7PNT(IGRID)
 !
@@ -601,7 +603,7 @@
       IF(IBD.EQ.2) THEN
         NAUX=1
         IF(IAUXSV.EQ.0) NAUX=0
-        CALL UBDSV4(KSTP,KPER,TEXT,NAUX,'IFACE           ',IFHBCB,&
+        CALL UBDSV4(KSTP,KPER,TEXT,NAUX,AUXTXT,IFHBCB,&
      &          NCOL,NROW,NLAY,NFLW,IOUT,DELT,PERTIM,TOTIM,IBOUND)
       END IF
 !

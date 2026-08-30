@@ -3606,10 +3606,12 @@
 !     LOCAL STATIC VARIABLES
 !     ------------------------------------------------------------------
       CHARACTER*16 text, strtxt, txtlst
+      CHARACTER*16 auxtxt(1)
       DATA text/'  STREAM LEAKAGE'/
       DATA strtxt/'STREAMFLOW OUT  '/
       DATA txtlst/'STREAM LISTING  '/
       DATA iwidthcheck/1/
+      DATA auxtxt/'IFACE           '/
 !     -----------------------------------------------------------------
 !
 !-------SET POINTERS FOR THE CURRENT GRID.
@@ -3680,7 +3682,7 @@
       IF ( ibd.EQ.2 ) THEN
         naux=1
         IF(IAUXSV.EQ.0) naux=0
-        CALL UBDSV4(Kkstp, Kkper, text, naux, 'IFACE           ',&
+        CALL UBDSV4(Kkstp, Kkper, text, naux, auxtxt,&
      &                            iout1, NCOL, NROW,NLAY,&
      &                            NSTRM, IOUT, DELT, PERTIM,&
      &                            TOTIM, IBOUND)
