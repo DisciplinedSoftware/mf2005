@@ -27,6 +27,11 @@ Release/
 **/__pycache__/
 
 builds/
+
+# dsmodern tool state for this project (scenarios, sessions, run/harness
+# scratch, mutation kill-matrix reports): generated and project-local, not
+# tracked here, same status as builds/. Config: tools/dsmodern.mf2005.toml.
+.dsmodern/
 *.gcda
 *.gcno
 .idea/
