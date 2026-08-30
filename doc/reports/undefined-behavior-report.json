@@ -1,15 +1,15 @@
 {
   "analysis": "undefined-behavior",
-  "generated": "2026-08-28T07:59:35-04:00",
-  "commit": "d08b1d1",
+  "generated": "2026-08-30T01:32:10-04:00",
+  "commit": "234402d",
   "project": "mf2005",
   "summary": {
     "files": 54,
-    "units": 791,
+    "units": 793,
     "skipped": 0,
-    "findings": 1541,
+    "findings": 1539,
     "detectors": {
-      "uninitialized": 1509,
+      "uninitialized": 1507,
       "aliasing": 30,
       "interface": 2,
       "bounds": 0,
@@ -693,51 +693,6 @@
           "subject": "nd",
           "detail": "defined at 201, 238, 295",
           "statement": "WRITE(IOUT, 54) (DSH1, M = 1, ND)"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2gag7.f90",
-          "unit": "gwf2gag7rp",
-          "line": 401,
-          "subject": "a",
-          "detail": "defined at 379",
-          "statement": "WRITE(IG3, LFRMAT) (CONCNAME(ISOL), ISOL = 1, NSOL)"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2gag7.f90",
-          "unit": "gwf2gag7rp",
-          "line": 408,
-          "subject": "a",
-          "detail": "defined at 379",
-          "statement": "WRITE(IG3, LFRMAT) (CONCNAME(ISOL), ISOL = 1, NSOL)"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2gag7.f90",
-          "unit": "gwf2gag7rp",
-          "line": 415,
-          "subject": "a",
-          "detail": "defined at 379",
-          "statement": "WRITE(IG3, LFRMAT) (CONCNAME(ISOL), ISOL = 1, NSOL), (DCTSNAME(ISOL), ISOL = 1, NSOL), (DCCMNAME(..."
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2gag7.f90",
-          "unit": "gwf2gag7rp",
-          "line": 426,
-          "subject": "a",
-          "detail": "defined at 379",
-          "statement": "WRITE(IG3, LFRMAT) (CONCNAME(ISOL), ISOL = 1, NSOL), (DCTSNAME(ISOL), ISOL = 1, NSOL), (DCCMNAME(..."
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2gag7.f90",
-          "unit": "gwf2gag7rp",
-          "line": 438,
-          "subject": "a",
-          "detail": "defined at 379",
-          "statement": "WRITE(IG3, LFRMAT) (CONCNAME(ISOL), ISOL = 1, NSOL)"
         },
         {
           "category": "loop-guarded",
@@ -5630,6 +5585,15 @@
           "category": "loop-guarded",
           "file": "gwf2mnw27.f90",
           "unit": "mnw2horiz",
+          "line": 4787,
+          "subject": "zi",
+          "detail": "defined at 4616, 4641, 4670, 4820, 4836, 4856",
+          "statement": "zseg2(inode) = zi"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2mnw27.f90",
+          "unit": "mnw2horiz",
           "line": 4788,
           "subject": "zi",
           "detail": "defined at 4616, 4641, 4670, 4820, 4836, 4856",
@@ -5643,24 +5607,6 @@
           "subject": "zi",
           "detail": "defined at 4616, 4641, 4670, 4820, 4836, 4856",
           "statement": "zseg2(inode + 1) = zi"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2mnw27.f90",
-          "unit": "mnw2horiz",
-          "line": 4956,
-          "subject": "zi",
-          "detail": "defined at 4616, 4641, 4670, 4820, 4836, 4856",
-          "statement": "b1 = zseg2(inode)"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2mnw27.f90",
-          "unit": "mnw2horiz",
-          "line": 5017,
-          "subject": "zi",
-          "detail": "defined at 4616, 4641, 4670, 4820, 4836, 4856",
-          "statement": "b1 = zseg2(inode + 1)"
         },
         {
           "category": "conditional",
@@ -5857,7 +5803,7 @@
           "unit": "gwf2sfr7ar",
           "line": 558,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "IF (IBOUND(jrch, irch, krch) .LE. 0) WRITE(IOUT, 9018) ireach, jseg"
         },
         {
@@ -5875,7 +5821,7 @@
           "unit": "gwf2sfr7ar",
           "line": 558,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "IF (IBOUND(jrch, irch, krch) .LE. 0) WRITE(IOUT, 9018) ireach, jseg"
         },
         {
@@ -5893,8 +5839,35 @@
           "unit": "gwf2sfr7ar",
           "line": 558,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "IF (IBOUND(jrch, irch, krch) .LE. 0) WRITE(IOUT, 9018) ireach, jseg"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7ar",
+          "line": 575,
+          "subject": "irch",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
+          "statement": "THTR(ii) = THTS(ii) - SC2LPF(jrch, irch, krch) / (DELR(jrch) * DELC(irch))"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7ar",
+          "line": 575,
+          "subject": "jrch",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
+          "statement": "THTR(ii) = THTS(ii) - SC2LPF(jrch, irch, krch) / (DELR(jrch) * DELC(irch))"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7ar",
+          "line": 575,
+          "subject": "krch",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
+          "statement": "THTR(ii) = THTS(ii) - SC2LPF(jrch, irch, krch) / (DELR(jrch) * DELC(irch))"
         },
         {
           "category": "loop-guarded",
@@ -5902,7 +5875,7 @@
           "unit": "gwf2sfr7ar",
           "line": 578,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "IF (LAYCON(krch) .LT. 2) THEN"
         },
         {
@@ -5911,7 +5884,7 @@
           "unit": "gwf2sfr7ar",
           "line": 579,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "THTR(ii) = THTS(ii) - SC1(jrch, irch, krch) / (DELR(jrch) * DELC(irch))"
         },
         {
@@ -5920,7 +5893,7 @@
           "unit": "gwf2sfr7ar",
           "line": 579,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "THTR(ii) = THTS(ii) - SC1(jrch, irch, krch) / (DELR(jrch) * DELC(irch))"
         },
         {
@@ -5929,7 +5902,7 @@
           "unit": "gwf2sfr7ar",
           "line": 579,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "THTR(ii) = THTS(ii) - SC1(jrch, irch, krch) / (DELR(jrch) * DELC(irch))"
         },
         {
@@ -5938,7 +5911,7 @@
           "unit": "gwf2sfr7ar",
           "line": 583,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "DO k = 1, krch"
         },
         {
@@ -5947,7 +5920,7 @@
           "unit": "gwf2sfr7ar",
           "line": 586,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "THTR(ii) = THTS(ii) - SC2(jrch, irch, kkrch) / (DELR(jrch) * DELC(irch))"
         },
         {
@@ -5956,7 +5929,7 @@
           "unit": "gwf2sfr7ar",
           "line": 586,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "THTR(ii) = THTS(ii) - SC2(jrch, irch, kkrch) / (DELR(jrch) * DELC(irch))"
         },
         {
@@ -5965,7 +5938,7 @@
           "unit": "gwf2sfr7ar",
           "line": 590,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "THTR(ii) = THTS(ii) - SC2HUF(jrch, irch)"
         },
         {
@@ -5974,7 +5947,7 @@
           "unit": "gwf2sfr7ar",
           "line": 590,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "THTR(ii) = THTS(ii) - SC2HUF(jrch, irch)"
         },
         {
@@ -5983,7 +5956,7 @@
           "unit": "gwf2sfr7ar",
           "line": 599,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)"
         },
         {
@@ -6001,15 +5974,6 @@
           "unit": "gwf2sfr7ar",
           "line": 599,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
-          "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7ar",
-          "line": 599,
-          "subject": "jseg",
           "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)"
         },
@@ -6018,8 +5982,17 @@
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7ar",
           "line": 599,
+          "subject": "jseg",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
+          "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7ar",
+          "line": 599,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)"
         },
         {
@@ -6028,7 +6001,7 @@
           "unit": "gwf2sfr7ar",
           "line": 602,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)"
         },
         {
@@ -6046,15 +6019,6 @@
           "unit": "gwf2sfr7ar",
           "line": 602,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
-          "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7ar",
-          "line": 602,
-          "subject": "jseg",
           "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)"
         },
@@ -6063,8 +6027,17 @@
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7ar",
           "line": 602,
+          "subject": "jseg",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
+          "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7ar",
+          "line": 602,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)"
         },
         {
@@ -6073,7 +6046,7 @@
           "unit": "gwf2sfr7ar",
           "line": 607,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6091,15 +6064,6 @@
           "unit": "gwf2sfr7ar",
           "line": 607,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
-          "statement": "WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7ar",
-          "line": 607,
-          "subject": "jseg",
           "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
@@ -6108,8 +6072,17 @@
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7ar",
           "line": 607,
+          "subject": "jseg",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
+          "statement": "WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7ar",
+          "line": 607,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6118,7 +6091,7 @@
           "unit": "gwf2sfr7ar",
           "line": 611,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6136,15 +6109,6 @@
           "unit": "gwf2sfr7ar",
           "line": 611,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
-          "statement": "WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7ar",
-          "line": 611,
-          "subject": "jseg",
           "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
@@ -6153,8 +6117,17 @@
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7ar",
           "line": 611,
+          "subject": "jseg",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
+          "statement": "WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7ar",
+          "line": 611,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6163,7 +6136,7 @@
           "unit": "gwf2sfr7ar",
           "line": 617,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6181,7 +6154,7 @@
           "unit": "gwf2sfr7ar",
           "line": 617,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6199,7 +6172,7 @@
           "unit": "gwf2sfr7ar",
           "line": 617,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6208,7 +6181,7 @@
           "unit": "gwf2sfr7ar",
           "line": 622,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6226,7 +6199,7 @@
           "unit": "gwf2sfr7ar",
           "line": 622,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6244,7 +6217,7 @@
           "unit": "gwf2sfr7ar",
           "line": 622,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6253,7 +6226,7 @@
           "unit": "gwf2sfr7ar",
           "line": 629,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6271,7 +6244,7 @@
           "unit": "gwf2sfr7ar",
           "line": 629,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6289,7 +6262,7 @@
           "unit": "gwf2sfr7ar",
           "line": 629,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6298,7 +6271,7 @@
           "unit": "gwf2sfr7ar",
           "line": 635,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6316,7 +6289,7 @@
           "unit": "gwf2sfr7ar",
           "line": 635,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6334,7 +6307,7 @@
           "unit": "gwf2sfr7ar",
           "line": 635,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ..."
         },
         {
@@ -6343,7 +6316,7 @@
           "unit": "gwf2sfr7ar",
           "line": 642,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)"
         },
         {
@@ -6361,7 +6334,7 @@
           "unit": "gwf2sfr7ar",
           "line": 642,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)"
         },
         {
@@ -6379,7 +6352,7 @@
           "unit": "gwf2sfr7ar",
           "line": 642,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)"
         },
         {
@@ -6388,7 +6361,7 @@
           "unit": "gwf2sfr7ar",
           "line": 645,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)"
         },
         {
@@ -6406,7 +6379,7 @@
           "unit": "gwf2sfr7ar",
           "line": 645,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)"
         },
         {
@@ -6424,7 +6397,7 @@
           "unit": "gwf2sfr7ar",
           "line": 645,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)"
         },
         {
@@ -6469,7 +6442,7 @@
           "unit": "gwf2sfr7ar",
           "line": 679,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "ISTRM(1, ii) = krch"
         },
         {
@@ -6478,7 +6451,7 @@
           "unit": "gwf2sfr7ar",
           "line": 680,
           "subject": "irch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790",
           "statement": "ISTRM(2, ii) = irch"
         },
         {
@@ -6487,7 +6460,7 @@
           "unit": "gwf2sfr7ar",
           "line": 681,
           "subject": "jrch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "ISTRM(3, ii) = jrch"
         },
         {
@@ -6532,7 +6505,7 @@
           "unit": "gwf2sfr7ar",
           "line": 688,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "uzfar_check % ltype = LAYHDT(krch)"
         },
         {
@@ -6577,7 +6550,7 @@
           "unit": "gwf2sfr7ar",
           "line": 755,
           "subject": "krch",
-          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575",
+          "detail": "defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554",
           "statement": "DO k = 1, krch"
         },
         {
@@ -12548,6 +12521,15 @@
           "statement": "WRITE(IUMT3D, *) TEXT, LKNODE"
         },
         {
+          "category": "call-assumed",
+          "file": "mf2005.f90",
+          "unit": "main",
+          "line": 359,
+          "subject": "icnvg",
+          "detail": "defined at 306, 313, 322, 339, 348, 355, 366, 482, 486",
+          "statement": "IF (ICNVG .EQ. 1) GO TO 33"
+        },
+        {
           "category": "conditional",
           "file": "obs2bas7.f90",
           "unit": "sobs2bas7hbf",
@@ -13922,36 +13904,38 @@
     {
       "key": "interface",
       "title": "Interface mismatches",
-      "description": "Checks every call site against the called procedure's definition elsewhere in the tree: argument counts, type classes, precision, and constants bound to array dummies.",
+      "description": "Checks every call site against the called procedure's definition elsewhere in the tree: argument counts, type classes, precision, and rank.",
       "categories": {
         "argument-count": "call passes a different number of arguments than the procedure declares",
         "argument-type": "actual and dummy are of incompatible type classes",
         "argument-precision": "REAL actual bound to DOUBLE PRECISION dummy or vice versa (mismatched except under promoting flags such as -fdefault-real-8)",
-        "argument-rank": "a scalar constant is bound to an array dummy"
+        "argument-rank": "a scalar actual is bound to an array dummy, or a whole array to a scalar dummy",
+        "argument-rank-character": "a CHARACTER scalar is bound to a CHARACTER array dummy: legal sequence association only while the actual is at least as long as the dummy elements the callee reaches"
       },
       "assumptions": [
         "Only procedures defined in this source tree (with unique names) are checked; intrinsics and external libraries are skipped.",
         "Types are compared by class (integer/real/double/complex/logical/character); kinds and character lengths are not compared, and REAL/COMPLEX with explicit kind selectors are skipped as unknown.",
-        "Array elements and sections passed where arrays are expected are legal sequence association and are not flagged; whole arrays bound to scalar dummies are likewise left to review.",
+        "Rank is compared only where both sides are known: array elements and array sections bound to array dummies are legal sequence association and are not flagged, and an actual whose rank this unit cannot settle (a module or host variable, an expression) is skipped.",
+        "A default CHARACTER scalar does sequence-associate with a CHARACTER array dummy, so those bindings are reported as argument-rank-character rather than argument-rank: they are undefined only when the actual is shorter than the elements the callee reaches, which the unchecked character lengths cannot settle.",
         "Calls through dummy procedures or with keyword arguments are not resolved."
       ],
       "findings": [
         {
-          "category": "argument-rank",
+          "category": "argument-rank-character",
           "file": "gwf2fhb7.f90",
           "unit": "gwf2fhb7bd",
           "line": 604,
           "subject": "ubdsv4(5)",
-          "detail": "actual 'IFACE ' is character, dummy auxtxt is character (array) at utl7.f90:1610",
+          "detail": "actual 'IFACE ' is a character scalar, dummy auxtxt is a character array at utl7.f90:1610",
           "statement": "CALL UBDSV4(KSTP, KPER, TEXT, NAUX, 'IFACE ', IFHBCB, NCOL, NROW, NLAY, NFLW, IOUT, DELT, PERTIM,..."
         },
         {
-          "category": "argument-rank",
+          "category": "argument-rank-character",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
           "line": 3683,
           "subject": "ubdsv4(5)",
-          "detail": "actual 'IFACE ' is character, dummy auxtxt is character (array) at utl7.f90:1610",
+          "detail": "actual 'IFACE ' is a character scalar, dummy auxtxt is a character array at utl7.f90:1610",
           "statement": "CALL UBDSV4(Kkstp, Kkper, text, naux, 'IFACE ', iout1, NCOL, NROW, NLAY, NSTRM, IOUT, DELT, PERTI..."
         }
       ]
