@@ -1,17 +1,17 @@
 {
   "analysis": "undefined-behavior",
-  "generated": "2026-08-30T01:32:10-04:00",
-  "commit": "234402d",
+  "generated": "2026-08-30T02:33:16-04:00",
+  "commit": "2aaa29e",
   "project": "mf2005",
   "summary": {
     "files": 54,
     "units": 793,
     "skipped": 0,
-    "findings": 1539,
+    "findings": 1537,
     "detectors": {
       "uninitialized": 1507,
       "aliasing": 30,
-      "interface": 2,
+      "interface": 0,
       "bounds": 0,
       "storage": 0,
       "pointer": 0
@@ -8339,73 +8339,37 @@
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 3983,
+          "line": 3985,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
           "statement": "flow = flowin + runof + runoff + precip - etstr"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 3983,
+          "line": 3985,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "flow = flowin + runof + runoff + precip - etstr"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 3989,
+          "line": 3991,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "IF (flowin + runoff + precip .LT. NEARZERO) THEN"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 3992,
-          "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
-          "statement": "ELSE IF (runof .GE. flowin + runoff + precip - etstr) THEN"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7bd",
-          "line": 3992,
-          "subject": "precip",
-          "detail": "defined at 3975, 3980",
-          "statement": "ELSE IF (runof .GE. flowin + runoff + precip - etstr) THEN"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7bd",
-          "line": 3993,
-          "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
-          "statement": "runof = flowin + runoff + precip - etstr"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7bd",
-          "line": 3993,
-          "subject": "precip",
-          "detail": "defined at 3975, 3980",
-          "statement": "runof = flowin + runoff + precip - etstr"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7bd",
           "line": 3994,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
-          "statement": "ELSE IF (etstr .GE. flowin + runoff + precip + runof) THEN"
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
+          "statement": "ELSE IF (runof .GE. flowin + runoff + precip - etstr) THEN"
         },
         {
           "category": "loop-guarded",
@@ -8413,8 +8377,17 @@
           "unit": "gwf2sfr7bd",
           "line": 3994,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
-          "statement": "ELSE IF (etstr .GE. flowin + runoff + precip + runof) THEN"
+          "detail": "defined at 3977, 3982",
+          "statement": "ELSE IF (runof .GE. flowin + runoff + precip - etstr) THEN"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7bd",
+          "line": 3995,
+          "subject": "etstr",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
+          "statement": "runof = flowin + runoff + precip - etstr"
         },
         {
           "category": "loop-guarded",
@@ -8422,8 +8395,26 @@
           "unit": "gwf2sfr7bd",
           "line": 3995,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
-          "statement": "etstr = flowin + runoff + precip + runof"
+          "detail": "defined at 3977, 3982",
+          "statement": "runof = flowin + runoff + precip - etstr"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7bd",
+          "line": 3996,
+          "subject": "etstr",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
+          "statement": "ELSE IF (etstr .GE. flowin + runoff + precip + runof) THEN"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7bd",
+          "line": 3996,
+          "subject": "precip",
+          "detail": "defined at 3977, 3982",
+          "statement": "ELSE IF (etstr .GE. flowin + runoff + precip + runof) THEN"
         },
         {
           "category": "loop-guarded",
@@ -8431,43 +8422,43 @@
           "unit": "gwf2sfr7bd",
           "line": 3997,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
+          "statement": "etstr = flowin + runoff + precip + runof"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7bd",
+          "line": 3999,
+          "subject": "precip",
+          "detail": "defined at 3977, 3982",
           "statement": "ELSE IF (flowin + runof + runoff + precip .GT. NEARZERO) THEN"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 3998,
+          "line": 4000,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "etstr = flowin + runof + runoff + precip"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4003,
+          "line": 4005,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "IF (flowin + runoff + precip - flobot .LT. NEARZERO) THEN"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4006,
+          "line": 4008,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
-          "statement": "ELSE IF (runof .GE. flowin + runoff + precip - flobot - etstr) THEN"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7bd",
-          "line": 4006,
-          "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
           "statement": "ELSE IF (runof .GE. flowin + runoff + precip - flobot - etstr) THEN"
         },
         {
@@ -8475,36 +8466,18 @@
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
           "line": 4008,
-          "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
-          "statement": "runof = - (flowin + runoff + precip - flobot - etstr)"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7bd",
-          "line": 4008,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
-          "statement": "runof = - (flowin + runoff + precip - flobot - etstr)"
+          "detail": "defined at 3977, 3982",
+          "statement": "ELSE IF (runof .GE. flowin + runoff + precip - flobot - etstr) THEN"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4009,
+          "line": 4010,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
-          "statement": "ELSE IF (etstr .GE. flowin + runoff + precip - flobot + runof) THEN"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7bd",
-          "line": 4009,
-          "subject": "precip",
-          "detail": "defined at 3975, 3980",
-          "statement": "ELSE IF (etstr .GE. flowin + runoff + precip - flobot + runof) THEN"
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
+          "statement": "runof = - (flowin + runoff + precip - flobot - etstr)"
         },
         {
           "category": "loop-guarded",
@@ -8512,35 +8485,44 @@
           "unit": "gwf2sfr7bd",
           "line": 4010,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
+          "statement": "runof = - (flowin + runoff + precip - flobot - etstr)"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7bd",
+          "line": 4011,
+          "subject": "etstr",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
+          "statement": "ELSE IF (etstr .GE. flowin + runoff + precip - flobot + runof) THEN"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7bd",
+          "line": 4011,
+          "subject": "precip",
+          "detail": "defined at 3977, 3982",
+          "statement": "ELSE IF (etstr .GE. flowin + runoff + precip - flobot + runof) THEN"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7bd",
+          "line": 4012,
+          "subject": "precip",
+          "detail": "defined at 3977, 3982",
           "statement": "etstr = flowin + runoff + precip - flobot + runof"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4012,
+          "line": 4014,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
           "statement": "ELSE IF (etstr .GT. flowin + runoff + runof + precip - flobot) THEN"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7bd",
-          "line": 4012,
-          "subject": "precip",
-          "detail": "defined at 3975, 3980",
-          "statement": "ELSE IF (etstr .GT. flowin + runoff + runof + precip - flobot) THEN"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7bd",
-          "line": 4013,
-          "subject": "precip",
-          "detail": "defined at 3975, 3980",
-          "statement": "etstr = flowin + runof + runoff + precip - flobot"
         },
         {
           "category": "loop-guarded",
@@ -8548,413 +8530,422 @@
           "unit": "gwf2sfr7bd",
           "line": 4014,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
+          "statement": "ELSE IF (etstr .GT. flowin + runoff + runof + precip - flobot) THEN"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7bd",
+          "line": 4015,
+          "subject": "precip",
+          "detail": "defined at 3977, 3982",
+          "statement": "etstr = flowin + runof + runoff + precip - flobot"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "gwf2sfr7bd",
+          "line": 4016,
+          "subject": "precip",
+          "detail": "defined at 3977, 3982",
           "statement": "ELSE IF (flowin + runoff + runof + precip - flobot .LT. NEARZERO) THEN"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4018,
+          "line": 4020,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
           "statement": "flow = flowin + runof + runoff + precip - etstr"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4018,
+          "line": 4020,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "flow = flowin + runof + runoff + precip - etstr"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4026,
+          "line": 4028,
           "subject": "h",
-          "detail": "defined at 3941, 3946, 4162",
+          "detail": "defined at 3943, 3948, 4164",
           "statement": "IF (h .LT. sbot) flobot = CALCUNSATFLOBOT(depth, avhc, fks, wetperm, sbdthk, areamax, strlen, fbc..."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4036,
+          "line": 4038,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
           "statement": "qlat = (runof + runoff + precip - etstr) / strlen"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4036,
+          "line": 4038,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "qlat = (runof + runoff + precip - etstr) / strlen"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4077,
+          "line": 4079,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
           "statement": "qlat = (runof + runoff + precip - etstr) / strlen"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4077,
+          "line": 4079,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "qlat = (runof + runoff + precip - etstr) / strlen"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4100,
+          "line": 4102,
           "subject": "h",
-          "detail": "defined at 3941, 3946, 4162",
+          "detail": "defined at 3943, 3948, 4164",
           "statement": "IF (h .LT. sbot) THEN"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4130,
+          "line": 4132,
           "subject": "h",
-          "detail": "defined at 3941, 3946, 4162",
+          "detail": "defined at 3943, 3948, 4164",
           "statement": "STRM(19, l) = h"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4147,
+          "line": 4149,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "sfrbudg_in = sfrbudg_in + precip"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4149,
+          "line": 4151,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
           "statement": "sfrbudg_out = sfrbudg_out + etstr"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4192,
+          "line": 4194,
           "subject": "h",
-          "detail": "defined at 3941, 3946, 4162",
+          "detail": "defined at 3943, 3948, 4164",
           "statement": "IF (icalccheck .EQ. 1 .AND. sbot .GT. h) THEN"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4200,
+          "line": 4202,
           "subject": "h",
-          "detail": "defined at 3941, 3946, 4162",
+          "detail": "defined at 3943, 3948, 4164",
           "statement": "ELSE IF (sbot .LT. h) THEN"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4211,
+          "line": 4213,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
           "statement": "WRITE(IOUT, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG..."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4211,
+          "line": 4213,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "WRITE(IOUT, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG..."
         },
         {
           "category": "conditional",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4222,
+          "line": 4224,
           "subject": "iout2",
-          "detail": "defined at 3670, 3673, 3688, 4397, 4400",
+          "detail": "defined at 3672, 3675, 3690, 4399, 4402",
           "statement": "WRITE(iout2, 9004) txtlst, Kkper, Kkstp"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4224,
+          "line": 4226,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
           "statement": "WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN..."
         },
         {
           "category": "conditional",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4224,
+          "line": 4226,
           "subject": "iout2",
-          "detail": "defined at 3670, 3673, 3688, 4397, 4400",
+          "detail": "defined at 3672, 3675, 3690, 4399, 4402",
           "statement": "WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN..."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4224,
+          "line": 4226,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN..."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4239,
+          "line": 4241,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
           "statement": "WRITE(IOUT, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG..."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4239,
+          "line": 4241,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "WRITE(IOUT, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG..."
         },
         {
           "category": "conditional",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4253,
+          "line": 4255,
           "subject": "iout2",
-          "detail": "defined at 3670, 3673, 3688, 4397, 4400",
+          "detail": "defined at 3672, 3675, 3690, 4399, 4402",
           "statement": "WRITE(iout2, 9006) txtlst, Kkper, Kkstp"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4255,
+          "line": 4257,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
           "statement": "WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN..."
         },
         {
           "category": "conditional",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4255,
+          "line": 4257,
           "subject": "iout2",
-          "detail": "defined at 3670, 3673, 3688, 4397, 4400",
+          "detail": "defined at 3672, 3675, 3690, 4399, 4402",
           "statement": "WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN..."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4255,
+          "line": 4257,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN..."
         },
         {
           "category": "conditional",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4264,
+          "line": 4266,
           "subject": "iout2",
-          "detail": "defined at 3670, 3673, 3688, 4397, 4400",
+          "detail": "defined at 3672, 3675, 3690, 4399, 4402",
           "statement": "WRITE(iout2, 9009) txtlst, Kkper, Kkstp"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4266,
+          "line": 4268,
           "subject": "etstr",
-          "detail": "defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016",
+          "detail": "defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018",
           "statement": "WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN..."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4266,
+          "line": 4268,
           "subject": "h",
-          "detail": "defined at 3941, 3946, 4162",
+          "detail": "defined at 3943, 3948, 4164",
           "statement": "WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN..."
         },
         {
           "category": "conditional",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4266,
+          "line": 4268,
           "subject": "iout2",
-          "detail": "defined at 3670, 3673, 3688, 4397, 4400",
+          "detail": "defined at 3672, 3675, 3690, 4399, 4402",
           "statement": "WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN..."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4266,
+          "line": 4268,
           "subject": "precip",
-          "detail": "defined at 3975, 3980",
+          "detail": "defined at 3977, 3982",
           "statement": "WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN..."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7bd",
-          "line": 4359,
+          "line": 4361,
           "subject": "icalccheck",
-          "detail": "defined at 3887, 3892",
+          "detail": "defined at 3889, 3894",
           "statement": "IF (IBUDFL .GT. 0 .AND. icalccheck .EQ. 1) CALL GWF2SFR7UZOT(Kkstp, Kkper)"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7lakoutflw",
-          "line": 4477,
+          "line": 4479,
           "subject": "roughch",
-          "detail": "defined at 4453, 4485, 4488",
+          "detail": "defined at 4455, 4487, 4490",
           "statement": "flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7lakoutflw",
-          "line": 4477,
+          "line": 4479,
           "subject": "slope",
-          "detail": "defined at 4452, 4485, 4488",
+          "detail": "defined at 4454, 4487, 4490",
           "statement": "flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7lakoutflw",
-          "line": 4477,
+          "line": 4479,
           "subject": "widthch",
-          "detail": "defined at 4454",
+          "detail": "defined at 4456",
           "statement": "flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7lakoutflw",
-          "line": 4480,
+          "line": 4482,
           "subject": "roughch",
-          "detail": "defined at 4453, 4485, 4488",
+          "detail": "defined at 4455, 4487, 4490",
           "statement": "SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7lakoutflw",
-          "line": 4480,
+          "line": 4482,
           "subject": "slope",
-          "detail": "defined at 4452, 4485, 4488",
+          "detail": "defined at 4454, 4487, 4490",
           "statement": "SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7lakoutflw",
-          "line": 4480,
+          "line": 4482,
           "subject": "widthch",
-          "detail": "defined at 4454",
+          "detail": "defined at 4456",
           "statement": "SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7flw",
-          "line": 5017,
+          "line": 5019,
           "subject": "xleft",
-          "detail": "defined at 4979, 5001",
+          "detail": "defined at 4981, 5003",
           "statement": "wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7flw",
-          "line": 5017,
+          "line": 5019,
           "subject": "xright",
-          "detail": "defined at 4985, 4993, 5002",
+          "detail": "defined at 4987, 4995, 5004",
           "statement": "wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7flw",
-          "line": 5017,
+          "line": 5019,
           "subject": "yleft",
-          "detail": "defined at 4980, 5000",
+          "detail": "defined at 4982, 5002",
           "statement": "wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "gwf2sfr7flw",
-          "line": 5017,
+          "line": 5019,
           "subject": "yright",
-          "detail": "defined at 4986, 4992, 5003",
+          "detail": "defined at 4988, 4994, 5005",
           "statement": "wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "sgwf2sfr7parmov",
-          "line": 5689,
+          "line": 5691,
           "subject": "jend",
-          "detail": "defined at 5683, 5685, 5687, 5696, 5698, 5700",
+          "detail": "defined at 5685, 5687, 5689, 5698, 5700, 5702",
           "statement": "DO jj = 6, jend"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "sgwf2sfr7parmov",
-          "line": 5702,
+          "line": 5704,
           "subject": "jend",
-          "detail": "defined at 5683, 5685, 5687, 5696, 5698, 5700",
+          "detail": "defined at 5685, 5687, 5689, 5698, 5700, 5702",
           "statement": "DO jj = 11, jend"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "leadwave",
-          "line": 7375,
+          "line": 7377,
           "subject": "checktime",
-          "detail": "defined at 7321, 7336, 7339, 7351, 7360, 7363, 7367, 7370, 7375",
+          "detail": "defined at 7323, 7338, 7341, 7353, 7362, 7365, 7369, 7372, 7377",
           "statement": "IF (checktime(j) .LT. NEARZERO) checktime(j) = big"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "leadwave",
-          "line": 7389,
-          "subject": "checktime",
-          "detail": "defined at 7321, 7336, 7339, 7351, 7360, 7363, 7367, 7370, 7375",
-          "statement": "IF (CHECKTIME(j) .LE. shortest) THEN"
         },
         {
           "category": "loop-guarded",
@@ -8962,89 +8953,89 @@
           "unit": "leadwave",
           "line": 7391,
           "subject": "checktime",
-          "detail": "defined at 7321, 7336, 7339, 7351, 7360, 7363, 7367, 7370, 7375",
+          "detail": "defined at 7323, 7338, 7341, 7353, 7362, 7365, 7369, 7372, 7377",
+          "statement": "IF (CHECKTIME(j) .LE. shortest) THEN"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "leadwave",
+          "line": 7393,
+          "subject": "checktime",
+          "detail": "defined at 7323, 7338, 7341, 7353, 7362, 7365, 7369, 7372, 7377",
           "statement": "shortest = CHECKTIME(j)"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "leadwave",
-          "line": 7400,
+          "line": 7402,
           "subject": "checktime",
-          "detail": "defined at 7321, 7336, 7339, 7351, 7360, 7363, 7367, 7370, 7375",
+          "detail": "defined at 7323, 7338, 7341, 7353, 7362, 7365, 7369, 7372, 7377",
           "statement": "IF (CHECKTIME(k) > shortest) MORE(k) = 0"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "leadwave",
-          "line": 7507,
+          "line": 7509,
           "subject": "more",
-          "detail": "defined at 7322, 7390, 7400",
+          "detail": "defined at 7324, 7392, 7402",
           "statement": "IF (more(j) .EQ. 1) THEN"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "channelarea",
-          "line": 7893,
+          "line": 7895,
           "subject": "mark",
-          "detail": "defined at 7886",
+          "detail": "defined at 7888",
           "statement": "chap = (XSEC(8 + mark(ll) - 1, Istsg) - XSEC(8 + mark(ll), Istsg))"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "channelarea",
-          "line": 7894,
+          "line": 7896,
           "subject": "mark",
-          "detail": "defined at 7886",
+          "detail": "defined at 7888",
           "statement": "IF (ABS(XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) .LT. 1.0E-30 .AND. ABS(XSEC(ma..."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "channelarea",
-          "line": 7900,
+          "line": 7902,
           "subject": "mark",
-          "detail": "defined at 7886",
+          "detail": "defined at 7888",
           "statement": "ELSE IF (ABS(XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) .LT. 1.0E-30) THEN"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "channelarea",
-          "line": 7903,
+          "line": 7905,
           "subject": "mark",
-          "detail": "defined at 7886",
+          "detail": "defined at 7888",
           "statement": "ELSE IF (ABS(XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) .LT. 1.0E-30) THEN"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "channelarea",
-          "line": 7907,
+          "line": 7909,
           "subject": "mark",
-          "detail": "defined at 7886",
+          "detail": "defined at 7888",
           "statement": "slope = (XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) / (XSEC(mark(ll), Istsg) - XS..."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "channelarea",
-          "line": 7911,
+          "line": 7913,
           "subject": "mark",
-          "detail": "defined at 7886",
+          "detail": "defined at 7888",
           "statement": "ffmin = XSEC(8 + mark(ll), Istsg)"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "channelarea",
-          "line": 7912,
-          "subject": "mark",
-          "detail": "defined at 7886",
-          "statement": "ffmax = XSEC(8 + mark(ll) - 1, Istsg)"
         },
         {
           "category": "loop-guarded",
@@ -9052,17 +9043,17 @@
           "unit": "channelarea",
           "line": 7914,
           "subject": "mark",
-          "detail": "defined at 7886",
-          "statement": "ffmin = XSEC(8 + mark(ll) - 1, Istsg)"
+          "detail": "defined at 7888",
+          "statement": "ffmax = XSEC(8 + mark(ll) - 1, Istsg)"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "channelarea",
-          "line": 7915,
+          "line": 7916,
           "subject": "mark",
-          "detail": "defined at 7886",
-          "statement": "ffmax = XSEC(8 + mark(ll), Istsg)"
+          "detail": "defined at 7888",
+          "statement": "ffmin = XSEC(8 + mark(ll) - 1, Istsg)"
         },
         {
           "category": "loop-guarded",
@@ -9070,44 +9061,44 @@
           "unit": "channelarea",
           "line": 7917,
           "subject": "mark",
-          "detail": "defined at 7886",
+          "detail": "defined at 7888",
+          "statement": "ffmax = XSEC(8 + mark(ll), Istsg)"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "channelarea",
+          "line": 7919,
+          "subject": "mark",
+          "detail": "defined at 7888",
           "statement": "b = XSEC(8 + mark(ll) - 1, Istsg) - slope * XSEC(mark(ll) - 1, Istsg)"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "channelarea",
-          "line": 7921,
+          "line": 7923,
           "subject": "mark",
-          "detail": "defined at 7886",
+          "detail": "defined at 7888",
           "statement": "area1 = (XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) * (stage - ffmin)"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "channelarea",
-          "line": 7927,
+          "line": 7929,
           "subject": "mark",
-          "detail": "defined at 7886",
+          "detail": "defined at 7888",
           "statement": "xinc = (XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) / 50."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "channelarea",
-          "line": 7928,
+          "line": 7930,
           "subject": "mark",
-          "detail": "defined at 7886",
+          "detail": "defined at 7888",
           "statement": "xmid = XSEC(mark(ll) - 1, Istsg)"
-        },
-        {
-          "category": "loop-guarded",
-          "file": "gwf2sfr7.f90",
-          "unit": "channelarea",
-          "line": 7934,
-          "subject": "mark",
-          "detail": "defined at 7886",
-          "statement": "IF (XSEC(8 + mark(ll) - 1, Istsg) .LT. XSEC(8 + mark(ll), Istsg)) THEN"
         },
         {
           "category": "loop-guarded",
@@ -9115,17 +9106,17 @@
           "unit": "channelarea",
           "line": 7936,
           "subject": "mark",
-          "detail": "defined at 7886",
-          "statement": "xinc = (ABS(XSEC(mark(ll) - 1, Istsg) - xmid)) / 50."
+          "detail": "defined at 7888",
+          "statement": "IF (XSEC(8 + mark(ll) - 1, Istsg) .LT. XSEC(8 + mark(ll), Istsg)) THEN"
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "channelarea",
-          "line": 7937,
+          "line": 7938,
           "subject": "mark",
-          "detail": "defined at 7886",
-          "statement": "xmid = XSEC(mark(ll) - 1, Istsg)"
+          "detail": "defined at 7888",
+          "statement": "xinc = (ABS(XSEC(mark(ll) - 1, Istsg) - xmid)) / 50."
         },
         {
           "category": "loop-guarded",
@@ -9133,16 +9124,25 @@
           "unit": "channelarea",
           "line": 7939,
           "subject": "mark",
-          "detail": "defined at 7886",
+          "detail": "defined at 7888",
+          "statement": "xmid = XSEC(mark(ll) - 1, Istsg)"
+        },
+        {
+          "category": "loop-guarded",
+          "file": "gwf2sfr7.f90",
+          "unit": "channelarea",
+          "line": 7941,
+          "subject": "mark",
+          "detail": "defined at 7888",
           "statement": "xinc = (ABS(XSEC(mark(ll), Istsg) - xmid)) / 50."
         },
         {
           "category": "loop-guarded",
           "file": "gwf2sfr7.f90",
           "unit": "channelarea",
-          "line": 7944,
+          "line": 7946,
           "subject": "mark",
-          "detail": "defined at 7886",
+          "detail": "defined at 7888",
           "statement": "xx = ABS(xmid - XSEC(mark(ll), Istsg))"
         },
         {
@@ -13919,26 +13919,7 @@
         "A default CHARACTER scalar does sequence-associate with a CHARACTER array dummy, so those bindings are reported as argument-rank-character rather than argument-rank: they are undefined only when the actual is shorter than the elements the callee reaches, which the unchecked character lengths cannot settle.",
         "Calls through dummy procedures or with keyword arguments are not resolved."
       ],
-      "findings": [
-        {
-          "category": "argument-rank-character",
-          "file": "gwf2fhb7.f90",
-          "unit": "gwf2fhb7bd",
-          "line": 604,
-          "subject": "ubdsv4(5)",
-          "detail": "actual 'IFACE ' is a character scalar, dummy auxtxt is a character array at utl7.f90:1610",
-          "statement": "CALL UBDSV4(KSTP, KPER, TEXT, NAUX, 'IFACE ', IFHBCB, NCOL, NROW, NLAY, NFLW, IOUT, DELT, PERTIM,..."
-        },
-        {
-          "category": "argument-rank-character",
-          "file": "gwf2sfr7.f90",
-          "unit": "gwf2sfr7bd",
-          "line": 3683,
-          "subject": "ubdsv4(5)",
-          "detail": "actual 'IFACE ' is a character scalar, dummy auxtxt is a character array at utl7.f90:1610",
-          "statement": "CALL UBDSV4(Kkstp, Kkper, text, naux, 'IFACE ', iout1, NCOL, NROW, NLAY, NSTRM, IOUT, DELT, PERTI..."
-        }
-      ]
+      "findings": []
     },
     {
       "key": "bounds",

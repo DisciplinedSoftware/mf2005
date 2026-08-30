@@ -1,6 +1,6 @@
 # Undefined behavior report
 
-Generated 2026-08-30T01:32:10-04:00 at commit 234402d for mf2005.
+Generated 2026-08-30T02:33:16-04:00 at commit 2aaa29e for mf2005.
 
 ## Summary
 
@@ -9,10 +9,10 @@ Generated 2026-08-30T01:32:10-04:00 at commit 234402d for mf2005.
 | Source files | 54 |
 | Program units analyzed | 793 |
 | Program units skipped | 0 |
-| Findings (all detectors) | 1,539 |
+| Findings (all detectors) | 1,537 |
 | — Uninitialized reads | 1,507 |
 | — Argument aliasing and constant modification | 30 |
-| — Interface mismatches | 2 |
+| — Interface mismatches | 0 |
 | — Out-of-bounds subscripts (constant) | 0 |
 | — Storage association (COMMON layout) | 0 |
 | — Pointer association misuse | 0 |
@@ -47,7 +47,7 @@ Checks every call site against the called procedure's definition elsewhere in th
 - **argument-type** (0) — actual and dummy are of incompatible type classes
 - **argument-precision** (0) — REAL actual bound to DOUBLE PRECISION dummy or vice versa (mismatched except under promoting flags such as -fdefault-real-8)
 - **argument-rank** (0) — a scalar actual is bound to an array dummy, or a whole array to a scalar dummy
-- **argument-rank-character** (2) — a CHARACTER scalar is bound to a CHARACTER array dummy: legal sequence association only while the actual is at least as long as the dummy elements the callee reaches
+- **argument-rank-character** (0) — a CHARACTER scalar is bound to a CHARACTER array dummy: legal sequence association only while the actual is at least as long as the dummy elements the callee reaches
 
 ### Out-of-bounds subscripts (constant)
 
@@ -169,13 +169,12 @@ Per-unit dataflow over ALLOCATE/DEALLOCATE/NULLIFY/pointer-assignment: flags ref
 | ---: | --- | --- | --- | --- | --- | --- |
 | 207 | gwf2evt7rp | uninitialized | conditional | inievt | defined at 129, 131 | `IF (INIEVT .LT. 0) THEN` |
 
-### gwf2fhb7.f90 (3)
+### gwf2fhb7.f90 (2)
 
 | Line | Unit | Detector | Category | Subject | Detail | Statement |
 | ---: | --- | --- | --- | --- | --- | --- |
 | 268 | gwf2fhb7ar | uninitialized | conditional | nd | defined at 201, 238, 295 | `WRITE(IOUT, 54) (DSH1, M = 1, ND)` |
 | 337 | gwf2fhb7ar | uninitialized | conditional | nd | defined at 201, 238, 295 | `WRITE(IOUT, 54) (DSH1, M = 1, ND)` |
-| 604 | gwf2fhb7bd | interface | argument-rank-character | ubdsv4(5) | actual 'IFACE ' is a character scalar, dummy auxtxt is a character array at utl7.f90:1610 | `CALL UBDSV4(KSTP, KPER, TEXT, NAUX, 'IFACE ', IFHBCB, NCOL, NROW, NLAY, NFLW, IOUT, DELT, PERTIM,...` |
 
 ### gwf2gag7.f90 (4)
 
@@ -794,7 +793,7 @@ Per-unit dataflow over ALLOCATE/DEALLOCATE/NULLIFY/pointer-assignment: flags ref
 | 426 | gwf2res7bd | uninitialized | loop-guarded | rate | defined at 413, 416 | `RATOUT = RATOUT - RATE` |
 | 431 | gwf2res7bd | uninitialized | loop-guarded | rate | defined at 413, 416 | `RATIN = RATIN + RATE` |
 
-### gwf2sfr7.f90 (373)
+### gwf2sfr7.f90 (372)
 
 | Line | Unit | Detector | Category | Subject | Detail | Statement |
 | ---: | --- | --- | --- | --- | --- | --- |
@@ -1080,97 +1079,96 @@ Per-unit dataflow over ALLOCATE/DEALLOCATE/NULLIFY/pointer-assignment: flags ref
 | 3464 | gwf2sfr7fm | uninitialized | loop-guarded | flobot | defined at 3146, 3175, 3283, 3285, 3307, 3308, 3310, 3311, 3314, 3320, 3333, 3350, 3374, 3424 | `SFRQ(3, l) = flobot` |
 | 3469 | gwf2sfr7fm | uninitialized | loop-guarded | flobot | defined at 3146, 3175, 3283, 3285, 3307, 3308, 3310, 3311, 3314, 3320, 3333, 3350, 3374, 3424 | `SFRQ(3, l) = flobot` |
 | 3491 | gwf2sfr7fm | uninitialized | loop-guarded | flowc | defined at 2437, 2443, 2446, 2458, 2459, 2493, 3151, 3158, 3179, 3186, 3209, 3233, 3260, 3265, 3305, 3360, 3418 | `ELSE IF (SUMLEAK(l) - flowc .LT. - CLOSEZERO) THEN` |
-| 3683 | gwf2sfr7bd | interface | argument-rank-character | ubdsv4(5) | actual 'IFACE ' is a character scalar, dummy auxtxt is a character array at utl7.f90:1610 | `CALL UBDSV4(Kkstp, Kkper, text, naux, 'IFACE ', iout1, NCOL, NROW, NLAY, NSTRM, IOUT, DELT, PERTI...` |
-| 3983 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `flow = flowin + runof + runoff + precip - etstr` |
-| 3983 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `flow = flowin + runof + runoff + precip - etstr` |
-| 3989 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `IF (flowin + runoff + precip .LT. NEARZERO) THEN` |
-| 3992 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `ELSE IF (runof .GE. flowin + runoff + precip - etstr) THEN` |
-| 3992 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (runof .GE. flowin + runoff + precip - etstr) THEN` |
-| 3993 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `runof = flowin + runoff + precip - etstr` |
-| 3993 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `runof = flowin + runoff + precip - etstr` |
-| 3994 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `ELSE IF (etstr .GE. flowin + runoff + precip + runof) THEN` |
-| 3994 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (etstr .GE. flowin + runoff + precip + runof) THEN` |
-| 3995 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `etstr = flowin + runoff + precip + runof` |
-| 3997 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (flowin + runof + runoff + precip .GT. NEARZERO) THEN` |
-| 3998 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `etstr = flowin + runof + runoff + precip` |
-| 4003 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `IF (flowin + runoff + precip - flobot .LT. NEARZERO) THEN` |
-| 4006 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `ELSE IF (runof .GE. flowin + runoff + precip - flobot - etstr) THEN` |
-| 4006 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (runof .GE. flowin + runoff + precip - flobot - etstr) THEN` |
-| 4008 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `runof = - (flowin + runoff + precip - flobot - etstr)` |
-| 4008 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `runof = - (flowin + runoff + precip - flobot - etstr)` |
-| 4009 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `ELSE IF (etstr .GE. flowin + runoff + precip - flobot + runof) THEN` |
-| 4009 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (etstr .GE. flowin + runoff + precip - flobot + runof) THEN` |
-| 4010 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `etstr = flowin + runoff + precip - flobot + runof` |
-| 4012 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `ELSE IF (etstr .GT. flowin + runoff + runof + precip - flobot) THEN` |
-| 4012 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (etstr .GT. flowin + runoff + runof + precip - flobot) THEN` |
-| 4013 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `etstr = flowin + runof + runoff + precip - flobot` |
-| 4014 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (flowin + runoff + runof + precip - flobot .LT. NEARZERO) THEN` |
-| 4018 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `flow = flowin + runof + runoff + precip - etstr` |
-| 4018 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `flow = flowin + runof + runoff + precip - etstr` |
-| 4026 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3941, 3946, 4162 | `IF (h .LT. sbot) flobot = CALCUNSATFLOBOT(depth, avhc, fks, wetperm, sbdthk, areamax, strlen, fbc...` |
-| 4036 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `qlat = (runof + runoff + precip - etstr) / strlen` |
-| 4036 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `qlat = (runof + runoff + precip - etstr) / strlen` |
-| 4077 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `qlat = (runof + runoff + precip - etstr) / strlen` |
-| 4077 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `qlat = (runof + runoff + precip - etstr) / strlen` |
-| 4100 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3941, 3946, 4162 | `IF (h .LT. sbot) THEN` |
-| 4130 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3941, 3946, 4162 | `STRM(19, l) = h` |
-| 4147 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `sfrbudg_in = sfrbudg_in + precip` |
-| 4149 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `sfrbudg_out = sfrbudg_out + etstr` |
-| 4192 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3941, 3946, 4162 | `IF (icalccheck .EQ. 1 .AND. sbot .GT. h) THEN` |
-| 4200 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3941, 3946, 4162 | `ELSE IF (sbot .LT. h) THEN` |
-| 4211 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `WRITE(IOUT, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
-| 4211 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `WRITE(IOUT, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
-| 4222 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3670, 3673, 3688, 4397, 4400 | `WRITE(iout2, 9004) txtlst, Kkper, Kkstp` |
-| 4224 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4224 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3670, 3673, 3688, 4397, 4400 | `WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4224 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4239 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `WRITE(IOUT, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
-| 4239 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `WRITE(IOUT, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
-| 4253 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3670, 3673, 3688, 4397, 4400 | `WRITE(iout2, 9006) txtlst, Kkper, Kkstp` |
-| 4255 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4255 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3670, 3673, 3688, 4397, 4400 | `WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4255 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4264 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3670, 3673, 3688, 4397, 4400 | `WRITE(iout2, 9009) txtlst, Kkper, Kkstp` |
-| 4266 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4266 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3941, 3946, 4162 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4266 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3670, 3673, 3688, 4397, 4400 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4266 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4359 | gwf2sfr7bd | uninitialized | loop-guarded | icalccheck | defined at 3887, 3892 | `IF (IBUDFL .GT. 0 .AND. icalccheck .EQ. 1) CALL GWF2SFR7UZOT(Kkstp, Kkper)` |
-| 4477 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | roughch | defined at 4453, 4485, 4488 | `flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))` |
-| 4477 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | slope | defined at 4452, 4485, 4488 | `flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))` |
-| 4477 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | widthch | defined at 4454 | `flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))` |
-| 4480 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | roughch | defined at 4453, 4485, 4488 | `SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))` |
-| 4480 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | slope | defined at 4452, 4485, 4488 | `SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))` |
-| 4480 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | widthch | defined at 4454 | `SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))` |
-| 5017 | gwf2sfr7flw | uninitialized | loop-guarded | xleft | defined at 4979, 5001 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
-| 5017 | gwf2sfr7flw | uninitialized | loop-guarded | xright | defined at 4985, 4993, 5002 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
-| 5017 | gwf2sfr7flw | uninitialized | loop-guarded | yleft | defined at 4980, 5000 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
-| 5017 | gwf2sfr7flw | uninitialized | loop-guarded | yright | defined at 4986, 4992, 5003 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
-| 5689 | sgwf2sfr7parmov | uninitialized | loop-guarded | jend | defined at 5683, 5685, 5687, 5696, 5698, 5700 | `DO jj = 6, jend` |
-| 5702 | sgwf2sfr7parmov | uninitialized | loop-guarded | jend | defined at 5683, 5685, 5687, 5696, 5698, 5700 | `DO jj = 11, jend` |
-| 7375 | leadwave | uninitialized | loop-guarded | checktime | defined at 7321, 7336, 7339, 7351, 7360, 7363, 7367, 7370, 7375 | `IF (checktime(j) .LT. NEARZERO) checktime(j) = big` |
-| 7389 | leadwave | uninitialized | loop-guarded | checktime | defined at 7321, 7336, 7339, 7351, 7360, 7363, 7367, 7370, 7375 | `IF (CHECKTIME(j) .LE. shortest) THEN` |
-| 7391 | leadwave | uninitialized | loop-guarded | checktime | defined at 7321, 7336, 7339, 7351, 7360, 7363, 7367, 7370, 7375 | `shortest = CHECKTIME(j)` |
-| 7400 | leadwave | uninitialized | loop-guarded | checktime | defined at 7321, 7336, 7339, 7351, 7360, 7363, 7367, 7370, 7375 | `IF (CHECKTIME(k) > shortest) MORE(k) = 0` |
-| 7507 | leadwave | uninitialized | loop-guarded | more | defined at 7322, 7390, 7400 | `IF (more(j) .EQ. 1) THEN` |
-| 7893 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `chap = (XSEC(8 + mark(ll) - 1, Istsg) - XSEC(8 + mark(ll), Istsg))` |
-| 7894 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `IF (ABS(XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) .LT. 1.0E-30 .AND. ABS(XSEC(ma...` |
-| 7900 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `ELSE IF (ABS(XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) .LT. 1.0E-30) THEN` |
-| 7903 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `ELSE IF (ABS(XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) .LT. 1.0E-30) THEN` |
-| 7907 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `slope = (XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) / (XSEC(mark(ll), Istsg) - XS...` |
-| 7911 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `ffmin = XSEC(8 + mark(ll), Istsg)` |
-| 7912 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `ffmax = XSEC(8 + mark(ll) - 1, Istsg)` |
-| 7914 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `ffmin = XSEC(8 + mark(ll) - 1, Istsg)` |
-| 7915 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `ffmax = XSEC(8 + mark(ll), Istsg)` |
-| 7917 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `b = XSEC(8 + mark(ll) - 1, Istsg) - slope * XSEC(mark(ll) - 1, Istsg)` |
-| 7921 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `area1 = (XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) * (stage - ffmin)` |
-| 7927 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `xinc = (XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) / 50.` |
-| 7928 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `xmid = XSEC(mark(ll) - 1, Istsg)` |
-| 7934 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `IF (XSEC(8 + mark(ll) - 1, Istsg) .LT. XSEC(8 + mark(ll), Istsg)) THEN` |
-| 7936 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `xinc = (ABS(XSEC(mark(ll) - 1, Istsg) - xmid)) / 50.` |
-| 7937 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `xmid = XSEC(mark(ll) - 1, Istsg)` |
-| 7939 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `xinc = (ABS(XSEC(mark(ll), Istsg) - xmid)) / 50.` |
-| 7944 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `xx = ABS(xmid - XSEC(mark(ll), Istsg))` |
+| 3985 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `flow = flowin + runof + runoff + precip - etstr` |
+| 3985 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `flow = flowin + runof + runoff + precip - etstr` |
+| 3991 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `IF (flowin + runoff + precip .LT. NEARZERO) THEN` |
+| 3994 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `ELSE IF (runof .GE. flowin + runoff + precip - etstr) THEN` |
+| 3994 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (runof .GE. flowin + runoff + precip - etstr) THEN` |
+| 3995 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `runof = flowin + runoff + precip - etstr` |
+| 3995 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `runof = flowin + runoff + precip - etstr` |
+| 3996 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `ELSE IF (etstr .GE. flowin + runoff + precip + runof) THEN` |
+| 3996 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (etstr .GE. flowin + runoff + precip + runof) THEN` |
+| 3997 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `etstr = flowin + runoff + precip + runof` |
+| 3999 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (flowin + runof + runoff + precip .GT. NEARZERO) THEN` |
+| 4000 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `etstr = flowin + runof + runoff + precip` |
+| 4005 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `IF (flowin + runoff + precip - flobot .LT. NEARZERO) THEN` |
+| 4008 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `ELSE IF (runof .GE. flowin + runoff + precip - flobot - etstr) THEN` |
+| 4008 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (runof .GE. flowin + runoff + precip - flobot - etstr) THEN` |
+| 4010 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `runof = - (flowin + runoff + precip - flobot - etstr)` |
+| 4010 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `runof = - (flowin + runoff + precip - flobot - etstr)` |
+| 4011 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `ELSE IF (etstr .GE. flowin + runoff + precip - flobot + runof) THEN` |
+| 4011 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (etstr .GE. flowin + runoff + precip - flobot + runof) THEN` |
+| 4012 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `etstr = flowin + runoff + precip - flobot + runof` |
+| 4014 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `ELSE IF (etstr .GT. flowin + runoff + runof + precip - flobot) THEN` |
+| 4014 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (etstr .GT. flowin + runoff + runof + precip - flobot) THEN` |
+| 4015 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `etstr = flowin + runof + runoff + precip - flobot` |
+| 4016 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (flowin + runoff + runof + precip - flobot .LT. NEARZERO) THEN` |
+| 4020 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `flow = flowin + runof + runoff + precip - etstr` |
+| 4020 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `flow = flowin + runof + runoff + precip - etstr` |
+| 4028 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3943, 3948, 4164 | `IF (h .LT. sbot) flobot = CALCUNSATFLOBOT(depth, avhc, fks, wetperm, sbdthk, areamax, strlen, fbc...` |
+| 4038 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `qlat = (runof + runoff + precip - etstr) / strlen` |
+| 4038 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `qlat = (runof + runoff + precip - etstr) / strlen` |
+| 4079 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `qlat = (runof + runoff + precip - etstr) / strlen` |
+| 4079 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `qlat = (runof + runoff + precip - etstr) / strlen` |
+| 4102 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3943, 3948, 4164 | `IF (h .LT. sbot) THEN` |
+| 4132 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3943, 3948, 4164 | `STRM(19, l) = h` |
+| 4149 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `sfrbudg_in = sfrbudg_in + precip` |
+| 4151 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `sfrbudg_out = sfrbudg_out + etstr` |
+| 4194 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3943, 3948, 4164 | `IF (icalccheck .EQ. 1 .AND. sbot .GT. h) THEN` |
+| 4202 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3943, 3948, 4164 | `ELSE IF (sbot .LT. h) THEN` |
+| 4213 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `WRITE(IOUT, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
+| 4213 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `WRITE(IOUT, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
+| 4224 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3672, 3675, 3690, 4399, 4402 | `WRITE(iout2, 9004) txtlst, Kkper, Kkstp` |
+| 4226 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4226 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3672, 3675, 3690, 4399, 4402 | `WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4226 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4241 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `WRITE(IOUT, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
+| 4241 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `WRITE(IOUT, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
+| 4255 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3672, 3675, 3690, 4399, 4402 | `WRITE(iout2, 9006) txtlst, Kkper, Kkstp` |
+| 4257 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4257 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3672, 3675, 3690, 4399, 4402 | `WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4257 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4266 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3672, 3675, 3690, 4399, 4402 | `WRITE(iout2, 9009) txtlst, Kkper, Kkstp` |
+| 4268 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4268 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3943, 3948, 4164 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4268 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3672, 3675, 3690, 4399, 4402 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4268 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4361 | gwf2sfr7bd | uninitialized | loop-guarded | icalccheck | defined at 3889, 3894 | `IF (IBUDFL .GT. 0 .AND. icalccheck .EQ. 1) CALL GWF2SFR7UZOT(Kkstp, Kkper)` |
+| 4479 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | roughch | defined at 4455, 4487, 4490 | `flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))` |
+| 4479 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | slope | defined at 4454, 4487, 4490 | `flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))` |
+| 4479 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | widthch | defined at 4456 | `flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))` |
+| 4482 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | roughch | defined at 4455, 4487, 4490 | `SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))` |
+| 4482 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | slope | defined at 4454, 4487, 4490 | `SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))` |
+| 4482 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | widthch | defined at 4456 | `SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))` |
+| 5019 | gwf2sfr7flw | uninitialized | loop-guarded | xleft | defined at 4981, 5003 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
+| 5019 | gwf2sfr7flw | uninitialized | loop-guarded | xright | defined at 4987, 4995, 5004 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
+| 5019 | gwf2sfr7flw | uninitialized | loop-guarded | yleft | defined at 4982, 5002 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
+| 5019 | gwf2sfr7flw | uninitialized | loop-guarded | yright | defined at 4988, 4994, 5005 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
+| 5691 | sgwf2sfr7parmov | uninitialized | loop-guarded | jend | defined at 5685, 5687, 5689, 5698, 5700, 5702 | `DO jj = 6, jend` |
+| 5704 | sgwf2sfr7parmov | uninitialized | loop-guarded | jend | defined at 5685, 5687, 5689, 5698, 5700, 5702 | `DO jj = 11, jend` |
+| 7377 | leadwave | uninitialized | loop-guarded | checktime | defined at 7323, 7338, 7341, 7353, 7362, 7365, 7369, 7372, 7377 | `IF (checktime(j) .LT. NEARZERO) checktime(j) = big` |
+| 7391 | leadwave | uninitialized | loop-guarded | checktime | defined at 7323, 7338, 7341, 7353, 7362, 7365, 7369, 7372, 7377 | `IF (CHECKTIME(j) .LE. shortest) THEN` |
+| 7393 | leadwave | uninitialized | loop-guarded | checktime | defined at 7323, 7338, 7341, 7353, 7362, 7365, 7369, 7372, 7377 | `shortest = CHECKTIME(j)` |
+| 7402 | leadwave | uninitialized | loop-guarded | checktime | defined at 7323, 7338, 7341, 7353, 7362, 7365, 7369, 7372, 7377 | `IF (CHECKTIME(k) > shortest) MORE(k) = 0` |
+| 7509 | leadwave | uninitialized | loop-guarded | more | defined at 7324, 7392, 7402 | `IF (more(j) .EQ. 1) THEN` |
+| 7895 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `chap = (XSEC(8 + mark(ll) - 1, Istsg) - XSEC(8 + mark(ll), Istsg))` |
+| 7896 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `IF (ABS(XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) .LT. 1.0E-30 .AND. ABS(XSEC(ma...` |
+| 7902 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `ELSE IF (ABS(XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) .LT. 1.0E-30) THEN` |
+| 7905 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `ELSE IF (ABS(XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) .LT. 1.0E-30) THEN` |
+| 7909 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `slope = (XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) / (XSEC(mark(ll), Istsg) - XS...` |
+| 7913 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `ffmin = XSEC(8 + mark(ll), Istsg)` |
+| 7914 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `ffmax = XSEC(8 + mark(ll) - 1, Istsg)` |
+| 7916 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `ffmin = XSEC(8 + mark(ll) - 1, Istsg)` |
+| 7917 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `ffmax = XSEC(8 + mark(ll), Istsg)` |
+| 7919 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `b = XSEC(8 + mark(ll) - 1, Istsg) - slope * XSEC(mark(ll) - 1, Istsg)` |
+| 7923 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `area1 = (XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) * (stage - ffmin)` |
+| 7929 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `xinc = (XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) / 50.` |
+| 7930 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `xmid = XSEC(mark(ll) - 1, Istsg)` |
+| 7936 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `IF (XSEC(8 + mark(ll) - 1, Istsg) .LT. XSEC(8 + mark(ll), Istsg)) THEN` |
+| 7938 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `xinc = (ABS(XSEC(mark(ll) - 1, Istsg) - xmid)) / 50.` |
+| 7939 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `xmid = XSEC(mark(ll) - 1, Istsg)` |
+| 7941 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `xinc = (ABS(XSEC(mark(ll), Istsg) - xmid)) / 50.` |
+| 7946 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `xx = ABS(xmid - XSEC(mark(ll), Istsg))` |
 
 ### gwf2str7.f90 (28)
 
