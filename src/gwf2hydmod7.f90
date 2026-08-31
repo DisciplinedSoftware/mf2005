@@ -8,10 +8,12 @@
 !  the initial SE calls for all of the packages that have the
 !  initial SE call in the AR subroutine.
       MODULE HYDBASMODULE
+        IMPLICIT NONE
         INTEGER,    SAVE,       POINTER                ::NHYDTOT
         REAL,       SAVE,       POINTER,DIMENSION(:,:) ::HYDVAL
         CHARACTER(LEN=20),SAVE, POINTER,DIMENSION(:)   ::HYDLBL
-        INTEGER,    SAVE,       POINTER            ::IHYDMUN,NHYDBAS
+        INTEGER,SAVE,POINTER:: IHYDMUN
+        INTEGER,SAVE,POINTER:: NHYDBAS
         REAL,       SAVE,       POINTER                ::HYDNOH
         LOGICAL,    SAVE,       POINTER,DIMENSION(:)   ::IBHYDBAS
         LOGICAL,    SAVE,       POINTER,DIMENSION(:)   ::INTRPHYDBAS
@@ -23,7 +25,8 @@
           INTEGER, POINTER                         ::NHYDTOT
           REAL,             POINTER,DIMENSION(:,:) ::HYDVAL
           CHARACTER(LEN=20),POINTER,DIMENSION(:)   ::HYDLBL
-          INTEGER,          POINTER                ::IHYDMUN,NHYDBAS
+          INTEGER,POINTER:: IHYDMUN
+          INTEGER,POINTER:: NHYDBAS
           REAL,             POINTER                ::HYDNOH
           LOGICAL,          POINTER,DIMENSION(:)   ::IBHYDBAS
           LOGICAL,          POINTER,DIMENSION(:)   ::INTRPHYDBAS
@@ -36,6 +39,7 @@
       END MODULE
 
       MODULE HYDIBSMODULE
+        IMPLICIT NONE
         INTEGER, SAVE,         POINTER                ::NHYDIBS
         LOGICAL, SAVE,         POINTER,DIMENSION(:)   ::IBHYDIBS
         LOGICAL, SAVE,         POINTER,DIMENSION(:)   ::INTRPHYDIBS
@@ -54,6 +58,7 @@
       END MODULE
 
       MODULE HYDSUBMODULE
+        IMPLICIT NONE
         INTEGER, SAVE,         POINTER                ::NHYDSUB
         LOGICAL, SAVE,         POINTER,DIMENSION(:)   ::IBHYDSUB
         LOGICAL, SAVE,         POINTER,DIMENSION(:)   ::INTRPHYDSUB
@@ -72,6 +77,7 @@
       END MODULE
 
       MODULE HYDSTRMODULE
+        IMPLICIT NONE
         INTEGER, SAVE,         POINTER                ::NHYDSTR
         INTEGER, SAVE,         POINTER,DIMENSION(:)   ::ISTRHYD
         CHARACTER(LEN=4),SAVE, POINTER,DIMENSION(:)   ::HYDSTRARR
@@ -84,6 +90,7 @@
       END MODULE
 
       MODULE HYDSFRMODULE
+        IMPLICIT NONE
         INTEGER, SAVE,         POINTER                ::NHYDSFR
         INTEGER, SAVE,         POINTER,DIMENSION(:)   ::ISFRHYD
         CHARACTER(LEN=4),SAVE, POINTER,DIMENSION(:)   ::HYDSFRARR
@@ -104,6 +111,37 @@
 !     ------------------------------------------------------------------
       USE GLOBAL , ONLY: IOUT,NCOL,NROW,STRT
       USE HYDBASMODULE
+      IMPLICIT NONE
+      REAL :: H1
+      REAL :: H2
+      REAL :: H3
+      REAL :: H4
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: KLAY
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NC1
+      INTEGER :: NC2
+      INTEGER :: NHYDM
+      INTEGER :: NR1
+      INTEGER :: NR2
+      INTEGER :: NTOT
+      REAL :: ONE
+      REAL :: R
+      REAL :: W1
+      REAL :: W2
+      REAL :: W3
+      REAL :: W4
+      REAL :: X1
+      REAL :: X2
+      REAL :: XL
+      REAL :: Y1
+      REAL :: Y2
+      REAL :: YL
+      REAL :: ZERO
       CHARACTER*80 LINE
       CHARACTER*1 INTYP
       CHARACTER*20 HYDBASLBL
@@ -321,8 +359,38 @@
       USE HYDIBSMODULE
       USE GWFIBSMODULE,   ONLY: IBQ
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: K
+      INTEGER :: KLAY
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NC1
+      INTEGER :: NC2
+      INTEGER :: NQ
+      INTEGER :: NR1
+      INTEGER :: NR2
+      REAL :: ONE
+      REAL :: R
+      REAL :: W1
+      REAL :: W2
+      REAL :: W3
+      REAL :: W4
+      REAL :: X1
+      REAL :: X2
+      REAL :: XL
+      REAL :: Y1
+      REAL :: Y2
+      REAL :: YL
+      REAL :: ZERO
       CHARACTER LINE*80
-      CHARACTER HYDIBSLBL*20,PCKG*3,ARR*2,INTYP*1
+      CHARACTER HYDIBSLBL*20
+      CHARACTER PCKG*3
+      CHARACTER ARR*2
+      CHARACTER INTYP*1
 !     ------------------------------------------------------------------
       ALLOCATE (NHYDIBS)
       ONE=1.0
@@ -479,8 +547,38 @@
       USE HYDSUBMODULE
       USE GWFSUBMODULE,   ONLY: LN,HC,SUB,NNDB
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: K
+      INTEGER :: KLAY
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NC1
+      INTEGER :: NC2
+      INTEGER :: NQSUB
+      INTEGER :: NR1
+      INTEGER :: NR2
+      REAL :: ONE
+      REAL :: R
+      REAL :: W1
+      REAL :: W2
+      REAL :: W3
+      REAL :: W4
+      REAL :: X1
+      REAL :: X2
+      REAL :: XL
+      REAL :: Y1
+      REAL :: Y2
+      REAL :: YL
+      REAL :: ZERO
       CHARACTER LINE*80
-      CHARACTER HYDSUBLBL*20,PCKG*3,ARR*2,INTYP*1
+      CHARACTER HYDSUBLBL*20
+      CHARACTER PCKG*3
+      CHARACTER ARR*2
+      CHARACTER INTYP*1
 !     ------------------------------------------------------------------
       ALLOCATE (NHYDSUB)
       ONE=1.0
@@ -635,6 +733,14 @@
       USE GLOBAL,    ONLY: IOUT
       USE HYDBASMODULE
       USE HYDSTRMODULE
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: LLOC
+      INTEGER :: N
+      REAL :: R
       CHARACTER LINE*80
 !     ------------------------------------------------------------------
       ALLOCATE (NHYDSTR)
@@ -673,7 +779,24 @@
       USE HYDBASMODULE
       USE HYDSTRMODULE
       USE GWFSTRMODULE, ONLY: ISTRM,STRM,NSTREM
-      CHARACTER HYDSTRLBL*20,LINE*80,INTYP*1
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: IRCH
+      INTEGER :: ISEG
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: KLAY
+      INTEGER :: KPER
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NUMSTR
+      REAL :: R
+      REAL :: XL
+      REAL :: YL
+      CHARACTER HYDSTRLBL*20
+      CHARACTER LINE*80
+      CHARACTER INTYP*1
 !     ------------------------------------------------------------------
       CALL SGWF2HYD7STR7PNT(IGRID)
 !
@@ -781,6 +904,14 @@
       USE GLOBAL,    ONLY: IOUT
       USE HYDBASMODULE
       USE HYDSFRMODULE
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: LLOC
+      INTEGER :: N
+      REAL :: R
       CHARACTER LINE*80
 !     ------------------------------------------------------------------
       ALLOCATE (NHYDSFR)
@@ -819,7 +950,24 @@
       USE HYDBASMODULE
       USE HYDSFRMODULE
       USE GWFSFRMODULE, ONLY: ISTRM,STRM,NSTRM
-      CHARACTER HYDSFRLBL*20,LINE*80,INTYP*1
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: IRCH
+      INTEGER :: ISEG
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: KLAY
+      INTEGER :: KPER
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NUMSFR
+      REAL :: R
+      REAL :: XL
+      REAL :: YL
+      CHARACTER HYDSFRLBL*20
+      CHARACTER LINE*80
+      CHARACTER INTYP*1
 !     ------------------------------------------------------------------
       CALL SGWF2HYD7SFR7PNT(IGRID)
 !
@@ -927,6 +1075,20 @@
       USE GLOBAL,   ONLY: HNEW,IBOUND,STRT,IOUT
       USE HYDBASMODULE
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IB1
+      INTEGER :: IB2
+      INTEGER :: IB3
+      INTEGER :: IB4
+      INTEGER :: IBFACT
+      INTEGER :: IGRID
+      INTEGER :: IHYDLOC
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: N
+      INTEGER :: NN
+      REAL :: SHYD7WTAVG
       CALL SGWF2HYD7BAS7PNT(IGRID)
 !
 ! -----Return if no BAS hydrographs.
@@ -988,6 +1150,25 @@
       USE HYDIBSMODULE
       USE GWFIBSMODULE,   ONLY: HC,SUB
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IB1
+      INTEGER :: IB2
+      INTEGER :: IB3
+      INTEGER :: IB4
+      INTEGER :: IBFACT
+      INTEGER :: IGRID
+      INTEGER :: IHYDLOC
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KLAY
+      INTEGER :: N
+      INTEGER :: NN
+      REAL :: TOTL
+      REAL :: W1
+      REAL :: W2
+      REAL :: W3
+      REAL :: W4
       CALL SGWF2HYD7IBS7PNT(IGRID)
 !
 ! -----Return if no IBS hydrographs.
@@ -1081,6 +1262,29 @@
       USE HYDSUBMODULE
       USE GWFSUBMODULE,   ONLY: LN,HC,SUB,NNDB
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IB1
+      INTEGER :: IB2
+      INTEGER :: IB3
+      INTEGER :: IB4
+      INTEGER :: IBFACT
+      INTEGER :: ICELL1
+      INTEGER :: ICELL2
+      INTEGER :: ICELL3
+      INTEGER :: ICELL4
+      INTEGER :: IGRID
+      INTEGER :: IHYDLOC
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KLAY
+      INTEGER :: N
+      INTEGER :: NN
+      REAL :: TOTL
+      REAL :: W1
+      REAL :: W2
+      REAL :: W3
+      REAL :: W4
       CALL SGWF2HYD7SUB7PNT(IGRID)
 !
 ! -----Return if no SUB hydrographs.
@@ -1185,7 +1389,17 @@
       USE HYDBASMODULE
       USE HYDSTRMODULE
       USE GWFSTRMODULE, ONLY: ISTRM,STRM,NSTREM
-      CHARACTER HYDSTRLBL*20,LINE*80,INTYP*1
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: IHYDLOC
+      INTEGER :: ISTR
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: N
+      CHARACTER HYDSTRLBL*20
+      CHARACTER LINE*80
+      CHARACTER INTYP*1
 !     ------------------------------------------------------------------
       CALL SGWF2HYD7STR7PNT(IGRID)
 !
@@ -1233,7 +1447,17 @@
       USE HYDBASMODULE
       USE HYDSFRMODULE
       USE GWFSFRMODULE, ONLY: ISTRM,STRM,NSTRM
-      CHARACTER HYDSFRLBL*20,LINE*80,INTYP*1
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: IHYDLOC
+      INTEGER :: ISFR
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: N
+      CHARACTER HYDSFRLBL*20
+      CHARACTER LINE*80
+      CHARACTER INTYP*1
 !     ------------------------------------------------------------------
       CALL SGWF2HYD7SFR7PNT(IGRID)
 !
@@ -1281,6 +1505,12 @@
       USE GWFBASMODULE, ONLY: TOTIM
       USE HYDBASMODULE
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: N
+      INTEGER :: NDECDIG
       CALL SGWF2HYD7BAS7PNT(IGRID)
 !
 !1------RETURN IF NO HYDROGRAPH RECORDS.
@@ -1316,6 +1546,32 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,   ONLY: NCOL,NROW,DELR,DELC
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: DXF
+      REAL :: DYF
+      REAL :: HALF
+      INTEGER :: N
+      INTEGER :: NC1
+      INTEGER :: NC2
+      INTEGER :: NR1
+      INTEGER :: NR2
+      REAL :: X1
+      REAL :: X2
+      REAL :: XC
+      REAL :: XCB
+      REAL :: XCF
+      REAL :: XL
+      REAL :: XX1
+      REAL :: XX2
+      REAL :: Y1
+      REAL :: Y2
+      REAL :: YC
+      REAL :: YCB
+      REAL :: YCF
+      REAL :: YL
+      REAL :: YY1
+      REAL :: YY2
+      REAL :: ZERO
       ZERO=0.
       HALF=0.5
       XX1=ZERO
@@ -1397,7 +1653,17 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,    ONLY: NCOL,NROW,NLAY,HNEW
       USE HYDBASMODULE, ONLY: JIKHYDBAS,HYDBASWT
-      DOUBLE PRECISION W1,W2,W3,W4,HTOT
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: N
+      REAL :: SHYD7WTAVG
+      DOUBLE PRECISION W1
+      DOUBLE PRECISION W2
+      DOUBLE PRECISION W3
+      DOUBLE PRECISION W4
+      DOUBLE PRECISION HTOT
 !     ------------------------------------------------------------------
       J=JIKHYDBAS(1,N)
       I=JIKHYDBAS(2,N)
@@ -1421,6 +1687,20 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      REAL :: DX
+      REAL :: DXY
+      REAL :: DY
+      REAL :: W1
+      REAL :: W2
+      REAL :: W3
+      REAL :: W4
+      REAL :: X0
+      REAL :: X1
+      REAL :: X2
+      REAL :: Y0
+      REAL :: Y1
+      REAL :: Y2
       DX=(X0-X1)/(X2-X1)
       DY=(Y0-Y1)/(Y2-Y1)
       DXY=DX*DY
@@ -1440,6 +1720,8 @@
       USE GLOBAL,   ONLY: IUNIT
 !     ------------------------------------------------------------------
 !1------DEALLOCATE HYDBAS VARIABLES      
+      IMPLICIT NONE
+      INTEGER :: IGRID
       CALL SGWF2HYD7BAS7DA(IGRID)
 !      
 !2------CHECK IF HYDMOD IS USED WITH OTHER PACKAGES.  IF SO, DEALLOCATE
@@ -1458,6 +1740,8 @@
 !  Deallocate HYD BAS memory
       USE HYDBASMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       DEALLOCATE(HYDBASDAT(IGRID)%NHYDTOT)
       DEALLOCATE(HYDBASDAT(IGRID)%HYDVAL)
       DEALLOCATE(HYDBASDAT(IGRID)%HYDLBL)
@@ -1477,6 +1761,8 @@
 !  Change HYD BAS data to a different grid.
       USE HYDBASMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       NHYDTOT=>HYDBASDAT(IGRID)%NHYDTOT
       HYDVAL=>HYDBASDAT(IGRID)%HYDVAL
       HYDLBL=>HYDBASDAT(IGRID)%HYDLBL
@@ -1496,6 +1782,8 @@
 !  Save HYD BAS data for a grid.
       USE HYDBASMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       HYDBASDAT(IGRID)%NHYDTOT=>NHYDTOT
       HYDBASDAT(IGRID)%HYDVAL=>HYDVAL
       HYDBASDAT(IGRID)%HYDLBL=>HYDLBL
@@ -1515,6 +1803,8 @@
 !  Deallocate HYD IBS memory
       USE HYDIBSMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       DEALLOCATE(HYDIBSDAT(IGRID)%NHYDIBS)
       DEALLOCATE(HYDIBSDAT(IGRID)%IBHYDIBS)
       DEALLOCATE(HYDIBSDAT(IGRID)%INTRPHYDIBS)
@@ -1528,6 +1818,8 @@
 !  Change HYD IBS data to a different grid.
       USE HYDIBSMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       NHYDIBS=>HYDIBSDAT(IGRID)%NHYDIBS
       IBHYDIBS=>HYDIBSDAT(IGRID)%IBHYDIBS
       INTRPHYDIBS=>HYDIBSDAT(IGRID)%INTRPHYDIBS
@@ -1541,6 +1833,8 @@
 !  Save HYD IBS data for a grid.
       USE HYDIBSMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       HYDIBSDAT(IGRID)%NHYDIBS=>NHYDIBS
       HYDIBSDAT(IGRID)%IBHYDIBS=>IBHYDIBS
       HYDIBSDAT(IGRID)%INTRPHYDIBS=>INTRPHYDIBS
@@ -1554,6 +1848,8 @@
 !  Deallocate HYD SUB memory
       USE HYDSUBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       DEALLOCATE(HYDSUBDAT(IGRID)%NHYDSUB)
       DEALLOCATE(HYDSUBDAT(IGRID)%IBHYDSUB)
       DEALLOCATE(HYDSUBDAT(IGRID)%INTRPHYDSUB)
@@ -1567,6 +1863,8 @@
 !  Change HYD SUB data to a different grid.
       USE HYDSUBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       NHYDSUB=>HYDSUBDAT(IGRID)%NHYDSUB
       IBHYDSUB=>HYDSUBDAT(IGRID)%IBHYDSUB
       INTRPHYDSUB=>HYDSUBDAT(IGRID)%INTRPHYDSUB
@@ -1580,6 +1878,8 @@
 !  Save HYD SUB data for a grid.
       USE HYDSUBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       HYDSUBDAT(IGRID)%NHYDSUB=>NHYDSUB
       HYDSUBDAT(IGRID)%IBHYDSUB=>IBHYDSUB
       HYDSUBDAT(IGRID)%INTRPHYDSUB=>INTRPHYDSUB
@@ -1593,6 +1893,8 @@
 !  Deallocate HYD STR memory
       USE HYDSTRMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       DEALLOCATE(HYDSTRDAT(IGRID)%NHYDSTR)
       DEALLOCATE(HYDSTRDAT(IGRID)%ISTRHYD)
       DEALLOCATE(HYDSTRDAT(IGRID)%HYDSTRARR)
@@ -1603,6 +1905,8 @@
 !  Change HYD STR data to a different grid.
       USE HYDSTRMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       NHYDSTR=>HYDSTRDAT(IGRID)%NHYDSTR
       ISTRHYD=>HYDSTRDAT(IGRID)%ISTRHYD
       HYDSTRARR=>HYDSTRDAT(IGRID)%HYDSTRARR
@@ -1613,6 +1917,8 @@
 !  Save HYD STR data for a grid.
       USE HYDSTRMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       HYDSTRDAT(IGRID)%NHYDSTR=>NHYDSTR
       HYDSTRDAT(IGRID)%ISTRHYD=>ISTRHYD
       HYDSTRDAT(IGRID)%HYDSTRARR=>HYDSTRARR
@@ -1623,6 +1929,8 @@
 !  Deallocate HYD SFR memory
       USE HYDSFRMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       DEALLOCATE(HYDSFRDAT(IGRID)%NHYDSFR)
       DEALLOCATE(HYDSFRDAT(IGRID)%ISFRHYD)
       DEALLOCATE(HYDSFRDAT(IGRID)%HYDSFRARR)
@@ -1633,6 +1941,8 @@
 !  Change HYD SFR data to a different grid.
       USE HYDSFRMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       NHYDSFR=>HYDSFRDAT(IGRID)%NHYDSFR
       ISFRHYD=>HYDSFRDAT(IGRID)%ISFRHYD
       HYDSFRARR=>HYDSFRDAT(IGRID)%HYDSFRARR
@@ -1643,6 +1953,8 @@
 !  Save HYD SFR data for a grid.
       USE HYDSFRMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       HYDSFRDAT(IGRID)%NHYDSFR=>NHYDSFR
       HYDSFRDAT(IGRID)%ISFRHYD=>ISFRHYD
       HYDSFRDAT(IGRID)%HYDSFRARR=>HYDSFRARR

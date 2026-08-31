@@ -5,11 +5,15 @@
 !     Store heads at beginning of iteration
 !     ******************************************************************
       IMPLICIT NONE
-      INTEGER,                         INTENT(IN) :: NCOL,NROW,NLAY
+      INTEGER,INTENT(IN):: NCOL
+      INTEGER,INTENT(IN):: NROW
+      INTEGER,INTENT(IN):: NLAY
       DOUBLE PRECISION, DIMENSION(NCOL,NROW,NLAY),INTENT(IN) ::HNEW
       REAL,             DIMENSION(NCOL,NROW,NLAY),INTENT(OUT)::HNEWLAST
 !  Local variables
-      INTEGER :: I, J, K
+      INTEGER:: I
+      INTEGER:: J
+      INTEGER:: K
 !     ------------------------------------------------------------------
 !
       DO K=1,NLAY
@@ -29,18 +33,41 @@
 !     ******************************************************************
       IMPLICIT NONE
 !  Argument-list variables
-      INTEGER, INTENT(IN) :: IUNITMHC,KITER,KSTP,KPER,NCOL,NROW,NLAY
+      INTEGER,INTENT(IN):: IUNITMHC
+      INTEGER,INTENT(IN):: KITER
+      INTEGER,INTENT(IN):: KSTP
+      INTEGER,INTENT(IN):: KPER
+      INTEGER,INTENT(IN):: NCOL
+      INTEGER,INTENT(IN):: NROW
+      INTEGER,INTENT(IN):: NLAY
       INTEGER, DIMENSION(NCOL,NROW,NLAY),INTENT(IN) ::IBOUND
       DOUBLE PRECISION, DIMENSION(NCOL,NROW,NLAY),INTENT(IN) ::HNEW
       REAL            , DIMENSION(NCOL,NROW,NLAY),INTENT(IN) ::HNEWLAST
       DOUBLE PRECISION, INTENT(IN) :: DDAMP
       DOUBLE PRECISION, INTENT(OUT):: BIGHEADCHG
 !  Local variables
-      REAL :: HEADCHG, HEADCHGMAX, HEADCHGMAXNEG, HEADCHGMAXPOS,&
-     &        HLAST, HLASTNEG, HLASTPOS, HTHIS, HTHISNEG, HTHISPOS
-      INTEGER :: I, IMAXHEADCHG, IMAXHEADCHGNEG, IMAXHEADCHGPOS,&
-     &           J, JMAXHEADCHG, JMAXHEADCHGNEG, JMAXHEADCHGPOS,&
-     &           K, KMAXHEADCHG, KMAXHEADCHGNEG, KMAXHEADCHGPOS
+      REAL:: HEADCHG
+      REAL:: HEADCHGMAX
+      REAL:: HEADCHGMAXNEG
+      REAL:: HEADCHGMAXPOS
+      REAL:: HLAST
+      REAL:: HLASTNEG
+      REAL:: HLASTPOS
+      REAL:: HTHIS
+      REAL:: HTHISNEG
+      REAL:: HTHISPOS
+      INTEGER:: I
+      INTEGER:: IMAXHEADCHG
+      INTEGER:: IMAXHEADCHGNEG
+      INTEGER:: IMAXHEADCHGPOS
+      INTEGER:: J
+      INTEGER:: JMAXHEADCHG
+      INTEGER:: JMAXHEADCHGNEG
+      INTEGER:: JMAXHEADCHGPOS
+      INTEGER:: K
+      INTEGER:: KMAXHEADCHG
+      INTEGER:: KMAXHEADCHGNEG
+      INTEGER:: KMAXHEADCHGPOS
 !     ------------------------------------------------------------------
 !
       HEADCHG = 0.0

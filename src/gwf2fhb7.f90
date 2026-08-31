@@ -1,6 +1,12 @@
       MODULE GWFFHBMODULE
-        INTEGER, SAVE, POINTER ::NBDTIM,NFLW,NHED,IFHBCB,NFHBX1,&
-     &                           NFHBX2,IFHBSS
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: NBDTIM
+        INTEGER,SAVE,POINTER:: NFLW
+        INTEGER,SAVE,POINTER:: NHED
+        INTEGER,SAVE,POINTER:: IFHBCB
+        INTEGER,SAVE,POINTER:: NFHBX1
+        INTEGER,SAVE,POINTER:: NFHBX2
+        INTEGER,SAVE,POINTER:: IFHBSS
         INTEGER, SAVE, POINTER, DIMENSION(:,:)  ::IFLLOC
         INTEGER, SAVE, POINTER, DIMENSION(:,:)  ::IHDLOC
         REAL,    SAVE, POINTER, DIMENSION(:)    ::BDTIM
@@ -11,8 +17,13 @@
         REAL,    SAVE, POINTER, DIMENSION(:)  ::FHBXWT
         CHARACTER(LEN=16), SAVE, POINTER, DIMENSION(:) ::FHBXNM
       TYPE GWFFHBTYPE
-        INTEGER, POINTER ::NBDTIM,NFLW,NHED,IFHBCB,NFHBX1,&
-     &                           NFHBX2,IFHBSS
+        INTEGER,POINTER:: NBDTIM
+        INTEGER,POINTER:: NFLW
+        INTEGER,POINTER:: NHED
+        INTEGER,POINTER:: IFHBCB
+        INTEGER,POINTER:: NFHBX1
+        INTEGER,POINTER:: NFHBX2
+        INTEGER,POINTER:: IFHBSS
         INTEGER, POINTER, DIMENSION(:,:)  ::IFLLOC
         INTEGER, POINTER, DIMENSION(:,:)  ::IHDLOC
         REAL,    POINTER, DIMENSION(:)    ::BDTIM
@@ -40,8 +51,33 @@
      &                      IFHBSS,IFLLOC,IHDLOC,BDTIM,FLWRAT,SBHED,&
      &                      BDFV,BDHV,FHBXWT,FHBXNM
 !
+      IMPLICIT NONE
+      REAL :: CNSTM
+      INTEGER :: I
+      INTEGER :: ICHK1
+      INTEGER :: ICHK2
+      INTEGER :: IFHBD3
+      INTEGER :: IFHBD4
+      INTEGER :: IFHBD5
+      INTEGER :: IFHBPT
+      INTEGER :: IFHBUN
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: L
+      INTEGER :: LLOC
+      INTEGER :: M
+      INTEGER :: N
+      INTEGER :: ND
+      INTEGER :: NS
+      INTEGER :: NX
+      REAL :: R
       CHARACTER*80 LINE
       CHARACTER*1 DSH1
+      SAVE :: DSH1
       DATA DSH1/'-'/
 !     ------------------------------------------------------------------
       ALLOCATE(NBDTIM,NFLW,NHED,IFHBCB,NFHBX1,NFHBX2,IFHBSS)
@@ -368,6 +404,43 @@
      &                      IFHBSS,IFLLOC,IHDLOC,BDTIM,FLWRAT,SBHED,&
      &                      BDFV,BDHV,FHBXWT
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: DDT
+      REAL :: HFACT
+      REAL :: HH
+      INTEGER :: I
+      INTEGER :: IB1
+      INTEGER :: IB2
+      INTEGER :: IB3
+      INTEGER :: IB4
+      INTEGER :: IGRID
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: L
+      INTEGER :: N1
+      INTEGER :: N2
+      INTEGER :: NF
+      INTEGER :: NH
+      INTEGER :: NI
+      INTEGER :: NPI
+      INTEGER :: NX
+      REAL :: Q1
+      REAL :: Q2
+      REAL :: QA
+      REAL :: QB
+      REAL :: QC
+      REAL :: QD
+      REAL :: QFACT1
+      REAL :: QFACT2
+      REAL :: QN
+      REAL :: QP
+      REAL :: SUM1
+      REAL :: T1
+      REAL :: T2
+      REAL :: TP
+      REAL :: TT
+      REAL :: XFACT
+      REAL :: XX
       CALL SGWF2FHB7PNT(IGRID)
 !
 !1------IF THIS IS A STEADY-STATE SIMULATION OR A TRANSIENT SIMULATION
@@ -546,6 +619,13 @@
       USE GLOBAL,      ONLY:IBOUND,RHS
       USE GWFFHBMODULE,ONLY:NFLW,IFLLOC,BDFV
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: IR
+      INTEGER :: L
+      REAL :: Q
       CALL SGWF2FHB7PNT(IGRID)
 !
 !1------PROCESS EACH SPECIFIED-FLOW LOCATION IN THE LIST.
@@ -581,11 +661,32 @@
      &                      IFHBSS,IFLLOC,IHDLOC,BDTIM,FLWRAT,SBHED,&
      &                      BDFV,BDHV,FHBXWT,FHBXNM
 !
+      IMPLICIT NONE
+      INTEGER :: IBD
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: IR
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: L
+      INTEGER :: NAUX
+      REAL :: Q
+      REAL :: RIN
+      REAL :: ROUT
+      REAL :: XFACE
+      REAL :: ZERO
       CHARACTER*16 TEXT
-      DOUBLE PRECISION RATIN,RATOUT,QQ
+      SAVE :: TEXT
+      DOUBLE PRECISION RATIN
+      DOUBLE PRECISION RATOUT
+      DOUBLE PRECISION QQ
 !
       DIMENSION XFACE(1)
+      CHARACTER*16 AUXTXT(1)
+      SAVE :: AUXTXT
       DATA TEXT/' SPECIFIED FLOWS'/
+      DATA AUXTXT/'IFACE           '/
 !     ------------------------------------------------------------------
       CALL SGWF2FHB7PNT(IGRID)
 !
@@ -601,7 +702,7 @@
       IF(IBD.EQ.2) THEN
         NAUX=1
         IF(IAUXSV.EQ.0) NAUX=0
-        CALL UBDSV4(KSTP,KPER,TEXT,NAUX,'IFACE           ',IFHBCB,&
+        CALL UBDSV4(KSTP,KPER,TEXT,NAUX,AUXTXT,IFHBCB,&
      &          NCOL,NROW,NLAY,NFLW,IOUT,DELT,PERTIM,TOTIM,IBOUND)
       END IF
 !
@@ -686,6 +787,8 @@
 !  Deallocate FHB DATA
       USE GWFFHBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         DEALLOCATE(GWFFHBDAT(IGRID)%NBDTIM)
         DEALLOCATE(GWFFHBDAT(IGRID)%NFLW)
         DEALLOCATE(GWFFHBDAT(IGRID)%NHED)
@@ -709,6 +812,8 @@
 !  Set pointers to FHB data for grid.
       USE GWFFHBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         NBDTIM=>GWFFHBDAT(IGRID)%NBDTIM
         NFLW=>GWFFHBDAT(IGRID)%NFLW
         NHED=>GWFFHBDAT(IGRID)%NHED
@@ -732,6 +837,8 @@
 !  Save pointers to FHB data for grid.
       USE GWFFHBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         GWFFHBDAT(IGRID)%NBDTIM=>NBDTIM
         GWFFHBDAT(IGRID)%NFLW=>NFLW
         GWFFHBDAT(IGRID)%NHED=>NHED

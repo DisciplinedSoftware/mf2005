@@ -1,18 +1,18 @@
 # Undefined behavior report
 
-Generated 2026-08-28T07:59:35-04:00 at commit d08b1d1 for mf2005.
+Generated 2026-08-30T02:33:16-04:00 at commit 2aaa29e for mf2005.
 
 ## Summary
 
 | Metric | Count |
 | --- | ---: |
 | Source files | 54 |
-| Program units analyzed | 791 |
+| Program units analyzed | 793 |
 | Program units skipped | 0 |
-| Findings (all detectors) | 1,541 |
-| — Uninitialized reads | 1,509 |
+| Findings (all detectors) | 1,537 |
+| — Uninitialized reads | 1,507 |
 | — Argument aliasing and constant modification | 30 |
-| — Interface mismatches | 2 |
+| — Interface mismatches | 0 |
 | — Out-of-bounds subscripts (constant) | 0 |
 | — Storage association (COMMON layout) | 0 |
 | — Pointer association misuse | 0 |
@@ -25,8 +25,8 @@ Definite assignment analysis: forward MUST/MAY dataflow over each unit's control
 
 - **always** (0) — no path defines the variable before this read
 - **conditional** (321) — some paths define it, others reach the read without
-- **loop-guarded** (1166) — every definition sits inside a possibly zero-trip loop
-- **call-assumed** (21) — only 'definition' is an argument to a call with unknown intent
+- **loop-guarded** (1163) — every definition sits inside a possibly zero-trip loop
+- **call-assumed** (22) — only 'definition' is an argument to a call with unknown intent
 - **result-unset** (1) — function result possibly never assigned before RETURN
 
 ### Argument aliasing and constant modification
@@ -41,12 +41,13 @@ Cross-checks every call site against the callee's inferred argument usage: overl
 
 ### Interface mismatches
 
-Checks every call site against the called procedure's definition elsewhere in the tree: argument counts, type classes, precision, and constants bound to array dummies.
+Checks every call site against the called procedure's definition elsewhere in the tree: argument counts, type classes, precision, and rank.
 
 - **argument-count** (0) — call passes a different number of arguments than the procedure declares
 - **argument-type** (0) — actual and dummy are of incompatible type classes
 - **argument-precision** (0) — REAL actual bound to DOUBLE PRECISION dummy or vice versa (mismatched except under promoting flags such as -fdefault-real-8)
-- **argument-rank** (2) — a scalar constant is bound to an array dummy
+- **argument-rank** (0) — a scalar actual is bound to an array dummy, or a whole array to a scalar dummy
+- **argument-rank-character** (0) — a CHARACTER scalar is bound to a CHARACTER array dummy: legal sequence association only while the actual is at least as long as the dummy elements the callee reaches
 
 ### Out-of-bounds subscripts (constant)
 
@@ -168,23 +169,17 @@ Per-unit dataflow over ALLOCATE/DEALLOCATE/NULLIFY/pointer-assignment: flags ref
 | ---: | --- | --- | --- | --- | --- | --- |
 | 207 | gwf2evt7rp | uninitialized | conditional | inievt | defined at 129, 131 | `IF (INIEVT .LT. 0) THEN` |
 
-### gwf2fhb7.f90 (3)
+### gwf2fhb7.f90 (2)
 
 | Line | Unit | Detector | Category | Subject | Detail | Statement |
 | ---: | --- | --- | --- | --- | --- | --- |
 | 268 | gwf2fhb7ar | uninitialized | conditional | nd | defined at 201, 238, 295 | `WRITE(IOUT, 54) (DSH1, M = 1, ND)` |
 | 337 | gwf2fhb7ar | uninitialized | conditional | nd | defined at 201, 238, 295 | `WRITE(IOUT, 54) (DSH1, M = 1, ND)` |
-| 604 | gwf2fhb7bd | interface | argument-rank | ubdsv4(5) | actual 'IFACE ' is character, dummy auxtxt is character (array) at utl7.f90:1610 | `CALL UBDSV4(KSTP, KPER, TEXT, NAUX, 'IFACE ', IFHBCB, NCOL, NROW, NLAY, NFLW, IOUT, DELT, PERTIM,...` |
 
-### gwf2gag7.f90 (9)
+### gwf2gag7.f90 (4)
 
 | Line | Unit | Detector | Category | Subject | Detail | Statement |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 401 | gwf2gag7rp | uninitialized | loop-guarded | a | defined at 379 | `WRITE(IG3, LFRMAT) (CONCNAME(ISOL), ISOL = 1, NSOL)` |
-| 408 | gwf2gag7rp | uninitialized | loop-guarded | a | defined at 379 | `WRITE(IG3, LFRMAT) (CONCNAME(ISOL), ISOL = 1, NSOL)` |
-| 415 | gwf2gag7rp | uninitialized | loop-guarded | a | defined at 379 | `WRITE(IG3, LFRMAT) (CONCNAME(ISOL), ISOL = 1, NSOL), (DCTSNAME(ISOL), ISOL = 1, NSOL), (DCCMNAME(...` |
-| 426 | gwf2gag7rp | uninitialized | loop-guarded | a | defined at 379 | `WRITE(IG3, LFRMAT) (CONCNAME(ISOL), ISOL = 1, NSOL), (DCTSNAME(ISOL), ISOL = 1, NSOL), (DCCMNAME(...` |
-| 438 | gwf2gag7rp | uninitialized | loop-guarded | a | defined at 379 | `WRITE(IG3, LFRMAT) (CONCNAME(ISOL), ISOL = 1, NSOL)` |
 | 931 | sgwf2gag7so | uninitialized | loop-guarded | pmxdvrt | defined at 889, 890, 891 | `WRITE(IG3, 270) GAGETM, STRM(15, II), PMXDVRT, STRM(10, II), UPSTRFLW` |
 | 931 | sgwf2gag7so | uninitialized | loop-guarded | upstrflw | defined at 888 | `WRITE(IG3, 270) GAGETM, STRM(15, II), PMXDVRT, STRM(10, II), UPSTRFLW` |
 | 1003 | sgwf2gag7so | uninitialized | loop-guarded | pmxdvrt | defined at 889, 890, 891 | `WRITE(IG3, LFRMAT) GAGETM, STRM(15, II), PMXDVRT, STRM(10, II), UPSTRFLW, (COUT(II, ISOL), CLOAD(...` |
@@ -375,7 +370,7 @@ Per-unit dataflow over ALLOCATE/DEALLOCATE/NULLIFY/pointer-assignment: flags ref
 | 1205 | gwf2mnw17bd | uninitialized | loop-guarded | href | defined at 1197, 1201, 1285 | `dd = hwell - href` |
 | 1228 | gwf2mnw17bd | uninitialized | loop-guarded | href | defined at 1197, 1201, 1285 | `WRITE(IOWELL2(1), '(i9,2i10,1X,g11.4,1X,i10,2x,6g11.4)') k, j, i, q, 0, qd, hwell, HNEW(i, j, k),...` |
 
-### gwf2mnw27.f90 (390)
+### gwf2mnw27.f90 (389)
 
 | Line | Unit | Detector | Category | Subject | Detail | Statement |
 | ---: | --- | --- | --- | --- | --- | --- |
@@ -758,10 +753,9 @@ Per-unit dataflow over ALLOCATE/DEALLOCATE/NULLIFY/pointer-assignment: flags ref
 | 4770 | mnw2horiz | uninitialized | loop-guarded | zi2 | defined at 4694, 4710, 4730 | `IF (zi .EQ. zi2) THEN` |
 | 4774 | mnw2horiz | uninitialized | loop-guarded | zi | defined at 4616, 4641, 4670, 4820, 4836, 4856 | `za = zi` |
 | 4775 | mnw2horiz | uninitialized | loop-guarded | zi2 | defined at 4694, 4710, 4730 | `zb = zi2` |
+| 4787 | mnw2horiz | uninitialized | loop-guarded | zi | defined at 4616, 4641, 4670, 4820, 4836, 4856 | `zseg2(inode) = zi` |
 | 4788 | mnw2horiz | uninitialized | loop-guarded | zi | defined at 4616, 4641, 4670, 4820, 4836, 4856 | `zseg1(inode + 1) = zi` |
 | 4867 | mnw2horiz | uninitialized | loop-guarded | zi | defined at 4616, 4641, 4670, 4820, 4836, 4856 | `zseg2(inode + 1) = zi` |
-| 4956 | mnw2horiz | uninitialized | loop-guarded | zi | defined at 4616, 4641, 4670, 4820, 4836, 4856 | `b1 = zseg2(inode)` |
-| 5017 | mnw2horiz | uninitialized | loop-guarded | zi | defined at 4616, 4641, 4670, 4820, 4836, 4856 | `b1 = zseg2(inode + 1)` |
 | 5247 | cel2wel2seg | uninitialized | conditional | omega0 | defined at 5129 | `IF (omega0 .GT. 90.0) omega = 180.0 - omega` |
 | 5324 | mnw2capacity | uninitialized | loop-guarded | ifirstl | defined at 5304 | `L1 = CapTable(iw, ifirstL, 1)` |
 | 5325 | mnw2capacity | uninitialized | loop-guarded | isecondl | defined at 5305 | `L2 = CapTable(iw, isecondL, 1)` |
@@ -799,91 +793,94 @@ Per-unit dataflow over ALLOCATE/DEALLOCATE/NULLIFY/pointer-assignment: flags ref
 | 426 | gwf2res7bd | uninitialized | loop-guarded | rate | defined at 413, 416 | `RATOUT = RATOUT - RATE` |
 | 431 | gwf2res7bd | uninitialized | loop-guarded | rate | defined at 413, 416 | `RATIN = RATIN + RATE` |
 
-### gwf2sfr7.f90 (370)
+### gwf2sfr7.f90 (372)
 
 | Line | Unit | Detector | Category | Subject | Detail | Statement |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 558 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `IF (IBOUND(jrch, irch, krch) .LE. 0) WRITE(IOUT, 9018) ireach, jseg` |
+| 558 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `IF (IBOUND(jrch, irch, krch) .LE. 0) WRITE(IOUT, 9018) ireach, jseg` |
 | 558 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9018) ireach, jseg` |
-| 558 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `IF (IBOUND(jrch, irch, krch) .LE. 0) WRITE(IOUT, 9018) ireach, jseg` |
+| 558 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `IF (IBOUND(jrch, irch, krch) .LE. 0) WRITE(IOUT, 9018) ireach, jseg` |
 | 558 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9018) ireach, jseg` |
-| 558 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `IF (IBOUND(jrch, irch, krch) .LE. 0) WRITE(IOUT, 9018) ireach, jseg` |
-| 578 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `IF (LAYCON(krch) .LT. 2) THEN` |
-| 579 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `THTR(ii) = THTS(ii) - SC1(jrch, irch, krch) / (DELR(jrch) * DELC(irch))` |
-| 579 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `THTR(ii) = THTS(ii) - SC1(jrch, irch, krch) / (DELR(jrch) * DELC(irch))` |
-| 579 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `THTR(ii) = THTS(ii) - SC1(jrch, irch, krch) / (DELR(jrch) * DELC(irch))` |
-| 583 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `DO k = 1, krch` |
-| 586 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `THTR(ii) = THTS(ii) - SC2(jrch, irch, kkrch) / (DELR(jrch) * DELC(irch))` |
-| 586 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `THTR(ii) = THTS(ii) - SC2(jrch, irch, kkrch) / (DELR(jrch) * DELC(irch))` |
-| 590 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `THTR(ii) = THTS(ii) - SC2HUF(jrch, irch)` |
-| 590 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `THTR(ii) = THTS(ii) - SC2HUF(jrch, irch)` |
-| 599 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
+| 558 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `IF (IBOUND(jrch, irch, krch) .LE. 0) WRITE(IOUT, 9018) ireach, jseg` |
+| 575 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `THTR(ii) = THTS(ii) - SC2LPF(jrch, irch, krch) / (DELR(jrch) * DELC(irch))` |
+| 575 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `THTR(ii) = THTS(ii) - SC2LPF(jrch, irch, krch) / (DELR(jrch) * DELC(irch))` |
+| 575 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `THTR(ii) = THTS(ii) - SC2LPF(jrch, irch, krch) / (DELR(jrch) * DELC(irch))` |
+| 578 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `IF (LAYCON(krch) .LT. 2) THEN` |
+| 579 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `THTR(ii) = THTS(ii) - SC1(jrch, irch, krch) / (DELR(jrch) * DELC(irch))` |
+| 579 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `THTR(ii) = THTS(ii) - SC1(jrch, irch, krch) / (DELR(jrch) * DELC(irch))` |
+| 579 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `THTR(ii) = THTS(ii) - SC1(jrch, irch, krch) / (DELR(jrch) * DELC(irch))` |
+| 583 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `DO k = 1, krch` |
+| 586 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `THTR(ii) = THTS(ii) - SC2(jrch, irch, kkrch) / (DELR(jrch) * DELC(irch))` |
+| 586 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `THTR(ii) = THTS(ii) - SC2(jrch, irch, kkrch) / (DELR(jrch) * DELC(irch))` |
+| 590 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `THTR(ii) = THTS(ii) - SC2HUF(jrch, irch)` |
+| 590 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `THTR(ii) = THTS(ii) - SC2HUF(jrch, irch)` |
+| 599 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
 | 599 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
-| 599 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
+| 599 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
 | 599 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
-| 599 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
-| 602 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
+| 599 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
+| 602 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
 | 602 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
-| 602 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
+| 602 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
 | 602 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
-| 602 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
-| 607 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 602 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
+| 607 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
 | 607 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 607 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 607 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
 | 607 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 607 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 611 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 607 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 611 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
 | 611 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 611 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 611 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
 | 611 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 611 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 617 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 611 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9020) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 617 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
 | 617 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 617 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 617 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
 | 617 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 617 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 622 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 617 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 622 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
 | 622 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 622 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 622 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
 | 622 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 622 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 629 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 622 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9021) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 629 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
 | 629 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 629 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 629 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
 | 629 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 629 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 635 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 629 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 635 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
 | 635 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 635 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 635 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
 | 635 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 635 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
-| 642 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
+| 635 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9022) krch, irch, jrch, jseg, ireach, STRM(1, ii), STRM(3, ii), STRM(2, ii), STRM(8, ...` |
+| 642 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
 | 642 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
-| 642 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
+| 642 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
 | 642 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
-| 642 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
-| 645 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
+| 642 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii), ISTRM(6, ii)` |
+| 645 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
 | 645 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
-| 645 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
+| 645 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
 | 645 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
-| 645 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
+| 645 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `WRITE(IOUT, 9019) krch, irch, jrch, jseg, ireach, STRM(1, ii)` |
 | 658 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `IF (jseg .LE. 0 .OR. jseg .GT. NSS) THEN` |
 | 662 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `IF (jseg .NE. nseg) THEN` |
 | 665 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `IF (jseg .NE. nseg) THEN` |
 | 671 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `IF (ireach .NE. nreach) THEN` |
-| 679 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `ISTRM(1, ii) = krch` |
-| 680 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575, 710, 790 | `ISTRM(2, ii) = irch` |
-| 681 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `ISTRM(3, ii) = jrch` |
+| 679 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `ISTRM(1, ii) = krch` |
+| 680 | gwf2sfr7ar | uninitialized | loop-guarded | irch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 710, 790 | `ISTRM(2, ii) = irch` |
+| 681 | gwf2sfr7ar | uninitialized | loop-guarded | jrch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `ISTRM(3, ii) = jrch` |
 | 682 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `ISTRM(4, ii) = jseg` |
 | 683 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `ISTRM(5, ii) = ireach` |
 | 686 | gwf2sfr7ar | uninitialized | loop-guarded | ireach | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `ISEG(4, jseg) = ireach` |
 | 686 | gwf2sfr7ar | uninitialized | loop-guarded | jseg | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `ISEG(4, jseg) = ireach` |
-| 688 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `uzfar_check % ltype = LAYHDT(krch)` |
+| 688 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `uzfar_check % ltype = LAYHDT(krch)` |
 | 734 | gwf2sfr7ar | uninitialized | loop-guarded | thsslpe | defined at 719 | `THTS(irch) = SEG(18, nseg) - (thsslpe * dist)` |
 | 735 | gwf2sfr7ar | uninitialized | loop-guarded | thislpe | defined at 720 | `THTI(irch) = SEG(19, nseg) - (thislpe * dist)` |
 | 736 | gwf2sfr7ar | uninitialized | loop-guarded | epsslpe | defined at 721 | `EPS(irch) = SEG(20, nseg) - (epsslpe * dist)` |
 | 737 | gwf2sfr7ar | uninitialized | loop-guarded | uhcslpe | defined at 722 | `UHC(irch) = SEG(21, nseg) - (uhcslpe * dist)` |
-| 755 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554, 575 | `DO k = 1, krch` |
+| 755 | gwf2sfr7ar | uninitialized | loop-guarded | krch | defined at 493, 496, 501, 505, 517, 522, 534, 539, 551, 554 | `DO k = 1, krch` |
 | 1108 | parsesfroptions | uninitialized | conditional | iostat | defined at 990 | `IF (Iostat .NE. 0) THEN` |
 | 1498 | gwf2sfr7rp | uninitialized | loop-guarded | hcslpe | defined at 1487 | `avhc = SEG(6, nseg) - (hcslpe * dist)` |
 | 1499 | gwf2sfr7rp | uninitialized | loop-guarded | thkslpe | defined at 1488 | `avthk = SEG(7, nseg) - (thkslpe * dist)` |
@@ -1082,97 +1079,96 @@ Per-unit dataflow over ALLOCATE/DEALLOCATE/NULLIFY/pointer-assignment: flags ref
 | 3464 | gwf2sfr7fm | uninitialized | loop-guarded | flobot | defined at 3146, 3175, 3283, 3285, 3307, 3308, 3310, 3311, 3314, 3320, 3333, 3350, 3374, 3424 | `SFRQ(3, l) = flobot` |
 | 3469 | gwf2sfr7fm | uninitialized | loop-guarded | flobot | defined at 3146, 3175, 3283, 3285, 3307, 3308, 3310, 3311, 3314, 3320, 3333, 3350, 3374, 3424 | `SFRQ(3, l) = flobot` |
 | 3491 | gwf2sfr7fm | uninitialized | loop-guarded | flowc | defined at 2437, 2443, 2446, 2458, 2459, 2493, 3151, 3158, 3179, 3186, 3209, 3233, 3260, 3265, 3305, 3360, 3418 | `ELSE IF (SUMLEAK(l) - flowc .LT. - CLOSEZERO) THEN` |
-| 3683 | gwf2sfr7bd | interface | argument-rank | ubdsv4(5) | actual 'IFACE ' is character, dummy auxtxt is character (array) at utl7.f90:1610 | `CALL UBDSV4(Kkstp, Kkper, text, naux, 'IFACE ', iout1, NCOL, NROW, NLAY, NSTRM, IOUT, DELT, PERTI...` |
-| 3983 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `flow = flowin + runof + runoff + precip - etstr` |
-| 3983 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `flow = flowin + runof + runoff + precip - etstr` |
-| 3989 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `IF (flowin + runoff + precip .LT. NEARZERO) THEN` |
-| 3992 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `ELSE IF (runof .GE. flowin + runoff + precip - etstr) THEN` |
-| 3992 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (runof .GE. flowin + runoff + precip - etstr) THEN` |
-| 3993 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `runof = flowin + runoff + precip - etstr` |
-| 3993 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `runof = flowin + runoff + precip - etstr` |
-| 3994 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `ELSE IF (etstr .GE. flowin + runoff + precip + runof) THEN` |
-| 3994 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (etstr .GE. flowin + runoff + precip + runof) THEN` |
-| 3995 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `etstr = flowin + runoff + precip + runof` |
-| 3997 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (flowin + runof + runoff + precip .GT. NEARZERO) THEN` |
-| 3998 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `etstr = flowin + runof + runoff + precip` |
-| 4003 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `IF (flowin + runoff + precip - flobot .LT. NEARZERO) THEN` |
-| 4006 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `ELSE IF (runof .GE. flowin + runoff + precip - flobot - etstr) THEN` |
-| 4006 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (runof .GE. flowin + runoff + precip - flobot - etstr) THEN` |
-| 4008 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `runof = - (flowin + runoff + precip - flobot - etstr)` |
-| 4008 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `runof = - (flowin + runoff + precip - flobot - etstr)` |
-| 4009 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `ELSE IF (etstr .GE. flowin + runoff + precip - flobot + runof) THEN` |
-| 4009 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (etstr .GE. flowin + runoff + precip - flobot + runof) THEN` |
-| 4010 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `etstr = flowin + runoff + precip - flobot + runof` |
-| 4012 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `ELSE IF (etstr .GT. flowin + runoff + runof + precip - flobot) THEN` |
-| 4012 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (etstr .GT. flowin + runoff + runof + precip - flobot) THEN` |
-| 4013 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `etstr = flowin + runof + runoff + precip - flobot` |
-| 4014 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `ELSE IF (flowin + runoff + runof + precip - flobot .LT. NEARZERO) THEN` |
-| 4018 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `flow = flowin + runof + runoff + precip - etstr` |
-| 4018 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `flow = flowin + runof + runoff + precip - etstr` |
-| 4026 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3941, 3946, 4162 | `IF (h .LT. sbot) flobot = CALCUNSATFLOBOT(depth, avhc, fks, wetperm, sbdthk, areamax, strlen, fbc...` |
-| 4036 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `qlat = (runof + runoff + precip - etstr) / strlen` |
-| 4036 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `qlat = (runof + runoff + precip - etstr) / strlen` |
-| 4077 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `qlat = (runof + runoff + precip - etstr) / strlen` |
-| 4077 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `qlat = (runof + runoff + precip - etstr) / strlen` |
-| 4100 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3941, 3946, 4162 | `IF (h .LT. sbot) THEN` |
-| 4130 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3941, 3946, 4162 | `STRM(19, l) = h` |
-| 4147 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `sfrbudg_in = sfrbudg_in + precip` |
-| 4149 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `sfrbudg_out = sfrbudg_out + etstr` |
-| 4192 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3941, 3946, 4162 | `IF (icalccheck .EQ. 1 .AND. sbot .GT. h) THEN` |
-| 4200 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3941, 3946, 4162 | `ELSE IF (sbot .LT. h) THEN` |
-| 4211 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `WRITE(IOUT, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
-| 4211 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `WRITE(IOUT, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
-| 4222 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3670, 3673, 3688, 4397, 4400 | `WRITE(iout2, 9004) txtlst, Kkper, Kkstp` |
-| 4224 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4224 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3670, 3673, 3688, 4397, 4400 | `WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4224 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4239 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `WRITE(IOUT, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
-| 4239 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `WRITE(IOUT, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
-| 4253 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3670, 3673, 3688, 4397, 4400 | `WRITE(iout2, 9006) txtlst, Kkper, Kkstp` |
-| 4255 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4255 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3670, 3673, 3688, 4397, 4400 | `WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4255 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4264 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3670, 3673, 3688, 4397, 4400 | `WRITE(iout2, 9009) txtlst, Kkper, Kkstp` |
-| 4266 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3976, 3981, 3991, 3995, 3998, 4000, 4005, 4010, 4013, 4016 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4266 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3941, 3946, 4162 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4266 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3670, 3673, 3688, 4397, 4400 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4266 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3975, 3980 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
-| 4359 | gwf2sfr7bd | uninitialized | loop-guarded | icalccheck | defined at 3887, 3892 | `IF (IBUDFL .GT. 0 .AND. icalccheck .EQ. 1) CALL GWF2SFR7UZOT(Kkstp, Kkper)` |
-| 4477 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | roughch | defined at 4453, 4485, 4488 | `flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))` |
-| 4477 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | slope | defined at 4452, 4485, 4488 | `flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))` |
-| 4477 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | widthch | defined at 4454 | `flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))` |
-| 4480 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | roughch | defined at 4453, 4485, 4488 | `SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))` |
-| 4480 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | slope | defined at 4452, 4485, 4488 | `SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))` |
-| 4480 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | widthch | defined at 4454 | `SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))` |
-| 5017 | gwf2sfr7flw | uninitialized | loop-guarded | xleft | defined at 4979, 5001 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
-| 5017 | gwf2sfr7flw | uninitialized | loop-guarded | xright | defined at 4985, 4993, 5002 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
-| 5017 | gwf2sfr7flw | uninitialized | loop-guarded | yleft | defined at 4980, 5000 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
-| 5017 | gwf2sfr7flw | uninitialized | loop-guarded | yright | defined at 4986, 4992, 5003 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
-| 5689 | sgwf2sfr7parmov | uninitialized | loop-guarded | jend | defined at 5683, 5685, 5687, 5696, 5698, 5700 | `DO jj = 6, jend` |
-| 5702 | sgwf2sfr7parmov | uninitialized | loop-guarded | jend | defined at 5683, 5685, 5687, 5696, 5698, 5700 | `DO jj = 11, jend` |
-| 7375 | leadwave | uninitialized | loop-guarded | checktime | defined at 7321, 7336, 7339, 7351, 7360, 7363, 7367, 7370, 7375 | `IF (checktime(j) .LT. NEARZERO) checktime(j) = big` |
-| 7389 | leadwave | uninitialized | loop-guarded | checktime | defined at 7321, 7336, 7339, 7351, 7360, 7363, 7367, 7370, 7375 | `IF (CHECKTIME(j) .LE. shortest) THEN` |
-| 7391 | leadwave | uninitialized | loop-guarded | checktime | defined at 7321, 7336, 7339, 7351, 7360, 7363, 7367, 7370, 7375 | `shortest = CHECKTIME(j)` |
-| 7400 | leadwave | uninitialized | loop-guarded | checktime | defined at 7321, 7336, 7339, 7351, 7360, 7363, 7367, 7370, 7375 | `IF (CHECKTIME(k) > shortest) MORE(k) = 0` |
-| 7507 | leadwave | uninitialized | loop-guarded | more | defined at 7322, 7390, 7400 | `IF (more(j) .EQ. 1) THEN` |
-| 7893 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `chap = (XSEC(8 + mark(ll) - 1, Istsg) - XSEC(8 + mark(ll), Istsg))` |
-| 7894 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `IF (ABS(XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) .LT. 1.0E-30 .AND. ABS(XSEC(ma...` |
-| 7900 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `ELSE IF (ABS(XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) .LT. 1.0E-30) THEN` |
-| 7903 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `ELSE IF (ABS(XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) .LT. 1.0E-30) THEN` |
-| 7907 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `slope = (XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) / (XSEC(mark(ll), Istsg) - XS...` |
-| 7911 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `ffmin = XSEC(8 + mark(ll), Istsg)` |
-| 7912 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `ffmax = XSEC(8 + mark(ll) - 1, Istsg)` |
-| 7914 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `ffmin = XSEC(8 + mark(ll) - 1, Istsg)` |
-| 7915 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `ffmax = XSEC(8 + mark(ll), Istsg)` |
-| 7917 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `b = XSEC(8 + mark(ll) - 1, Istsg) - slope * XSEC(mark(ll) - 1, Istsg)` |
-| 7921 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `area1 = (XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) * (stage - ffmin)` |
-| 7927 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `xinc = (XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) / 50.` |
-| 7928 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `xmid = XSEC(mark(ll) - 1, Istsg)` |
-| 7934 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `IF (XSEC(8 + mark(ll) - 1, Istsg) .LT. XSEC(8 + mark(ll), Istsg)) THEN` |
-| 7936 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `xinc = (ABS(XSEC(mark(ll) - 1, Istsg) - xmid)) / 50.` |
-| 7937 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `xmid = XSEC(mark(ll) - 1, Istsg)` |
-| 7939 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `xinc = (ABS(XSEC(mark(ll), Istsg) - xmid)) / 50.` |
-| 7944 | channelarea | uninitialized | loop-guarded | mark | defined at 7886 | `xx = ABS(xmid - XSEC(mark(ll), Istsg))` |
+| 3985 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `flow = flowin + runof + runoff + precip - etstr` |
+| 3985 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `flow = flowin + runof + runoff + precip - etstr` |
+| 3991 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `IF (flowin + runoff + precip .LT. NEARZERO) THEN` |
+| 3994 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `ELSE IF (runof .GE. flowin + runoff + precip - etstr) THEN` |
+| 3994 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (runof .GE. flowin + runoff + precip - etstr) THEN` |
+| 3995 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `runof = flowin + runoff + precip - etstr` |
+| 3995 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `runof = flowin + runoff + precip - etstr` |
+| 3996 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `ELSE IF (etstr .GE. flowin + runoff + precip + runof) THEN` |
+| 3996 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (etstr .GE. flowin + runoff + precip + runof) THEN` |
+| 3997 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `etstr = flowin + runoff + precip + runof` |
+| 3999 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (flowin + runof + runoff + precip .GT. NEARZERO) THEN` |
+| 4000 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `etstr = flowin + runof + runoff + precip` |
+| 4005 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `IF (flowin + runoff + precip - flobot .LT. NEARZERO) THEN` |
+| 4008 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `ELSE IF (runof .GE. flowin + runoff + precip - flobot - etstr) THEN` |
+| 4008 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (runof .GE. flowin + runoff + precip - flobot - etstr) THEN` |
+| 4010 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `runof = - (flowin + runoff + precip - flobot - etstr)` |
+| 4010 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `runof = - (flowin + runoff + precip - flobot - etstr)` |
+| 4011 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `ELSE IF (etstr .GE. flowin + runoff + precip - flobot + runof) THEN` |
+| 4011 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (etstr .GE. flowin + runoff + precip - flobot + runof) THEN` |
+| 4012 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `etstr = flowin + runoff + precip - flobot + runof` |
+| 4014 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `ELSE IF (etstr .GT. flowin + runoff + runof + precip - flobot) THEN` |
+| 4014 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (etstr .GT. flowin + runoff + runof + precip - flobot) THEN` |
+| 4015 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `etstr = flowin + runof + runoff + precip - flobot` |
+| 4016 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `ELSE IF (flowin + runoff + runof + precip - flobot .LT. NEARZERO) THEN` |
+| 4020 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `flow = flowin + runof + runoff + precip - etstr` |
+| 4020 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `flow = flowin + runof + runoff + precip - etstr` |
+| 4028 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3943, 3948, 4164 | `IF (h .LT. sbot) flobot = CALCUNSATFLOBOT(depth, avhc, fks, wetperm, sbdthk, areamax, strlen, fbc...` |
+| 4038 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `qlat = (runof + runoff + precip - etstr) / strlen` |
+| 4038 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `qlat = (runof + runoff + precip - etstr) / strlen` |
+| 4079 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `qlat = (runof + runoff + precip - etstr) / strlen` |
+| 4079 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `qlat = (runof + runoff + precip - etstr) / strlen` |
+| 4102 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3943, 3948, 4164 | `IF (h .LT. sbot) THEN` |
+| 4132 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3943, 3948, 4164 | `STRM(19, l) = h` |
+| 4149 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `sfrbudg_in = sfrbudg_in + precip` |
+| 4151 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `sfrbudg_out = sfrbudg_out + etstr` |
+| 4194 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3943, 3948, 4164 | `IF (icalccheck .EQ. 1 .AND. sbot .GT. h) THEN` |
+| 4202 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3943, 3948, 4164 | `ELSE IF (sbot .LT. h) THEN` |
+| 4213 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `WRITE(IOUT, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
+| 4213 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `WRITE(IOUT, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
+| 4224 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3672, 3675, 3690, 4399, 4402 | `WRITE(iout2, 9004) txtlst, Kkper, Kkstp` |
+| 4226 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4226 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3672, 3675, 3690, 4399, 4402 | `WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4226 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `WRITE(iout2, 9005) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4241 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `WRITE(IOUT, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
+| 4241 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `WRITE(IOUT, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SNG...` |
+| 4255 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3672, 3675, 3690, 4399, 4402 | `WRITE(iout2, 9006) txtlst, Kkper, Kkstp` |
+| 4257 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4257 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3672, 3675, 3690, 4399, 4402 | `WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4257 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `WRITE(iout2, 9007) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4266 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3672, 3675, 3690, 4399, 4402 | `WRITE(iout2, 9009) txtlst, Kkper, Kkstp` |
+| 4268 | gwf2sfr7bd | uninitialized | loop-guarded | etstr | defined at 3978, 3983, 3993, 3997, 4000, 4002, 4007, 4012, 4015, 4018 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4268 | gwf2sfr7bd | uninitialized | loop-guarded | h | defined at 3943, 3948, 4164 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4268 | gwf2sfr7bd | uninitialized | conditional | iout2 | defined at 3672, 3675, 3690, 4399, 4402 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4268 | gwf2sfr7bd | uninitialized | loop-guarded | precip | defined at 3977, 3982 | `WRITE(iout2, 9010) il, ir, ic, ISTRM(4, l), ISTRM(5, l), STRM(10, l), STRM(11, l), STRM(9, l), SN...` |
+| 4361 | gwf2sfr7bd | uninitialized | loop-guarded | icalccheck | defined at 3889, 3894 | `IF (IBUDFL .GT. 0 .AND. icalccheck .EQ. 1) CALL GWF2SFR7UZOT(Kkstp, Kkper)` |
+| 4479 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | roughch | defined at 4455, 4487, 4490 | `flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))` |
+| 4479 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | slope | defined at 4454, 4487, 4490 | `flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))` |
+| 4479 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | widthch | defined at 4456 | `flwdlk2 = (CONST / roughch) * widthch * (dlkstr2 ** FIVE_THIRDS) * (DSQRT(slope))` |
+| 4482 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | roughch | defined at 4455, 4487, 4490 | `SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))` |
+| 4482 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | slope | defined at 4454, 4487, 4490 | `SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))` |
+| 4482 | gwf2sfr7lakoutflw | uninitialized | loop-guarded | widthch | defined at 4456 | `SLKOTFLW(lk, istsg) = (CONST / roughch) * widthch * (dlkstr1 ** FIVE_THIRDS) * (DSQRT(slope))` |
+| 5019 | gwf2sfr7flw | uninitialized | loop-guarded | xleft | defined at 4981, 5003 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
+| 5019 | gwf2sfr7flw | uninitialized | loop-guarded | xright | defined at 4987, 4995, 5004 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
+| 5019 | gwf2sfr7flw | uninitialized | loop-guarded | yleft | defined at 4982, 5002 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
+| 5019 | gwf2sfr7flw | uninitialized | loop-guarded | yright | defined at 4988, 4994, 5005 | `wtprm = DSQRT(((xleft - xright) * (xleft - xright)) + ((yleft - yright) * (yleft - yright)))` |
+| 5691 | sgwf2sfr7parmov | uninitialized | loop-guarded | jend | defined at 5685, 5687, 5689, 5698, 5700, 5702 | `DO jj = 6, jend` |
+| 5704 | sgwf2sfr7parmov | uninitialized | loop-guarded | jend | defined at 5685, 5687, 5689, 5698, 5700, 5702 | `DO jj = 11, jend` |
+| 7377 | leadwave | uninitialized | loop-guarded | checktime | defined at 7323, 7338, 7341, 7353, 7362, 7365, 7369, 7372, 7377 | `IF (checktime(j) .LT. NEARZERO) checktime(j) = big` |
+| 7391 | leadwave | uninitialized | loop-guarded | checktime | defined at 7323, 7338, 7341, 7353, 7362, 7365, 7369, 7372, 7377 | `IF (CHECKTIME(j) .LE. shortest) THEN` |
+| 7393 | leadwave | uninitialized | loop-guarded | checktime | defined at 7323, 7338, 7341, 7353, 7362, 7365, 7369, 7372, 7377 | `shortest = CHECKTIME(j)` |
+| 7402 | leadwave | uninitialized | loop-guarded | checktime | defined at 7323, 7338, 7341, 7353, 7362, 7365, 7369, 7372, 7377 | `IF (CHECKTIME(k) > shortest) MORE(k) = 0` |
+| 7509 | leadwave | uninitialized | loop-guarded | more | defined at 7324, 7392, 7402 | `IF (more(j) .EQ. 1) THEN` |
+| 7895 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `chap = (XSEC(8 + mark(ll) - 1, Istsg) - XSEC(8 + mark(ll), Istsg))` |
+| 7896 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `IF (ABS(XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) .LT. 1.0E-30 .AND. ABS(XSEC(ma...` |
+| 7902 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `ELSE IF (ABS(XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) .LT. 1.0E-30) THEN` |
+| 7905 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `ELSE IF (ABS(XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) .LT. 1.0E-30) THEN` |
+| 7909 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `slope = (XSEC(8 + mark(ll), Istsg) - XSEC(8 + mark(ll) - 1, Istsg)) / (XSEC(mark(ll), Istsg) - XS...` |
+| 7913 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `ffmin = XSEC(8 + mark(ll), Istsg)` |
+| 7914 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `ffmax = XSEC(8 + mark(ll) - 1, Istsg)` |
+| 7916 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `ffmin = XSEC(8 + mark(ll) - 1, Istsg)` |
+| 7917 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `ffmax = XSEC(8 + mark(ll), Istsg)` |
+| 7919 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `b = XSEC(8 + mark(ll) - 1, Istsg) - slope * XSEC(mark(ll) - 1, Istsg)` |
+| 7923 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `area1 = (XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) * (stage - ffmin)` |
+| 7929 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `xinc = (XSEC(mark(ll), Istsg) - XSEC(mark(ll) - 1, Istsg)) / 50.` |
+| 7930 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `xmid = XSEC(mark(ll) - 1, Istsg)` |
+| 7936 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `IF (XSEC(8 + mark(ll) - 1, Istsg) .LT. XSEC(8 + mark(ll), Istsg)) THEN` |
+| 7938 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `xinc = (ABS(XSEC(mark(ll) - 1, Istsg) - xmid)) / 50.` |
+| 7939 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `xmid = XSEC(mark(ll) - 1, Istsg)` |
+| 7941 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `xinc = (ABS(XSEC(mark(ll), Istsg) - xmid)) / 50.` |
+| 7946 | channelarea | uninitialized | loop-guarded | mark | defined at 7888 | `xx = ABS(xmid - XSEC(mark(ll), Istsg))` |
 
 ### gwf2str7.f90 (28)
 
@@ -1606,7 +1602,7 @@ Per-unit dataflow over ALLOCATE/DEALLOCATE/NULLIFY/pointer-assignment: flags ref
 | 4382 | lmt8lak3 | uninitialized | conditional | text | defined at 4375, 4377, 4404 | `WRITE(IUMT3D) KPER, KSTP, NCOL, NROW, NLAY, TEXT, LKNODE` |
 | 4385 | lmt8lak3 | uninitialized | conditional | text | defined at 4375, 4377, 4404 | `WRITE(IUMT3D, *) TEXT, LKNODE` |
 
-### mf2005.f90 (7)
+### mf2005.f90 (8)
 
 | Line | Unit | Detector | Category | Subject | Detail | Statement |
 | ---: | --- | --- | --- | --- | --- | --- |
@@ -1617,6 +1613,7 @@ Per-unit dataflow over ALLOCATE/DEALLOCATE/NULLIFY/pointer-assignment: flags ref
 | 348 | main | aliasing | global-aliasing | hnew | argument 1 of pcgn2ap, which also assigns that module variable directly | `CALL PCGN2AP(HNEW, RHS, CR, CC, CV, HCOF, IBOUND, KKITER, KKSTP, KKPER, ICNVG, HNOFLO, IGRID)` |
 | 348 | main | aliasing | global-aliasing | ibound | argument 7 of pcgn2ap, which also assigns that module variable directly | `CALL PCGN2AP(HNEW, RHS, CR, CC, CV, HCOF, IBOUND, KKITER, KKSTP, KKPER, ICNVG, HNOFLO, IGRID)` |
 | 348 | main | aliasing | global-aliasing | rhs | argument 2 of pcgn2ap, which also assigns that module variable directly | `CALL PCGN2AP(HNEW, RHS, CR, CC, CV, HCOF, IBOUND, KKITER, KKSTP, KKPER, ICNVG, HNOFLO, IGRID)` |
+| 359 | main | uninitialized | call-assumed | icnvg | defined at 306, 313, 322, 339, 348, 355, 366, 482, 486 | `IF (ICNVG .EQ. 1) GO TO 33` |
 
 ### obs2bas7.f90 (48)
 
@@ -1798,7 +1795,8 @@ Each detector is conservative **given** its policies below; every policy is a pl
 
 - Only procedures defined in this source tree (with unique names) are checked; intrinsics and external libraries are skipped.
 - Types are compared by class (integer/real/double/complex/logical/character); kinds and character lengths are not compared, and REAL/COMPLEX with explicit kind selectors are skipped as unknown.
-- Array elements and sections passed where arrays are expected are legal sequence association and are not flagged; whole arrays bound to scalar dummies are likewise left to review.
+- Rank is compared only where both sides are known: array elements and array sections bound to array dummies are legal sequence association and are not flagged, and an actual whose rank this unit cannot settle (a module or host variable, an expression) is skipped.
+- A default CHARACTER scalar does sequence-associate with a CHARACTER array dummy, so those bindings are reported as argument-rank-character rather than argument-rank: they are undefined only when the actual is shorter than the elements the callee reaches, which the unchecked character lengths cannot settle.
 - Calls through dummy procedures or with keyword arguments are not resolved.
 
 ### Out-of-bounds subscripts (constant)

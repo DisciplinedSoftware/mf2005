@@ -7,24 +7,37 @@
 !                                        LPF, BCF, or HUF
 !
       MODULE GWFMNW1MODULE
+        IMPLICIT NONE
         DOUBLE PRECISION, PARAMETER :: TWOPI=2.0D0*3.1415926535897932D0
-        DOUBLE PRECISION, PARAMETER :: ZERO25=1.0D-25, ZERO20=1.0D-20
-        DOUBLE PRECISION, PARAMETER :: ZERO8=1.0D-8, BIG=1.0D30
+        DOUBLE PRECISION,PARAMETER:: ZERO25=1.0D-25
+        DOUBLE PRECISION,PARAMETER:: ZERO20=1.0D-20
+        DOUBLE PRECISION,PARAMETER:: ZERO8=1.0D-8
+        DOUBLE PRECISION,PARAMETER:: BIG=1.0D30
         CHARACTER(LEN=200),SAVE,POINTER:: MNWNAME
-        INTEGER,          SAVE,POINTER :: NWELL2, MXWEL2, IWL2CB, KSPREF
-        INTEGER,          SAVE,POINTER :: IWELPT, NOMOITER
+        INTEGER,SAVE,POINTER:: NWELL2
+        INTEGER,SAVE,POINTER:: MXWEL2
+        INTEGER,SAVE,POINTER:: IWL2CB
+        INTEGER,SAVE,POINTER:: KSPREF
+        INTEGER,SAVE,POINTER:: IWELPT
+        INTEGER,SAVE,POINTER:: NOMOITER
         DOUBLE PRECISION, SAVE,POINTER :: PLOSS
-        DOUBLE PRECISION, SAVE,POINTER :: SMALL, HMAX
+        DOUBLE PRECISION,SAVE,POINTER:: SMALL
+        DOUBLE PRECISION,SAVE,POINTER:: HMAX
         CHARACTER(LEN=32),SAVE,DIMENSION(:),    POINTER :: MNWSITE
         INTEGER,          SAVE,DIMENSION(:),    POINTER :: IOWELL2
         DOUBLE PRECISION, SAVE,DIMENSION(:,:),  POINTER :: WELL2
         DOUBLE PRECISION, SAVE,DIMENSION(:,:,:),POINTER :: HREF
       TYPE GWFMNWTYPE
         CHARACTER(LEN=200),    POINTER :: MNWNAME
-        INTEGER,               POINTER :: NWELL2, MXWEL2, IWL2CB, KSPREF
-        INTEGER,               POINTER :: IWELPT, NOMOITER
+        INTEGER,POINTER:: NWELL2
+        INTEGER,POINTER:: MXWEL2
+        INTEGER,POINTER:: IWL2CB
+        INTEGER,POINTER:: KSPREF
+        INTEGER,POINTER:: IWELPT
+        INTEGER,POINTER:: NOMOITER
         DOUBLE PRECISION,      POINTER :: PLOSS
-        DOUBLE PRECISION,      POINTER :: SMALL, HMAX
+        DOUBLE PRECISION,POINTER:: SMALL
+        DOUBLE PRECISION,POINTER:: HMAX
         CHARACTER(LEN=32),     DIMENSION(:),    POINTER :: MNWSITE
         INTEGER,               DIMENSION(:),    POINTER :: IOWELL2
         DOUBLE PRECISION,      DIMENSION(:,:),  POINTER :: WELL2
@@ -61,20 +74,35 @@
 !     ------------------------------------------------------------------
 !     Arguments
 !     ------------------------------------------------------------------
-      INTEGER :: In, Iusip, Iude4, Iusor, Iupcg, Iugmg, Igrid
+      INTEGER:: In
+      INTEGER:: Iusip
+      INTEGER:: Iude4
+      INTEGER:: Iusor
+      INTEGER:: Iupcg
+      INTEGER:: Iugmg
+      INTEGER:: Igrid
       INTEGER :: Iupcgn
       CHARACTER(LEN=200) :: Fname !!08/19/02KJH-MODIFIED
 !     ------------------------------------------------------------------
 !     Local Variables
 !     ------------------------------------------------------------------
       REAL :: bs
-      INTEGER :: ierr, io, iok, jf, ke, kf, ki, kio
+      INTEGER:: ierr
+      INTEGER:: io
+      INTEGER:: iok
+      INTEGER:: jf
+      INTEGER:: ke
+      INTEGER:: kf
+      INTEGER:: ki
+      INTEGER:: kio
       DOUBLE PRECISION :: rn(25)
-      CHARACTER(LEN=256) :: txt, tx2
+      CHARACTER(LEN=256):: txt
+      CHARACTER(LEN=256):: tx2
 !     ------------------------------------------------------------------
 !     Static Variables
 !     ------------------------------------------------------------------
       CHARACTER(LEN=6) :: ftag(3)
+      SAVE :: FTAG
       INTEGER :: icf(3)
       DATA ftag/'WEL1  ', 'BYNODE', 'QSUM  '/
       DATA icf/4, 6, 4/
@@ -280,27 +308,80 @@
      &                       BIG,ZERO25
       IMPLICIT NONE
       INTRINSIC ABS, MAX, MOD, INT
-      INTEGER, EXTERNAL :: IFRL, IDIRECT
-      DOUBLE PRECISION, EXTERNAL :: CEL2WELBCF, CEL2WELLPF, CEL2WELHUF
+      INTEGER,EXTERNAL:: IFRL
+      INTEGER,EXTERNAL:: IDIRECT
+      DOUBLE PRECISION,EXTERNAL:: CEL2WELBCF
+      DOUBLE PRECISION,EXTERNAL:: CEL2WELLPF
+      DOUBLE PRECISION,EXTERNAL:: CEL2WELHUF
       EXTERNAL NCREAD, UPCASE, QREAD, USTOP
 !     ------------------------------------------------------------------
 !     Arguments
 !     ------------------------------------------------------------------
-      INTEGER, INTENT(IN) :: Iubcf, Iulpf, Iuhuf, Kper, Igrid
+      INTEGER,INTENT(IN):: Iubcf
+      INTEGER,INTENT(IN):: Iulpf
+      INTEGER,INTENT(IN):: Iuhuf
+      INTEGER,INTENT(IN):: Kper
+      INTEGER,INTENT(IN):: Igrid
       INTEGER, INTENT(INOUT) :: In
 !     ------------------------------------------------------------------
 !     Local Variables
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION :: qfrcmn, qfrcmx, qreject, drytest, ipole, hlim
-      DOUBLE PRECISION :: hrfw, qsum, rw, cond, qact, sk, cf, q, rn(25)
-      INTEGER :: i, icmn, ierr, igrp, ii, iin, io, iok, ip, ipt, irmx
-      INTEGER :: itmp, j, k, kblk, kcp, kfini, ki, kpc, kqc, ksiteid
-      INTEGER :: ktab, m, mstep, n, n1, nb, ne, ngrp, nl, nn, node
-      INTEGER :: nqreject, nstart
-      INTEGER :: idwell,mm
+      DOUBLE PRECISION:: qfrcmn
+      DOUBLE PRECISION:: qfrcmx
+      DOUBLE PRECISION:: qreject
+      DOUBLE PRECISION:: drytest
+      DOUBLE PRECISION:: ipole
+      DOUBLE PRECISION:: hlim
+      DOUBLE PRECISION:: hrfw
+      DOUBLE PRECISION:: qsum
+      DOUBLE PRECISION:: rw
+      DOUBLE PRECISION:: cond
+      DOUBLE PRECISION:: qact
+      DOUBLE PRECISION:: sk
+      DOUBLE PRECISION:: cf
+      DOUBLE PRECISION:: q
+      DOUBLE PRECISION:: rn(25)
+      INTEGER:: i
+      INTEGER:: icmn
+      INTEGER:: ierr
+      INTEGER:: igrp
+      INTEGER:: ii
+      INTEGER:: iin
+      INTEGER:: io
+      INTEGER:: iok
+      INTEGER:: ip
+      INTEGER:: ipt
+      INTEGER:: irmx
+      INTEGER:: itmp
+      INTEGER:: j
+      INTEGER:: k
+      INTEGER:: kblk
+      INTEGER:: kcp
+      INTEGER:: kfini
+      INTEGER:: ki
+      INTEGER:: kpc
+      INTEGER:: kqc
+      INTEGER:: ksiteid
+      INTEGER:: ktab
+      INTEGER:: m
+      INTEGER:: mstep
+      INTEGER:: n
+      INTEGER:: n1
+      INTEGER:: nb
+      INTEGER:: ne
+      INTEGER:: ngrp
+      INTEGER:: nl
+      INTEGER:: nn
+      INTEGER:: node
+      INTEGER:: nqreject
+      INTEGER:: nstart
+      INTEGER:: idwell
+      INTEGER:: mm
       CHARACTER(LEN=1) :: tab
       CHARACTER(LEN=32) :: tempsite
-      CHARACTER(LEN=256) :: txt, tx2, txtraw
+      CHARACTER(LEN=256):: txt
+      CHARACTER(LEN=256):: tx2
+      CHARACTER(LEN=256):: txtraw
 !     ------------------------------------------------------------------
 !-----SET POINTERS FOR THE CURRENT GRID.
       CALL SGWF2MNW1PNT(Igrid)
@@ -728,14 +809,41 @@
       IMPLICIT NONE
       INTRINSIC ABS, MOD
       INTEGER, EXTERNAL :: IFRL
-      DOUBLE PRECISION, EXTERNAL :: CEL2WELBCF, CEL2WELLPF, CEL2WELHUF
+      DOUBLE PRECISION,EXTERNAL:: CEL2WELBCF
+      DOUBLE PRECISION,EXTERNAL:: CEL2WELLPF
+      DOUBLE PRECISION,EXTERNAL:: CEL2WELHUF
 ! Arguments
-      INTEGER, INTENT(IN) :: Iubcf, Iuhuf, Iulpf, Igrid
+      INTEGER,INTENT(IN):: Iubcf
+      INTEGER,INTENT(IN):: Iuhuf
+      INTEGER,INTENT(IN):: Iulpf
+      INTEGER,INTENT(IN):: Igrid
 ! Local Variables
-      DOUBLE PRECISION :: rw, cond, qact, sk, cf, qoff, qon, qsmall
-      DOUBLE PRECISION :: qdes, csum, chsum, hwell, hlim, href, ipole
-      DOUBLE PRECISION :: ddmax, ddsim, qpot, ratio
-      INTEGER iin, m, n, ne, k, j, i
+      DOUBLE PRECISION:: rw
+      DOUBLE PRECISION:: cond
+      DOUBLE PRECISION:: qact
+      DOUBLE PRECISION:: sk
+      DOUBLE PRECISION:: cf
+      DOUBLE PRECISION:: qoff
+      DOUBLE PRECISION:: qon
+      DOUBLE PRECISION:: qsmall
+      DOUBLE PRECISION:: qdes
+      DOUBLE PRECISION:: csum
+      DOUBLE PRECISION:: chsum
+      DOUBLE PRECISION:: hwell
+      DOUBLE PRECISION:: hlim
+      DOUBLE PRECISION:: href
+      DOUBLE PRECISION:: ipole
+      DOUBLE PRECISION:: ddmax
+      DOUBLE PRECISION:: ddsim
+      DOUBLE PRECISION:: qpot
+      DOUBLE PRECISION:: ratio
+      INTEGER iin
+      INTEGER m
+      INTEGER n
+      INTEGER ne
+      INTEGER k
+      INTEGER j
+      INTEGER i
 !     ------------------------------------------------------------------
 !-----SET POINTERS FOR THE CURRENT GRID.
       CALL SGWF2MNW1PNT(Igrid)
@@ -878,13 +986,39 @@
       IMPLICIT NONE
       INTRINSIC ABS, MOD
       INTEGER, EXTERNAL :: IFRL
-      DOUBLE PRECISION, EXTERNAL :: CEL2WELBCF, CEL2WELLPF, CEL2WELHUF
+      DOUBLE PRECISION,EXTERNAL:: CEL2WELBCF
+      DOUBLE PRECISION,EXTERNAL:: CEL2WELLPF
+      DOUBLE PRECISION,EXTERNAL:: CEL2WELHUF
 ! Arguments
-      INTEGER, INTENT(IN) :: Iubcf, Iuhuf, Iulpf, Kiter, Igrid
+      INTEGER,INTENT(IN):: Iubcf
+      INTEGER,INTENT(IN):: Iuhuf
+      INTEGER,INTENT(IN):: Iulpf
+      INTEGER,INTENT(IN):: Kiter
+      INTEGER,INTENT(IN):: Igrid
 ! Local Variables
-      INTEGER :: iin, iqslv, m, n, ne, k, j, i
-      DOUBLE PRECISION :: rw, cond, qact, sk, cf, qdes, csum, chsum
-      DOUBLE PRECISION :: hwell, ipole, hlim, href, ddmax, ddsim, ratio
+      INTEGER:: iin
+      INTEGER:: iqslv
+      INTEGER:: m
+      INTEGER:: n
+      INTEGER:: ne
+      INTEGER:: k
+      INTEGER:: j
+      INTEGER:: i
+      DOUBLE PRECISION:: rw
+      DOUBLE PRECISION:: cond
+      DOUBLE PRECISION:: qact
+      DOUBLE PRECISION:: sk
+      DOUBLE PRECISION:: cf
+      DOUBLE PRECISION:: qdes
+      DOUBLE PRECISION:: csum
+      DOUBLE PRECISION:: chsum
+      DOUBLE PRECISION:: hwell
+      DOUBLE PRECISION:: ipole
+      DOUBLE PRECISION:: hlim
+      DOUBLE PRECISION:: href
+      DOUBLE PRECISION:: ddmax
+      DOUBLE PRECISION:: ddsim
+      DOUBLE PRECISION:: ratio
       DOUBLE PRECISION :: dhc2w
 !     ------------------------------------------------------------------
 !-----SET POINTERS FOR THE CURRENT GRID.
@@ -1082,15 +1216,52 @@
       INTEGER, EXTERNAL :: IFRL
       EXTERNAL UBDSV4, UBDSVB, UBUDSV
 ! Arguments
-      INTEGER, INTENT(IN) :: Nstp, Kstp, Kper, Igrid
+      INTEGER,INTENT(IN):: Nstp
+      INTEGER,INTENT(IN):: Kstp
+      INTEGER,INTENT(IN):: Kper
+      INTEGER,INTENT(IN):: Igrid
 ! Local Variables
-      DOUBLE PRECISION :: ratin, ratout, qwsum, qsum, qwbar, drytest
-      DOUBLE PRECISION :: qd, hlim, href, hwell, dd, s, ipole, sNL, sL
-      DOUBLE PRECISION :: qin, qout, qwfsum, q
-      REAL :: dummy(5), qsing
-      INTEGER :: ibd, igrp1, igrp2, iin, imult, iobynd, ioc
-      INTEGER :: ioch, ioqsum, m, m2, n, naux, ne, nwelvl, k, i, j
-      CHARACTER(LEN=16) :: text, auxtxt(20)
+      DOUBLE PRECISION:: ratin
+      DOUBLE PRECISION:: ratout
+      DOUBLE PRECISION:: qwsum
+      DOUBLE PRECISION:: qsum
+      DOUBLE PRECISION:: qwbar
+      DOUBLE PRECISION:: drytest
+      DOUBLE PRECISION:: qd
+      DOUBLE PRECISION:: hlim
+      DOUBLE PRECISION:: href
+      DOUBLE PRECISION:: hwell
+      DOUBLE PRECISION:: dd
+      DOUBLE PRECISION:: s
+      DOUBLE PRECISION:: ipole
+      DOUBLE PRECISION:: sNL
+      DOUBLE PRECISION:: sL
+      DOUBLE PRECISION:: qin
+      DOUBLE PRECISION:: qout
+      DOUBLE PRECISION:: qwfsum
+      DOUBLE PRECISION:: q
+      REAL:: dummy(5)
+      REAL:: qsing
+      INTEGER:: ibd
+      INTEGER:: igrp1
+      INTEGER:: igrp2
+      INTEGER:: iin
+      INTEGER:: imult
+      INTEGER:: iobynd
+      INTEGER:: ioc
+      INTEGER:: ioch
+      INTEGER:: ioqsum
+      INTEGER:: m
+      INTEGER:: m2
+      INTEGER:: n
+      INTEGER:: naux
+      INTEGER:: ne
+      INTEGER:: nwelvl
+      INTEGER:: k
+      INTEGER:: i
+      INTEGER:: j
+      CHARACTER(LEN=16):: text
+      CHARACTER(LEN=16):: auxtxt(20)
 !     ------------------------------------------------------------------
 !-----SET POINTERS FOR THE CURRENT GRID.
       CALL SGWF2MNW1PNT(Igrid)
@@ -1358,12 +1529,36 @@
 ! Arguments
       INTEGER, INTENT(IN) :: Igrid
 ! Local Variables
-      DOUBLE PRECISION :: hwell, conc, qt, qin, qout, q, timein, hcell
-      DOUBLE PRECISION :: qsum, qwbar, timmult,timeinlast
-      INTEGER :: i, icnt, io, iobynd, iopt, ioqsum, iostart, iot, istop
-      INTEGER :: me, nb, ne, node
+      DOUBLE PRECISION:: hwell
+      DOUBLE PRECISION:: conc
+      DOUBLE PRECISION:: qt
+      DOUBLE PRECISION:: qin
+      DOUBLE PRECISION:: qout
+      DOUBLE PRECISION:: q
+      DOUBLE PRECISION:: timein
+      DOUBLE PRECISION:: hcell
+      DOUBLE PRECISION:: qsum
+      DOUBLE PRECISION:: qwbar
+      DOUBLE PRECISION:: timmult
+      DOUBLE PRECISION:: timeinlast
+      INTEGER:: i
+      INTEGER:: icnt
+      INTEGER:: io
+      INTEGER:: iobynd
+      INTEGER:: iopt
+      INTEGER:: ioqsum
+      INTEGER:: iostart
+      INTEGER:: iot
+      INTEGER:: istop
+      INTEGER:: me
+      INTEGER:: nb
+      INTEGER:: ne
+      INTEGER:: node
       CHARACTER(LEN=1) :: tab
-      CHARACTER(LEN=32) :: temptag, tt, lasttag, eoftag
+      CHARACTER(LEN=32):: temptag
+      CHARACTER(LEN=32):: tt
+      CHARACTER(LEN=32):: lasttag
+      CHARACTER(LEN=32):: eoftag
 !     ------------------------------------------------------------------
       CALL SGWF2MNW1PNT(IGRID)
 !
@@ -1514,7 +1709,9 @@
       CHARACTER(LEN=32), INTENT(IN) :: Temptag
 !     ------------------------------------------------------------------
 ! Local Variables
-      INTEGER :: i, k1, k2
+      INTEGER:: i
+      INTEGER:: k1
+      INTEGER:: k2
       CHARACTER(LEN=256) :: txt
 !     ------------------------------------------------------------------
       i = 0
@@ -1574,12 +1771,41 @@
       IMPLICIT NONE
       INTRINSIC LOG, ABS, SQRT
 ! Arguments
-      INTEGER, INTENT(IN) :: Ix, Iy, Iz
-      DOUBLE PRECISION, INTENT(IN) :: Rw, Skin, Q, Cf
+      INTEGER,INTENT(IN):: Ix
+      INTEGER,INTENT(IN):: Iy
+      INTEGER,INTENT(IN):: Iz
+      DOUBLE PRECISION,INTENT(IN):: Rw
+      DOUBLE PRECISION,INTENT(IN):: Skin
+      DOUBLE PRECISION,INTENT(IN):: Q
+      DOUBLE PRECISION,INTENT(IN):: Cf
 ! Local Variables
-      DOUBLE PRECISION :: ro, ah, tempKX, dx, dy, top, bot, dxp, dxm
-      DOUBLE PRECISION :: txm, txp, dyp, dym, typ, tym, div, txx, tyy
-      DOUBLE PRECISION :: thick, upper, yx4, xy4, tpi2, a, b, c, cel2wel
+      DOUBLE PRECISION:: ro
+      DOUBLE PRECISION:: ah
+      DOUBLE PRECISION:: tempKX
+      DOUBLE PRECISION:: dx
+      DOUBLE PRECISION:: dy
+      DOUBLE PRECISION:: top
+      DOUBLE PRECISION:: bot
+      DOUBLE PRECISION:: dxp
+      DOUBLE PRECISION:: dxm
+      DOUBLE PRECISION:: txm
+      DOUBLE PRECISION:: txp
+      DOUBLE PRECISION:: dyp
+      DOUBLE PRECISION:: dym
+      DOUBLE PRECISION:: typ
+      DOUBLE PRECISION:: tym
+      DOUBLE PRECISION:: div
+      DOUBLE PRECISION:: txx
+      DOUBLE PRECISION:: tyy
+      DOUBLE PRECISION:: thick
+      DOUBLE PRECISION:: upper
+      DOUBLE PRECISION:: yx4
+      DOUBLE PRECISION:: xy4
+      DOUBLE PRECISION:: tpi2
+      DOUBLE PRECISION:: a
+      DOUBLE PRECISION:: b
+      DOUBLE PRECISION:: c
+      DOUBLE PRECISION:: cel2wel
 !     ------------------------------------------------------------------
 !1000 FORMAT(/1X,
 !    &'***ERROR: MNW PACKAGE DOES NOT SUPPORT HEAD-DEPENDENT',/,
@@ -1723,11 +1949,32 @@
       IMPLICIT NONE
       INTRINSIC LOG, ABS, SQRT
 ! Arguments
-      INTEGER, INTENT(IN) :: Ix, Iy, Iz
-      DOUBLE PRECISION, INTENT(IN) :: Rw, Skin, Q, Cf
+      INTEGER,INTENT(IN):: Ix
+      INTEGER,INTENT(IN):: Iy
+      INTEGER,INTENT(IN):: Iz
+      DOUBLE PRECISION,INTENT(IN):: Rw
+      DOUBLE PRECISION,INTENT(IN):: Skin
+      DOUBLE PRECISION,INTENT(IN):: Q
+      DOUBLE PRECISION,INTENT(IN):: Cf
 ! Local Variables
-      DOUBLE PRECISION :: ro, ah, tempKX, dx, dy, top, bot, txx, tyy
-      DOUBLE PRECISION :: thick, upper, yx4, xy4, tpi2, a, b, c, cel2wel
+      DOUBLE PRECISION:: ro
+      DOUBLE PRECISION:: ah
+      DOUBLE PRECISION:: tempKX
+      DOUBLE PRECISION:: dx
+      DOUBLE PRECISION:: dy
+      DOUBLE PRECISION:: top
+      DOUBLE PRECISION:: bot
+      DOUBLE PRECISION:: txx
+      DOUBLE PRECISION:: tyy
+      DOUBLE PRECISION:: thick
+      DOUBLE PRECISION:: upper
+      DOUBLE PRECISION:: yx4
+      DOUBLE PRECISION:: xy4
+      DOUBLE PRECISION:: tpi2
+      DOUBLE PRECISION:: a
+      DOUBLE PRECISION:: b
+      DOUBLE PRECISION:: c
+      DOUBLE PRECISION:: cel2wel
 !     ------------------------------------------------------------------
 !1000 FORMAT(/1X,
 !    &'***ERROR: MNW PACKAGE DOES NOT SUPPORT HEAD-DEPENDENT',/,
@@ -1820,11 +2067,33 @@
       IMPLICIT NONE
       INTRINSIC LOG, ABS, SQRT
 ! Arguments
-      INTEGER, INTENT(IN) :: Ix, Iy, Iz
-      DOUBLE PRECISION, INTENT(IN) :: Rw, Skin, Q, Cf
+      INTEGER,INTENT(IN):: Ix
+      INTEGER,INTENT(IN):: Iy
+      INTEGER,INTENT(IN):: Iz
+      DOUBLE PRECISION,INTENT(IN):: Rw
+      DOUBLE PRECISION,INTENT(IN):: Skin
+      DOUBLE PRECISION,INTENT(IN):: Q
+      DOUBLE PRECISION,INTENT(IN):: Cf
 ! Local Variables
-      DOUBLE PRECISION :: ro, ah, tempKX, dx, dy, top, bot, txx, tyy, ky
-      DOUBLE PRECISION :: thick, upper, yx4, xy4, tpi2, a, b, c, cel2wel
+      DOUBLE PRECISION:: ro
+      DOUBLE PRECISION:: ah
+      DOUBLE PRECISION:: tempKX
+      DOUBLE PRECISION:: dx
+      DOUBLE PRECISION:: dy
+      DOUBLE PRECISION:: top
+      DOUBLE PRECISION:: bot
+      DOUBLE PRECISION:: txx
+      DOUBLE PRECISION:: tyy
+      DOUBLE PRECISION:: ky
+      DOUBLE PRECISION:: thick
+      DOUBLE PRECISION:: upper
+      DOUBLE PRECISION:: yx4
+      DOUBLE PRECISION:: xy4
+      DOUBLE PRECISION:: tpi2
+      DOUBLE PRECISION:: a
+      DOUBLE PRECISION:: b
+      DOUBLE PRECISION:: c
+      DOUBLE PRECISION:: cel2wel
 !     ------------------------------------------------------------------
 !1000 FORMAT(/1X,
 !    &'***ERROR: MNW PACKAGE DOES NOT SUPPORT HEAD-DEPENDENT',/,
@@ -1891,7 +2160,10 @@
       IMPLICIT NONE
       INTRINSIC ABS
 ! Arguments
-      INTEGER, INTENT(IN) :: N1, N2, Ncol, Nrow
+      INTEGER,INTENT(IN):: N1
+      INTEGER,INTENT(IN):: N2
+      INTEGER,INTENT(IN):: Ncol
+      INTEGER,INTENT(IN):: Nrow
 !     ------------------------------------------------------------------
       IDIRECT = Ncol
       IF ( ABS(N2-N1).GT.Ncol*Nrow ) IDIRECT = Ncol*Nrow
@@ -1944,7 +2216,11 @@
       INTEGER, INTENT(OUT) :: Ierr
       CHARACTER(LEN=256), INTENT(OUT) :: Txt
 ! Local Variables
-      INTEGER :: ioalt, ioflip, iohold, ki
+      INTEGER:: ioalt
+      INTEGER:: ioflip
+      SAVE :: IOFLIP
+      INTEGER:: iohold
+      INTEGER:: ki
       CHARACTER(LEN=128) :: afile
       CHARACTER(LEN=256) :: tx2
       DATA ioflip, ioalt/69, 69/
@@ -2023,7 +2299,11 @@
       INTEGER, INTENT(OUT) :: Ierr
       CHARACTER(LEN=256), INTENT(IN) :: Ain
 ! Local Variables
-      INTEGER :: i, istat, ki, n, nd
+      INTEGER:: i
+      INTEGER:: istat
+      INTEGER:: ki
+      INTEGER:: n
+      INTEGER:: nd
       CHARACTER(LEN=1) :: tab
       CHARACTER(LEN=8) :: rdfmt
       CHARACTER(LEN=256) :: a256
@@ -2086,7 +2366,9 @@
       USE GWFMNW1MODULE
 !     ------------------------------------------------------------------
 ! Arguments
-      INTEGER :: Igrid, IDUM
+      IMPLICIT NONE
+      INTEGER:: Igrid
+      INTEGER:: IDUM
 !     ------------------------------------------------------------------
       IDUM=IGRID
       DEALLOCATE (GWFMNWDAT(Igrid)%NWELL2)
@@ -2116,6 +2398,7 @@
       USE GWFMNW1MODULE
 !     ------------------------------------------------------------------
 ! Arguments
+      IMPLICIT NONE
       INTEGER :: Igrid
 !     ------------------------------------------------------------------
       NWELL2=>GWFMNWDAT(Igrid)%NWELL2
@@ -2145,6 +2428,7 @@
       USE GWFMNW1MODULE
 !     ------------------------------------------------------------------
 ! Arguments
+      IMPLICIT NONE
       INTEGER :: Igrid
 !     ------------------------------------------------------------------
       GWFMNWDAT(Igrid)%NWELL2=>NWELL2

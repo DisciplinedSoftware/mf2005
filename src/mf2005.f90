@@ -19,6 +19,32 @@
       USE DE4MODULE
       USE GMGMODULE
       USE PCGN
+      IMPLICIT NONE
+      REAL :: BUDPERC
+      INTEGER :: I
+      INTEGER :: IBDRET
+      INTEGER :: IC1
+      INTEGER :: IC2
+      INTEGER :: ICNVG
+      INTEGER :: IDIR
+      INTEGER :: IERR
+      INTEGER :: IGRID
+      INTEGER :: IL1
+      INTEGER :: IL2
+      INTEGER :: INUNIT
+      INTEGER :: IOUTS
+      INTEGER :: IR1
+      INTEGER :: IR2
+      INTEGER :: KITER
+      INTEGER :: KKITER
+      INTEGER :: KKPER
+      INTEGER :: KKSTP
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: MAXUNIT
+      INTEGER :: NC
+      INTEGER :: NCVGERR
+      INTEGER :: NSOL
       INCLUDE 'openspec.inc'
 !
 !-------ASSIGN VERSION NUMBER AND DATE
@@ -595,6 +621,13 @@
 !        SPECIFICATIONS:
 !
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: ICOL
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: N
+      INTEGER :: NC
+      REAL :: R
       CHARACTER*(*) FNAME
       CHARACTER*200 COMLIN
       LOGICAL EXISTS
@@ -645,7 +678,31 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      INTEGER IBDT(8), IEDT(8), IDPM(12)
+      IMPLICIT NONE
+      REAL :: ELSEC
+      INTEGER :: I
+      INTEGER :: IBD
+      INTEGER :: IED
+      INTEGER :: IOUT
+      INTEGER :: IPRTIM
+      INTEGER :: LEAP
+      INTEGER :: M
+      INTEGER :: MB
+      INTEGER :: MC
+      INTEGER :: ME
+      INTEGER :: MSECS
+      INTEGER :: NDAYS
+      INTEGER :: NHOURS
+      INTEGER :: NM
+      INTEGER :: NMINS
+      INTEGER :: NRSECS
+      INTEGER :: NSECS
+      INTEGER :: NSPD
+      REAL :: RSECS
+      INTEGER IBDT(8)
+      INTEGER IEDT(8)
+      INTEGER IDPM(12)
+      SAVE :: IDPM
       DATA IDPM/31,28,31,30,31,30,31,31,30,31,30,31/ ! Days per month
       DATA NSPD/86400/ ! Seconds per day
 !     ------------------------------------------------------------------

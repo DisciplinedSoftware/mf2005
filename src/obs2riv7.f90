@@ -1,5 +1,10 @@
       MODULE OBSRIVMODULE
-         INTEGER, SAVE, POINTER  ::NQRV,NQCRV,NQTRV,IURVOBSV,IPRT
+         IMPLICIT NONE
+         INTEGER,SAVE,POINTER:: NQRV
+         INTEGER,SAVE,POINTER:: NQCRV
+         INTEGER,SAVE,POINTER:: NQTRV
+         INTEGER,SAVE,POINTER:: IURVOBSV
+         INTEGER,SAVE,POINTER:: IPRT
          INTEGER, SAVE, DIMENSION(:),   POINTER ::NQOBRV
          INTEGER, SAVE, DIMENSION(:),   POINTER ::NQCLRV
          INTEGER, SAVE, DIMENSION(:),   POINTER ::IOBTS
@@ -10,7 +15,11 @@
          REAL,    SAVE, DIMENSION(:,:), POINTER ::QCELL
          CHARACTER*12,SAVE,DIMENSION(:),POINTER ::OBSNAM
       TYPE OBSRIVTYPE
-         INTEGER, POINTER  ::NQRV,NQCRV,NQTRV,IURVOBSV,IPRT
+         INTEGER,POINTER:: NQRV
+         INTEGER,POINTER:: NQCRV
+         INTEGER,POINTER:: NQTRV
+         INTEGER,POINTER:: IURVOBSV
+         INTEGER,POINTER:: IPRT
          INTEGER,     DIMENSION(:),   POINTER ::NQOBRV
          INTEGER,     DIMENSION(:),   POINTER ::NQCLRV
          INTEGER,     DIMENSION(:),   POINTER ::IOBTS
@@ -45,6 +54,32 @@
       USE GLOBAL,  ONLY:IOUT,NPER,NSTP,PERLEN,TSMULT,ISSFLG,&
      &                  NCOL,NROW,NLAY,ITRSS
       USE OBSRIVMODULE
+      IMPLICIT NONE
+      REAL :: DUM
+      INTEGER :: I
+      INTEGER :: IDUM
+      INTEGER :: IERR
+      INTEGER :: IFCTFLG
+      INTEGER :: IGRID
+      INTEGER :: IQ
+      INTEGER :: IREFSP
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: IURV
+      INTEGER :: IURVOB
+      INTEGER :: J
+      INTEGER :: L
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NC
+      INTEGER :: NC1
+      INTEGER :: NC2
+      INTEGER :: NT
+      INTEGER :: NT1
+      INTEGER :: NT2
+      REAL :: TOFFSET
+      REAL :: TOMULTRV
+      REAL :: ZERO
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
       ALLOCATE(NQRV,NQCRV,NQTRV,IURVOBSV,IPRT)
@@ -209,7 +244,34 @@
       USE GWFRIVMODULE, ONLY:NRIVER,RIVR
       USE OBSBASMODULE,ONLY:ITS
       USE OBSRIVMODULE
-      DOUBLE PRECISION HHNEW, C, HB , RBOT
+      IMPLICIT NONE
+      REAL :: FLWCEL
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: II
+      INTEGER :: IQ
+      INTEGER :: IRBOT
+      INTEGER :: J
+      INTEGER :: JJ
+      INTEGER :: JRBOT
+      INTEGER :: K
+      INTEGER :: KK
+      INTEGER :: KRBOT
+      INTEGER :: MNB
+      INTEGER :: N
+      INTEGER :: NB
+      INTEGER :: NC
+      INTEGER :: NC1
+      INTEGER :: NC2
+      INTEGER :: NT
+      INTEGER :: NT1
+      INTEGER :: NT2
+      REAL :: TFACT
+      REAL :: ZERO
+      DOUBLE PRECISION HHNEW
+      DOUBLE PRECISION C
+      DOUBLE PRECISION HB
+      DOUBLE PRECISION RBOT
 !     ------------------------------------------------------------------
       CALL SGWF2RIV7PNT(IGRID)
       CALL SOBS2RIV7PNT(IGRID)
@@ -354,7 +416,12 @@
 !     ------------------------------------------------------------------
       USE GLOBAL, ONLY: IOUT
       USE OBSRIVMODULE
-      DOUBLE PRECISION SQ,SUMSQ
+      IMPLICIT NONE
+      REAL :: DIFF
+      INTEGER :: IGRID
+      INTEGER :: N
+      DOUBLE PRECISION SQ
+      DOUBLE PRECISION SUMSQ
 !     ------------------------------------------------------------------
       CALL SOBS2RIV7PNT(IGRID)
 !
@@ -388,6 +455,8 @@
 !  Deallocate OBSRIV memory
       USE OBSRIVMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       CALL SOBS2RIV7PNT(IGRID)
       DEALLOCATE(NQRV)
       DEALLOCATE(NQCRV)
@@ -410,6 +479,8 @@
 !  Change OBSRIV data to a different grid.
       USE OBSRIVMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       NQRV=>OBSRIVDAT(IGRID)%NQRV
       NQCRV=>OBSRIVDAT(IGRID)%NQCRV
       NQTRV=>OBSRIVDAT(IGRID)%NQTRV
@@ -431,6 +502,8 @@
 !  Save OBSRIV data for a grid.
       USE OBSRIVMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       OBSRIVDAT(IGRID)%NQRV=>NQRV
       OBSRIVDAT(IGRID)%NQCRV=>NQCRV
       OBSRIVDAT(IGRID)%NQTRV=>NQTRV

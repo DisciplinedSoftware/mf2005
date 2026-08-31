@@ -1,5 +1,6 @@
 ! $Id: gwf2gag7.f 3234 2007-03-24 01:44:52Z deprudic $      
       MODULE GWFGAGMODULE
+        IMPLICIT NONE
         INTEGER,SAVE,POINTER  ::NUMGAGE
         INTEGER,SAVE,  DIMENSION(:,:),  POINTER :: IGGLST
       TYPE GWFGAGTYPE
@@ -21,6 +22,15 @@
       USE GLOBAL,       ONLY:IOUT
       USE GWFGAGMODULE
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: INGAGE
+      INTEGER :: IOB
+      INTEGER :: IUNITLAK
+      INTEGER :: IUNITSFR
+      INTEGER :: NGAGESAR
+      INTEGER :: NLG
+      INTEGER :: NSG
       ALLOCATE (NUMGAGE)
       NUMGAGE = 0
 !
@@ -160,9 +170,23 @@
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      INTEGER NSOL,IGRID,IUNITLAK,IOG,IG,IG2,IG3,IRCH,II,IUNITGWT
-      INTEGER  IUNITUZF,LK,DFLAG,ISOL
-      REAL DUM,DUMMY
+      IMPLICIT NONE
+      INTEGER NSOL
+      INTEGER IGRID
+      INTEGER IUNITLAK
+      INTEGER IOG
+      INTEGER IG
+      INTEGER IG2
+      INTEGER IG3
+      INTEGER IRCH
+      INTEGER II
+      INTEGER IUNITGWT
+      INTEGER IUNITUZF
+      INTEGER LK
+      INTEGER DFLAG
+      INTEGER ISOL
+      REAL DUM
+      REAL DUMMY
       CHARACTER*1 A
       CHARACTER*2 B
       CHARACTER*7 CONCNAME
@@ -664,10 +688,47 @@
      &                       VOLINIT,OVRLNDRNF,TSLAKERR,CMLAKERR,DELVOL,&
      &                       SEEPUZ
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: CLAKE
+      REAL :: CLAKINIT
+      REAL :: CLKOLD
+      REAL :: DELCCUM
+      REAL :: DELCTS
+      REAL :: DELHCUM
+      REAL :: DELHTS
+      REAL :: ET
+      REAL :: FLUXIN
+      REAL :: FLXINL
+      REAL :: GAGETM
+      REAL :: GWFIN
+      REAL :: GWFOT
+      REAL :: GWIN
+      REAL :: GWOUT
+      INTEGER :: IG1
+      INTEGER :: IG3
+      INTEGER :: IOG
+      INTEGER :: ISOL
+      INTEGER :: IUNITGWT
+      INTEGER :: IUNITUZF
+      INTEGER :: LK
+      INTEGER :: NSOL
+      REAL :: PP
+      REAL :: RUNF
+      REAL :: SEEPUZF
+      REAL :: SRIN
+      REAL :: SROT
+      REAL :: UZFRNF
+      REAL :: VOLOLD
+      REAL :: VOLRATE
+      REAL :: WDRW
       DIMENSION CLAKE(NLAKES,NSOL)
 !dep 4/20/2009 dimensioned SEEP array to nlakes
-      DIMENSION GWIN(NLAKES),GWOUT(NLAKES),FLXINL(NLAKES),&
-     &          VOLOLD(NLAKES),CLKOLD(NLAKES,NSOL),CLAKINIT(NLAKES,NSOL)
+      DIMENSION GWIN(NLAKES)
+      DIMENSION GWOUT(NLAKES)
+      DIMENSION FLXINL(NLAKES)
+      DIMENSION VOLOLD(NLAKES)
+      DIMENSION CLKOLD(NLAKES,NSOL)
+      DIMENSION CLAKINIT(NLAKES,NSOL)
       DOUBLE PRECISION SEEP(NLAKES)
       CHARACTER*1256  LFRMAT
       ALLOCATABLE DELCTS(:,:),DELCCUM(:,:)
@@ -862,6 +923,24 @@
      &                       AVWAT,WAT1,AVDPT
 !     ------------------------------------------------------------------
 
+      IMPLICIT NONE
+      REAL :: CLOAD
+      REAL :: COUT
+      REAL :: DEPTH
+      REAL :: GAGETM
+      INTEGER :: IBD
+      INTEGER :: IG1
+      INTEGER :: IG3
+      INTEGER :: II
+      INTEGER :: IL
+      INTEGER :: IOG
+      INTEGER :: ISOL
+      INTEGER :: IUNITGWT
+      INTEGER :: IUNITUZF
+      INTEGER :: IUPSEG
+      INTEGER :: NSOL
+      REAL :: PMXDVRT
+      REAL :: UPSTRFLW
       CHARACTER*50  LFRMAT
       REAL SFRQ(5,NSTRM)
       DIMENSION COUT(NSTRM,NSOL)
@@ -1040,6 +1119,7 @@
       SUBROUTINE GWF2GAG7DA(IGRID)
 !  Deallocate GAG data for a grid.
       USE GWFGAGMODULE
+      IMPLICIT NONE
       INTEGER IGRID
 !
       DEALLOCATE (GWFGAGDAT(IGRID)%NUMGAGE)
@@ -1051,6 +1131,7 @@
       SUBROUTINE SGWF2GAG7PNT(IGRID)
 !  Change GAG data to a different grid.
       USE GWFGAGMODULE
+      IMPLICIT NONE
       INTEGER IGRID
 !
       NUMGAGE=>GWFGAGDAT(IGRID)%NUMGAGE
@@ -1063,6 +1144,8 @@
 !  Save GAG data for a grid.
       USE GWFGAGMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       GWFGAGDAT(IGRID)%NUMGAGE=>NUMGAGE
       GWFGAGDAT(IGRID)%IGGLST=>IGGLST
 !

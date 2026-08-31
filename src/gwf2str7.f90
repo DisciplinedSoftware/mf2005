@@ -1,8 +1,18 @@
       MODULE GWFSTRMODULE
-        INTEGER,SAVE,POINTER   ::MXSTRM,NSTREM,NSS,NTRIB,NDIV,ICALC
-        INTEGER,SAVE,POINTER   ::ISTCB1,ISTCB2,IPTFLG,NSTRVL
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: MXSTRM
+        INTEGER,SAVE,POINTER:: NSTREM
+        INTEGER,SAVE,POINTER:: NSS
+        INTEGER,SAVE,POINTER:: NTRIB
+        INTEGER,SAVE,POINTER:: NDIV
+        INTEGER,SAVE,POINTER:: ICALC
+        INTEGER,SAVE,POINTER:: ISTCB1
+        INTEGER,SAVE,POINTER:: ISTCB2
+        INTEGER,SAVE,POINTER:: IPTFLG
+        INTEGER,SAVE,POINTER:: NSTRVL
         REAL,   SAVE,POINTER   ::CONST
-        INTEGER,SAVE,POINTER   ::NPSTR,ISTRPB
+        INTEGER,SAVE,POINTER:: NPSTR
+        INTEGER,SAVE,POINTER:: ISTRPB
         REAL,   SAVE,  POINTER,  DIMENSION(:,:)  ::STRM
         REAL,   SAVE,  POINTER,  DIMENSION(:)    ::ARTRIB
         INTEGER,SAVE,  POINTER,  DIMENSION(:,:)  ::ISTRM
@@ -11,10 +21,19 @@
         INTEGER,SAVE,  POINTER,  DIMENSION(:)    ::NDFGAR
         CHARACTER(LEN=16),SAVE, DIMENSION(:),   POINTER     ::STRAUX
       TYPE GWFSTRTYPE
-        INTEGER,POINTER   ::MXSTRM,NSTREM,NSS,NTRIB,NDIV,ICALC
-        INTEGER,POINTER   ::ISTCB1,ISTCB2,IPTFLG,NSTRVL
+        INTEGER,POINTER:: MXSTRM
+        INTEGER,POINTER:: NSTREM
+        INTEGER,POINTER:: NSS
+        INTEGER,POINTER:: NTRIB
+        INTEGER,POINTER:: NDIV
+        INTEGER,POINTER:: ICALC
+        INTEGER,POINTER:: ISTCB1
+        INTEGER,POINTER:: ISTCB2
+        INTEGER,POINTER:: IPTFLG
+        INTEGER,POINTER:: NSTRVL
         REAL,   POINTER   ::CONST
-        INTEGER,POINTER   ::NPSTR,ISTRPB
+        INTEGER,POINTER:: NPSTR
+        INTEGER,POINTER:: ISTRPB
         REAL,   POINTER,  DIMENSION(:,:)  ::STRM
         REAL,   POINTER,  DIMENSION(:)    ::ARTRIB
         INTEGER,POINTER,  DIMENSION(:,:)  ::ISTRM
@@ -39,6 +58,26 @@
      &                      STRM,ARTRIB,ISTRM,ITRBAR,IDIVAR,NDFGAR,&
      &                      STRAUX,NSTRVL
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: IP
+      INTEGER :: IRDFLG
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: K
+      INTEGER :: LLOC
+      INTEGER :: LSTBEG
+      INTEGER :: LSTSUM
+      INTEGER :: MXACTS
+      INTEGER :: MXPS
+      INTEGER :: N
+      INTEGER :: NAUX
+      INTEGER :: NINLST
+      INTEGER :: NLST
+      INTEGER :: NUMINST
+      REAL :: R
       CHARACTER*200 LINE
 !     -----------------------------------------------------------------C
       ALLOCATE(MXSTRM,NSTREM,NSS,NTRIB,NDIV,ICALC)
@@ -165,6 +204,24 @@
      &                      STRM,ARTRIB,ISTRM,ITRBAR,IDIVAR,NDFGAR,&
      &                      STRAUX,NSTRVL
 !     -----------------------------------------------------------------C
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IBEG
+      INTEGER :: IEND
+      INTEGER :: IGRID
+      INTEGER :: II
+      INTEGER :: III
+      INTEGER :: IK
+      INTEGER :: IN
+      INTEGER :: IRDFLG
+      INTEGER :: ITMP
+      INTEGER :: J
+      INTEGER :: JK
+      INTEGER :: MXACTS
+      INTEGER :: N
+      INTEGER :: NAUX
+      INTEGER :: NLST
+      REAL :: PV
       CALL SGWF2STR7PNT(IGRID)
 !
 !1A-----IF MXSTREAM IS LESS THAN 1 THEN STREAM IS INACTIVE. RETURN.
@@ -330,6 +387,35 @@
      &                      CONST,NPSTR,ISTRPB,&
      &                      STRM,ARTRIB,ISTRM,ITRBAR,IDIVAR,NDFGAR
 !     -----------------------------------------------------------------C
+      IMPLICIT NONE
+      REAL :: CSTR
+      REAL :: DEPTH
+      REAL :: DNOM
+      REAL :: DUM
+      REAL :: FLOBOT
+      REAL :: FLOWIN
+      REAL :: FLOWOT
+      REAL :: H
+      REAL :: HSTR
+      INTEGER :: I
+      INTEGER :: IC
+      INTEGER :: IDL
+      INTEGER :: IFLG
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: INODE
+      INTEGER :: IQFLG
+      INTEGER :: IR
+      INTEGER :: ISTSG
+      INTEGER :: ITRIB
+      INTEGER :: L
+      INTEGER :: LL
+      INTEGER :: NDFLG
+      INTEGER :: NREACH
+      INTEGER :: NSFLG
+      REAL :: SBOT
+      REAL :: T
+      REAL :: XNUM
       CALL SGWF2STR7PNT(IGRID)
 !                                                                      C
 !1------IF NSTREM<=0 THERE ARE NO STREAMS. RETURN.                     C
@@ -470,7 +556,44 @@
      &                      STRM,ARTRIB,ISTRM,ITRBAR,IDIVAR,NDFGAR,&
      &                      NSTRVL,STRAUX
 !
-      CHARACTER*16 TEXT,STRTXT
+      IMPLICIT NONE
+      REAL :: CSTR
+      REAL :: DEPTH
+      REAL :: DNOM
+      REAL :: DUM
+      REAL :: FLOBOT
+      REAL :: FLOWIN
+      REAL :: FLOWOT
+      REAL :: H
+      REAL :: HSTR
+      INTEGER :: I
+      INTEGER :: IBD
+      INTEGER :: IC
+      INTEGER :: IDL
+      INTEGER :: IFLG
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: INODE
+      INTEGER :: IR
+      INTEGER :: ISTSG
+      INTEGER :: ITRIB
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: L
+      INTEGER :: LL
+      INTEGER :: NAUX
+      INTEGER :: NDFLG
+      INTEGER :: NREACH
+      INTEGER :: NSFLG
+      REAL :: RATIN
+      REAL :: RATOUT
+      REAL :: SBOT
+      REAL :: T
+      REAL :: XNUM
+      CHARACTER*16 TEXT
+      SAVE :: TEXT
+      CHARACTER*16 STRTXT
+      SAVE :: STRTXT
       DATA   TEXT/'  STREAM LEAKAGE'/
       DATA STRTXT/'STREAM FLOW OUT '/
 !     -----------------------------------------------------------------C
@@ -717,7 +840,36 @@
 !
 !     SPECIFICATIONS:
 !     -----------------------------------------------------------------C
-      DIMENSION STRM(NSTRVL,MXSTRM),ISTRM(5,MXSTRM)
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IDUM
+      INTEGER :: IFREFM
+      INTEGER :: II
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: IRDFLG
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: ISTRM
+      INTEGER :: J
+      INTEGER :: JJ
+      INTEGER :: K
+      INTEGER :: LENLAB
+      INTEGER :: LLOC
+      INTEGER :: LSTBEG
+      INTEGER :: MXSTRM
+      INTEGER :: N
+      INTEGER :: NAUX
+      INTEGER :: NCAUX
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NLST
+      INTEGER :: NROW
+      INTEGER :: NSTRVL
+      REAL :: R
+      REAL :: STRM
+      DIMENSION STRM(NSTRVL,MXSTRM)
+      DIMENSION ISTRM(5,MXSTRM)
       CHARACTER*16 STRAUX(NCAUX)
       CHARACTER*200 LABEL
       CHARACTER*300 LINE
@@ -801,6 +953,8 @@
 !  Deallocate STR DATA
       USE GWFSTRMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         DEALLOCATE(GWFSTRDAT(IGRID)%MXSTRM)
         DEALLOCATE(GWFSTRDAT(IGRID)%NSTREM)
         DEALLOCATE(GWFSTRDAT(IGRID)%NSS)
@@ -828,6 +982,8 @@
 !  Set pointers to STR data for grid.
       USE GWFSTRMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         MXSTRM=>GWFSTRDAT(IGRID)%MXSTRM
         NSTREM=>GWFSTRDAT(IGRID)%NSTREM
         NSS=>GWFSTRDAT(IGRID)%NSS
@@ -855,6 +1011,8 @@
 !  Save pointers to STR data for grid.
       USE GWFSTRMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         GWFSTRDAT(IGRID)%MXSTRM=>MXSTRM
         GWFSTRDAT(IGRID)%NSTREM=>NSTREM
         GWFSTRDAT(IGRID)%NSS=>NSS

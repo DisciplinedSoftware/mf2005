@@ -23,24 +23,121 @@
 !-----
 !----- VERSION 0100 29JULY1998 HYDFMT
 !=============================================================================
-      CHARACTER FN1*80,FN2*80,FMT1*80,FN3*80,WELLID*20
-      CHARACTER TIMTYP*1,ELPTYP*1,arr*2,timlbl*4,fmtout*27,fmtoute*17
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: ID
+      INTEGER :: IDAY
+      INTEGER :: IDAYS
+      INTEGER :: II
+      INTEGER :: IK
+      INTEGER :: IMON
+      INTEGER :: INUNIT
+      INTEGER :: IPREC
+      INTEGER :: IST
+      INTEGER :: ISTART
+      INTEGER :: ISTRT
+      INTEGER :: ISTT
+      INTEGER :: ITIME
+      INTEGER :: ITMUNI
+      INTEGER :: IX
+      INTEGER :: IYEAR
+      INTEGER :: JCOL
+      INTEGER :: LEN
+      INTEGER :: N
+      INTEGER :: NC
+      INTEGER :: NDATE
+      INTEGER :: NUMCH
+      INTEGER :: NUMH
+      INTEGER :: NUMHC
+      INTEGER :: NUMHD
+      INTEGER :: NUMHFA
+      INTEGER :: NUMHFI
+      INTEGER :: NUMHFO
+      INTEGER :: NUMHH
+      INTEGER :: NUMHHF
+      INTEGER :: NUMHS
+      REAL :: START
+      REAL :: TIME
+      REAL :: YR
+      REAL :: Z
+      REAL :: ZFA
+      REAL :: ZFI
+      REAL :: ZFO
+      REAL :: ZH
+      REAL :: ZHC
+      REAL :: ZHD
+      REAL :: ZHF
+      REAL :: ZHPH
+      REAL :: ZHS
+      CHARACTER FN1*80
+      CHARACTER FN2*80
+      CHARACTER FMT1*80
+      CHARACTER FN3*80
+      CHARACTER WELLID*20
+      SAVE :: WELLID
+      CHARACTER TIMTYP*1
+      CHARACTER ELPTYP*1
+      CHARACTER arr*2
+      CHARACTER timlbl*4
+      CHARACTER fmtout*27
+      CHARACTER fmtoute*17
 !      character fmtoutd*20,blank*80,SITTYP*1,LEAPYR*1/'L'/
-      character fmtoutd*20,blank*80,SITTYP*1,LEAPYR*1
-      character WELLIDH*20,WELLIDD*20,WELLIDCH*20,&
-     & WELLIDC*20,WELLIDS*20,WELLIDFI*20,&
-     & WELLIDHF*20,WELLIDFO*20,WELLIDFA*20
-      DIMENSION JCOL(5000),Z(5000),zh(5000),id(5000),&
-     & zhd(5000),zhph(5000),zhc(5000),zhs(5000),&
-     & zfi(5000),zfo(5000),zhf(5000),zfa(5000)
-      DOUBLE PRECISION DTIME,DZ(5000)
-       DIMENSION WELLID(5000),WELLIDH(5000),WELLIDD(5000),&
-     & WELLIDCH(5000),&
-     & WELLIDC(5000),WELLIDS(5000),WELLIDFI(5000),&
-     & WELLIDHF(5000),WELLIDFO(5000),WELLIDFA(5000)
-      INTEGER DAYS,IDATE,nu(9),icnt(9)
+      character fmtoutd*20
+      character blank*80
+      SAVE :: BLANK
+      character SITTYP*1
+      character LEAPYR*1
+      character WELLIDH*20
+      SAVE :: WELLIDH
+      character WELLIDD*20
+      SAVE :: WELLIDD
+      character WELLIDCH*20
+      SAVE :: WELLIDCH
+      character WELLIDC*20
+      SAVE :: WELLIDC
+      character WELLIDS*20
+      SAVE :: WELLIDS
+      character WELLIDFI*20
+      SAVE :: WELLIDFI
+      character WELLIDHF*20
+      SAVE :: WELLIDHF
+      character WELLIDFO*20
+      SAVE :: WELLIDFO
+      character WELLIDFA*20
+      SAVE :: WELLIDFA
+      DIMENSION JCOL(5000)
+      DIMENSION Z(5000)
+      DIMENSION zh(5000)
+      DIMENSION id(5000)
+      DIMENSION zhd(5000)
+      DIMENSION zhph(5000)
+      DIMENSION zhc(5000)
+      DIMENSION zhs(5000)
+      DIMENSION zfi(5000)
+      DIMENSION zfo(5000)
+      DIMENSION zhf(5000)
+      DIMENSION zfa(5000)
+      DOUBLE PRECISION DTIME
+      DOUBLE PRECISION DZ(5000)
+       DIMENSION WELLID(5000)
+       DIMENSION WELLIDH(5000)
+       DIMENSION WELLIDD(5000)
+       DIMENSION WELLIDCH(5000)
+       DIMENSION WELLIDC(5000)
+       DIMENSION WELLIDS(5000)
+       DIMENSION WELLIDFI(5000)
+       DIMENSION WELLIDHF(5000)
+       DIMENSION WELLIDFO(5000)
+       DIMENSION WELLIDFA(5000)
+      INTEGER DAYS
+      INTEGER IDATE
+      INTEGER nu(9)
+      INTEGER icnt(9)
+      SAVE :: ICNT
       INTEGER ISTRNG
-      LOGICAL FIRST,GEN
+      LOGICAL FIRST
+      SAVE :: FIRST
+      LOGICAL GEN
       DATA FIRST,GEN/.TRUE.,.TRUE./
 !C
       COMMON /T/YR,LEAPYR
@@ -408,8 +505,27 @@
 !
 !     SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      CHARACTER TIMTYP*1,ELPTYP*1,LEAPYR*1
-      INTEGER DATE1,DAYS
+      IMPLICIT NONE
+      REAL :: DELTIM
+      REAL :: FYY
+      INTEGER :: IDATE
+      INTEGER :: IDAYS
+      INTEGER :: ISTART
+      INTEGER :: ISTY
+      INTEGER :: ITIME
+      INTEGER :: ITIME2
+      INTEGER :: ITMUNI
+      INTEGER :: IYY
+      REAL :: REMTIM
+      REAL :: START
+      REAL :: TOTIM
+      REAL :: YR
+      REAL :: YY
+      CHARACTER TIMTYP*1
+      CHARACTER ELPTYP*1
+      CHARACTER LEAPYR*1
+      INTEGER DATE1
+      INTEGER DAYS
       LOGICAL FIRST
 !C
       COMMON /T/YR,LEAPYR
@@ -531,7 +647,15 @@
 !     SPECIFICATIONS:
 !     ------------------------------------------------------------------
 !C
-      INTEGER DAT,YEAR,DAY,DAYM(12)
+      IMPLICIT NONE
+      INTEGER :: M
+      INTEGER :: MONTH
+      REAL :: YR
+      INTEGER DAT
+      INTEGER YEAR
+      INTEGER DAY
+      INTEGER DAYM(12)
+      SAVE :: DAYM
       CHARACTER*1 LEAPYR
 !C
       COMMON /T/YR,LEAPYR
@@ -571,7 +695,18 @@
 !
 !     SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      INTEGER DAYS,DAYM(12,2),YY,MM,DD,DY,NL
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: L
+      INTEGER DAYS
+      INTEGER DAYM(12,2)
+      SAVE :: DAYM
+      INTEGER YY
+      INTEGER MM
+      INTEGER DD
+      INTEGER DY
+      INTEGER NL
 !C
       DATA ((DAYM(I,J),I=1,12),J=1,2)&
      &/0,31,59,90,120,151,181,212,243,273,304,334,&
@@ -602,7 +737,10 @@
 !
 !     SPECIFICATIONS:
 !     ------------------------------------------------------------------
-       INTEGER DIMS,LEN
+       IMPLICIT NONE
+       INTEGER :: N
+       INTEGER DIMS
+       INTEGER LEN
        CHARACTER STRING*80
        DO 10 N=DIMS,1,-1
        IF(STRING(N:N).NE.' ')GO TO 20
@@ -623,6 +761,8 @@
 !
 !     SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
       CHARACTER STRING*20
       DO 10 I=1,20
       IF(STRING(I:I).NE.' ') GO TO 20

@@ -1,5 +1,10 @@
       MODULE OBSCHDMODULE
-         INTEGER, SAVE, POINTER    ::NQCH,NQCCH,NQTCH,IUCHOBSV,IPRT
+         IMPLICIT NONE
+         INTEGER,SAVE,POINTER:: NQCH
+         INTEGER,SAVE,POINTER:: NQCCH
+         INTEGER,SAVE,POINTER:: NQTCH
+         INTEGER,SAVE,POINTER:: IUCHOBSV
+         INTEGER,SAVE,POINTER:: IPRT
          INTEGER, SAVE, DIMENSION(:),   POINTER ::NQOBCH
          INTEGER, SAVE, DIMENSION(:),   POINTER ::NQCLCH
          INTEGER, SAVE, DIMENSION(:),   POINTER ::IOBTS
@@ -10,7 +15,11 @@
          REAL,    SAVE, DIMENSION(:,:), POINTER ::QCELL
          CHARACTER*12,SAVE,DIMENSION(:),POINTER ::OBSNAM
       TYPE OBSCHDTYPE
-         INTEGER,            POINTER ::NQCH,NQCCH,NQTCH,IUCHOBSV,IPRT
+         INTEGER,POINTER:: NQCH
+         INTEGER,POINTER:: NQCCH
+         INTEGER,POINTER:: NQTCH
+         INTEGER,POINTER:: IUCHOBSV
+         INTEGER,POINTER:: IPRT
          INTEGER,     DIMENSION(:),  POINTER ::NQOBCH
          INTEGER,     DIMENSION(:),  POINTER ::NQCLCH
          INTEGER,     DIMENSION(:),  POINTER ::IOBTS
@@ -37,6 +46,32 @@
      &                  IOUT,ITRSS
       USE OBSCHDMODULE
 !
+      IMPLICIT NONE
+      REAL :: DUM
+      INTEGER :: I
+      INTEGER :: IDUM
+      INTEGER :: IERR
+      INTEGER :: IFCTFLG
+      INTEGER :: IGRID
+      INTEGER :: IQ
+      INTEGER :: IREFSP
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: IUCHOB
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: L
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NC
+      INTEGER :: NC1
+      INTEGER :: NC2
+      INTEGER :: NT
+      INTEGER :: NT1
+      INTEGER :: NT2
+      REAL :: TOFFSET
+      REAL :: TOMULTCH
+      REAL :: ZERO
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
       ALLOCATE(NQCH,NQTCH,NQCCH,IUCHOBSV,IPRT)
@@ -189,6 +224,22 @@
       USE OBSBASMODULE,ONLY:ITS
       USE OBSCHDMODULE
 !
+      IMPLICIT NONE
+      REAL :: FACT
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: IQ
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KKPER
+      INTEGER :: N
+      INTEGER :: NC
+      INTEGER :: NC1
+      INTEGER :: NC2
+      INTEGER :: NT
+      INTEGER :: NT1
+      INTEGER :: NT2
+      REAL :: ZERO
       DOUBLE PRECISION RATE
 !     ------------------------------------------------------------------
       CALL SOBS2CHD7PNT(IGRID)
@@ -268,7 +319,22 @@
      &                       NCOL,NROW,NLAY,LAYHDT,LBOTM
       USE GWFBASMODULE, ONLY:ICHFLG
 !
-      DOUBLE PRECISION HD,X1,X2,X3,X4,X5,X6,RATE
+      IMPLICIT NONE
+      REAL :: HDIFF
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: K
+      REAL :: TMP
+      REAL :: TOP
+      REAL :: ZERO
+      DOUBLE PRECISION HD
+      DOUBLE PRECISION X1
+      DOUBLE PRECISION X2
+      DOUBLE PRECISION X3
+      DOUBLE PRECISION X4
+      DOUBLE PRECISION X5
+      DOUBLE PRECISION X6
+      DOUBLE PRECISION RATE
 !     ------------------------------------------------------------------
 !
 !6------CLEAR VALUES FOR FLOW RATE THROUGH EACH FACE OF CELL.
@@ -355,7 +421,12 @@
 !     ------------------------------------------------------------------
       USE GLOBAL, ONLY: IOUT
       USE OBSCHDMODULE
-      DOUBLE PRECISION SQ,SUMSQ
+      IMPLICIT NONE
+      REAL :: DIFF
+      INTEGER :: IGRID
+      INTEGER :: N
+      DOUBLE PRECISION SQ
+      DOUBLE PRECISION SUMSQ
 !     ------------------------------------------------------------------
       CALL SOBS2CHD7PNT(IGRID)
 !
@@ -389,6 +460,8 @@
 !  Deallocate OBSCHD memory
       USE OBSCHDMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       DEALLOCATE(NQCH)
       DEALLOCATE(NQTCH)
       DEALLOCATE(NQCCH)
@@ -410,6 +483,8 @@
 !  Change OBSCHD data to a different grid.
       USE OBSCHDMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       NQCH=>OBSCHDDAT(IGRID)%NQCH
       NQTCH=>OBSCHDDAT(IGRID)%NQTCH
       NQCCH=>OBSCHDDAT(IGRID)%NQCCH
@@ -431,6 +506,8 @@
 !  Save OBSCHD data for a grid.
       USE OBSCHDMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       OBSCHDDAT(IGRID)%NQCH=>NQCH
       OBSCHDDAT(IGRID)%NQTCH=>NQTCH
       OBSCHDDAT(IGRID)%NQCCH=>NQCCH

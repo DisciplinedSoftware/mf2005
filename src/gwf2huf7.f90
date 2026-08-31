@@ -1,6 +1,12 @@
       MODULE GWFHUFMODULE
-        INTEGER, SAVE,   POINTER ::IHUFCB,NHUF,NPHUF,IWETIT,IHDWET,&
-     &                             IOHUFHDS,IOHUFFLWS
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: IHUFCB
+        INTEGER,SAVE,POINTER:: NHUF
+        INTEGER,SAVE,POINTER:: NPHUF
+        INTEGER,SAVE,POINTER:: IWETIT
+        INTEGER,SAVE,POINTER:: IHDWET
+        INTEGER,SAVE,POINTER:: IOHUFHDS
+        INTEGER,SAVE,POINTER:: IOHUFFLWS
         REAL,    SAVE,   POINTER ::WETFCT
         CHARACTER(LEN=10),SAVE, POINTER, DIMENSION(:)     ::HGUNAM
         INTEGER, SAVE,   POINTER, DIMENSION(:)     ::LTHUF
@@ -14,7 +20,8 @@
         REAL,    SAVE,   POINTER, DIMENSION(:)     ::HUFSY
         REAL,    SAVE,   POINTER, DIMENSION(:)     ::HUFHANI
         REAL,    SAVE,   POINTER, DIMENSION(:)     ::HUFKDEP
-        REAL,    SAVE,   POINTER, DIMENSION(:,:)   ::GS,SC2HUF
+        REAL,SAVE,POINTER,DIMENSION(:,:):: GS
+        REAL,SAVE,POINTER,DIMENSION(:,:):: SC2HUF
         REAL,    SAVE,   POINTER, DIMENSION(:,:,:) ::VKAH
         REAL,    SAVE,   POINTER, DIMENSION(:,:,:) ::SC1
         REAL,    SAVE,   POINTER, DIMENSION(:,:,:) ::WETDRY
@@ -26,8 +33,13 @@
         REAL,    SAVE,   POINTER, DIMENSION(:,:,:,:) ::VDHT
         REAL,    SAVE,   POINTER, DIMENSION(:,:,:,:) ::A9
       TYPE GWFHUFTYPE
-        INTEGER, POINTER ::IHUFCB,NHUF,NPHUF,IWETIT,IHDWET,&
-     &                     IOHUFHDS,IOHUFFLWS
+        INTEGER,POINTER:: IHUFCB
+        INTEGER,POINTER:: NHUF
+        INTEGER,POINTER:: NPHUF
+        INTEGER,POINTER:: IWETIT
+        INTEGER,POINTER:: IHDWET
+        INTEGER,POINTER:: IOHUFHDS
+        INTEGER,POINTER:: IOHUFFLWS
         REAL, POINTER    ::WETFCT
         CHARACTER(LEN=10), POINTER, DIMENSION(:)     ::HGUNAM
         INTEGER,   POINTER, DIMENSION(:)     ::LTHUF
@@ -41,7 +53,8 @@
         REAL,      POINTER, DIMENSION(:)     ::HUFSY
         REAL,      POINTER, DIMENSION(:)     ::HUFHANI
         REAL,      POINTER, DIMENSION(:)     ::HUFKDEP
-        REAL,      POINTER, DIMENSION(:,:)   ::GS,SC2HUF
+        REAL,POINTER,DIMENSION(:,:):: GS
+        REAL,POINTER,DIMENSION(:,:):: SC2HUF
         REAL,      POINTER, DIMENSION(:,:,:) ::VKAH
         REAL,      POINTER, DIMENSION(:,:,:) ::SC1
         REAL,      POINTER, DIMENSION(:,:,:) ::WETDRY
@@ -74,9 +87,56 @@
      &                      HUFSY,HUFHANI,HUFKDEP,GS,VKAH,SC1,WETDRY,HK,&
      &                      HKCC,HUFTMP,VDHD,HUFTHK,VDHT,A9,SC2HUF
 
-      CHARACTER*10 TMPNAM,CTMP1
-      CHARACTER*14 LAYPRN(5),TYPNAM(2),VKANAM(2),WETNAM(2),HANNAM,&
-     &             LAYPRN2
+      IMPLICIT NONE
+      REAL :: BOT
+      REAL :: CHCOF
+      REAL :: CRHS
+      REAL :: HANITMP
+      REAL :: HO
+      INTEGER :: I
+      INTEGER :: ICODE
+      INTEGER :: IFKDEP
+      INTEGER :: IGRID
+      INTEGER :: IKDEP
+      INTEGER :: ILVDA
+      INTEGER :: IN
+      INTEGER :: ISS
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: IU
+      INTEGER :: IWDFLG
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KK
+      INTEGER :: KLAYFLG
+      INTEGER :: KPER
+      INTEGER :: LINELEN
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NCNVRT
+      INTEGER :: NNU
+      INTEGER :: NPKDEP
+      INTEGER :: NPLVDA
+      INTEGER :: NPSS
+      INTEGER :: NPSY
+      INTEGER :: NPSYTP
+      INTEGER :: NU
+      INTEGER :: NWETD
+      REAL :: R
+      REAL :: TOP
+      REAL :: VANITMP
+      CHARACTER*10 TMPNAM
+      CHARACTER*10 CTMP1
+      CHARACTER*14 LAYPRN(5)
+      CHARACTER*14 TYPNAM(2)
+      SAVE :: TYPNAM
+      CHARACTER*14 VKANAM(2)
+      SAVE :: VKANAM
+      CHARACTER*14 WETNAM(2)
+      SAVE :: WETNAM
+      CHARACTER*14 HANNAM
+      SAVE :: HANNAM
+      CHARACTER*14 LAYPRN2
       DATA TYPNAM/'      CONFINED','   CONVERTIBLE'/
       DATA VKANAM/'    VERTICAL K','    ANISOTROPY'/
       DATA WETNAM/'  NON-WETTABLE','      WETTABLE'/
@@ -86,6 +146,7 @@
 !
       CHARACTER*200 LINE
       CHARACTER*24 ANAME(8)
+      SAVE :: ANAME
       CHARACTER*4 PTYP
       DOUBLE PRECISION HN
 !
@@ -603,6 +664,14 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,      ONLY:NCOL,NROW,IOUT
       USE GWFHUFMODULE,ONLY:NHUF,HUFTHK,HGUNAM
+      IMPLICIT NONE
+      INTEGER :: IN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: LLOC
+      INTEGER :: M
+      INTEGER :: N
+      REAL :: R
       CHARACTER*200 LINE
       CHARACTER*24 ANAME
 !     ------------------------------------------------------------------
@@ -646,8 +715,28 @@
      &                      WETDRY,HUFTHK,HKCC,HUFHK,HUFHANI,HUFVK,&
      &                      HUFSS,IHGUFLG,HUFSY,VDHD,HUFTMP,VDHT,&
      &                      HUFKDEP,GS,A9,HGUHANI,HGUVANI,HGUNAM
+      IMPLICIT NONE
+      REAL :: BOTU
+      INTEGER :: I
+      INTEGER :: IA
+      INTEGER :: IFLG
+      INTEGER :: ILVDA
+      INTEGER :: IP
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KB
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: KT
+      INTEGER :: NK
+      INTEGER :: NU
+      REAL :: THCKU
+      REAL :: TOPU
       CHARACTER*4 PTYPE(6)
+      SAVE :: PTYPE
       CHARACTER*24 ANAME(6)
+      SAVE :: ANAME
 !
 !
       DATA ANAME(1) /'   HYD. COND. ALONG ROWS'/
@@ -859,11 +948,42 @@
       USE GLOBAL,      ONLY:LBOTM
       USE GWFHUFMODULE,ONLY:LTHUF
 
+      IMPLICIT NONE
+      REAL :: BOT1
+      REAL :: BOTL
+      REAL :: BOTM
+      REAL :: BOTU
+      REAL :: GS
+      REAL :: HK
+      REAL :: HKCC
+      REAL :: HKCR
+      REAL :: HUFHANI
+      REAL :: HUFHK
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: KB
+      INTEGER :: KL
+      INTEGER :: KT
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NHUF
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      INTEGER :: NU
+      REAL :: THCK
+      REAL :: TOP1
+      REAL :: TOPL
+      REAL :: TOPU
       DOUBLE PRECISION HNEW
-      REAL LAMBDA,MULTKDEP
-      DIMENSION HK(NCOL,NROW,NLAY),HKCC(NCOL,NROW,NLAY),&
-     &  HUFHK(NHUF),BOTM(NCOL,NROW,0:NBOTM),HUFHANI(NHUF),&
-     &  HNEW(NCOL,NROW,NLAY),GS(NCOL,NROW)
+      REAL LAMBDA
+      REAL MULTKDEP
+      DIMENSION HK(NCOL,NROW,NLAY)
+      DIMENSION HKCC(NCOL,NROW,NLAY)
+      DIMENSION HUFHK(NHUF)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION HUFHANI(NHUF)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION GS(NCOL,NROW)
 !     ------------------------------------------------------------------
 !
       MULTKDEP = 1.0
@@ -921,11 +1041,44 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,      ONLY:LBOTM
       USE GWFHUFMODULE,ONLY:LTHUF,HGUVANI
+      IMPLICIT NONE
+      REAL :: BOTM
+      REAL :: BOTU
+      REAL :: GS
+      REAL :: HUFHK
+      REAL :: HUFVK
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: IFLG
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: KB
+      INTEGER :: KL
+      INTEGER :: KT
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NHUF
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      INTEGER :: NU
+      REAL :: THCK
+      REAL :: TOPU
+      REAL :: VKAH
       DOUBLE PRECISION HNEW
-      REAL TOP1,TOP2,TOP3,RMID1,RMID2,LAMBDA,MULTKDEP
-      DIMENSION HNEW(NCOL,NROW,NLAY),BOTM(NCOL,NROW,0:NBOTM),&
-     &  VKAH(NCOL,NROW,NLAY),HUFHK(NHUF),HUFVK(NHUF),&
-     &  IBOUND(NCOL,NROW,NLAY),GS(NCOL,NROW)
+      REAL TOP1
+      REAL TOP2
+      REAL TOP3
+      REAL RMID1
+      REAL RMID2
+      REAL LAMBDA
+      REAL MULTKDEP
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION VKAH(NCOL,NROW,NLAY)
+      DIMENSION HUFHK(NHUF)
+      DIMENSION HUFVK(NHUF)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION GS(NCOL,NROW)
 !     ------------------------------------------------------------------
 
       CALL SGWF2HUF7VSRCH(NCOL,NROW,NLAY,BOTM,NBOTM,I,J,TOPU,BOTU,&
@@ -1002,11 +1155,39 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,      ONLY:LBOTM
       USE GWFHUFMODULE,ONLY:HGUVANI,HUFHK,HUFVK,HUFKDEP
+      IMPLICIT NONE
+      REAL :: ABTU
+      REAL :: ATPU
+      REAL :: BOTM
+      REAL :: BOTU
+      REAL :: GS
+      REAL :: HUFTHK
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: IFLG
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: KB
+      INTEGER :: KL
+      INTEGER :: KT
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NHUF
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      INTEGER :: NU
+      REAL :: THCK
+      REAL :: THCKU
+      REAL :: TOPU
+      REAL :: VK
       DOUBLE PRECISION HNEW
       REAL MULTKDEP
-      DIMENSION HNEW(NCOL,NROW,NLAY),BOTM(NCOL,NROW,0:NBOTM),&
-     &  VK(NCOL,NROW),&
-     &  IBOUND(NCOL,NROW,NLAY),GS(NCOL,NROW),HUFTHK(NCOL,NROW,NHUF,2)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION VK(NCOL,NROW)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION GS(NCOL,NROW)
+      DIMENSION HUFTHK(NCOL,NROW,NHUF,2)
 !     ------------------------------------------------------------------
 
       DO 100 NU=1,NHUF
@@ -1080,9 +1261,30 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,      ONLY:LBOTM
       USE GWFHUFMODULE,ONLY:LTHUF
+      IMPLICIT NONE
+      REAL :: BOTM
+      REAL :: BOTU
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: IFLG
+      INTEGER :: J
+      INTEGER :: KB
+      INTEGER :: KKB
+      INTEGER :: KT
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: RMID1
+      REAL :: RMID2
+      REAL :: TOP1
+      REAL :: TOP2
+      REAL :: TOP3
+      REAL :: TOPU
       DOUBLE PRECISION HNEW
-      DIMENSION HNEW(NCOL,NROW,NLAY),BOTM(NCOL,NROW,0:NBOTM),&
-     &  IBOUND(NCOL,NROW,NLAY)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
 !
 ! Reset IFLG
       IFLG=1
@@ -1162,9 +1364,27 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,      ONLY:LBOTM
       USE GWFHUFMODULE,ONLY:LTHUF
+      IMPLICIT NONE
+      REAL :: BOTM
+      REAL :: BOTU
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: IFLG
+      INTEGER :: IHNEW
+      INTEGER :: J
+      INTEGER :: KB
+      INTEGER :: KKB
+      INTEGER :: KT
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: TOP
+      REAL :: TOPU
       DOUBLE PRECISION HNEW
-      DIMENSION HNEW(NCOL,NROW,NLAY),BOTM(NCOL,NROW,0:NBOTM),&
-     &  IBOUND(NCOL,NROW,NLAY)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
 !
 ! Reset IFLG
       IHNEW=IFLG
@@ -1246,8 +1466,27 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE GLOBAL,      ONLY:LBOTM
-      DIMENSION BOTM(NCOL,NROW,0:NBOTM),HUFSS(NHUF),&
-     &  SC1(NCOL,NROW,NLAY)
+      IMPLICIT NONE
+      REAL :: BOTM
+      REAL :: BOTU
+      REAL :: HUFSS
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: KB
+      INTEGER :: KL
+      INTEGER :: KT
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NHUF
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      INTEGER :: NU
+      REAL :: SC1
+      REAL :: THCK
+      REAL :: TOPU
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION HUFSS(NHUF)
+      DIMENSION SC1(NCOL,NROW,NLAY)
 !     ------------------------------------------------------------------
 
       IF(KT.EQ.KB) THEN
@@ -1284,11 +1523,34 @@
       USE GWFBASMODULE,ONLY:HNOFLO
       USE GWFHUFMODULE,ONLY:LAYWT
 !
+      IMPLICIT NONE
+      REAL :: BOTM
+      REAL :: HCNV
+      REAL :: HK
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: IOUT
+      INTEGER :: IZFLG
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KB
+      INTEGER :: KT
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: THICK
+      REAL :: VKAH
+      REAL :: WETDRY
+      REAL :: ZERO
       DOUBLE PRECISION HNEW
 !
-      DIMENSION HNEW(NCOL,NROW,NLAY),IBOUND(NCOL,NROW,NLAY),&
-     &    HK(NCOL,NROW,NLAY),VKAH(NCOL,NROW,NLAY),&
-     &    WETDRY(NCOL,NROW,NLAY),BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION HK(NCOL,NROW,NLAY)
+      DIMENSION VKAH(NCOL,NROW,NLAY)
+      DIMENSION WETDRY(NCOL,NROW,NLAY)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
 !
 !     ------------------------------------------------------------------
       ZERO=0.
@@ -1392,12 +1654,41 @@
       USE GLOBAL,      ONLY:LBOTM
       USE GWFHUFMODULE,ONLY:LTHUF
 !
+      IMPLICIT NONE
+      REAL :: BOT
+      REAL :: BOTM
+      REAL :: CC
+      REAL :: CR
+      REAL :: DELC
+      REAL :: DELR
+      REAL :: HDRY
+      REAL :: HK
+      REAL :: HKCC
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KITER
+      INTEGER :: KK
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: TOP
       DOUBLE PRECISION HNEW
 !
-      DIMENSION HNEW(NCOL,NROW,NLAY),IBOUND(NCOL,NROW,NLAY),&
-     &    CR(NCOL,NROW,NLAY),CC(NCOL,NROW,NLAY),&
-     &    HK(NCOL,NROW,NLAY), DELR(NCOL),DELC(NROW),&
-     &    BOTM(NCOL,NROW,0:NBOTM),HKCC(NCOL,NROW,NLAY)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION CR(NCOL,NROW,NLAY)
+      DIMENSION CC(NCOL,NROW,NLAY)
+      DIMENSION HK(NCOL,NROW,NLAY)
+      DIMENSION DELR(NCOL)
+      DIMENSION DELC(NROW)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION HKCC(NCOL,NROW,NLAY)
 !
 !     ------------------------------------------------------------------
 !
@@ -1436,9 +1727,23 @@
 !     ------------------------------------------------------------------
 !
 !
-      DIMENSION IBOUND(NCOL,NROW,NLAY),&
-     &    CV(NCOL,NROW,NLAY),VKAH(NCOL,NROW,NLAY),&
-     &    DELR(NCOL),DELC(NROW)
+      IMPLICIT NONE
+      REAL :: CV
+      REAL :: DELC
+      REAL :: DELR
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: VKAH
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION CV(NCOL,NROW,NLAY)
+      DIMENSION VKAH(NCOL,NROW,NLAY)
+      DIMENSION DELR(NCOL)
+      DIMENSION DELC(NROW)
 !     ------------------------------------------------------------------
 !
 !5------CALCULATE VERTICAL CONDUCTANCE
@@ -1470,8 +1775,23 @@
       USE PARAMMODULE
       USE GWFHUFMODULE,ONLY:LTHUF
 !
-      DIMENSION IBOUND(NCOL,NROW,NLAY),&
-     &    SC1(NCOL,NROW,NLAY)
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: IPFLG
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: ND
+      INTEGER :: NLAY
+      INTEGER :: NM
+      INTEGER :: NP
+      INTEGER :: NROW
+      INTEGER :: NZ
+      REAL :: RMLT0
+      REAL :: SC1
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION SC1(NCOL,NROW,NLAY)
 !     ------------------------------------------------------------------
 !
 !
@@ -1534,8 +1854,21 @@
 !     ------------------------------------------------------------------
 !
 !
-      DIMENSION IBOUND(NCOL,NROW,NLAY),&
-     &    SC1(NCOL,NROW,NLAY),DELR(NCOL),DELC(NROW)
+      IMPLICIT NONE
+      REAL :: DELC
+      REAL :: DELR
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: SC1
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION SC1(NCOL,NROW,NLAY)
+      DIMENSION DELR(NCOL)
+      DIMENSION DELC(NROW)
 !     ------------------------------------------------------------------
 !
       DO 70 K=1,NLAY
@@ -1560,15 +1893,51 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,      ONLY:LBOTM
       USE GWFHUFMODULE,ONLY:LTHUF,LAYWT
-      DOUBLE PRECISION HNEW,HHD,BBOT,TTOP
+      IMPLICIT NONE
+      REAL :: BOTM
+      REAL :: CC
+      REAL :: CR
+      REAL :: DELC
+      REAL :: DELR
+      REAL :: HDRY
+      REAL :: HK
+      REAL :: HKCC
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: ICNVRT
+      INTEGER :: IHDCNV
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: JCNVRT
+      INTEGER :: K
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NBOTM
+      INTEGER :: NCNVRT
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: THCK
+      REAL :: ZERO
+      DOUBLE PRECISION HNEW
+      DOUBLE PRECISION HHD
+      DOUBLE PRECISION BBOT
+      DOUBLE PRECISION TTOP
 !
-      DIMENSION HNEW(NCOL,NROW,NLAY),IBOUND(NCOL,NROW,NLAY),&
-     & CR(NCOL,NROW,NLAY), CC(NCOL,NROW,NLAY), HK(NCOL,NROW,NLAY),&
-     & DELR(NCOL), DELC(NROW),&
-     & BOTM(NCOL,NROW,0:NBOTM),&
-     & HKCC(NCOL,NROW,NLAY)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION CR(NCOL,NROW,NLAY)
+      DIMENSION CC(NCOL,NROW,NLAY)
+      DIMENSION HK(NCOL,NROW,NLAY)
+      DIMENSION DELR(NCOL)
+      DIMENSION DELC(NROW)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION HKCC(NCOL,NROW,NLAY)
       CHARACTER*3 ACNVRT
-      DIMENSION ICNVRT(5),JCNVRT(5),ACNVRT(5)
+      DIMENSION ICNVRT(5)
+      DIMENSION JCNVRT(5)
+      DIMENSION ACNVRT(5)
 !     ------------------------------------------------------------------
 !1------INITIALIZE DATA.
       ZERO=0.
@@ -1651,13 +2020,47 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,      ONLY:LBOTM
       USE GWFHUFMODULE,ONLY:LTHUF,LAYWT
-      DOUBLE PRECISION HNEW,HHD,BBOT,TTOP
+      IMPLICIT NONE
+      REAL :: BOTM
+      REAL :: CC
+      REAL :: HDRY
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: ICNVRT
+      INTEGER :: IHDCNV
+      INTEGER :: IHDWET
+      INTEGER :: IOUT
+      INTEGER :: ITFLG
+      INTEGER :: IWETIT
+      INTEGER :: J
+      INTEGER :: JCNVRT
+      INTEGER :: K
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NBOTM
+      INTEGER :: NCNVRT
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: THCK
+      REAL :: WETDRY
+      REAL :: WETFCT
+      REAL :: ZERO
+      DOUBLE PRECISION HNEW
+      DOUBLE PRECISION HHD
+      DOUBLE PRECISION BBOT
+      DOUBLE PRECISION TTOP
 !
-      DIMENSION HNEW(NCOL,NROW,NLAY),IBOUND(NCOL,NROW,NLAY),&
-     & CC(NCOL,NROW,NLAY),&
-     & BOTM(NCOL,NROW,0:NBOTM),WETDRY(NCOL,NROW,NLAY)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION CC(NCOL,NROW,NLAY)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION WETDRY(NCOL,NROW,NLAY)
       CHARACTER*3 ACNVRT
-      DIMENSION ICNVRT(5),JCNVRT(5),ACNVRT(5)
+      DIMENSION ICNVRT(5)
+      DIMENSION JCNVRT(5)
+      DIMENSION ACNVRT(5)
 !     ------------------------------------------------------------------
 !1------INITIALIZE DATA.
       ZERO=0.
@@ -1747,6 +2150,14 @@
       USE GWFHUFMODULE,ONLY:LAYWT,WETDRY
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: ISS
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      REAL :: ZERO
       CALL SGWF2HUF7PNT(IGRID)
       ISS=ISSFLG(KPER)
 !
@@ -1792,12 +2203,41 @@
       USE GLOBAL,      ONLY:LBOTM
       USE GWFHUFMODULE,ONLY:LAYWT
 !
+      IMPLICIT NONE
+      REAL :: BOTM
+      REAL :: HTMP
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: ICNVRT
+      INTEGER :: IHDCNV
+      INTEGER :: IHDWET
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: JCNVRT
+      INTEGER :: K
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NBOTM
+      INTEGER :: NCNVRT
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: TURNON
+      REAL :: WD
+      REAL :: WETDRY
+      REAL :: WETFCT
+      REAL :: ZERO
       DOUBLE PRECISION HNEW
 !
-      DIMENSION HNEW(NCOL,NROW,NLAY),IBOUND(NCOL,NROW,NLAY),&
-     &          BOTM(NCOL,NROW,0:NBOTM),WETDRY(NCOL,NROW,NLAY)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION WETDRY(NCOL,NROW,NLAY)
       CHARACTER*3 ACNVRT
-      DIMENSION ICNVRT(5),JCNVRT(5),ACNVRT(5)
+      DIMENSION ICNVRT(5)
+      DIMENSION JCNVRT(5)
+      DIMENSION ACNVRT(5)
 !     ------------------------------------------------------------------
       ZERO=0.0
 !
@@ -1880,8 +2320,24 @@
 !
 !      SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: ICNVRT
+      INTEGER :: ICODE
+      INTEGER :: IHDCNV
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: JCNVRT
+      INTEGER :: K
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: L
+      INTEGER :: NCNVRT
       CHARACTER*3 ACNVRT
-      DIMENSION ICNVRT(5),JCNVRT(5),ACNVRT(5)
+      DIMENSION ICNVRT(5)
+      DIMENSION JCNVRT(5)
+      DIMENSION ACNVRT(5)
 !     ------------------------------------------------------------------
 !1------KEEP TRACK OF CELL CONVERSIONS.
       IF(ICODE.GT.0) THEN
@@ -1923,10 +2379,32 @@
 !
 !      SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION CR(NCOL,NROW,NLAY),CC(NCOL,NROW,NLAY),&
-     &          HK(NCOL,NROW,NLAY),&
-     &          IBOUND(NCOL,NROW,NLAY),DELR(NCOL),DELC(NROW),&
-     &          HKCC(NCOL,NROW,NLAY)
+      IMPLICIT NONE
+      REAL :: CC
+      REAL :: CR
+      REAL :: DELC
+      REAL :: DELR
+      REAL :: HK
+      REAL :: HKCC
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: T1C
+      REAL :: T1R
+      REAL :: T2
+      REAL :: TWO
+      REAL :: ZERO
+      DIMENSION CR(NCOL,NROW,NLAY)
+      DIMENSION CC(NCOL,NROW,NLAY)
+      DIMENSION HK(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION DELR(NCOL)
+      DIMENSION DELC(NROW)
+      DIMENSION HKCC(NCOL,NROW,NLAY)
 !     ------------------------------------------------------------------
       ZERO=0.
       TWO=2.
@@ -1994,6 +2472,26 @@
       USE GWFBASMODULE,ONLY:DELT
       USE GWFHUFMODULE,ONLY:LTHUF,SC1,NHUF,HUFTHK,VDHT,A9
 
+      IMPLICIT NONE
+      REAL :: BOT
+      REAL :: CHCOF
+      REAL :: CRHS
+      REAL :: HO
+      REAL :: HTMP
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: ILVDA
+      INTEGER :: ISS
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KITER
+      INTEGER :: KLAYFLG
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      REAL :: ONE
+      REAL :: RHO
+      REAL :: TLED
+      REAL :: TOP
       DOUBLE PRECISION HN
 !     ------------------------------------------------------------------
       CALL SGWF2HUF7PNT(IGRID)
@@ -2136,8 +2634,34 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
+      IMPLICIT NONE
+      REAL :: BNP
+      REAL :: HO
+      REAL :: HUFTHK
+      INTEGER :: I
+      INTEGER :: IFND
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: ND
+      INTEGER :: NHUF
+      INTEGER :: NM
+      INTEGER :: NP
+      INTEGER :: NROW
+      INTEGER :: NU
+      INTEGER :: NZ
+      REAL :: RMLT0
+      REAL :: TLED
       DOUBLE PRECISION HN
-      REAL TOPU, BOTU, THCKU, TOP, BOT, CHCOF, CRHS, AREA
+      REAL TOPU
+      REAL BOTU
+      REAL THCKU
+      REAL TOP
+      REAL BOT
+      REAL CHCOF
+      REAL CRHS
+      REAL AREA
       INTEGER IFLG
       DIMENSION HUFTHK(NCOL,NROW,NHUF,2)
 !     ------------------------------------------------------------------
@@ -2263,8 +2787,34 @@
       USE GWFBASMODULE,ONLY:MSUM,ICBCFL,VBVL,VBNM,DELT,PERTIM,TOTIM
       USE GWFHUFMODULE,ONLY:LTHUF,SC1,IHUFCB,HUFTHK,NHUF
 
+      IMPLICIT NONE
+      REAL :: BOT
+      REAL :: CHCOF
+      REAL :: HO
+      INTEGER :: I
+      INTEGER :: IBD
+      INTEGER :: IGRID
+      INTEGER :: ISS
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: KT
+      INTEGER :: LC
+      REAL :: ONE
+      REAL :: RHO
+      REAL :: SIN
+      REAL :: SOUT
+      REAL :: STRG
+      REAL :: TLED
+      REAL :: TOP
+      REAL :: ZERO
       CHARACTER*16 TEXT
-      DOUBLE PRECISION STOIN,STOUT,SSTRG,HN
+      SAVE :: TEXT
+      DOUBLE PRECISION STOIN
+      DOUBLE PRECISION STOUT
+      DOUBLE PRECISION SSTRG
+      DOUBLE PRECISION HN
 !
       DATA TEXT /'         STORAGE'/
 !     ------------------------------------------------------------------
@@ -2376,8 +2926,40 @@
       USE GWFBASMODULE,ONLY:DELT,PERTIM,TOTIM,ICBCFL,ICHFLG
       USE GWFHUFMODULE,ONLY:LTHUF,IHUFCB,VDHT
 
+      IMPLICIT NONE
+      REAL :: HDIFF
+      INTEGER :: I
+      INTEGER :: I1
+      INTEGER :: I2
+      INTEGER :: IBD
+      INTEGER :: IBDRET
+      INTEGER :: IC1
+      INTEGER :: IC2
+      INTEGER :: IDIR
+      INTEGER :: IGRID
+      INTEGER :: IL1
+      INTEGER :: IL2
+      INTEGER :: ILVDA
+      INTEGER :: IR1
+      INTEGER :: IR2
+      INTEGER :: J
+      INTEGER :: J1
+      INTEGER :: J2
+      INTEGER :: K
+      INTEGER :: K1
+      INTEGER :: K2
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      REAL :: TMP
+      REAL :: TOP
+      REAL :: ZERO
       CHARACTER*16 TEXT(3)
-      DOUBLE PRECISION HD,DFL,DFR,DFT,DFB
+      SAVE :: TEXT
+      DOUBLE PRECISION HD
+      DOUBLE PRECISION DFL
+      DOUBLE PRECISION DFR
+      DOUBLE PRECISION DFT
+      DOUBLE PRECISION DFB
 !
       DATA TEXT(1),TEXT(2),TEXT(3)&
      & /'FLOW RIGHT FACE ','FLOW FRONT FACE ','FLOW LOWER FACE '/
@@ -2569,9 +3151,51 @@
      &                      ICHFLG
       USE GWFHUFMODULE,ONLY:LTHUF,IHUFCB,VDHT
 
+      IMPLICIT NONE
+      REAL :: CHCH1
+      REAL :: CHCH2
+      REAL :: CHCH3
+      REAL :: CHCH4
+      REAL :: CHCH5
+      REAL :: CHCH6
+      REAL :: CIN
+      REAL :: COUT
+      REAL :: HDIFF
+      INTEGER :: I
+      INTEGER :: IBD
+      INTEGER :: IBDLBL
+      INTEGER :: IGRID
+      INTEGER :: ILVDA
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NCH
+      REAL :: RATE
+      REAL :: TMP
+      REAL :: TOP
+      REAL :: X1
+      REAL :: X2
+      REAL :: X3
+      REAL :: X4
+      REAL :: X5
+      REAL :: X6
+      REAL :: ZERO
       CHARACTER*16 TEXT
-      DOUBLE PRECISION HD,CHIN,CHOUT,XX1,XX2,XX3,XX4,XX5,XX6
-      DOUBLE PRECISION DFL,DFR,DFT,DFB
+      SAVE :: TEXT
+      DOUBLE PRECISION HD
+      DOUBLE PRECISION CHIN
+      DOUBLE PRECISION CHOUT
+      DOUBLE PRECISION XX1
+      DOUBLE PRECISION XX2
+      DOUBLE PRECISION XX3
+      DOUBLE PRECISION XX4
+      DOUBLE PRECISION XX5
+      DOUBLE PRECISION XX6
+      DOUBLE PRECISION DFL
+      DOUBLE PRECISION DFR
+      DOUBLE PRECISION DFT
+      DOUBLE PRECISION DFB
 !
       DATA TEXT /'   CONSTANT HEAD'/
 !     ------------------------------------------------------------------
@@ -2807,7 +3431,16 @@
 
       USE GWFHUFMODULE,ONLY:NHUF,HUFTHK,GS,IOHUFHDS,IOHUFFLWS,HGUNAM,&
      &                      HNWHGU=>HUFTMP
+      IMPLICIT NONE
+      INTEGER :: ICNVG
+      INTEGER :: IFIRST
+      INTEGER :: IGRID
+      INTEGER :: ISA
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NU
       CHARACTER*16 TEXT
+      SAVE :: TEXT
 
 !      CHARACTER*20 CHEDFM
 !      CHARACTER*10 HGUNAM
@@ -2894,12 +3527,73 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: BOTM
+      REAL :: BOTU
+      REAL :: CCB
+      REAL :: CCT
+      REAL :: CRL
+      REAL :: CRR
+      REAL :: CV
+      REAL :: CVB
+      REAL :: DELC
+      REAL :: DELR
+      REAL :: DELT
+      REAL :: GS
+      REAL :: HNWHGU
+      REAL :: HUFTHK
+      INTEGER :: I
+      INTEGER :: IB0
+      INTEGER :: IBB
+      INTEGER :: IBD
+      INTEGER :: IBOUND
+      INTEGER :: IBR
+      INTEGER :: ICHFLG
+      INTEGER :: ICNT
+      INTEGER :: IFLG
+      INTEGER :: IHUFCB
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: KB
+      INTEGER :: KL
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: KT
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NHUF
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      INTEGER :: NU
+      REAL :: PERTIM
+      REAL :: Q
+      REAL :: THCKU
+      REAL :: THK0
+      REAL :: THKB
+      REAL :: THKL
+      REAL :: THKR
+      REAL :: THKT
+      REAL :: TOPU
+      REAL :: TOTIM
       CHARACTER*16 TEXT(3)
-      DOUBLE PRECISION HNEW,H0,HXR,HYB,HZB,DHXR,DHYB,DHZB
-      DIMENSION HNEW(NCOL,NROW,NLAY),HNWHGU(NCOL,NROW,NHUF),&
-     &    IBOUND(NCOL,NROW,NLAY),BOTM(NCOL,NROW,0:NBOTM),&
-     &    DELR(NCOL),DELC(NROW),CV(NCOL,NROW,NLAY),&
-     &    HUFTHK(NCOL,NROW,NHUF,2),GS(NCOL,NROW)
+      SAVE :: TEXT
+      DOUBLE PRECISION HNEW
+      DOUBLE PRECISION H0
+      DOUBLE PRECISION HXR
+      DOUBLE PRECISION HYB
+      DOUBLE PRECISION HZB
+      DOUBLE PRECISION DHXR
+      DOUBLE PRECISION DHYB
+      DOUBLE PRECISION DHZB
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION HNWHGU(NCOL,NROW,NHUF)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION DELR(NCOL)
+      DIMENSION DELC(NROW)
+      DIMENSION CV(NCOL,NROW,NLAY)
+      DIMENSION HUFTHK(NCOL,NROW,NHUF,2)
+      DIMENSION GS(NCOL,NROW)
 !
       DATA TEXT(1),TEXT(2),TEXT(3)&
      & /'FLOW RIGHT FACE ','FLOW FRONT FACE ','FLOW LOWER FACE '/
@@ -3045,12 +3739,63 @@
       USE GLOBAL,      ONLY:LBOTM
       USE GWFHUFMODULE,ONLY:HGUVANI,HUFHK,HUFVK,HUFKDEP
 
-      REAL LAMBDA,MULTKDEP
-      DOUBLE PRECISION HNEW,HDIFF,QN
-      DIMENSION HNEW(NCOL,NROW,NLAY),HNWHGU(NCOL,NROW,NHUF),&
-     &    IBOUND(NCOL,NROW,NLAY),BOTM(NCOL,NROW,0:NBOTM),&
-     &    DELR(NCOL),DELC(NROW),CV(NCOL,NROW,NLAY),&
-     &    HUFTHK(NCOL,NROW,NHUF,2),INDX(NHUF),GS(NCOL,NROW)
+      IMPLICIT NONE
+      REAL :: BOTKB
+      REAL :: BOTKL
+      REAL :: BOTM
+      REAL :: BOTU
+      REAL :: CV
+      REAL :: CVKB
+      REAL :: CVKL
+      REAL :: CVKT
+      REAL :: DELC
+      REAL :: DELR
+      REAL :: DRDC
+      REAL :: GS
+      REAL :: HNOFLO
+      REAL :: HNWHGU
+      REAL :: HUFTHK
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: IFLG
+      INTEGER :: IFRST
+      INTEGER :: INDX
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: KB
+      INTEGER :: KL
+      INTEGER :: KT
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NHUF
+      INTEGER :: NLAY
+      INTEGER :: NNU
+      INTEGER :: NROW
+      INTEGER :: NU
+      REAL :: RMIDKB
+      REAL :: RMIDKL
+      REAL :: RMIDKT
+      REAL :: RMIDU
+      REAL :: THCKU
+      REAL :: TOPKB
+      REAL :: TOPKL
+      REAL :: TOPU
+      REAL :: VK
+      REAL LAMBDA
+      REAL MULTKDEP
+      DOUBLE PRECISION HNEW
+      DOUBLE PRECISION HDIFF
+      DOUBLE PRECISION QN
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION HNWHGU(NCOL,NROW,NHUF)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION DELR(NCOL)
+      DIMENSION DELC(NROW)
+      DIMENSION CV(NCOL,NROW,NLAY)
+      DIMENSION HUFTHK(NCOL,NROW,NHUF,2)
+      DIMENSION INDX(NHUF)
+      DIMENSION GS(NCOL,NROW)
 !     ------------------------------------------------------------------
 !
 !-----LOOP THROUGH ROWS AND COLUMNS
@@ -3201,13 +3946,71 @@
       USE GLOBAL,      ONLY:LBOTM
       USE GWFHUFMODULE,ONLY:LTHUF
 
+      IMPLICIT NONE
+      REAL :: BOTM
+      REAL :: BOTU
+      REAL :: CCB
+      REAL :: CCT
+      REAL :: CHCH1
+      REAL :: CHCH2
+      REAL :: CHCH3
+      REAL :: CHCH4
+      REAL :: CHCH5
+      REAL :: CHCH6
+      REAL :: CRL
+      REAL :: CRR
+      REAL :: CV
+      REAL :: DELC
+      REAL :: DELR
+      REAL :: GS
+      REAL :: H0
+      REAL :: HNWHGU
+      REAL :: HUFTHK
+      INTEGER :: I
+      INTEGER :: IBD
+      INTEGER :: IBOUND
+      INTEGER :: ICHFLG
+      INTEGER :: IFLG
+      INTEGER :: IHUFCB
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KB
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: KT
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NHUF
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      INTEGER :: NU
+      REAL :: RATE
+      REAL :: THCKU
+      REAL :: THK0
+      REAL :: THKB
+      REAL :: THKL
+      REAL :: THKR
+      REAL :: THKT
+      REAL :: TMP
+      REAL :: TOP
+      REAL :: TOPU
+      REAL :: ZERO
       CHARACTER*16 TEXT
-      DOUBLE PRECISION HNEW,HDIFF,HD
+      SAVE :: TEXT
+      DOUBLE PRECISION HNEW
+      DOUBLE PRECISION HDIFF
+      DOUBLE PRECISION HD
 !
-      DIMENSION HNEW(NCOL,NROW,NLAY),HNWHGU(NCOL,NROW,NHUF),&
-     &     IBOUND(NCOL,NROW,NLAY),CV(NCOL,NROW,NLAY),&
-     &     BOTM(NCOL,NROW,0:NBOTM),DELR(NCOL),DELC(NROW),&
-     &     HUFTHK(NCOL,NROW,NHUF,2),GS(NCOL,NROW)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION HNWHGU(NCOL,NROW,NHUF)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION CV(NCOL,NROW,NLAY)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION DELR(NCOL)
+      DIMENSION DELC(NROW)
+      DIMENSION HUFTHK(NCOL,NROW,NHUF,2)
+      DIMENSION GS(NCOL,NROW)
 
 !
 !
@@ -3348,14 +4151,64 @@
       USE GLOBAL,      ONLY:LBOTM
       USE GWFHUFMODULE,ONLY:LTHUF,HGUHANI,HUFKDEP,HUFHK,HUFHANI
 
+      IMPLICIT NONE
+      REAL :: ABTU
+      REAL :: ATPU
+      REAL :: BOT0
+      REAL :: BOTG
+      REAL :: BOTM
+      REAL :: BOTUU
+      REAL :: CCB
+      REAL :: CCT
+      REAL :: CRL
+      REAL :: CRR
+      REAL :: DELC
+      REAL :: DELR
+      REAL :: GS
+      REAL :: HUFTHK
+      INTEGER :: I
+      INTEGER :: ICNT
+      INTEGER :: IOUT
+      INTEGER :: IPT
+      INTEGER :: J
+      INTEGER :: JPT
+      INTEGER :: KPT
+      INTEGER :: LT
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NHUF
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      INTEGER :: NU
+      REAL :: TC0
+      REAL :: TC1
+      REAL :: THCK
+      REAL :: THCKU
+      REAL :: THCKUU
+      REAL :: THK
+      REAL :: THK0
+      REAL :: THKB
+      REAL :: THKG
+      REAL :: THKL
+      REAL :: THKR
+      REAL :: THKT
+      REAL :: TOP0
+      REAL :: TOPG
+      REAL :: TOPU
+      REAL :: TOPUU
+      REAL :: TR0
+      REAL :: TR1
       DOUBLE PRECISION HNEW
-      REAL LAMBDA,MULTKDEP
+      REAL LAMBDA
+      REAL MULTKDEP
       INTEGER GPT
 !
-      DIMENSION HNEW(NCOL,NROW,NLAY),&
-     &    DELR(NCOL),DELC(NROW),BOTM(NCOL,NROW,0:NBOTM),&
-     &    HUFTHK(NCOL,NROW,NHUF,2),&
-     &    GS(NCOL,NROW)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION DELR(NCOL)
+      DIMENSION DELC(NROW)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION HUFTHK(NCOL,NROW,NHUF,2)
+      DIMENSION GS(NCOL,NROW)
 !
 !      INCLUDE 'param.inc'
 
@@ -3498,10 +4351,26 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      INTEGER NHUF,indx(NHUF),M,NSTACK
+      IMPLICIT NONE
+      INTEGER :: II
+      INTEGER :: JJ
+      INTEGER :: NCOL
+      INTEGER :: NROW
+      INTEGER NHUF
+      INTEGER indx(NHUF)
+      INTEGER M
+      INTEGER NSTACK
       REAL HUFTHK(NCOL,NROW,NHUF,2)
       PARAMETER (M=7,NSTACK=50)
-      INTEGER i,indxt,ir,itemp,j,jstack,k,l,istack(NSTACK)
+      INTEGER i
+      INTEGER indxt
+      INTEGER ir
+      INTEGER itemp
+      INTEGER j
+      INTEGER jstack
+      INTEGER k
+      INTEGER l
+      INTEGER istack(NSTACK)
       REAL a
       do 11 j=1,NHUF
         indx(j)=j
@@ -3588,8 +4457,24 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
+      IMPLICIT NONE
+      REAL :: GS
+      INTEGER :: I
+      INTEGER :: IFKDEP
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: ITERP
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NHUF
+      INTEGER :: NP
+      INTEGER :: NPKDEP
+      INTEGER :: NROW
+      REAL :: TOP
       CHARACTER*4 PTYP
-      DIMENSION GS(NCOL,NROW),TOP(NCOL,NROW)
+      DIMENSION GS(NCOL,NROW)
+      DIMENSION TOP(NCOL,NROW)
 !     ------------------------------------------------------------------
 !
       WRITE(IOUT,47)
@@ -3638,7 +4523,14 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      REAL LAMBDA,MULTKDEP
+      IMPLICIT NONE
+      REAL :: BOT
+      REAL :: D1
+      REAL :: D2
+      REAL :: GS
+      REAL :: TOP
+      REAL LAMBDA
+      REAL MULTKDEP
 !     ------------------------------------------------------------------
 !
 !---First, convert TOP and BOT to depths assuming that ground surface
@@ -3668,6 +4560,17 @@
       USE PARAMMODULE
       USE GWFHUFMODULE,ONLY:LTHUF
 !      
+      IMPLICIT NONE
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: ISEN
+      INTEGER :: ITERP
+      INTEGER :: K
+      INTEGER :: KLAYFLG
+      INTEGER :: NHUF
+      INTEGER :: NLAY
+      INTEGER :: NP
+      INTEGER :: NPLVDA
       CHARACTER*4 PTYP
 !     ------------------------------------------------------------------
 !
@@ -3720,13 +4623,44 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION HNEW,H1
-      DOUBLE PRECISION TF9,TF5,FL5,FR5,FT5,FB5,&
-     &   CRL,CRR,CCT,CCB
-      DIMENSION RHS(NCOL,NROW,NLAY),VDHT(NCOL,NROW,NLAY,3),&
-     &    IBOUND(NCOL,NROW,NLAY), HNEW(NCOL,NROW,NLAY),&
-     &    CR(NCOL,NROW,NLAY),CC(NCOL,NROW,NLAY),&
-     &    A9(NCOL,NROW,NLAY,5)
+      IMPLICIT NONE
+      REAL :: A9
+      REAL :: CC
+      REAL :: CR
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: RHS
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TBB1
+      REAL :: TBB4
+      REAL :: TWO
+      REAL :: VDHT
+      REAL :: ZERO
+      DOUBLE PRECISION HNEW
+      DOUBLE PRECISION H1
+      DOUBLE PRECISION TF9
+      DOUBLE PRECISION TF5
+      DOUBLE PRECISION FL5
+      DOUBLE PRECISION FR5
+      DOUBLE PRECISION FT5
+      DOUBLE PRECISION FB5
+      DOUBLE PRECISION CRL
+      DOUBLE PRECISION CRR
+      DOUBLE PRECISION CCT
+      DOUBLE PRECISION CCB
+      DIMENSION RHS(NCOL,NROW,NLAY)
+      DIMENSION VDHT(NCOL,NROW,NLAY,3)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION CR(NCOL,NROW,NLAY)
+      DIMENSION CC(NCOL,NROW,NLAY)
+      DIMENSION A9(NCOL,NROW,NLAY,5)
 !-----------------------------------------------------------------------
 !
       ZERO = 0.0
@@ -3820,12 +4754,39 @@
 !     ------------------------------------------------------------------
       USE GWFHUFMODULE,ONLY:HGUHANI,HUFHK,HUFHANI,HUFKDEP
 !
+      IMPLICIT NONE
+      REAL :: BOTM
+      REAL :: BOTU
+      REAL :: GS
+      REAL :: HK
+      REAL :: HKCC
+      REAL :: HUFTHK
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: IFLG
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KB
+      INTEGER :: KT
+      INTEGER :: NBOTM
+      INTEGER :: NCOL
+      INTEGER :: NHUF
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      INTEGER :: NU
+      REAL :: THCKU
+      REAL :: TOPU
+      REAL :: VDHD
       DOUBLE PRECISION HNEW
-      DIMENSION VDHD(NCOL,NROW,NLAY),&
-     &    HK(NCOL,NROW,NLAY),HKCC(NCOL,NROW,NLAY),&
-     &    IBOUND(NCOL,NROW,NLAY),&
-     &    HUFTHK(NCOL,NROW,NHUF,2),BOTM(NCOL,NROW,0:NBOTM),&
-     &    HNEW(NCOL,NROW,NLAY),GS(NCOL,NROW)
+      DIMENSION VDHD(NCOL,NROW,NLAY)
+      DIMENSION HK(NCOL,NROW,NLAY)
+      DIMENSION HKCC(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION HUFTHK(NCOL,NROW,NHUF,2)
+      DIMENSION BOTM(NCOL,NROW,0:NBOTM)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION GS(NCOL,NROW)
 !-----------------------------------------------------------------------
 !
 !2------DEFINE DATA FOR NAMED PARAMETERS.
@@ -3891,10 +4852,36 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION VDHD(NCOL,NROW,NLAY),&
-     &    VDHT(NCOL,NROW,NLAY,3),DELR(NCOL),DELC(NROW),&
-     &    HK(NCOL,NROW,NLAY),HKCC(NCOL,NROW,NLAY),&
-     &    IBOUND(NCOL,NROW,NLAY)
+      IMPLICIT NONE
+      REAL :: DC
+      REAL :: DELC
+      REAL :: DELR
+      REAL :: DR
+      REAL :: HK
+      REAL :: HK1
+      REAL :: HKCC
+      REAL :: HKCC1
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: PI
+      REAL :: TAA
+      REAL :: TAB
+      REAL :: TBB
+      REAL :: TWOTHETA
+      REAL :: VDHD
+      REAL :: VDHT
+      DIMENSION VDHD(NCOL,NROW,NLAY)
+      DIMENSION VDHT(NCOL,NROW,NLAY,3)
+      DIMENSION DELR(NCOL)
+      DIMENSION DELC(NROW)
+      DIMENSION HK(NCOL,NROW,NLAY)
+      DIMENSION HKCC(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
 !-----------------------------------------------------------------------
 !
       PI=3.14159265
@@ -3941,22 +4928,96 @@
 !
 !     SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION HNEW,H1,H2,H3,H4,H5,H6,H7,H8,H9,FS1A,FS1B,&
-     &  FW1A,FW1B,FS2A,FS2B,FE2A,FE2B,FE3A,FE3B,FN3A,FN3B,&
-     &  FW4A,FW4B,FN4A,FN4B
-      DOUBLE PRECISION FL,FR,FT,FB
-      DOUBLE PRECISION AS11234,AS21234,AS31234,AS41234,&
-     &                 AW11234,AW21234,AW31234,AW41234,&
-     &                 AS16145,AS26145,AS36145,AS46145,&
-     &                 AE16145,AE26145,AE36145,AE46145,&
-     &                 AN17816,AN27816,AN37816,AN47816,&
-     &                 AE17816,AE27816,AE37816,AE47816,&
-     &                 AN18921,AN28921,AN38921,AN48921,&
-     &                 AW18921,AW28921,AW38921,AW48921,&
-     & DTAA1,DTAB1,DTBB1
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IBD2
+      INTEGER :: IBD3
+      INTEGER :: IBD4
+      INTEGER :: IBD5
+      INTEGER :: IBD6
+      INTEGER :: IBD7
+      INTEGER :: IBD8
+      INTEGER :: IBD9
+      INTEGER :: IBOUND
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: TAA1
+      REAL :: TAB1
+      REAL :: TBB1
+      REAL :: TMPCOF
+      REAL :: VDHT
+      DOUBLE PRECISION HNEW
+      DOUBLE PRECISION H1
+      DOUBLE PRECISION H2
+      DOUBLE PRECISION H3
+      DOUBLE PRECISION H4
+      DOUBLE PRECISION H5
+      DOUBLE PRECISION H6
+      DOUBLE PRECISION H7
+      DOUBLE PRECISION H8
+      DOUBLE PRECISION H9
+      DOUBLE PRECISION FS1A
+      DOUBLE PRECISION FS1B
+      DOUBLE PRECISION FW1A
+      DOUBLE PRECISION FW1B
+      DOUBLE PRECISION FS2A
+      DOUBLE PRECISION FS2B
+      DOUBLE PRECISION FE2A
+      DOUBLE PRECISION FE2B
+      DOUBLE PRECISION FE3A
+      DOUBLE PRECISION FE3B
+      DOUBLE PRECISION FN3A
+      DOUBLE PRECISION FN3B
+      DOUBLE PRECISION FW4A
+      DOUBLE PRECISION FW4B
+      DOUBLE PRECISION FN4A
+      DOUBLE PRECISION FN4B
+      DOUBLE PRECISION FL
+      DOUBLE PRECISION FR
+      DOUBLE PRECISION FT
+      DOUBLE PRECISION FB
+      DOUBLE PRECISION AS11234
+      DOUBLE PRECISION AS21234
+      DOUBLE PRECISION AS31234
+      DOUBLE PRECISION AS41234
+      DOUBLE PRECISION AW11234
+      DOUBLE PRECISION AW21234
+      DOUBLE PRECISION AW31234
+      DOUBLE PRECISION AW41234
+      DOUBLE PRECISION AS16145
+      DOUBLE PRECISION AS26145
+      DOUBLE PRECISION AS36145
+      DOUBLE PRECISION AS46145
+      DOUBLE PRECISION AE16145
+      DOUBLE PRECISION AE26145
+      DOUBLE PRECISION AE36145
+      DOUBLE PRECISION AE46145
+      DOUBLE PRECISION AN17816
+      DOUBLE PRECISION AN27816
+      DOUBLE PRECISION AN37816
+      DOUBLE PRECISION AN47816
+      DOUBLE PRECISION AE17816
+      DOUBLE PRECISION AE27816
+      DOUBLE PRECISION AE37816
+      DOUBLE PRECISION AE47816
+      DOUBLE PRECISION AN18921
+      DOUBLE PRECISION AN28921
+      DOUBLE PRECISION AN38921
+      DOUBLE PRECISION AN48921
+      DOUBLE PRECISION AW18921
+      DOUBLE PRECISION AW28921
+      DOUBLE PRECISION AW38921
+      DOUBLE PRECISION AW48921
+      DOUBLE PRECISION DTAA1
+      DOUBLE PRECISION DTAB1
+      DOUBLE PRECISION DTBB1
 !
-      DIMENSION HNEW(NCOL,NROW,NLAY), IBOUND(NCOL,NROW,NLAY),&
-     &     VDHT(NCOL,NROW,NLAY,3)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION VDHT(NCOL,NROW,NLAY,3)
 !     ------------------------------------------------------------------
 !
 !-------Set scaling factor for inactive cells around current cell
@@ -4049,10 +5110,37 @@
 !
 !     SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION HNEW,H1,H2,H3,H4,H5,H6,H7,H8,H9
+      IMPLICIT NONE
+      REAL :: A9
+      INTEGER :: I
+      INTEGER :: IBD2
+      INTEGER :: IBD3
+      INTEGER :: IBD4
+      INTEGER :: IBD5
+      INTEGER :: IBD6
+      INTEGER :: IBD7
+      INTEGER :: IBD8
+      INTEGER :: IBD9
+      INTEGER :: IBOUND
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      DOUBLE PRECISION HNEW
+      DOUBLE PRECISION H1
+      DOUBLE PRECISION H2
+      DOUBLE PRECISION H3
+      DOUBLE PRECISION H4
+      DOUBLE PRECISION H5
+      DOUBLE PRECISION H6
+      DOUBLE PRECISION H7
+      DOUBLE PRECISION H8
+      DOUBLE PRECISION H9
       DOUBLE PRECISION F
-      DIMENSION HNEW(NCOL,NROW,NLAY), IBOUND(NCOL,NROW,NLAY),&
-     &     A9(NCOL,NROW,NLAY,5)
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION A9(NCOL,NROW,NLAY,5)
 !     ------------------------------------------------------------------
 !-------Get heads for 9 local cells
       CALL SGWF2HUF7VDHGET(&
@@ -4086,16 +5174,57 @@
 !     SPECIFICATIONS:
 !     ------------------------------------------------------------------
 !
-      DOUBLE PRECISION AS11234,AS21234,AS31234,AS41234,&
-     &                 AW11234,AW21234,AW31234,AW41234,&
-     &                 AS16145,AS26145,AS36145,AS46145,&
-     &                 AE16145,AE26145,AE36145,AE46145,&
-     &                 AN17816,AN27816,AN37816,AN47816,&
-     &                 AE17816,AE27816,AE37816,AE47816,&
-     &                 AN18921,AN28921,AN38921,AN48921,&
-     &                 AW18921,AW28921,AW38921,AW48921
-      DIMENSION A9(NCOL,NROW,NLAY,5), IBOUND(NCOL,NROW,NLAY),&
-     &     VDHT(NCOL,NROW,NLAY,3)
+      IMPLICIT NONE
+      REAL :: A9
+      REAL :: C
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: INDEX
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: TAA1
+      REAL :: TAB1
+      REAL :: TBB1
+      REAL :: TMPCOF
+      REAL :: VDHT
+      DOUBLE PRECISION AS11234
+      DOUBLE PRECISION AS21234
+      DOUBLE PRECISION AS31234
+      DOUBLE PRECISION AS41234
+      DOUBLE PRECISION AW11234
+      DOUBLE PRECISION AW21234
+      DOUBLE PRECISION AW31234
+      DOUBLE PRECISION AW41234
+      DOUBLE PRECISION AS16145
+      DOUBLE PRECISION AS26145
+      DOUBLE PRECISION AS36145
+      DOUBLE PRECISION AS46145
+      DOUBLE PRECISION AE16145
+      DOUBLE PRECISION AE26145
+      DOUBLE PRECISION AE36145
+      DOUBLE PRECISION AE46145
+      DOUBLE PRECISION AN17816
+      DOUBLE PRECISION AN27816
+      DOUBLE PRECISION AN37816
+      DOUBLE PRECISION AN47816
+      DOUBLE PRECISION AE17816
+      DOUBLE PRECISION AE27816
+      DOUBLE PRECISION AE37816
+      DOUBLE PRECISION AE47816
+      DOUBLE PRECISION AN18921
+      DOUBLE PRECISION AN28921
+      DOUBLE PRECISION AN38921
+      DOUBLE PRECISION AN48921
+      DOUBLE PRECISION AW18921
+      DOUBLE PRECISION AW28921
+      DOUBLE PRECISION AW38921
+      DOUBLE PRECISION AW48921
+      DIMENSION A9(NCOL,NROW,NLAY,5)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION VDHT(NCOL,NROW,NLAY,3)
 !     ------------------------------------------------------------------
 !
 !-------Set scaling factor for inactive cells around current cell
@@ -4233,8 +5362,35 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION HNEW,H1,H2,H3,H4,H5,H6,H7,H8,H9
-      DIMENSION HNEW(NCOL,NROW,NLAY),IBOUND(NCOL,NROW,NLAY)
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IBD2
+      INTEGER :: IBD3
+      INTEGER :: IBD4
+      INTEGER :: IBD5
+      INTEGER :: IBD6
+      INTEGER :: IBD7
+      INTEGER :: IBD8
+      INTEGER :: IBD9
+      INTEGER :: IBOUND
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: ZERO
+      DOUBLE PRECISION HNEW
+      DOUBLE PRECISION H1
+      DOUBLE PRECISION H2
+      DOUBLE PRECISION H3
+      DOUBLE PRECISION H4
+      DOUBLE PRECISION H5
+      DOUBLE PRECISION H6
+      DOUBLE PRECISION H7
+      DOUBLE PRECISION H8
+      DOUBLE PRECISION H9
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
 !-----------------------------------------------------------------------
 !
 !
@@ -4320,9 +5476,39 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION VDHT(NCOL,NROW,NLAY,3),IBOUND(NCOL,NROW,NLAY)
-      DOUBLE PRECISION AS11234,AS21234,AS31234,AS41234,&
-     &  AW11234,AW21234,AW31234,AW41234,D1234
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      REAL :: TMPCOF
+      REAL :: VDHT
+      DIMENSION VDHT(NCOL,NROW,NLAY,3)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DOUBLE PRECISION AS11234
+      DOUBLE PRECISION AS21234
+      DOUBLE PRECISION AS31234
+      DOUBLE PRECISION AS41234
+      DOUBLE PRECISION AW11234
+      DOUBLE PRECISION AW21234
+      DOUBLE PRECISION AW31234
+      DOUBLE PRECISION AW41234
+      DOUBLE PRECISION D1234
 !-----------------------------------------------------------------------
 !
 !-------Local cell 1, I,J
@@ -4396,9 +5582,39 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION VDHT(NCOL,NROW,NLAY,3),IBOUND(NCOL,NROW,NLAY)
-      DOUBLE PRECISION AS16145,AS26145,AS36145,AS46145,&
-     &  AE16145,AE26145,AE36145,AE46145,D6145
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: TAA1
+      REAL :: TAA4
+      REAL :: TAA5
+      REAL :: TAA6
+      REAL :: TAB1
+      REAL :: TAB4
+      REAL :: TAB5
+      REAL :: TAB6
+      REAL :: TBB1
+      REAL :: TBB4
+      REAL :: TBB5
+      REAL :: TBB6
+      REAL :: TMPCOF
+      REAL :: VDHT
+      DIMENSION VDHT(NCOL,NROW,NLAY,3)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DOUBLE PRECISION AS16145
+      DOUBLE PRECISION AS26145
+      DOUBLE PRECISION AS36145
+      DOUBLE PRECISION AS46145
+      DOUBLE PRECISION AE16145
+      DOUBLE PRECISION AE26145
+      DOUBLE PRECISION AE36145
+      DOUBLE PRECISION AE46145
+      DOUBLE PRECISION D6145
 !-----------------------------------------------------------------------
 !
 !-------Local cell 1, I,J
@@ -4470,9 +5686,39 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION VDHT(NCOL,NROW,NLAY,3),IBOUND(NCOL,NROW,NLAY)
-      DOUBLE PRECISION AN17816,AN27816,AN37816,AN47816,&
-     &  AE17816,AE27816,AE37816,AE47816,D7816
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: TAA1
+      REAL :: TAA6
+      REAL :: TAA7
+      REAL :: TAA8
+      REAL :: TAB1
+      REAL :: TAB6
+      REAL :: TAB7
+      REAL :: TAB8
+      REAL :: TBB1
+      REAL :: TBB6
+      REAL :: TBB7
+      REAL :: TBB8
+      REAL :: TMPCOF
+      REAL :: VDHT
+      DIMENSION VDHT(NCOL,NROW,NLAY,3)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DOUBLE PRECISION AN17816
+      DOUBLE PRECISION AN27816
+      DOUBLE PRECISION AN37816
+      DOUBLE PRECISION AN47816
+      DOUBLE PRECISION AE17816
+      DOUBLE PRECISION AE27816
+      DOUBLE PRECISION AE37816
+      DOUBLE PRECISION AE47816
+      DOUBLE PRECISION D7816
 !-----------------------------------------------------------------------
 !
 !-------Local cell 1, I,J
@@ -4544,9 +5790,39 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION VDHT(NCOL,NROW,NLAY,3),IBOUND(NCOL,NROW,NLAY)
-      DOUBLE PRECISION AN18921,AN28921,AN38921,AN48921,&
-     &  AW18921,AW28921,AW38921,AW48921,D8921
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA8
+      REAL :: TAA9
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB8
+      REAL :: TAB9
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB8
+      REAL :: TBB9
+      REAL :: TMPCOF
+      REAL :: VDHT
+      DIMENSION VDHT(NCOL,NROW,NLAY,3)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DOUBLE PRECISION AN18921
+      DOUBLE PRECISION AN28921
+      DOUBLE PRECISION AN38921
+      DOUBLE PRECISION AN48921
+      DOUBLE PRECISION AW18921
+      DOUBLE PRECISION AW28921
+      DOUBLE PRECISION AW38921
+      DOUBLE PRECISION AW48921
+      DOUBLE PRECISION D8921
 !-----------------------------------------------------------------------
 !
 !-------Local cell 1, I,J
@@ -4616,6 +5892,19 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
       DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !
@@ -4642,7 +5931,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AS1,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AS1
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !
       C1=(TAA3+TAA4)*(TBB1+TBB4)*(TBB2+TBB3)
@@ -4668,7 +5973,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AS2,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AS2
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !
       C1=(TAA3+TAA4)*(TBB1+TBB4)*(TBB2+TBB3)
@@ -4694,7 +6015,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AS3,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AS3
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !
       C1=-TAB1*TAB4*(TBB2+TBB3)
@@ -4719,7 +6056,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AS4,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AS4
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !
       C1=-TAB1*TAB4*(TBB2+TBB3)
@@ -4744,7 +6097,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AW1,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AW1
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !
       C1=TAB1*TAB3*TAB3
@@ -4770,7 +6139,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AW2,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AW2
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !
       C1=TAB1*TAB3*TAB3
@@ -4795,7 +6180,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AW3,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AW3
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !
       C1=TAB1*TAB2*TAB3
@@ -4820,7 +6221,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AW4,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AW4
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !
       C1=TAB1*TAB2*TAB3
@@ -4846,7 +6263,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AE1,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AE1
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !     6145
 !     1234
@@ -4872,7 +6305,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AE2,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AE2
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !     6145
 !     1234
@@ -4899,7 +6348,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AE3,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AE3
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !     6145
 !     1234
@@ -4926,7 +6391,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AE4,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AE4
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !     6145
 !     1234
@@ -4952,7 +6433,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AN1,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AN1
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !     7816
 !     1234
@@ -4978,7 +6475,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AN2,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AN2
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !     7816
 !     1234
@@ -5004,7 +6517,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AN3,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AN3
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !     7816
 !     1234
@@ -5031,7 +6560,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION AN4,C1,C2,D
+      IMPLICIT NONE
+      REAL :: TAA1
+      REAL :: TAA2
+      REAL :: TAA3
+      REAL :: TAA4
+      REAL :: TAB1
+      REAL :: TAB2
+      REAL :: TAB3
+      REAL :: TAB4
+      REAL :: TBB1
+      REAL :: TBB2
+      REAL :: TBB3
+      REAL :: TBB4
+      DOUBLE PRECISION AN4
+      DOUBLE PRECISION C1
+      DOUBLE PRECISION C2
+      DOUBLE PRECISION D
 !-----------------------------------------------------------------------
 !     7816
 !     1234
@@ -5059,6 +6604,8 @@
 !     ------------------------------------------------------------------
       USE GWFHUFMODULE
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IGRID
       DEALLOCATE(GWFHUFDAT(IGRID)%IHUFCB)
       DEALLOCATE(GWFHUFDAT(IGRID)%NHUF)
       DEALLOCATE(GWFHUFDAT(IGRID)%NPHUF)
@@ -5104,6 +6651,8 @@
 !     ------------------------------------------------------------------
       USE GWFHUFMODULE
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IGRID
       IHUFCB=>GWFHUFDAT(IGRID)%IHUFCB
       NHUF=>GWFHUFDAT(IGRID)%NHUF
       NPHUF=>GWFHUFDAT(IGRID)%NPHUF
@@ -5149,6 +6698,8 @@
 !     ------------------------------------------------------------------
       USE GWFHUFMODULE
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IGRID
       GWFHUFDAT(IGRID)%IHUFCB=>IHUFCB
       GWFHUFDAT(IGRID)%NHUF=>NHUF
       GWFHUFDAT(IGRID)%NPHUF=>NPHUF

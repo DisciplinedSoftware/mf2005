@@ -17,8 +17,15 @@
 !       stop the simulation.
 !
       MODULE GWFIBSMODULE
-        INTEGER, SAVE, POINTER    ::IIBSCB,IIBSOC,ISUBFM,ICOMFM,IHCFM
-        INTEGER, SAVE, POINTER    ::ISUBUN,ICOMUN,IHCUN
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: IIBSCB
+        INTEGER,SAVE,POINTER:: IIBSOC
+        INTEGER,SAVE,POINTER:: ISUBFM
+        INTEGER,SAVE,POINTER:: ICOMFM
+        INTEGER,SAVE,POINTER:: IHCFM
+        INTEGER,SAVE,POINTER:: ISUBUN
+        INTEGER,SAVE,POINTER:: ICOMUN
+        INTEGER,SAVE,POINTER:: IHCUN
         INTEGER, SAVE,    DIMENSION(:),     POINTER ::IBQ
         INTEGER, SAVE,    DIMENSION(:),     POINTER ::IBQ1
         REAL,    SAVE,    DIMENSION(:,:,:), POINTER ::HC
@@ -26,8 +33,14 @@
         REAL,    SAVE,    DIMENSION(:,:,:), POINTER ::SCV
         REAL,    SAVE,    DIMENSION(:,:,:), POINTER ::SUB
       TYPE GWFIBSTYPE
-        INTEGER,POINTER    ::IIBSCB,IIBSOC,ISUBFM,ICOMFM,IHCFM
-        INTEGER,POINTER    ::ISUBUN,ICOMUN,IHCUN
+        INTEGER,POINTER:: IIBSCB
+        INTEGER,POINTER:: IIBSOC
+        INTEGER,POINTER:: ISUBFM
+        INTEGER,POINTER:: ICOMFM
+        INTEGER,POINTER:: IHCFM
+        INTEGER,POINTER:: ISUBUN
+        INTEGER,POINTER:: ICOMUN
+        INTEGER,POINTER:: IHCUN
         INTEGER,    DIMENSION(:),     POINTER ::IBQ
         INTEGER,    DIMENSION(:),     POINTER ::IBQ1
         REAL,       DIMENSION(:,:,:), POINTER ::HC
@@ -55,7 +68,18 @@
       USE GLOBAL,       ONLY: NCOL,NROW,NLAY,IOUT,DELR,DELC,HNEW
       USE GWFIBSMODULE, ONLY: HC,SCE,SCV,SUB,IBQ,IBQ1,IIBSCB,IIBSOC,&
      &                        ISUBFM,ICOMFM,IHCFM,ISUBUN,ICOMUN,IHCUN
+      IMPLICIT NONE
+      REAL :: AREA
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: INSUB
+      INTEGER :: IR
+      INTEGER :: K
+      INTEGER :: KQ
+      INTEGER :: NAQL
       CHARACTER*24 ANAME(4)
+      SAVE :: ANAME
 !
       DATA ANAME(1) /'   PRECONSOLIDATION HEAD'/
       DATA ANAME(2) /'ELASTIC INTERBED STORAGE'/
@@ -200,6 +224,14 @@
 !     ------------------------------------------------------------------
 !
 !-------SET POINTERS FOR THE CURRENT GRID.
+      IMPLICIT NONE
+      REAL :: HTMP
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IR
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KQ
       CALL SGWF2IBS7PNT(IGRID)
 !
 !1------STOP if steady state after 1st stress period.
@@ -246,6 +278,18 @@
 !     ------------------------------------------------------------------
 !
 !-------SET POINTERS FOR THE CURRENT GRID.
+      IMPLICIT NONE
+      REAL :: HCTMP
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: ISSF
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KQ
+      REAL :: RHO1
+      REAL :: RHO2
+      REAL :: TLED
       CALL SGWF2IBS7PNT(IGRID)
 !
 !0------Return if stress period is steady state.
@@ -294,7 +338,30 @@
       USE GWFBASMODULE, ONLY:DELT,VBVL,VBNM,MSUM,ICBCFL
       USE GWFIBSMODULE, ONLY:HC,SCE,SCV,SUB,IBQ,IIBSCB
 !
+      IMPLICIT NONE
+      REAL :: HHC
+      REAL :: HHNEW
+      REAL :: HHOLD
+      INTEGER :: I
+      INTEGER :: IBD
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: IR
+      INTEGER :: ISSF
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KQ
+      INTEGER :: KSTP
+      REAL :: SBGN
+      REAL :: SEND
+      REAL :: STOIN
+      REAL :: STOUT
+      REAL :: STRG
+      REAL :: TLED
       CHARACTER*16 TEXT
+      SAVE :: TEXT
       DATA TEXT /'INTERBED STORAGE'/
 !     ------------------------------------------------------------------
 !
@@ -403,7 +470,26 @@
       USE GWFBASMODULE, ONLY:PERTIM,TOTIM
       USE GWFIBSMODULE, ONLY:IBQ,SUB,HC,IIBSOC,ISUBFM,ICOMFM,IHCFM,&
      &                          ISUBUN,ICOMUN,IHCUN
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IC
+      INTEGER :: ICOMPR
+      INTEGER :: ICOMSV
+      INTEGER :: IGRID
+      INTEGER :: IHCPR
+      INTEGER :: IHCSV
+      INTEGER :: IN
+      INTEGER :: IR
+      INTEGER :: ISSF
+      INTEGER :: ISUBPR
+      INTEGER :: ISUBSV
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KQ
+      INTEGER :: KSTP
       CHARACTER*16 TEXT(3)
+      SAVE :: TEXT
       DATA TEXT(1) /'      SUBSIDENCE'/
       DATA TEXT(2) /'      COMPACTION'/
       DATA TEXT(3) /'   CRITICAL HEAD'/
@@ -515,6 +601,8 @@
 !  Deallocate IBS DATA
       USE GWFIBSMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         DEALLOCATE(GWFIBSDAT(IGRID)%IIBSCB)
         DEALLOCATE(GWFIBSDAT(IGRID)%IIBSOC)
         DEALLOCATE(GWFIBSDAT(IGRID)%ISUBFM)
@@ -536,6 +624,8 @@
 !  Set IBS pointers for grid.
       USE GWFIBSMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         IIBSCB=>GWFIBSDAT(IGRID)%IIBSCB
         IIBSOC=>GWFIBSDAT(IGRID)%IIBSOC
         ISUBFM=>GWFIBSDAT(IGRID)%ISUBFM
@@ -557,6 +647,8 @@
 !  Save IBS pointers for grid.
       USE GWFIBSMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         GWFIBSDAT(IGRID)%IIBSCB=>IIBSCB
         GWFIBSDAT(IGRID)%IIBSOC=>IIBSOC
         GWFIBSDAT(IGRID)%ISUBFM=>ISUBFM

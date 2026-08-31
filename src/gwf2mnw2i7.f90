@@ -1,9 +1,16 @@
       MODULE GWFMNW2IMODULE
-        INTEGER,SAVE,POINTER  ::Wel1flag,QSUMflag,BYNDflag,MNWOBS
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: Wel1flag
+        INTEGER,SAVE,POINTER:: QSUMflag
+        INTEGER,SAVE,POINTER:: BYNDflag
+        INTEGER,SAVE,POINTER:: MNWOBS
         CHARACTER(LEN=20),SAVE, DIMENSION(:),   POINTER     ::MNWIID
         DOUBLE PRECISION, SAVE, DIMENSION(:,:), POINTER     ::MNWILST
       TYPE GWFMNWITYPE
-        INTEGER,POINTER  ::Wel1flag,QSUMflag,BYNDflag,MNWOBS
+        INTEGER,POINTER:: Wel1flag
+        INTEGER,POINTER:: QSUMflag
+        INTEGER,POINTER:: BYNDflag
+        INTEGER,POINTER:: MNWOBS
         CHARACTER(LEN=20),DIMENSION(:),   POINTER     ::MNWIID
         DOUBLE PRECISION, DIMENSION(:,:), POINTER     ::MNWILST
       END TYPE
@@ -27,6 +34,12 @@
       USE GWFMNW2IMODULE, ONLY:Wel1flag,QSUMflag,BYNDflag,MNWOBS,&
      &                            MNWIID,MNWILST
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: INMNW2
+      INTEGER :: INMNWI
+      INTEGER :: LCMNIO
+      INTEGER :: NMNWIVL
       IF(INMNWI.GT.0.AND.INMNW2.LE.0) THEN
         WRITE(IOUT,*) '***ERROR*** : MNWI PACKAGE CAN ONLY BE &
      &USED IF MNW2 PACKAGE IS ACTIVE'
@@ -87,8 +100,15 @@
       USE GWFMNW2IMODULE, ONLY:Wel1flag,QSUMflag,BYNDflag,MNWOBS,&
      &                       MNWILST,MNWIID
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: INMNWI
+      INTEGER :: IOB
+      INTEGER :: IS_SITE
+      INTEGER :: IW
       INTEGER GWTUNIT
-      CHARACTER*20 SITE,MSITE
+      CHARACTER*20 SITE
+      CHARACTER*20 MSITE
 !
 !     ******************************************************************
 !
@@ -213,13 +233,44 @@
      &                       NTOTNOD,MNWNOD,SMALL
       USE GWFMNW2IMODULE, ONLY:Wel1flag,QSUMflag,BYNDflag,MNWOBS,&
      &                       MNWILST,MNWIID
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IBH
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: IND
+      INTEGER :: INODE
+      INTEGER :: IR
+      INTEGER :: ISTAT
+      INTEGER :: IW
+      INTEGER :: IWOBS
+      INTEGER :: KKPER
+      INTEGER :: KKSTP
+      INTEGER :: ND
+      INTEGER :: NNDSIW
+      INTEGER :: NNODES
+      INTEGER :: NSTP
+      INTEGER :: NUMVALS
+      REAL :: SFTEST
       ALLOCATABLE QBH(:)
-      INTEGER firstnode,lastnode,QNDflag,QBHflag,QCONCflag,&
-     & iaux,naux
-      DOUBLE PRECISION q,hwell,qin,qout,qnet,hcell,&
-     & QBH
+      INTEGER firstnode
+      INTEGER lastnode
+      INTEGER QNDflag
+      INTEGER QBHflag
+      INTEGER QCONCflag
+      INTEGER iaux
+      INTEGER naux
+      DOUBLE PRECISION q
+      DOUBLE PRECISION hwell
+      DOUBLE PRECISION qin
+      DOUBLE PRECISION qout
+      DOUBLE PRECISION qnet
+      DOUBLE PRECISION hcell
+      DOUBLE PRECISION QBH
 !--LFK  Nov. 2012
-      DOUBLE PRECISION COND,SEEPFLG
+      DOUBLE PRECISION COND
+      DOUBLE PRECISION SEEPFLG
       CHARACTER*20 obssite
       CHARACTER*50 LFRMAT
 !--lfk
@@ -682,6 +733,8 @@
 !  Deallocate MNW MEMORY
       USE GWFMNW2IMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         CALL SGWF2MNW2IPNT(IGRID)
         DEALLOCATE(Wel1flag)
         DEALLOCATE(QSUMflag)
@@ -696,6 +749,8 @@
 !  Change MNW data to a different grid.
       USE GWFMNW2IMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         Wel1flag=>GWFMNWIDAT(IGRID)%Wel1flag
         QSUMflag=>GWFMNWIDAT(IGRID)%QSUMflag
         BYNDflag=>GWFMNWIDAT(IGRID)%BYNDflag
@@ -709,6 +764,8 @@
 !  Save MNW2 data for a grid.
       USE GWFMNW2IMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         GWFMNWIDAT(IGRID)%Wel1flag=>Wel1flag
         GWFMNWIDAT(IGRID)%QSUMflag=>QSUMflag
         GWFMNWIDAT(IGRID)%BYNDflag=>BYNDflag

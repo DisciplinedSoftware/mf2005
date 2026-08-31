@@ -17,12 +17,28 @@ module common_parameters
 !  integer, parameter :: kv=selected_real_kind(p=10)
   integer, parameter :: kv=kind(DBLKIND)
   ! ... common numbers
-  real(kind=kv), parameter :: n0=0.0_kv, n1=1.0_kv, n2=2.0_kv, n3=3.0_kv, &
-       n4=4.0_kv, n5=5.0_kv, n6=6.0_kv, n7=7.0_kv, n8=8.0_kv, n9=9.0_kv, &
-       n10=10.0_kv, n100=100.0_kv
+  real(kind=kv),parameter:: n0=0.0_kv
+  real(kind=kv),parameter:: n1=1.0_kv
+  real(kind=kv),parameter:: n2=2.0_kv
+  real(kind=kv),parameter:: n3=3.0_kv
+  real(kind=kv),parameter:: n4=4.0_kv
+  real(kind=kv),parameter:: n5=5.0_kv
+  real(kind=kv),parameter:: n6=6.0_kv
+  real(kind=kv),parameter:: n7=7.0_kv
+  real(kind=kv),parameter:: n8=8.0_kv
+  real(kind=kv),parameter:: n9=9.0_kv
+  real(kind=kv),parameter:: n10=10.0_kv
+  real(kind=kv),parameter:: n100=100.0_kv
   ! ... common fractions
-  real(kind=kv), parameter :: f2=0.5_kv, f3=n1/n3, f4=0.25_kv, f5=0.2_kv, &
-       f6=n1/n6, f7=n1/n7, f8=0.125_kv, f9=n1/n9, f10=0.1_kv
+  real(kind=kv),parameter:: f2=0.5_kv
+  real(kind=kv),parameter:: f3=n1/n3
+  real(kind=kv),parameter:: f4=0.25_kv
+  real(kind=kv),parameter:: f5=0.2_kv
+  real(kind=kv),parameter:: f6=n1/n6
+  real(kind=kv),parameter:: f7=n1/n7
+  real(kind=kv),parameter:: f8=0.125_kv
+  real(kind=kv),parameter:: f9=n1/n9
+  real(kind=kv),parameter:: f10=0.1_kv
   ! ... machine smallest number
   real(kind=kv), parameter :: machine_epsilon=epsilon(n0)
   real(kind=kv), parameter :: small=n100*machine_epsilon
@@ -32,11 +48,22 @@ end module common_parameters
 module common_solver_types
   use common_parameters
   implicit none
-  integer, save :: dim, nx, ny, nz, n_rows
+  integer,save:: dim
+  integer,save:: nx
+  integer,save:: ny
+  integer,save:: nz
+  integer,save:: n_rows
   ! ... arrays
-  real(kind=kv), dimension(:), pointer :: DD, DX, DY, DZ
-  real(kind=kv), dimension(:), pointer :: dx0, dy0, dz0       
-  real(kind=kv), dimension(:), pointer :: dx1, dy1, dz1
+  real(kind=kv),dimension(:),pointer:: DD
+  real(kind=kv),dimension(:),pointer:: DX
+  real(kind=kv),dimension(:),pointer:: DY
+  real(kind=kv),dimension(:),pointer:: DZ
+  real(kind=kv),dimension(:),pointer:: dx0
+  real(kind=kv),dimension(:),pointer:: dy0
+  real(kind=kv),dimension(:),pointer:: dz0
+  real(kind=kv),dimension(:),pointer:: dx1
+  real(kind=kv),dimension(:),pointer:: dy1
+  real(kind=kv),dimension(:),pointer:: dz1
   real(kind=kv), dimension(:), pointer :: diag
 end module common_solver_types
 
@@ -71,9 +98,18 @@ contains
     ! ...  
     ! ...  local variables
     ! ...
-    integer :: node, nxy, m
+    integer:: node
+    integer:: nxy
+    integer:: m
     integer, save :: mod_no=8
-    real(kind=kv) :: bnp0, bnp1, bnp2, bnp3, bnp4, bnp5, bnp6, bnp7
+    real(kind=kv):: bnp0
+    real(kind=kv):: bnp1
+    real(kind=kv):: bnp2
+    real(kind=kv):: bnp3
+    real(kind=kv):: bnp4
+    real(kind=kv):: bnp5
+    real(kind=kv):: bnp6
+    real(kind=kv):: bnp7
     !......................................................................
     select case(dim)
     case(3)
@@ -415,7 +451,8 @@ contains
     ! ...
     ! ... local variables
     ! ...
-    integer :: node, nxy
+    integer:: node
+    integer:: nxy
     ! ...
     ! ...................................................................
     ! ...
@@ -538,7 +575,9 @@ contains
     ! ...
     ! ... local variables
     ! ...
-    integer :: node, nxy, m
+    integer:: node
+    integer:: nxy
+    integer:: m
     integer, save :: mod_no=8
     ! ...
     ! ....................................................................
@@ -635,7 +674,9 @@ contains
     ! ...
     ! ... local variables
     ! ...
-    integer :: node, nxy, m
+    integer:: node
+    integer:: nxy
+    integer:: m
     integer, save :: mod_no=8
     ! ... 
     ! ....................................................................
@@ -740,7 +781,8 @@ contains
     ! ...
     ! ... local variables
     ! ...
-    integer :: node, nxy
+    integer:: node
+    integer:: nxy
     ! ...
     ! ...................................................................
     ! ...
@@ -900,7 +942,9 @@ contains
     ! ...
     ! ... local variables
     ! ...
-    integer :: node, nxy, m
+    integer:: node
+    integer:: nxy
+    integer:: m
     integer, save :: mod_no=8
     ! ...
     ! ....................................................................
@@ -1033,7 +1077,9 @@ contains
     ! ...
     ! ... local variables
     ! ...
-    integer :: node, nxy, m
+    integer:: node
+    integer:: nxy
+    integer:: m
     integer, save :: mod_no=8
     ! ... 
     ! ....................................................................
@@ -1209,7 +1255,8 @@ module PCG_SOLVE
   use mat_vec_mult
   ! ... rhs, r_v: A*r_v=rhs
   implicit none
-  real(kind=kv), dimension(:), pointer :: x_dev, r_dev
+  real(kind=kv),dimension(:),pointer:: x_dev
+  real(kind=kv),dimension(:),pointer:: r_dev
   real(kind=kv) :: nu_i
 contains
 
@@ -1245,13 +1292,18 @@ contains
     integer, intent(inout) :: max_iter
     real(kind=kv), intent(inout) :: eps_i
     real(kind=kv), intent(inout) :: eps_o
-    real(kind=kv), intent(inout), dimension(:) :: X, res
+    real(kind=kv),intent(inout),dimension(:):: X
+    real(kind=kv),intent(inout),dimension(:):: res
     logical, external :: convg_fn
     ! ... 
     ! ... local variables
     ! ... 
-    integer :: i, i_val
-    real(kind=kv) :: mu, nu, nu_p, ratio_l
+    integer:: i
+    integer:: i_val
+    real(kind=kv):: mu
+    real(kind=kv):: nu
+    real(kind=kv):: nu_p
+    real(kind=kv):: ratio_l
     real(kind=kv), save :: nu_f=n0
     ! ... 
     ! ...................................................................
@@ -1348,13 +1400,17 @@ contains
     integer, intent(inout) :: max_iter
     real(kind=kv), intent(inout) :: eps_i
     real(kind=kv), intent(out) :: eps_o
-    real(kind=kv), intent(inout), dimension(:) :: X, res
+    real(kind=kv),intent(inout),dimension(:):: X
+    real(kind=kv),intent(inout),dimension(:):: res
     logical, external :: convg_fn
     ! ... 
     ! ... local variables
     ! ... 
-    integer :: i, i_val
-    real(kind=kv) :: mu, nu, nu_p
+    integer:: i
+    integer:: i_val
+    real(kind=kv):: mu
+    real(kind=kv):: nu
+    real(kind=kv):: nu_p
     ! ... 
     ! ...................................................................
     ! ... 
@@ -1403,7 +1459,8 @@ contains
     ! ... based on eps<sqrt(dot_product(X_c,res));
     ! ... equivalently: eps**2<dot_product(X_c,res)
     ! ... eps must be squared prior to calling function
-    real(kind=kv) :: eps,nu
+    real(kind=kv):: eps
+    real(kind=kv):: nu
     logical :: abs_convg
     abs_convg=.false.
     if (nu<=eps) abs_convg=.true.
@@ -1412,7 +1469,8 @@ contains
   function rel_convg(eps,nu)
     ! ... relative convergence function
     ! ... based on dot_product(X_c,res)_final<eps*dot_product(X_c,res)_initial
-    real(kind=kv) :: eps,nu
+    real(kind=kv):: eps
+    real(kind=kv):: nu
     logical :: rel_convg
     rel_convg=.false.
     if (nu<=eps*nu_i) rel_convg=.true.
@@ -1426,7 +1484,9 @@ contains
     real(kind=kv), dimension(:), intent(in) :: x
     real(kind=kv), intent(in) :: r
     integer, save :: mod_no=8
-    integer :: ii, m, asize
+    integer:: ii
+    integer:: m
+    integer:: asize
     asize=size(y)
     m=mod(asize,mod_no)
     !$OMP PARALLEL DEFAULT(NONE) &
@@ -1466,7 +1526,9 @@ contains
     real(kind=kv), dimension(:), intent(in) :: x
     real(kind=kv), intent(in) :: r
     integer, save :: mod_no=8
-    integer :: ii, m, asize
+    integer:: ii
+    integer:: m
+    integer:: asize
     asize=size(y)
     m=mod(asize,mod_no)
     !$OMP PARALLEL DEFAULT(NONE) &
@@ -1563,8 +1625,13 @@ module PCG_MAIN
   use mat_vec_mult
   use pcg_solve
   implicit none
-  integer, save :: fill_level, x_flag, pc_unit, ts_unit
-  real(kind=kv), save :: omega, eps=small, eps_t
+  integer,save:: fill_level
+  integer,save:: x_flag
+  integer,save:: pc_unit
+  integer,save:: ts_unit
+  real(kind=kv),save:: omega
+  real(kind=kv),save:: eps=small
+  real(kind=kv),save:: eps_t
   character(len=32), dimension(:), pointer :: marker_name
   private; public :: PCG, PCG_init, PCG_fin
 contains
@@ -1602,17 +1669,26 @@ contains
     ! ... 
     ! ... argument list
     ! ... 
-    integer, intent(in) :: fill, n_x, n_y, n_z, flag_x, unit_ts, unit_pc
+    integer,intent(in):: fill
+    integer,intent(in):: n_x
+    integer,intent(in):: n_y
+    integer,intent(in):: n_z
+    integer,intent(in):: flag_x
+    integer,intent(in):: unit_ts
+    integer,intent(in):: unit_pc
     character(len=32), dimension(1:3), optional, intent(in), target :: &
          mrkr_name
     real(kind=kv), optional, intent(in) :: relax
-    real(kind=kv), dimension(:), intent(in), target :: d_d, d_x, &
-         d_y, d_z
+    real(kind=kv),dimension(:),intent(in),target:: d_d
+    real(kind=kv),dimension(:),intent(in),target:: d_x
+    real(kind=kv),dimension(:),intent(in),target:: d_y
+    real(kind=kv),dimension(:),intent(in),target:: d_z
     integer, dimension(1:2), intent(inout), optional :: err_stat
     ! ... 
     ! ... local variables
     ! ... 
-    integer :: i, error
+    integer:: i
+    integer:: error
     ! ... 
     ! .....................................................................
     ! ... 
@@ -1753,9 +1829,18 @@ contains
     ! ... 
     ! ... local variables
     ! ... 
-    integer :: ii, jj, kk
-    real(kind=kv) :: eps_i, eps_o
-    integer :: error, iter_max, iter_no, i, start_time, end_time, solv_time
+    integer:: ii
+    integer:: jj
+    integer:: kk
+    real(kind=kv):: eps_i
+    real(kind=kv):: eps_o
+    integer:: error
+    integer:: iter_max
+    integer:: iter_no
+    integer:: i
+    integer:: start_time
+    integer:: end_time
+    integer:: solv_time
     integer :: cum_time=0
     integer, external :: elapsed_time
     real(kind=kv), dimension(:), pointer :: X
@@ -2008,7 +2093,11 @@ contains
     ! ... result
     integer :: iter_max
     ! ... local variables
-    integer :: ponent, a_iter, o_iter, a_nodes, o_nodes
+    integer:: ponent
+    integer:: a_iter
+    integer:: o_iter
+    integer:: a_nodes
+    integer:: o_nodes
     ! ...................................................................
     ponent=nint(log10(real(n_rows)))
     if (ponent==0) then
@@ -2044,6 +2133,7 @@ function elapsed_time(t_opt) result(e_time)
   ! ... t_opt=other: returns time in seconds
   ! ... argument list
   ! ... 
+  IMPLICIT NONE
   integer :: t_opt
   ! ... 
   ! ... result
@@ -2055,9 +2145,22 @@ function elapsed_time(t_opt) result(e_time)
   integer, dimension(1:8) :: t_part
   integer, save, dimension(1:12) :: no_dapmo= &
        (/31,28,31,30,31,30,31,31,30,31,30,31/)
-  integer, save :: mo_s, da_s, h_s, mi_s, sec_s, msec_s
-  logical, save :: initial=.true., flip
-  integer :: mo_d, da_d, h_d, mi_d, sec_d, msec_d, t_sec, t_msec
+  integer,save:: mo_s
+  integer,save:: da_s
+  integer,save:: h_s
+  integer,save:: mi_s
+  integer,save:: sec_s
+  integer,save:: msec_s
+  logical,save:: initial=.true.
+  logical,save:: flip
+  integer:: mo_d
+  integer:: da_d
+  integer:: h_d
+  integer:: mi_d
+  integer:: sec_d
+  integer:: msec_d
+  integer:: t_sec
+  integer:: t_msec
   ! .....................................................................
   ! ... year=>t_part(1); month=>t_part(2); day=>t_part(3); hour=>t_part(5)
   ! ... minute=>t_part(6); second=>t_part(7); msecond=>t_part(8)

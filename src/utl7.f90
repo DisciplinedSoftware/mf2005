@@ -29,6 +29,21 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: ICOL
+      INTEGER :: IDIFF
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: L
+      INTEGER :: LINLEN
+      INTEGER :: N
+      INTEGER :: NCODE
+      REAL :: R
       CHARACTER*(*) LINE
       CHARACTER*20 STRING
       CHARACTER*30 RW
@@ -153,6 +168,10 @@
 !     ******************************************************************
 !       SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IDIFF
+      INTEGER :: K
+      INTEGER :: L
       CHARACTER WORD*(*)
 !
 !1------Compute the difference between lowercase and uppercase.
@@ -176,6 +195,11 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: L
       CHARACTER*(*) LINE
 !     ------------------------------------------------------------------
 !
@@ -203,11 +227,52 @@
 !     Read and print a list.  NAUX of the values in the list are
 !     optional -- auxiliary data.
 !     ******************************************************************
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IAL
+      INTEGER :: IBINARY
+      INTEGER :: ICLOSE
+      INTEGER :: IDUM
+      INTEGER :: IFREFM
+      INTEGER :: II
+      INTEGER :: ILOC
+      INTEGER :: IN
+      INTEGER :: INPACK
+      INTEGER :: IOUT
+      INTEGER :: IPRFLG
+      INTEGER :: ISCLOC1
+      INTEGER :: ISCLOC2
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: J
+      INTEGER :: JAUX
+      INTEGER :: JJ
+      INTEGER :: K
+      INTEGER :: LDIM
+      INTEGER :: LLOC
+      INTEGER :: LSTBEG
+      INTEGER :: MXLIST
+      INTEGER :: N
+      INTEGER :: NAUX
+      INTEGER :: NCAUX
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NLIST
+      INTEGER :: NN
+      INTEGER :: NREAD1
+      INTEGER :: NREAD2
+      INTEGER :: NROW
+      INTEGER :: NUNOPN
+      REAL :: R
+      REAL :: RLIST
+      REAL :: SFAC
       CHARACTER*(*) LABEL
       CHARACTER*16 CAUX(NCAUX)
       DIMENSION RLIST(LDIM,MXLIST)
-      CHARACTER*200 LINE,FNAME
-      CHARACTER*20 FMTARG, ACCARG
+      CHARACTER*200 LINE
+      CHARACTER*200 FNAME
+      CHARACTER*20 FMTARG
+      CHARACTER*20 ACCARG
       CHARACTER*20 FILEFMT
       CHARACTER*30 CERR
       LOGICAL LVAL
@@ -414,10 +479,19 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: N1
+      INTEGER :: NAUX
+      INTEGER :: NBUF
+      INTEGER :: NCAUX
       CHARACTER*(*) LABEL
       CHARACTER*16 CAUX(NCAUX)
       CHARACTER*400 BUF
       CHARACTER*1 DASH(400)
+      SAVE :: DASH
       DATA DASH/400*'-'/
 !     ------------------------------------------------------------------
 !
@@ -457,6 +531,25 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: A
+      REAL :: CNSTNT
+      INTEGER :: I
+      INTEGER :: ICLOSE
+      INTEGER :: ICOL
+      INTEGER :: IFREE
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: IPRN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: J
+      INTEGER :: JJ
+      INTEGER :: LOCAT
+      INTEGER :: N
+      INTEGER :: NUNOPN
+      REAL :: R
+      REAL :: ZERO
       CHARACTER*24 ANAME
       DIMENSION A(JJ)
       CHARACTER*20 FMTIN
@@ -571,6 +664,26 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IA
+      INTEGER :: ICLOSE
+      INTEGER :: ICOL
+      INTEGER :: ICONST
+      INTEGER :: IFREE
+      INTEGER :: II
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: IPRN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: J
+      INTEGER :: JJ
+      INTEGER :: K
+      INTEGER :: LOCAT
+      INTEGER :: N
+      INTEGER :: NUNOPN
+      REAL :: R
       CHARACTER*24 ANAME
       DIMENSION IA(JJ,II)
       CHARACTER*20 FMTIN
@@ -799,6 +912,34 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: A
+      REAL :: CNSTNT
+      INTEGER :: I
+      INTEGER :: ICLOSE
+      INTEGER :: ICOL
+      INTEGER :: IFREE
+      INTEGER :: II
+      INTEGER :: ILAY
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: IPRN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: J
+      INTEGER :: JJ
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: LOCAT
+      INTEGER :: N
+      INTEGER :: NCOL
+      INTEGER :: NROW
+      INTEGER :: NUNOPN
+      REAL :: PERTIM
+      REAL :: R
+      REAL :: TOTIM
+      REAL :: ZERO
       CHARACTER*24 ANAME
       DIMENSION A(JJ,II)
       CHARACTER*20 FMTIN
@@ -955,8 +1096,34 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      CHARACTER*1 DOT,SPACE,DG,BF
-      DIMENSION BF(130),DG(10)
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: I1
+      INTEGER :: I2
+      INTEGER :: I3
+      INTEGER :: I4
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: J1
+      INTEGER :: J2
+      INTEGER :: N
+      INTEGER :: NBF
+      INTEGER :: NCPL
+      INTEGER :: NDIG
+      INTEGER :: NLBL
+      INTEGER :: NLBL1
+      INTEGER :: NLBL2
+      INTEGER :: NSPACE
+      INTEGER :: NTOT
+      INTEGER :: NWRAP
+      CHARACTER*1 DOT
+      SAVE :: DOT
+      CHARACTER*1 SPACE
+      CHARACTER*1 DG
+      SAVE :: DG
+      CHARACTER*1 BF
+      DIMENSION BF(130)
+      DIMENSION DG(10)
 !
       DATA DG(1),DG(2),DG(3),DG(4),DG(5),DG(6),DG(7),DG(8),DG(9),DG(10)/&
      &         '0','1','2','3','4','5','6','7','8','9'/
@@ -1035,6 +1202,25 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: BUF
+      INTEGER :: I
+      INTEGER :: ILAY
+      INTEGER :: IOUT
+      INTEGER :: IP
+      INTEGER :: IPRN
+      INTEGER :: ISP
+      INTEGER :: J
+      INTEGER :: J1
+      INTEGER :: J2
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: N
+      INTEGER :: NCAP
+      INTEGER :: NCOL
+      INTEGER :: NCPF
+      INTEGER :: NROW
+      INTEGER :: NSTRIP
       CHARACTER*16 TEXT
       DIMENSION BUF(NCOL,NROW)
 !     ------------------------------------------------------------------
@@ -1207,6 +1393,18 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: BUF
+      INTEGER :: I
+      INTEGER :: ILAY
+      INTEGER :: IOUT
+      INTEGER :: IP
+      INTEGER :: IPRN
+      INTEGER :: J
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NCOL
+      INTEGER :: NROW
       CHARACTER*16 TEXT
       DIMENSION BUF(NCOL,NROW)
 !     ------------------------------------------------------------------
@@ -1361,6 +1559,16 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: A
+      INTEGER :: I
+      INTEGER :: ILAY
+      INTEGER :: IOUT
+      INTEGER :: IPRN
+      INTEGER :: J
+      INTEGER :: NCOL
+      INTEGER :: NROW
+      REAL :: TMP
       DIMENSION A(NCOL,NROW)
       CHARACTER*(*) ANAME
 !     ------------------------------------------------------------------
@@ -1406,6 +1614,18 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: BUF
+      INTEGER :: IC
+      INTEGER :: ICHN
+      INTEGER :: ILAY
+      INTEGER :: IR
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NCOL
+      INTEGER :: NROW
+      REAL :: PERTIM
+      REAL :: TOTIM
       CHARACTER*16 TEXT
       DIMENSION BUF(NCOL,NROW)
 !     ------------------------------------------------------------------
@@ -1429,8 +1649,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: BUFF
+      INTEGER :: IBOUND
+      INTEGER :: IC
+      INTEGER :: ICHN
+      INTEGER :: ILAY
+      INTEGER :: IR
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: LBLSAV
+      INTEGER :: NCOL
+      INTEGER :: NROW
+      REAL :: PERTIM
+      REAL :: TOTIM
       CHARACTER*16 TEXT
-      DIMENSION BUFF(NCOL,NROW),IBOUND(NCOL,NROW)
+      DIMENSION BUFF(NCOL,NROW)
+      DIMENSION IBOUND(NCOL,NROW)
       CHARACTER*20 FMTOUT
 !     ------------------------------------------------------------------
 !
@@ -1455,6 +1690,19 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IC
+      INTEGER :: ICHN
+      INTEGER :: IDATA
+      INTEGER :: ILAY
+      INTEGER :: IR
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: LBLSAV
+      INTEGER :: NCOL
+      INTEGER :: NROW
+      REAL :: PERTIM
+      REAL :: TOTIM
       CHARACTER*16 TEXT
       DIMENSION IDATA(NCOL,NROW)
       CHARACTER*20 FMTOUT
@@ -1480,6 +1728,15 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: BUFF
+      INTEGER :: IBDCHN
+      INTEGER :: IOUT
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
       CHARACTER*16 TEXT
       DIMENSION BUFF(NCOL,NROW,NLAY)
 !     ------------------------------------------------------------------
@@ -1506,8 +1763,22 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: BUFF
+      REAL :: DELT
+      INTEGER :: IBDCHN
+      INTEGER :: IBOUND
+      INTEGER :: IOUT
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: PERTIM
+      REAL :: TOTIM
       CHARACTER*16 TEXT
-      DIMENSION BUFF(NCOL,NROW,NLAY),IBOUND(NCOL,NROW,NLAY)
+      DIMENSION BUFF(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
 !     ------------------------------------------------------------------
 !
 !1------WRITE TWO UNFORMATTED RECORDS IDENTIFYING DATA.
@@ -1534,6 +1805,19 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: DELT
+      INTEGER :: IBDCHN
+      INTEGER :: IBOUND
+      INTEGER :: IOUT
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NLIST
+      INTEGER :: NROW
+      REAL :: PERTIM
+      REAL :: TOTIM
       CHARACTER*16 TEXT
       DIMENSION IBOUND(NCOL,NROW,NLAY)
 !     ------------------------------------------------------------------
@@ -1556,6 +1840,17 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IBDCHN
+      INTEGER :: IBOUND
+      INTEGER :: ICRL
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: Q
       DIMENSION IBOUND(NCOL,NROW,NLAY)
 !     ------------------------------------------------------------------
 !
@@ -1577,9 +1872,28 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: BUFF
+      REAL :: DELT
+      INTEGER :: I
+      INTEGER :: IBDCHN
+      INTEGER :: IBOUND
+      INTEGER :: IBUFF
+      INTEGER :: IMETH
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NOPT
+      INTEGER :: NROW
+      REAL :: PERTIM
+      REAL :: TOTIM
       CHARACTER*16 TEXT
-      DIMENSION BUFF(NCOL,NROW,NLAY),IBUFF(NCOL,NROW),&
-     &          IBOUND(NCOL,NROW,NLAY)
+      DIMENSION BUFF(NCOL,NROW,NLAY)
+      DIMENSION IBUFF(NCOL,NROW)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
 !     ------------------------------------------------------------------
 !
 !1------WRITE TWO UNFORMATTED RECORDS IDENTIFYING DATA.
@@ -1617,7 +1931,23 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      CHARACTER*16 TEXT,AUXTXT(*)
+      IMPLICIT NONE
+      REAL :: DELT
+      INTEGER :: IBDCHN
+      INTEGER :: IBOUND
+      INTEGER :: IOUT
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: N
+      INTEGER :: NAUX
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NLIST
+      INTEGER :: NROW
+      REAL :: PERTIM
+      REAL :: TOTIM
+      CHARACTER*16 TEXT
+      CHARACTER*16 AUXTXT(*)
       DIMENSION IBOUND(NCOL,NROW,NLAY)
 !     ------------------------------------------------------------------
 !
@@ -1643,7 +1973,25 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION IBOUND(NCOL,NROW,NLAY),VAL(NVL)
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IBDCHN
+      INTEGER :: IBOUND
+      INTEGER :: ICRL
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: LAUX
+      INTEGER :: N
+      INTEGER :: N2
+      INTEGER :: NAUX
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      INTEGER :: NVL
+      REAL :: Q
+      REAL :: VAL
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION VAL(NVL)
 !     ------------------------------------------------------------------
 !
 !1------CALCULATE CELL NUMBER
@@ -1667,7 +2015,10 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      CHARACTER*(*) TEXT1,TEXT2
+      IMPLICIT NONE
+      INTEGER :: IOUT
+      CHARACTER*(*) TEXT1
+      CHARACTER*(*) TEXT2
 !     ------------------------------------------------------------------
       WRITE(IOUT,*)
       WRITE(IOUT,'(1X,2A)') TEXT1,TEXT2
@@ -1681,6 +2032,7 @@
 !     ******************************************************************
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
       CHARACTER STOPMESS*(*)
 !     ------------------------------------------------------------------
 10    FORMAT(1X,A)

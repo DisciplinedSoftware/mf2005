@@ -1,5 +1,9 @@
       MODULE GWFBCFMODULE
-       INTEGER, SAVE, POINTER ::IBCFCB,IWDFLG,IWETIT,IHDWET
+       IMPLICIT NONE
+       INTEGER,SAVE,POINTER:: IBCFCB
+       INTEGER,SAVE,POINTER:: IWDFLG
+       INTEGER,SAVE,POINTER:: IWETIT
+       INTEGER,SAVE,POINTER:: IHDWET
        REAL, SAVE, POINTER    ::WETFCT
        INTEGER, SAVE,  POINTER,   DIMENSION(:)     ::LAYCON
        INTEGER, SAVE,  POINTER,   DIMENSION(:)     ::LAYAVG
@@ -10,7 +14,10 @@
        REAL, SAVE,     POINTER,   DIMENSION(:,:,:) ::CVWD
        REAL, SAVE,     POINTER,   DIMENSION(:)     ::TRPY
       TYPE GWFBCFTYPE
-       INTEGER, POINTER  ::IBCFCB,IWDFLG,IWETIT,IHDWET
+       INTEGER,POINTER:: IBCFCB
+       INTEGER,POINTER:: IWDFLG
+       INTEGER,POINTER:: IWETIT
+       INTEGER,POINTER:: IHDWET
        REAL, POINTER     ::WETFCT
        INTEGER,  POINTER,   DIMENSION(:)     ::LAYCON
        INTEGER,  POINTER,   DIMENSION(:)     ::LAYAVG
@@ -39,8 +46,23 @@
       USE GWFBCFMODULE,ONLY:IBCFCB,IWDFLG,IWETIT,IHDWET,WETFCT,&
      &                      LAYCON,LAYAVG,HY,SC1,SC2,WETDRY,CVWD,TRPY
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: INAM
+      INTEGER :: ISS
+      INTEGER :: K
+      INTEGER :: KB
+      INTEGER :: KK
+      INTEGER :: KT
+      INTEGER :: L
+      INTEGER :: NBOT
+      INTEGER :: NTOP
       CHARACTER*24 ANAME(7)
+      SAVE :: ANAME
       CHARACTER*12 AVGNAM(4)
+      SAVE :: AVGNAM
       DATA AVGNAM/'HARMONIC    ','ARITHMETIC  ',&
      &            'LOGARITHMIC ','*UNCONFINED*'/
 !
@@ -256,6 +278,15 @@
       USE GWFBCFMODULE,ONLY:IWDFLG,WETDRY,LAYCON
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: ISS
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KB
+      INTEGER :: KPER
+      REAL :: ZERO
       CALL SGWF2BCF7PNT(IGRID)
       ISS=ISSFLG(KPER)
 !
@@ -298,6 +329,27 @@
       USE GWFBASMODULE,ONLY:DELT
       USE GWFBCFMODULE,ONLY:LAYCON,SC1,SC2
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: HTMP
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: ISS
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KB
+      INTEGER :: KITER
+      INTEGER :: KK
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: KT
+      REAL :: ONE
+      REAL :: RHO
+      REAL :: RHO1
+      REAL :: RHO2
+      REAL :: SNEW
+      REAL :: SOLD
+      REAL :: TLED
+      REAL :: TP
       CALL SGWF2BCF7PNT(IGRID)
       ISS=ISSFLG(KPER)
       KB=0
@@ -421,8 +473,35 @@
       USE GWFBASMODULE,ONLY:MSUM,ICBCFL,VBVL,VBNM,DELT,PERTIM,TOTIM
       USE GWFBCFMODULE,ONLY:IBCFCB,LAYCON,SC1,SC2
 !
+      IMPLICIT NONE
+      REAL :: HSING
+      INTEGER :: I
+      INTEGER :: IBD
+      INTEGER :: IGRID
+      INTEGER :: ISS
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: KT
+      INTEGER :: LC
+      REAL :: ONE
+      REAL :: RHO
+      REAL :: RHO1
+      REAL :: RHO2
+      REAL :: SIN
+      REAL :: SNEW
+      REAL :: SOLD
+      REAL :: SOUT
+      REAL :: STRG
+      REAL :: TLED
+      REAL :: TP
+      REAL :: ZERO
       CHARACTER*16 TEXT
-      DOUBLE PRECISION STOIN,STOUT,SSTRG
+      SAVE :: TEXT
+      DOUBLE PRECISION STOIN
+      DOUBLE PRECISION STOUT
+      DOUBLE PRECISION SSTRG
 !
       DATA TEXT /'         STORAGE'/
 !     ------------------------------------------------------------------
@@ -524,8 +603,46 @@
      &                      ICHFLG
       USE GWFBCFMODULE,ONLY:IBCFCB,LAYCON
 !
+      IMPLICIT NONE
+      REAL :: CHCH1
+      REAL :: CHCH2
+      REAL :: CHCH3
+      REAL :: CHCH4
+      REAL :: CHCH5
+      REAL :: CHCH6
+      REAL :: CIN
+      REAL :: COUT
+      REAL :: HDIFF
+      INTEGER :: I
+      INTEGER :: IBD
+      INTEGER :: IBDLBL
+      INTEGER :: IGRID
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: LC
+      INTEGER :: NCH
+      REAL :: RATE
+      REAL :: TMP
+      REAL :: X1
+      REAL :: X2
+      REAL :: X3
+      REAL :: X4
+      REAL :: X5
+      REAL :: X6
+      REAL :: ZERO
       CHARACTER*16 TEXT
-      DOUBLE PRECISION HD,CHIN,CHOUT,XX1,XX2,XX3,XX4,XX5,XX6
+      SAVE :: TEXT
+      DOUBLE PRECISION HD
+      DOUBLE PRECISION CHIN
+      DOUBLE PRECISION CHOUT
+      DOUBLE PRECISION XX1
+      DOUBLE PRECISION XX2
+      DOUBLE PRECISION XX3
+      DOUBLE PRECISION XX4
+      DOUBLE PRECISION XX5
+      DOUBLE PRECISION XX6
 !
       DATA TEXT /'   CONSTANT HEAD'/
 !     ------------------------------------------------------------------
@@ -744,7 +861,33 @@
       USE GWFBASMODULE,ONLY:ICBCFL,DELT,PERTIM,TOTIM,ICHFLG
       USE GWFBCFMODULE,ONLY:IBCFCB,LAYCON
 !
+      IMPLICIT NONE
+      REAL :: HDIFF
+      INTEGER :: I
+      INTEGER :: I1
+      INTEGER :: I2
+      INTEGER :: IBD
+      INTEGER :: IBDRET
+      INTEGER :: IC1
+      INTEGER :: IC2
+      INTEGER :: IDIR
+      INTEGER :: IGRID
+      INTEGER :: IL1
+      INTEGER :: IL2
+      INTEGER :: IR1
+      INTEGER :: IR2
+      INTEGER :: J
+      INTEGER :: J1
+      INTEGER :: J2
+      INTEGER :: K
+      INTEGER :: K1
+      INTEGER :: K2
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      REAL :: TMP
+      REAL :: ZERO
       CHARACTER*16 TEXT(3)
+      SAVE :: TEXT
       DOUBLE PRECISION HD
 !
       DATA TEXT(1),TEXT(2),TEXT(3)&
@@ -916,6 +1059,15 @@
       USE GWFBCFMODULE,ONLY:TRPY
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: K
+      REAL :: T1
+      REAL :: T2
+      REAL :: TWO
+      REAL :: YX
+      REAL :: ZERO
       ZERO=0.
       TWO=2.
       YX=TRPY(K)*TWO
@@ -961,9 +1113,32 @@
       USE GWFBCFMODULE,ONLY:IWDFLG,WETFCT,IHDWET,IWETIT,LAYCON,&
      &                      HY,CVWD,WETDRY,LAYAVG
 !
-      DOUBLE PRECISION HD,BBOT,TTOP
+      IMPLICIT NONE
+      REAL :: HTMP
+      INTEGER :: I
+      INTEGER :: ICNVRT
+      INTEGER :: IHDCNV
+      INTEGER :: ITFLG
+      INTEGER :: J
+      INTEGER :: JCNVRT
+      INTEGER :: K
+      INTEGER :: KB
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: L
+      INTEGER :: NCNVRT
+      REAL :: THCK
+      REAL :: TURNON
+      REAL :: WD
+      REAL :: ZERO
+      DOUBLE PRECISION HD
+      DOUBLE PRECISION BBOT
+      DOUBLE PRECISION TTOP
       CHARACTER*3 ACNVRT
-      DIMENSION ICNVRT(5),JCNVRT(5),ACNVRT(5)
+      DIMENSION ICNVRT(5)
+      DIMENSION JCNVRT(5)
+      DIMENSION ACNVRT(5)
 !     ------------------------------------------------------------------
 !
 !1------LOOP THROUGH EACH CELL IN LAYER AND CALCULATE TRANSMISSIVITY AT
@@ -1138,6 +1313,16 @@
       USE GWFBASMODULE,ONLY:HNOFLO
       USE GWFBCFMODULE,ONLY:IWDFLG,WETDRY,HY,CVWD,LAYCON,LAYAVG,SC1,SC2
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: ISS
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: K1
+      INTEGER :: KB
+      INTEGER :: KK
+      INTEGER :: KT
+      REAL :: ZERO
       DOUBLE PRECISION HCNV
 !     ------------------------------------------------------------------
 !
@@ -1277,6 +1462,14 @@
       USE GWFBCFMODULE,ONLY:TRPY
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: K
+      REAL :: T1
+      REAL :: T2
+      REAL :: YX
+      REAL :: ZERO
       ZERO=0.
       YX=TRPY(K)
 !
@@ -1328,6 +1521,20 @@
       USE GWFBCFMODULE,ONLY:TRPY
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      REAL :: FRAC1
+      REAL :: FRAC2
+      REAL :: HALF
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: K
+      REAL :: RATIO
+      REAL :: T
+      REAL :: T1
+      REAL :: T2
+      REAL :: TWO
+      REAL :: YX
+      REAL :: ZERO
       ZERO=0.
       TWO=2.
       HALF=0.5
@@ -1399,6 +1606,19 @@
       USE GWFBCFMODULE,ONLY:TRPY
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      REAL :: FRAC1
+      REAL :: FRAC2
+      REAL :: HALF
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: K
+      REAL :: RATIO
+      REAL :: T
+      REAL :: T1
+      REAL :: T2
+      REAL :: YX
+      REAL :: ZERO
       ZERO=0.
       HALF=0.5
       FRAC1=1.005
@@ -1460,6 +1680,8 @@
       SUBROUTINE GWF2BCF7DA(IGRID)
       USE GWFBCFMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       DEALLOCATE(GWFBCFDAT(IGRID)%IBCFCB)
       DEALLOCATE(GWFBCFDAT(IGRID)%IWDFLG)
       DEALLOCATE(GWFBCFDAT(IGRID)%IWETIT)
@@ -1479,6 +1701,8 @@
       SUBROUTINE SGWF2BCF7PNT(IGRID)
       USE GWFBCFMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       IBCFCB=>GWFBCFDAT(IGRID)%IBCFCB
       IWDFLG=>GWFBCFDAT(IGRID)%IWDFLG
       IWETIT=>GWFBCFDAT(IGRID)%IWETIT
@@ -1498,6 +1722,8 @@
       SUBROUTINE SGWF2BCF7PSV(IGRID)
       USE GWFBCFMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       GWFBCFDAT(IGRID)%IBCFCB=>IBCFCB
       GWFBCFDAT(IGRID)%IWDFLG=>IWDFLG
       GWFBCFDAT(IGRID)%IWETIT=>IWETIT

@@ -2,6 +2,7 @@
 ! Requires the Fortran 2003 ISO_C_BINDING Intrinsic Module
 !--------------------------------------------------------------------
 Module GMG_C_INTERFACE
+  IMPLICIT NONE
   Interface
 
 !

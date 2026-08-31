@@ -1,6 +1,10 @@
          MODULE SIPMODULE
-         INTEGER, SAVE, POINTER          ::NPARM,IPCALC,IPRSIP
-         REAL,    SAVE, POINTER          ::HCLOSE,ACCL
+         IMPLICIT NONE
+         INTEGER,SAVE,POINTER:: NPARM
+         INTEGER,SAVE,POINTER:: IPCALC
+         INTEGER,SAVE,POINTER:: IPRSIP
+         REAL,SAVE,POINTER:: HCLOSE
+         REAL,SAVE,POINTER:: ACCL
          REAL,    SAVE, DIMENSION(:),       POINTER   ::W
          REAL,    SAVE, DIMENSION(:,:,:),   POINTER   ::EL
          REAL,    SAVE, DIMENSION(:,:,:),   POINTER   ::FL
@@ -9,8 +13,11 @@
          REAL,    SAVE, DIMENSION(:),       POINTER   ::HDCG
          INTEGER, SAVE, DIMENSION(:,:),     POINTER   ::LRCH
        TYPE SIPTYPE
-         INTEGER,       POINTER          ::NPARM,IPCALC,IPRSIP
-         REAL,          POINTER          ::HCLOSE,ACCL
+         INTEGER,POINTER:: NPARM
+         INTEGER,POINTER:: IPCALC
+         INTEGER,POINTER:: IPRSIP
+         REAL,POINTER:: HCLOSE
+         REAL,POINTER:: ACCL
          REAL,          DIMENSION(:),       POINTER   ::W
          REAL,          DIMENSION(:,:,:),   POINTER   ::EL
          REAL,          DIMENSION(:,:,:),   POINTER   ::FL
@@ -34,6 +41,21 @@
       USE SIPMODULE, ONLY: NPARM,IPCALC,IPRSIP,HCLOSE,ACCL,W,EL,FL,GL,&
      &                     V,HDCG,LRCH
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: J
+      INTEGER :: LLOC
+      INTEGER :: MXITER
+      REAL :: ONE
+      REAL :: P1
+      REAL :: P2
+      REAL :: R
+      REAL :: WSEED
+      REAL :: ZERO
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
       ALLOCATE(NPARM,IPCALC,IPRSIP,HCLOSE,ACCL)
@@ -118,16 +140,135 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION HNEW,DITPAR,AC,HHCOF,RRHS,XI,DZERO,DONE,RES
-      DOUBLE PRECISION Z,B,D,E,F,H,S,AP,TP,CP,GP,UP,RP
-      DOUBLE PRECISION ZHNEW,BHNEW,DHNEW,FHNEW,HHNEW,SHNEW
-      DOUBLE PRECISION AL,BL,CL,DL,ELNCL,FLNCL,GLNCL
-      DOUBLE PRECISION ELNRL,FLNRL,GLNRL,ELNLL,FLNLL,GLNLL
-      DOUBLE PRECISION VNRL,VNCL,VNLL,ELXI,FLXI,GLXI,VN
+      IMPLICIT NONE
+      REAL :: ACCL
+      REAL :: BIG
+      REAL :: BIGG
+      REAL :: CC
+      REAL :: CR
+      REAL :: CV
+      REAL :: EL
+      REAL :: FL
+      REAL :: GL
+      REAL :: HCLOSE
+      REAL :: HCOF
+      REAL :: HDCG
+      INTEGER :: I
+      INTEGER :: IB
+      INTEGER :: IBOUND
+      INTEGER :: ICNVG
+      INTEGER :: IDIR
+      INTEGER :: IDNCOL
+      INTEGER :: IDNRC
+      INTEGER :: IERR
+      INTEGER :: II
+      INTEGER :: IOUT
+      INTEGER :: IPCALC
+      INTEGER :: IPRSIP
+      INTEGER :: J
+      INTEGER :: JB
+      INTEGER :: JJ
+      INTEGER :: K
+      INTEGER :: KB
+      INTEGER :: KITER
+      INTEGER :: KK
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: LRCH
+      INTEGER :: MUTSIP
+      INTEGER :: MXITER
+      INTEGER :: N
+      INTEGER :: NC
+      INTEGER :: NCD
+      INTEGER :: NCF
+      INTEGER :: NCL
+      INTEGER :: NCN
+      INTEGER :: NCOL
+      INTEGER :: NL
+      INTEGER :: NLAY
+      INTEGER :: NLL
+      INTEGER :: NLN
+      INTEGER :: NLS
+      INTEGER :: NLZ
+      INTEGER :: NODES
+      INTEGER :: NPARM
+      INTEGER :: NR
+      INTEGER :: NRB
+      INTEGER :: NRC
+      INTEGER :: NRH
+      INTEGER :: NRL
+      INTEGER :: NRN
+      INTEGER :: NROW
+      INTEGER :: NSTP
+      INTEGER :: NTH
+      REAL :: RHS
+      REAL :: TCHK
+      REAL :: V
+      REAL :: W
+      REAL :: ZERO
+      DOUBLE PRECISION HNEW
+      DOUBLE PRECISION DITPAR
+      DOUBLE PRECISION AC
+      DOUBLE PRECISION HHCOF
+      DOUBLE PRECISION RRHS
+      DOUBLE PRECISION XI
+      DOUBLE PRECISION DZERO
+      DOUBLE PRECISION DONE
+      DOUBLE PRECISION RES
+      DOUBLE PRECISION Z
+      DOUBLE PRECISION B
+      DOUBLE PRECISION D
+      DOUBLE PRECISION E
+      DOUBLE PRECISION F
+      DOUBLE PRECISION H
+      DOUBLE PRECISION S
+      DOUBLE PRECISION AP
+      DOUBLE PRECISION TP
+      DOUBLE PRECISION CP
+      DOUBLE PRECISION GP
+      DOUBLE PRECISION UP
+      DOUBLE PRECISION RP
+      DOUBLE PRECISION ZHNEW
+      DOUBLE PRECISION BHNEW
+      DOUBLE PRECISION DHNEW
+      DOUBLE PRECISION FHNEW
+      DOUBLE PRECISION HHNEW
+      DOUBLE PRECISION SHNEW
+      DOUBLE PRECISION AL
+      DOUBLE PRECISION BL
+      DOUBLE PRECISION CL
+      DOUBLE PRECISION DL
+      DOUBLE PRECISION ELNCL
+      DOUBLE PRECISION FLNCL
+      DOUBLE PRECISION GLNCL
+      DOUBLE PRECISION ELNRL
+      DOUBLE PRECISION FLNRL
+      DOUBLE PRECISION GLNRL
+      DOUBLE PRECISION ELNLL
+      DOUBLE PRECISION FLNLL
+      DOUBLE PRECISION GLNLL
+      DOUBLE PRECISION VNRL
+      DOUBLE PRECISION VNCL
+      DOUBLE PRECISION VNLL
+      DOUBLE PRECISION ELXI
+      DOUBLE PRECISION FLXI
+      DOUBLE PRECISION GLXI
+      DOUBLE PRECISION VN
 !
-      DIMENSION HNEW(NODES), IBOUND(NODES), CR(NODES), CC(NODES),&
-     &  CV(NODES), HCOF(NODES), RHS(NODES), EL(NODES), FL(NODES),&
-     &  GL(NODES), V(NODES), W(NPARM), HDCG(MXITER), LRCH(3,MXITER)
+      DIMENSION HNEW(NODES)
+      DIMENSION IBOUND(NODES)
+      DIMENSION CR(NODES)
+      DIMENSION CC(NODES)
+      DIMENSION CV(NODES)
+      DIMENSION HCOF(NODES)
+      DIMENSION RHS(NODES)
+      DIMENSION EL(NODES)
+      DIMENSION FL(NODES)
+      DIMENSION GL(NODES)
+      DIMENSION V(NODES)
+      DIMENSION W(NPARM)
+      DIMENSION HDCG(MXITER)
+      DIMENSION LRCH(3,MXITER)
 !     ------------------------------------------------------------------
 !
 !1------CALCULATE ITERATION PARAMETERS IF FLAG IS SET.  THEN
@@ -420,10 +561,60 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION CR(NCOL,NROW,NLAY),CC(NCOL,NROW,NLAY)&
-     &       ,CV(NCOL,NROW,NLAY),IBOUND(NCOL,NROW,NLAY),W(NPARM)
+      IMPLICIT NONE
+      REAL :: AVGMIN
+      REAL :: B
+      REAL :: BHMN
+      REAL :: BHMX
+      REAL :: C
+      REAL :: CC
+      REAL :: CCOL
+      REAL :: CLAY
+      REAL :: CR
+      REAL :: CROW
+      REAL :: CV
+      REAL :: D
+      REAL :: DFMN
+      REAL :: DFMX
+      REAL :: F
+      REAL :: H
+      INTEGER :: I
+      INTEGER :: IBOUND
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NODES
+      INTEGER :: NPARM
+      INTEGER :: NROW
+      REAL :: ONE
+      REAL :: P1
+      REAL :: P2
+      REAL :: PIEPIE
+      REAL :: R
+      REAL :: S
+      REAL :: TMP
+      REAL :: TWO
+      REAL :: W
+      REAL :: WCOL
+      REAL :: WLAY
+      REAL :: WMIN
+      REAL :: WMINMN
+      REAL :: WROW
+      REAL :: Z
+      REAL :: ZERO
+      REAL :: ZL
+      REAL :: ZSMN
+      REAL :: ZSMX
+      DIMENSION CR(NCOL,NROW,NLAY)
+      DIMENSION CC(NCOL,NROW,NLAY)
+      DIMENSION CV(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION W(NPARM)
 !
-      DOUBLE PRECISION DWMIN,AVGSUM
+      DOUBLE PRECISION DWMIN
+      DOUBLE PRECISION AVGSUM
 !     ------------------------------------------------------------------
 !
 !1------CALCULATE CONSTANTS AND INITIALIZE VARIABLES
@@ -525,7 +716,20 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
 !
-      DIMENSION HDCG(MXITER), LRCH(3,MXITER)
+      IMPLICIT NONE
+      REAL :: HDCG
+      INTEGER :: I
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KITER
+      INTEGER :: L1
+      INTEGER :: L2
+      INTEGER :: LRCH
+      INTEGER :: MXITER
+      INTEGER :: NGRP
+      DIMENSION HDCG(MXITER)
+      DIMENSION LRCH(3,MXITER)
 !     ------------------------------------------------------------------
 !
       WRITE(IOUT,5)
@@ -552,6 +756,8 @@
 !  Deallocate SIP DATA
       USE SIPMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       CALL SIP7PNT(IGRID)
         DEALLOCATE(NPARM,IPCALC,IPRSIP,HCLOSE,ACCL)
         DEALLOCATE(EL)
@@ -568,6 +774,8 @@
 !  Set pointers to SIP data for a grid
       USE SIPMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       NPARM=>SIPDAT(IGRID)%NPARM
       IPCALC=>SIPDAT(IGRID)%IPCALC
       IPRSIP=>SIPDAT(IGRID)%IPRSIP
@@ -588,6 +796,8 @@
 !  Save pointers to SIP data
       USE SIPMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       SIPDAT(IGRID)%NPARM=>NPARM
       SIPDAT(IGRID)%IPCALC=>IPCALC
       SIPDAT(IGRID)%IPRSIP=>IPRSIP

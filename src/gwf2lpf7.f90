@@ -1,6 +1,14 @@
       MODULE GWFLPFMODULE
-        INTEGER, SAVE,   POINTER ::ILPFCB,IWDFLG,IWETIT,IHDWET
-        INTEGER, SAVE,   POINTER ::ISFAC,ICONCV,ITHFLG,NOCVCO,NOVFC
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: ILPFCB
+        INTEGER,SAVE,POINTER:: IWDFLG
+        INTEGER,SAVE,POINTER:: IWETIT
+        INTEGER,SAVE,POINTER:: IHDWET
+        INTEGER,SAVE,POINTER:: ISFAC
+        INTEGER,SAVE,POINTER:: ICONCV
+        INTEGER,SAVE,POINTER:: ITHFLG
+        INTEGER,SAVE,POINTER:: NOCVCO
+        INTEGER,SAVE,POINTER:: NOVFC
         REAL,    SAVE,   POINTER ::WETFCT
         INTEGER, SAVE,   POINTER, DIMENSION(:)     ::LAYTYP
         INTEGER, SAVE,   POINTER, DIMENSION(:)     ::LAYAVG
@@ -17,8 +25,15 @@
         REAL,    SAVE,   POINTER, DIMENSION(:,:,:) ::WETDRY
         REAL,    SAVE,   POINTER, DIMENSION(:,:,:) ::HK
       TYPE GWFLPFTYPE
-        INTEGER, POINTER ::ILPFCB,IWDFLG,IWETIT,IHDWET
-        INTEGER, POINTER ::ISFAC,ICONCV,ITHFLG,NOCVCO,NOVFC
+        INTEGER,POINTER:: ILPFCB
+        INTEGER,POINTER:: IWDFLG
+        INTEGER,POINTER:: IWETIT
+        INTEGER,POINTER:: IHDWET
+        INTEGER,POINTER:: ISFAC
+        INTEGER,POINTER:: ICONCV
+        INTEGER,POINTER:: ITHFLG
+        INTEGER,POINTER:: NOCVCO
+        INTEGER,POINTER:: NOVFC
         REAL, POINTER    ::WETFCT
         INTEGER,   POINTER, DIMENSION(:)     ::LAYTYP
         INTEGER,   POINTER, DIMENSION(:)     ::LAYAVG
@@ -54,15 +69,52 @@
      &                      LAYTYP,LAYAVG,CHANI,LAYVKA,LAYWET,LAYSTRT,&
      &                      LAYFLG,VKA,VKCB,SC1,SC2,HANI,WETDRY,HK
 !
-      CHARACTER*14 LAYPRN(5),AVGNAM(3),TYPNAM(2),VKANAM(2),WETNAM(2),&
-     &            HANNAM
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IANAME
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: K
+      INTEGER :: KHANI
+      INTEGER :: KK
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NCNVRT
+      INTEGER :: NHANI
+      INTEGER :: NOPCHK
+      INTEGER :: NPHANI
+      INTEGER :: NPHK
+      INTEGER :: NPLPF
+      INTEGER :: NPSS
+      INTEGER :: NPSY
+      INTEGER :: NPVANI
+      INTEGER :: NPVK
+      INTEGER :: NPVKCB
+      INTEGER :: NWETD
+      REAL :: R
+      REAL :: ZERO
+      CHARACTER*14 LAYPRN(5)
+      CHARACTER*14 AVGNAM(3)
+      SAVE :: AVGNAM
+      CHARACTER*14 TYPNAM(2)
+      SAVE :: TYPNAM
+      CHARACTER*14 VKANAM(2)
+      SAVE :: VKANAM
+      CHARACTER*14 WETNAM(2)
+      SAVE :: WETNAM
+      CHARACTER*14 HANNAM
+      SAVE :: HANNAM
       DATA AVGNAM/'      HARMONIC','   LOGARITHMIC','     LOG-ARITH'/
       DATA TYPNAM/'      CONFINED','   CONVERTIBLE'/
       DATA VKANAM/'    VERTICAL K','    ANISOTROPY'/
       DATA WETNAM/'  NON-WETTABLE','      WETTABLE'/
       DATA HANNAM/'      VARIABLE'/
       CHARACTER*200 LINE
-      CHARACTER*24 ANAME(9),STOTXT
+      CHARACTER*24 ANAME(9)
+      SAVE :: ANAME
+      CHARACTER*24 STOTXT
       CHARACTER*4 PTYP
 !
       DATA ANAME(1) /'   HYD. COND. ALONG ROWS'/
@@ -485,6 +537,14 @@
       USE GWFLPFMODULE,ONLY:LAYWET,WETDRY
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: ISS
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      REAL :: ZERO
       CALL SGWF2LPF7PNT(IGRID)
       ISS=ISSFLG(KPER)
 !
@@ -528,6 +588,26 @@
 !
 !1------SET POINTERS TO DATA, GET STEADY-STATE FLAG FOR STRESS PERIOD,
 !1------DEFINE CONSTANT.
+      IMPLICIT NONE
+      REAL :: HTMP
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: ISS
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KITER
+      INTEGER :: KK
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      REAL :: ONE
+      REAL :: RHO
+      REAL :: RHO1
+      REAL :: RHO2
+      REAL :: SNEW
+      REAL :: SOLD
+      REAL :: TLED
+      REAL :: TOP
+      REAL :: TP
       CALL SGWF2LPF7PNT(IGRID)
       ISS=ISSFLG(KPER)
       ONE=1.
@@ -657,6 +737,13 @@
 !     ------------------------------------------------------------------
 !
 !1------DEFINE CONSTANTS.
+      IMPLICIT NONE
+      REAL :: HCNV
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KK
+      REAL :: ZERO
       ZERO=0.
       HCNV=HNOFLO
 !
@@ -784,7 +871,34 @@
       USE GWFBASMODULE,ONLY:ICBCFL,DELT,PERTIM,TOTIM,ICHFLG
       USE GWFLPFMODULE,ONLY:ILPFCB,LAYTYP,NOVFC
 !
+      IMPLICIT NONE
+      REAL :: HDIFF
+      INTEGER :: I
+      INTEGER :: I1
+      INTEGER :: I2
+      INTEGER :: IBD
+      INTEGER :: IBDRET
+      INTEGER :: IC1
+      INTEGER :: IC2
+      INTEGER :: IDIR
+      INTEGER :: IGRID
+      INTEGER :: IL1
+      INTEGER :: IL2
+      INTEGER :: IR1
+      INTEGER :: IR2
+      INTEGER :: J
+      INTEGER :: J1
+      INTEGER :: J2
+      INTEGER :: K
+      INTEGER :: K1
+      INTEGER :: K2
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      REAL :: TMP
+      REAL :: TOP
+      REAL :: ZERO
       CHARACTER*16 TEXT(3)
+      SAVE :: TEXT
       DOUBLE PRECISION HD
 !
       DATA TEXT(1),TEXT(2),TEXT(3)&
@@ -958,8 +1072,35 @@
       USE GWFBASMODULE,ONLY:MSUM,ICBCFL,VBVL,VBNM,DELT,PERTIM,TOTIM
       USE GWFLPFMODULE,ONLY:ILPFCB,LAYTYP,SC1,SC2
 
+      IMPLICIT NONE
+      REAL :: HSING
+      INTEGER :: I
+      INTEGER :: IBD
+      INTEGER :: IGRID
+      INTEGER :: ISS
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: KT
+      INTEGER :: LC
+      REAL :: ONE
+      REAL :: RHO
+      REAL :: RHO1
+      REAL :: RHO2
+      REAL :: SIN
+      REAL :: SNEW
+      REAL :: SOLD
+      REAL :: SOUT
+      REAL :: STRG
+      REAL :: TLED
+      REAL :: TP
+      REAL :: ZERO
       CHARACTER*16 TEXT
-      DOUBLE PRECISION STOIN,STOUT,SSTRG
+      SAVE :: TEXT
+      DOUBLE PRECISION STOIN
+      DOUBLE PRECISION STOUT
+      DOUBLE PRECISION SSTRG
 !
       DATA TEXT /'         STORAGE'/
 !     ------------------------------------------------------------------
@@ -1062,8 +1203,46 @@
      &                      ICHFLG
       USE GWFLPFMODULE,ONLY:ILPFCB,LAYTYP,NOVFC
 
+      IMPLICIT NONE
+      REAL :: CHCH1
+      REAL :: CHCH2
+      REAL :: CHCH3
+      REAL :: CHCH4
+      REAL :: CHCH5
+      REAL :: CHCH6
+      REAL :: CIN
+      REAL :: COUT
+      REAL :: HDIFF
+      INTEGER :: I
+      INTEGER :: IBD
+      INTEGER :: IBDLBL
+      INTEGER :: IGRID
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NCH
+      REAL :: RATE
+      REAL :: TMP
+      REAL :: TOP
+      REAL :: X1
+      REAL :: X2
+      REAL :: X3
+      REAL :: X4
+      REAL :: X5
+      REAL :: X6
+      REAL :: ZERO
       CHARACTER*16 TEXT
-      DOUBLE PRECISION HD,CHIN,CHOUT,XX1,XX2,XX3,XX4,XX5,XX6
+      SAVE :: TEXT
+      DOUBLE PRECISION HD
+      DOUBLE PRECISION CHIN
+      DOUBLE PRECISION CHOUT
+      DOUBLE PRECISION XX1
+      DOUBLE PRECISION XX2
+      DOUBLE PRECISION XX3
+      DOUBLE PRECISION XX4
+      DOUBLE PRECISION XX5
+      DOUBLE PRECISION XX6
 !
       DATA TEXT /'   CONSTANT HEAD'/
 !     ------------------------------------------------------------------
@@ -1279,6 +1458,13 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,        ONLY:NCOL,NROW,DELR,DELC,BOTM,LBOTM,LAYCBD
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: ISPST
+      INTEGER :: J
+      INTEGER :: K
+      REAL :: SC
+      REAL :: THICK
       DIMENSION SC(NCOL,NROW)
 !     ------------------------------------------------------------------
 !
@@ -1314,8 +1500,27 @@
       USE GWFBASMODULE,ONLY:HDRY
       USE GWFLPFMODULE,ONLY:LAYWET,IWETIT,LAYTYP,LAYAVG,LAYSTRT
 !
+      IMPLICIT NONE
+      REAL :: BBOT
+      REAL :: HHD
+      INTEGER :: I
+      INTEGER :: ICNVRT
+      INTEGER :: IHDCNV
+      INTEGER :: ITFLG
+      INTEGER :: J
+      INTEGER :: JCNVRT
+      INTEGER :: K
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NCNVRT
+      REAL :: THCK
+      REAL :: TTOP
+      REAL :: ZERO
       CHARACTER*3 ACNVRT
-      DIMENSION ICNVRT(5),JCNVRT(5),ACNVRT(5)
+      DIMENSION ICNVRT(5)
+      DIMENSION JCNVRT(5)
+      DIMENSION ACNVRT(5)
 !
 !     ------------------------------------------------------------------
 !1------INITIALIZE DATA.
@@ -1430,8 +1635,25 @@
       USE GWFLPFMODULE,  ONLY:LAYTYP,CHANI,LAYVKA,LAYWET,WETDRY,&
      &                        WETFCT,IHDWET
 !
+      IMPLICIT NONE
+      REAL :: HTMP
+      INTEGER :: I
+      INTEGER :: ICNVRT
+      INTEGER :: IHDCNV
+      INTEGER :: J
+      INTEGER :: JCNVRT
+      INTEGER :: K
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NCNVRT
+      REAL :: TURNON
+      REAL :: WD
+      REAL :: ZERO
       CHARACTER*3 ACNVRT
-      DIMENSION ICNVRT(5),JCNVRT(5),ACNVRT(5)
+      DIMENSION ICNVRT(5)
+      DIMENSION JCNVRT(5)
+      DIMENSION ACNVRT(5)
 !     ------------------------------------------------------------------
 !
 !1------LOOP THROUGH ALL CELLS.
@@ -1510,8 +1732,26 @@
 !
 !      SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: ICNVRT
+      INTEGER :: ICODE
+      INTEGER :: IHDCNV
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: JCNVRT
+      INTEGER :: K
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: L
+      INTEGER :: NCNVRT
+      INTEGER :: NCOL
+      INTEGER :: NROW
       CHARACTER*3 ACNVRT
-      DIMENSION ICNVRT(5),JCNVRT(5),ACNVRT(5)
+      DIMENSION ICNVRT(5)
+      DIMENSION JCNVRT(5)
+      DIMENSION ACNVRT(5)
 !     ------------------------------------------------------------------
 !
 !1------KEEP TRACK OF CELL CONVERSIONS.
@@ -1559,6 +1799,15 @@
       USE GWFLPFMODULE,ONLY:HK,CHANI,HANI
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KHANI
+      REAL :: T1
+      REAL :: T2
+      REAL :: TWO
+      REAL :: ZERO
       ZERO=0.
       TWO=2.
 !
@@ -1630,6 +1879,20 @@
       USE GWFLPFMODULE,ONLY:HK,CHANI,HANI
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      REAL :: FRAC1
+      REAL :: FRAC2
+      REAL :: HALF
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KHANI
+      REAL :: RATIO
+      REAL :: T
+      REAL :: T1
+      REAL :: T2
+      REAL :: TWO
+      REAL :: ZERO
       ZERO=0.
       TWO=2.
       HALF=0.5
@@ -1716,6 +1979,19 @@
       USE GWFLPFMODULE,ONLY:HK,CHANI,HANI
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      REAL :: FRAC1
+      REAL :: FRAC2
+      REAL :: HALF
+      REAL :: HYC
+      REAL :: HYC1
+      REAL :: HYC2
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KHANI
+      REAL :: RATIO
+      REAL :: ZERO
       ZERO=0.
       HALF=0.5
       FRAC1=1.005
@@ -1805,7 +2081,21 @@
       USE GWFLPFMODULE,  ONLY:LAYTYP,LAYAVG,CHANI,LAYVKA,LAYWET,&
      &                        HK,VKA,VKCB,NOCVCO,ICONCV,LAYSTRT
 !
-      DOUBLE PRECISION BBOT,TTOP,HHD
+      IMPLICIT NONE
+      REAL :: B
+      REAL :: BOVK1
+      REAL :: BOVK2
+      REAL :: CBBOVK
+      REAL :: HALF
+      REAL :: HYC1
+      REAL :: HYC2
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: K
+      REAL :: ZERO
+      DOUBLE PRECISION BBOT
+      DOUBLE PRECISION TTOP
+      DOUBLE PRECISION HHD
 !     ------------------------------------------------------------------
 !
       IF(K.EQ.NLAY) RETURN
@@ -1901,6 +2191,12 @@
       USE GWFLPFMODULE,  ONLY:LAYTYP,LAYAVG,CHANI,LAYVKA,LAYWET
       USE PARAMMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: ICL
+      INTEGER :: IOUT
+      INTEGER :: LAY
+      INTEGER :: LV
+      INTEGER :: NP
       CHARACTER*4 PTYP
 !     ------------------------------------------------------------------
 !
@@ -1937,6 +2233,8 @@
 !  Deallocate LPF DATA
       USE GWFLPFMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         DEALLOCATE(GWFLPFDAT(IGRID)%ILPFCB)
         DEALLOCATE(GWFLPFDAT(IGRID)%IWDFLG)
         DEALLOCATE(GWFLPFDAT(IGRID)%IWETIT)
@@ -1968,6 +2266,8 @@
 !  Point to LPF data for a grid.
       USE GWFLPFMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         ILPFCB=>GWFLPFDAT(IGRID)%ILPFCB
         IWDFLG=>GWFLPFDAT(IGRID)%IWDFLG
         IWETIT=>GWFLPFDAT(IGRID)%IWETIT
@@ -1999,6 +2299,8 @@
 !  Save LPF data for a grid.
       USE GWFLPFMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         GWFLPFDAT(IGRID)%ILPFCB=>ILPFCB
         GWFLPFDAT(IGRID)%IWDFLG=>IWDFLG
         GWFLPFDAT(IGRID)%IWETIT=>IWETIT

@@ -1,8 +1,22 @@
       MODULE GLOBAL
+        IMPLICIT NONE
+        INTEGER :: NIUNIT
         PARAMETER(NIUNIT=100)
-        INTEGER, SAVE, POINTER    ::NCOL,NROW,NLAY,NPER,NBOTM,NCNFBD
-        INTEGER, SAVE, POINTER    ::ITMUNI,LENUNI,IXSEC,ITRSS,INBAS
-        INTEGER, SAVE, POINTER    ::IFREFM,NODES,IOUT,MXITER
+        INTEGER,SAVE,POINTER:: NCOL
+        INTEGER,SAVE,POINTER:: NROW
+        INTEGER,SAVE,POINTER:: NLAY
+        INTEGER,SAVE,POINTER:: NPER
+        INTEGER,SAVE,POINTER:: NBOTM
+        INTEGER,SAVE,POINTER:: NCNFBD
+        INTEGER,SAVE,POINTER:: ITMUNI
+        INTEGER,SAVE,POINTER:: LENUNI
+        INTEGER,SAVE,POINTER:: IXSEC
+        INTEGER,SAVE,POINTER:: ITRSS
+        INTEGER,SAVE,POINTER:: INBAS
+        INTEGER,SAVE,POINTER:: IFREFM
+        INTEGER,SAVE,POINTER:: NODES
+        INTEGER,SAVE,POINTER:: IOUT
+        INTEGER,SAVE,POINTER:: MXITER
         INTEGER, SAVE,    DIMENSION(:),     POINTER ::IUNIT(:)
         DOUBLE PRECISION, SAVE, DIMENSION(:,:,:), POINTER ::HNEW
         INTEGER, SAVE,    DIMENSION(:),     POINTER ::LBOTM
@@ -27,9 +41,21 @@
         REAL,    SAVE,    DIMENSION(:,:,:), POINTER ::STRT
         REAL,    SAVE,    DIMENSION(:,:,:), POINTER ::DDREF
       TYPE GLOBALTYPE
-        INTEGER,POINTER    :: NCOL,NROW,NLAY,NPER,NBOTM,NCNFBD
-        INTEGER,POINTER    :: ITMUNI,LENUNI,IXSEC,ITRSS,INBAS
-        INTEGER,POINTER    :: IFREFM,NODES,IOUT,MXITER
+        INTEGER,POINTER:: NCOL
+        INTEGER,POINTER:: NROW
+        INTEGER,POINTER:: NLAY
+        INTEGER,POINTER:: NPER
+        INTEGER,POINTER:: NBOTM
+        INTEGER,POINTER:: NCNFBD
+        INTEGER,POINTER:: ITMUNI
+        INTEGER,POINTER:: LENUNI
+        INTEGER,POINTER:: IXSEC
+        INTEGER,POINTER:: ITRSS
+        INTEGER,POINTER:: INBAS
+        INTEGER,POINTER:: IFREFM
+        INTEGER,POINTER:: NODES
+        INTEGER,POINTER:: IOUT
+        INTEGER,POINTER:: MXITER
         INTEGER,    DIMENSION(:),     POINTER ::IUNIT
         DOUBLE PRECISION, DIMENSION(:,:,:), POINTER ::HNEW
         INTEGER,    DIMENSION(:),     POINTER ::LBOTM
@@ -60,8 +86,17 @@
 !  Data definitions for Named Parameters
 !  Explicitly declare all variables to enable subroutines that include
 !  this file to use the IMPLICIT NONE statement.
+        IMPLICIT NONE
+        INTEGER :: MXCLST
+        INTEGER :: MXINST
+        INTEGER :: MXPAR
         PARAMETER (MXPAR=2000,MXCLST=20000,MXINST=50000)
-        INTEGER,SAVE,POINTER ::ICLSUM,IPSUM,INAMLOC,NMLTAR,NZONAR,NPVAL
+        INTEGER,SAVE,POINTER:: ICLSUM
+        INTEGER,SAVE,POINTER:: IPSUM
+        INTEGER,SAVE,POINTER:: INAMLOC
+        INTEGER,SAVE,POINTER:: NMLTAR
+        INTEGER,SAVE,POINTER:: NZONAR
+        INTEGER,SAVE,POINTER:: NPVAL
         REAL,          SAVE,    DIMENSION(:),    POINTER ::B
         INTEGER,       SAVE,    DIMENSION(:),    POINTER ::IACTIVE
         INTEGER,       SAVE,    DIMENSION(:,:),  POINTER ::IPLOC
@@ -74,7 +109,12 @@
         CHARACTER(LEN=10),SAVE, DIMENSION(:),    POINTER ::MLTNAM
         CHARACTER(LEN=10),SAVE, DIMENSION(:),    POINTER ::INAME
       TYPE PARAMTYPE
-        INTEGER,POINTER  ::ICLSUM,IPSUM,INAMLOC,NMLTAR,NZONAR,NPVAL
+        INTEGER,POINTER:: ICLSUM
+        INTEGER,POINTER:: IPSUM
+        INTEGER,POINTER:: INAMLOC
+        INTEGER,POINTER:: NMLTAR
+        INTEGER,POINTER:: NZONAR
+        INTEGER,POINTER:: NPVAL
         REAL,              DIMENSION(:),    POINTER ::B
         INTEGER,           DIMENSION(:),    POINTER ::IACTIVE
         INTEGER,           DIMENSION(:,:),  POINTER ::IPLOC
@@ -90,26 +130,69 @@
       TYPE(PARAMTYPE), SAVE  ::PARAMDAT(10)
       END MODULE PARAMMODULE
       MODULE GWFBASMODULE
+        IMPLICIT NONE
         INTEGER, SAVE, POINTER  ::MSUM
-        INTEGER, SAVE, POINTER  ::IHEDFM,IHEDUN,IDDNFM,IDDNUN,IBOUUN
-        INTEGER, SAVE, POINTER  ::LBHDSV,LBDDSV,LBBOSV
-        INTEGER, SAVE, POINTER  ::IBUDFL,ICBCFL,IHDDFL,IAUXSV,IBDOPT
-        INTEGER, SAVE, POINTER  ::IPRTIM,IPEROC,ITSOC,ICHFLG
-        INTEGER, SAVE, POINTER  ::IDDREF,IDDREFNEW
-        REAL,    SAVE, POINTER  ::DELT,PERTIM,TOTIM,HNOFLO,HDRY,STOPER
-        CHARACTER(LEN=20), SAVE, POINTER   ::CHEDFM,CDDNFM,CBOUFM
+        INTEGER,SAVE,POINTER:: IHEDFM
+        INTEGER,SAVE,POINTER:: IHEDUN
+        INTEGER,SAVE,POINTER:: IDDNFM
+        INTEGER,SAVE,POINTER:: IDDNUN
+        INTEGER,SAVE,POINTER:: IBOUUN
+        INTEGER,SAVE,POINTER:: LBHDSV
+        INTEGER,SAVE,POINTER:: LBDDSV
+        INTEGER,SAVE,POINTER:: LBBOSV
+        INTEGER,SAVE,POINTER:: IBUDFL
+        INTEGER,SAVE,POINTER:: ICBCFL
+        INTEGER,SAVE,POINTER:: IHDDFL
+        INTEGER,SAVE,POINTER:: IAUXSV
+        INTEGER,SAVE,POINTER:: IBDOPT
+        INTEGER,SAVE,POINTER:: IPRTIM
+        INTEGER,SAVE,POINTER:: IPEROC
+        INTEGER,SAVE,POINTER:: ITSOC
+        INTEGER,SAVE,POINTER:: ICHFLG
+        INTEGER,SAVE,POINTER:: IDDREF
+        INTEGER,SAVE,POINTER:: IDDREFNEW
+        REAL,SAVE,POINTER:: DELT
+        REAL,SAVE,POINTER:: PERTIM
+        REAL,SAVE,POINTER:: TOTIM
+        REAL,SAVE,POINTER:: HNOFLO
+        REAL,SAVE,POINTER:: HDRY
+        REAL,SAVE,POINTER:: STOPER
+        CHARACTER(LEN=20),SAVE,POINTER:: CHEDFM
+        CHARACTER(LEN=20),SAVE,POINTER:: CDDNFM
+        CHARACTER(LEN=20),SAVE,POINTER:: CBOUFM
         INTEGER,           SAVE, DIMENSION(:,:), POINTER ::IOFLG
         REAL,              SAVE, DIMENSION(:,:), POINTER ::VBVL
         CHARACTER(LEN=16), SAVE, DIMENSION(:),   POINTER ::VBNM
       TYPE GWFBASTYPE
         INTEGER, POINTER  ::MSUM
-        INTEGER, POINTER  ::IHEDFM,IHEDUN,IDDNFM,IDDNUN,IBOUUN
-        INTEGER, POINTER  ::LBHDSV,LBDDSV,LBBOSV
-        INTEGER, POINTER  ::IBUDFL,ICBCFL,IHDDFL,IAUXSV,IBDOPT
-        INTEGER, POINTER  ::IPRTIM,IPEROC,ITSOC,ICHFLG
-        INTEGER, POINTER  ::IDDREF,IDDREFNEW
-        REAL,    POINTER  ::DELT,PERTIM,TOTIM,HNOFLO,HDRY,STOPER
-        CHARACTER(LEN=20), POINTER   ::CHEDFM,CDDNFM,CBOUFM
+        INTEGER,POINTER:: IHEDFM
+        INTEGER,POINTER:: IHEDUN
+        INTEGER,POINTER:: IDDNFM
+        INTEGER,POINTER:: IDDNUN
+        INTEGER,POINTER:: IBOUUN
+        INTEGER,POINTER:: LBHDSV
+        INTEGER,POINTER:: LBDDSV
+        INTEGER,POINTER:: LBBOSV
+        INTEGER,POINTER:: IBUDFL
+        INTEGER,POINTER:: ICBCFL
+        INTEGER,POINTER:: IHDDFL
+        INTEGER,POINTER:: IAUXSV
+        INTEGER,POINTER:: IBDOPT
+        INTEGER,POINTER:: IPRTIM
+        INTEGER,POINTER:: IPEROC
+        INTEGER,POINTER:: ITSOC
+        INTEGER,POINTER:: ICHFLG
+        INTEGER,POINTER:: IDDREF
+        INTEGER,POINTER:: IDDREFNEW
+        REAL,POINTER:: DELT
+        REAL,POINTER:: PERTIM
+        REAL,POINTER:: TOTIM
+        REAL,POINTER:: HNOFLO
+        REAL,POINTER:: HDRY
+        REAL,POINTER:: STOPER
+        CHARACTER(LEN=20),POINTER:: CHEDFM
+        CHARACTER(LEN=20),POINTER:: CDDNFM
+        CHARACTER(LEN=20),POINTER:: CBOUFM
         INTEGER,           DIMENSION(:,:), POINTER ::IOFLG
         REAL,              DIMENSION(:,:), POINTER ::VBVL
         CHARACTER(LEN=16), DIMENSION(:),   POINTER ::VBNM
@@ -142,6 +225,27 @@
      &                      IDDREF,IDDREFNEW,DELT,PERTIM,TOTIM,HNOFLO,&
      &                      HDRY,STOPER,CHEDFM,CDDNFM,CBOUFM,VBVL,VBNM
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: INUNIT
+      INTEGER :: IPBUFF
+      INTEGER :: IPHNEW
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: IUDIS
+      INTEGER :: IUMLT
+      INTEGER :: IUOC
+      INTEGER :: IUPVAL
+      INTEGER :: IUZON
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KK
+      INTEGER :: LLOC
+      INTEGER :: MAXUNIT
+      INTEGER :: N
+      REAL :: R
+      REAL :: ZERO
       CHARACTER*4 CUNIT(NIUNIT)
       CHARACTER*(*) VERSION
       CHARACTER*80 HEADNG(2)
@@ -150,6 +254,7 @@
 !
       DOUBLE PRECISION HNF
       CHARACTER*24 ANAME(2)
+      SAVE :: ANAME
       DATA ANAME(1) /'          BOUNDARY ARRAY'/
       DATA ANAME(2) /'            INITIAL HEAD'/
 !     ------------------------------------------------------------------
@@ -381,6 +486,10 @@
       USE GLOBAL,      ONLY:IOUT,PERLEN,NSTP,TSMULT
       USE GWFBASMODULE,ONLY:DELT,PERTIM
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: KPER
+      REAL :: ONE
       CALL SGWF2BAS7PNT(IGRID)
 !
 !1------WRITE STRESS PERIOD INFORMATION
@@ -425,6 +534,13 @@
       USE GLOBAL,      ONLY:NCOL,NROW,NLAY,TSMULT,HNEW,HOLD
       USE GWFBASMODULE,ONLY:DELT,TOTIM,PERTIM
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KSTP
       CALL SGWF2BAS7PNT(IGRID)
 !
 !1------IF NOT FIRST TIME STEP THEN CALCULATE TIME STEP LENGTH.
@@ -453,6 +569,9 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,ONLY:HCOF,RHS
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      REAL :: ZERO
       CALL SGWF2BAS7PNT(IGRID)
 !
 !1------FOR EACH CELL INITIALIZE HCOF AND RHS ACCUMULATORS.
@@ -475,6 +594,15 @@
      &                      IOFLG
 !
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: ICNVG
+      INTEGER :: IGRID
+      INTEGER :: INCODE
+      INTEGER :: INOC
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: M
       CALL SGWF2BAS7PNT(IGRID)
 !
 !1------TEST UNIT NUMBER (INOC (INOC=IUNIT(12))) TO SEE IF
@@ -587,6 +715,14 @@
      &                      MSUM,VBVL,VBNM,IDDREF
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      REAL :: BUDPERC
+      INTEGER :: ICNVG
+      INTEGER :: IGRID
+      INTEGER :: IPFLG
+      INTEGER :: ISA
+      INTEGER :: KPER
+      INTEGER :: KSTP
       CALL SGWF2BAS7PNT(IGRID)
 !
 !1------CLEAR PRINTOUT FLAG (IPFLG)
@@ -657,8 +793,24 @@
      &                     LENUNI,IUNIT,LBOTM,LAYCBD,ITRSS,&
      &                     PERLEN,NSTP,TSMULT,ISSFLG,DELR,DELC,BOTM
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: INDIS
+      INTEGER :: IOUT
+      INTEGER :: ISS
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: ITR
+      INTEGER :: IUDIS
+      INTEGER :: K
+      INTEGER :: KK
+      INTEGER :: LLOC
+      INTEGER :: N
+      REAL :: R
+      REAL :: ZERO
       CHARACTER*200 LINE
       CHARACTER*24 ANAME(5)
+      SAVE :: ANAME
       DATA ANAME(1) /'                    DELR'/
       DATA ANAME(2) /'                    DELC'/
       DATA ANAME(3) /'TOP ELEVATION OF LAYER 1'/
@@ -866,7 +1018,19 @@
       USE GWFBASMODULE,ONLY:PERTIM,TOTIM,IDDNFM,IDDNUN,LBDDSV,&
      &                      CDDNFM,IOFLG
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IFIRST
+      INTEGER :: IPFLG
+      INTEGER :: ISA
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KK
+      INTEGER :: KL
+      INTEGER :: KPER
+      INTEGER :: KSTP
       CHARACTER*16 TEXT
+      SAVE :: TEXT
       DOUBLE PRECISION SSTRT
 !
       DATA TEXT /'        DRAWDOWN'/
@@ -965,7 +1129,19 @@
       USE GWFBASMODULE,ONLY:PERTIM,TOTIM,IHEDFM,IHEDUN,LBHDSV,&
      &                      CHEDFM,IOFLG
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IFIRST
+      INTEGER :: IPFLG
+      INTEGER :: ISA
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KK
+      INTEGER :: KL
+      INTEGER :: KPER
+      INTEGER :: KSTP
       CHARACTER*16 TEXT
+      SAVE :: TEXT
       DATA TEXT /'            HEAD'/
 !     ------------------------------------------------------------------
 !
@@ -1058,7 +1234,14 @@
       USE GLOBAL,      ONLY:NCOL,NROW,NLAY,IXSEC,IBOUND,IOUT
       USE GWFBASMODULE,ONLY:PERTIM,TOTIM,IBOUUN,LBBOSV,CBOUFM,IOFLG
 !
+      IMPLICIT NONE
+      INTEGER :: IFIRST
+      INTEGER :: K
+      INTEGER :: KK
+      INTEGER :: KPER
+      INTEGER :: KSTP
       CHARACTER*16 TEXT
+      SAVE :: TEXT
       DATA TEXT /'          IBOUND'/
 !     ------------------------------------------------------------------
       IF(IBOUUN.LE.0) RETURN
@@ -1100,6 +1283,18 @@
      &                        CHEDFM,CDDNFM,IBDOPT,LBHDSV,LBDDSV,&
      &                        IBOUUN,LBBOSV,CBOUFM,IAUXSV,IOFLG,&
      &                        VBVL,VBNM,IDDREF,IDDREFNEW
+      IMPLICIT NONE
+      INTEGER :: IFREFM
+      INTEGER :: INOC
+      INTEGER :: IOUT
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: K
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NIUNIT
+      INTEGER :: NLAY
+      REAL :: R
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
 !
@@ -1201,6 +1396,15 @@
      &                        CHEDFM,CDDNFM,IBDOPT,LBHDSV,LBDDSV,&
      &                        IBOUUN,LBBOSV,CBOUFM,IAUXSV,IDDREFNEW
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: INOC
+      INTEGER :: IOUT
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: LLOC
+      INTEGER :: N
+      REAL :: R
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
 !
@@ -1385,6 +1589,34 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: CNV
+      REAL :: DAYYR
+      REAL :: DELDY
+      REAL :: DELHR
+      REAL :: DELMN
+      REAL :: DELSEC
+      REAL :: DELT
+      REAL :: DELYR
+      REAL :: HRDAY
+      INTEGER :: IOUT
+      INTEGER :: ITMUNI
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      REAL :: PERDY
+      REAL :: PERHR
+      REAL :: PERMN
+      REAL :: PERSEC
+      REAL :: PERTIM
+      REAL :: PERYR
+      REAL :: SIXTY
+      REAL :: TOTDY
+      REAL :: TOTHR
+      REAL :: TOTIM
+      REAL :: TOTMN
+      REAL :: TOTSEC
+      REAL :: TOTYR
+      REAL :: ZERO
       WRITE(IOUT,199) KSTP,KPER
 199   FORMAT(1X,///9X,'TIME SUMMARY AT END OF TIME STEP',I5,&
      &     ' IN STRESS PERIOD ',I4)
@@ -1453,9 +1685,37 @@
 !
 !     SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: ADIFFR
+      REAL :: ADIFFV
+      REAL :: AVGRAT
+      REAL :: AVGVOL
+      REAL :: BIGVL1
+      REAL :: BIGVL2
+      REAL :: BUDPERC
+      REAL :: DIFFR
+      REAL :: DIFFV
+      REAL :: HUND
+      INTEGER :: IOUT
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: L
+      INTEGER :: MSUM
+      INTEGER :: MSUM1
+      REAL :: PDIFFR
+      REAL :: PDIFFV
+      REAL :: SMALL
+      REAL :: TOTRIN
+      REAL :: TOTROT
+      REAL :: TOTVIN
+      REAL :: TOTVOT
+      REAL :: TWO
+      REAL :: VBVL
+      REAL :: ZERO
       CHARACTER*16 VBNM(MSUM)
       DIMENSION VBVL(4,MSUM)
-      CHARACTER*17 VAL1,VAL2
+      CHARACTER*17 VAL1
+      CHARACTER*17 VAL2
 !     ------------------------------------------------------------------
 !
 !1------DETERMINE NUMBER OF INDIVIDUAL BUDGET ENTRIES.
@@ -1615,6 +1875,19 @@
       USE GWFBASMODULE, ONLY: IOFLG,IHDDFL,IBUDFL,ICBCFL,IPEROC,&
      &                        ITSOC,IBDOPT,IDDREF,IDDREFNEW
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: INOC
+      INTEGER :: IOUT
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NLAY
+      REAL :: R
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
 !
@@ -1755,6 +2028,21 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: INOC
+      INTEGER :: IOFLG
+      INTEGER :: IOUT
+      INTEGER :: IPOS
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: K
+      INTEGER :: L
+      INTEGER :: LAYER
+      INTEGER :: LLOC
+      INTEGER :: M
+      INTEGER :: NLAY
+      INTEGER :: NSET
+      REAL :: R
       DIMENSION IOFLG(NLAY,5)
       CHARACTER*200 LINE
       CHARACTER*(*) LABEL
@@ -1801,14 +2089,42 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IFLEN
+      INTEGER :: INAM1
+      INTEGER :: INAM2
+      INTEGER :: INBAS
+      INTEGER :: INDENT
+      INTEGER :: INUNIT
+      INTEGER :: IOPT1
+      INTEGER :: IOPT2
+      INTEGER :: IOUT
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: ITYP1
+      INTEGER :: ITYP2
+      INTEGER :: IU
+      INTEGER :: IUNIT
+      INTEGER :: LENVER
+      INTEGER :: LLOC
+      INTEGER :: MAXUNIT
+      INTEGER :: N
+      INTEGER :: NFILE
+      INTEGER :: NIUNIT
+      REAL :: R
       INCLUDE 'openspec.inc'
       DIMENSION IUNIT(NIUNIT)
       CHARACTER*4 CUNIT(NIUNIT)
       CHARACTER*7 FILSTAT
-      CHARACTER*20 FILACT, FMTARG, ACCARG
-      CHARACTER*(*) VERSION,MFVNAM
+      CHARACTER*20 FILACT
+      CHARACTER*20 FMTARG
+      CHARACTER*20 ACCARG
+      CHARACTER*(*) VERSION
+      CHARACTER*(*) MFVNAM
       CHARACTER*40 SPACES
-      CHARACTER*300 LINE, FNAME
+      CHARACTER*300 LINE
+      CHARACTER*300 FNAME
       CHARACTER*20 FILTYP
       LOGICAL LOP
 !     ---------------------------------------------------------------
@@ -1982,10 +2298,27 @@
       USE GLOBAL,     ONLY:NCOL,NROW,IOUT
       USE PARAMMODULE,ONLY:NZONAR,NMLTAR,ZONNAM,MLTNAM,IZON,RMLT
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: INMULT
+      INTEGER :: INZONE
+      INTEGER :: IPRN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: J
+      INTEGER :: L
+      INTEGER :: LLOC
+      INTEGER :: M
+      INTEGER :: MM
+      INTEGER :: N
+      INTEGER :: NOP
+      INTEGER :: NZ
+      REAL :: R
       CHARACTER*20 RW
       CHARACTER*1 COP
       CHARACTER*24 ANAME
-      CHARACTER*10 CTMP1,CTMP2
+      CHARACTER*10 CTMP1
+      CHARACTER*10 CTMP2
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
 !
@@ -2184,7 +2517,20 @@
       USE GLOBAL,    ONLY: IOUT,IUNIT
       USE PARAMMODULE, ONLY:MXPAR,IPSUM,PARNAM,B,NPVAL
 !
-      CHARACTER*10 PNI, PNJ
+      IMPLICIT NONE
+      REAL :: DUM
+      INTEGER :: I
+      INTEGER :: IERR
+      INTEGER :: IM1
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: IU
+      INTEGER :: IUPVAL
+      INTEGER :: J
+      INTEGER :: LLOC
+      INTEGER :: NPE
+      CHARACTER*10 PNI
+      CHARACTER*10 PNJ
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
 !
@@ -2307,6 +2653,9 @@
       USE GLOBAL,      ONLY: IOUT
       USE PARAMMODULE, ONLY:NPVAL,PARTYP,PARNAM
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IERR
+      INTEGER :: IP
       IF(NPVAL.LE.0) RETURN
       IERR=0
 !
@@ -2332,6 +2681,8 @@
       USE PARAMMODULE
       USE GWFBASMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         DEALLOCATE(GLOBALDAT(IGRID)%NCOL)
         DEALLOCATE(GLOBALDAT(IGRID)%NROW)
         DEALLOCATE(GLOBALDAT(IGRID)%NLAY)
@@ -2428,6 +2779,8 @@
       USE PARAMMODULE
       USE GWFBASMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         NCOL=>GLOBALDAT(IGRID)%NCOL
         NROW=>GLOBALDAT(IGRID)%NROW
         NLAY=>GLOBALDAT(IGRID)%NLAY
@@ -2529,6 +2882,8 @@
       USE PARAMMODULE
       USE GWFBASMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         GLOBALDAT(IGRID)%NCOL=>NCOL
         GLOBALDAT(IGRID)%NROW=>NROW
         GLOBALDAT(IGRID)%NLAY=>NLAY
