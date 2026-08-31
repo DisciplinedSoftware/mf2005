@@ -1,5 +1,10 @@
       MODULE OBSGHBMODULE
-         INTEGER, SAVE, POINTER  ::NQGB,NQCGB,NQTGB,IUGBOBSV,IPRT
+         IMPLICIT NONE
+         INTEGER,SAVE,POINTER:: NQGB
+         INTEGER,SAVE,POINTER:: NQCGB
+         INTEGER,SAVE,POINTER:: NQTGB
+         INTEGER,SAVE,POINTER:: IUGBOBSV
+         INTEGER,SAVE,POINTER:: IPRT
          INTEGER, SAVE, DIMENSION(:),   POINTER ::NQOBGB
          INTEGER, SAVE, DIMENSION(:),   POINTER ::NQCLGB
          INTEGER, SAVE, DIMENSION(:),   POINTER ::IOBTS
@@ -10,7 +15,11 @@
          REAL,    SAVE, DIMENSION(:,:), POINTER ::QCELL
          CHARACTER*12,SAVE,DIMENSION(:),POINTER ::OBSNAM
       TYPE OBSGHBTYPE
-         INTEGER, POINTER  ::NQGB,NQCGB,NQTGB,IUGBOBSV,IPRT
+         INTEGER,POINTER:: NQGB
+         INTEGER,POINTER:: NQCGB
+         INTEGER,POINTER:: NQTGB
+         INTEGER,POINTER:: IUGBOBSV
+         INTEGER,POINTER:: IPRT
          INTEGER,     DIMENSION(:),   POINTER ::NQOBGB
          INTEGER,     DIMENSION(:),   POINTER ::NQCLGB
          INTEGER,     DIMENSION(:),   POINTER ::IOBTS
@@ -45,6 +54,32 @@
       USE GLOBAL,  ONLY:IOUT,NPER,NSTP,PERLEN,TSMULT,ISSFLG,&
      &                  NCOL,NROW,NLAY,ITRSS
       USE OBSGHBMODULE
+      IMPLICIT NONE
+      REAL :: DUM
+      INTEGER :: I
+      INTEGER :: IDUM
+      INTEGER :: IERR
+      INTEGER :: IFCTFLG
+      INTEGER :: IGRID
+      INTEGER :: IQ
+      INTEGER :: IREFSP
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: IUGB
+      INTEGER :: IUGBOB
+      INTEGER :: J
+      INTEGER :: L
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NC
+      INTEGER :: NC1
+      INTEGER :: NC2
+      INTEGER :: NT
+      INTEGER :: NT1
+      INTEGER :: NT2
+      REAL :: TOFFSET
+      REAL :: TOMULTRV
+      REAL :: ZERO
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
       ALLOCATE(NQGB,NQCGB,NQTGB,IUGBOBSV,IPRT)
@@ -208,7 +243,33 @@
       USE GWFGHBMODULE, ONLY:NBOUND,BNDS
       USE OBSBASMODULE,ONLY:ITS
       USE OBSGHBMODULE
-      DOUBLE PRECISION HHNEW, C, HB , RBOT
+      IMPLICIT NONE
+      REAL :: HH
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: II
+      INTEGER :: IQ
+      INTEGER :: J
+      INTEGER :: JJ
+      INTEGER :: JRBOT
+      INTEGER :: K
+      INTEGER :: KK
+      INTEGER :: KRBOT
+      INTEGER :: MNB
+      INTEGER :: N
+      INTEGER :: NB
+      INTEGER :: NC
+      INTEGER :: NC1
+      INTEGER :: NC2
+      INTEGER :: NT
+      INTEGER :: NT1
+      INTEGER :: NT2
+      REAL :: TFACT
+      REAL :: ZERO
+      DOUBLE PRECISION HHNEW
+      DOUBLE PRECISION C
+      DOUBLE PRECISION HB
+      DOUBLE PRECISION RBOT
 !     ------------------------------------------------------------------
       CALL SGWF2GHB7PNT(IGRID)
       CALL SOBS2GHB7PNT(IGRID)
@@ -324,7 +385,12 @@
 !     ------------------------------------------------------------------
       USE GLOBAL, ONLY: IOUT
       USE OBSGHBMODULE
-      DOUBLE PRECISION SQ,SUMSQ
+      IMPLICIT NONE
+      REAL :: DIFF
+      INTEGER :: IGRID
+      INTEGER :: N
+      DOUBLE PRECISION SQ
+      DOUBLE PRECISION SUMSQ
 !     ------------------------------------------------------------------
       CALL SOBS2GHB7PNT(IGRID)
 !
@@ -358,6 +424,8 @@
 !  Deallocate OBSGHB memory
       USE OBSGHBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       CALL SOBS2GHB7PNT(IGRID)
       DEALLOCATE(NQGB)
       DEALLOCATE(NQCGB)
@@ -380,6 +448,8 @@
 !  Change OBSGHB data to a different grid.
       USE OBSGHBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       NQGB=>OBSGHBDAT(IGRID)%NQGB
       NQCGB=>OBSGHBDAT(IGRID)%NQCGB
       NQTGB=>OBSGHBDAT(IGRID)%NQTGB
@@ -401,6 +471,8 @@
 !  Save OBSGHB data for a grid.
       USE OBSGHBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       OBSGHBDAT(IGRID)%NQGB=>NQGB
       OBSGHBDAT(IGRID)%NQCGB=>NQCGB
       OBSGHBDAT(IGRID)%NQTGB=>NQTGB

@@ -99,18 +99,21 @@
         IMPLICIT NONE
         DOUBLE PRECISION, PARAMETER :: HEPS = 1.0E-7
         DOUBLE PRECISION, SAVE, DIMENSION(:), POINTER :: A
-        INTEGER, SAVE, DIMENSION(:), POINTER :: IA, JA
+        INTEGER,SAVE,DIMENSION(:),POINTER:: IA
+        INTEGER,SAVE,DIMENSION(:),POINTER:: JA
         INTEGER, SAVE, DIMENSION(:, :, :), POINTER :: Icell
       END MODULE GWFNWTMODULE
 !
 !       DUMMY GWFUPWMODULE MODULE FOR MODFLOW NWT
       MODULE GWFUPWMODULE
+        IMPLICIT NONE
         REAL, SAVE, POINTER, DIMENSION(:,:,:) :: HKUPW
       END MODULE GWFUPWMODULE
 !       END   - DUMMY MODULES FOR MODFLOW NWT - COMMENT OUT IF MODFLOW-NWT
 !-----------------------------------------------------------------------------
 !      
       MODULE GWFSWRMODULE
+        IMPLICIT NONE
         CHARACTER(LEN=64),PARAMETER :: VERSION_SWR =&
      &'$Id: gwf2swr7.f 1.05 2022-03-10 15:00:00Z jdhughes $'
 !
@@ -557,7 +560,9 @@
         DOUBLEPRECISION,SAVE,POINTER  :: DMAXSTG
         DOUBLEPRECISION,SAVE,POINTER  :: DMAXINF
         DOUBLEPRECISION,SAVE,POINTER  :: DMAXSBZ
-        INTEGER,SAVE,POINTER          :: ISOLVER, NOUTER, NINNER
+        INTEGER,SAVE,POINTER:: ISOLVER
+        INTEGER,SAVE,POINTER:: NOUTER
+        INTEGER,SAVE,POINTER:: NINNER
         CHARACTER(LEN=40),SAVE,POINTER:: SOLVERTEXT
         INTEGER,SAVE,POINTER          :: IBT
         INTEGER,SAVE,POINTER          :: NTMIN
@@ -598,9 +603,16 @@
         INTEGER,SAVE,POINTER          :: NLEVELS
         DOUBLEPRECISION,SAVE,POINTER  :: DROPTOL
         INTEGER,SAVE,POINTER          :: IBTPRT
-        INTEGER,SAVE,POINTER          :: ITMP,IPTFLG
-        INTEGER,SAVE,POINTER          :: IRDBND,IRDRAI,IRDEVP,IRDLIN
-        INTEGER,SAVE,POINTER          :: IRDGEO,IRDSTR,IRDSTG,IRDAUX
+        INTEGER,SAVE,POINTER:: ITMP
+        INTEGER,SAVE,POINTER:: IPTFLG
+        INTEGER,SAVE,POINTER:: IRDBND
+        INTEGER,SAVE,POINTER:: IRDRAI
+        INTEGER,SAVE,POINTER:: IRDEVP
+        INTEGER,SAVE,POINTER:: IRDLIN
+        INTEGER,SAVE,POINTER:: IRDGEO
+        INTEGER,SAVE,POINTER:: IRDSTR
+        INTEGER,SAVE,POINTER:: IRDSTG
+        INTEGER,SAVE,POINTER:: IRDAUX
         DOUBLEPRECISION,SAVE,DIMENSION(:,:), POINTER  :: BFCNV
         INTEGER,SAVE,POINTER          :: ICALCQAQ
         INTEGER,SAVE,POINTER          :: NBDITEMS
@@ -715,7 +727,9 @@
           DOUBLEPRECISION,POINTER  :: DMAXSTG
           DOUBLEPRECISION,POINTER  :: DMAXINF
           DOUBLEPRECISION,POINTER  :: DMAXSBZ
-          INTEGER,POINTER          :: ISOLVER, NOUTER, NINNER
+          INTEGER,POINTER:: ISOLVER
+          INTEGER,POINTER:: NOUTER
+          INTEGER,POINTER:: NINNER
           CHARACTER(LEN=40),POINTER:: SOLVERTEXT
           INTEGER,POINTER          :: IBT
           INTEGER,POINTER          :: NTMIN
@@ -756,9 +770,16 @@
           INTEGER,POINTER          :: NLEVELS
           DOUBLEPRECISION,POINTER  :: DROPTOL
           INTEGER,POINTER          :: IBTPRT
-          INTEGER,POINTER          :: ITMP,IPTFLG
-          INTEGER,POINTER          :: IRDBND,IRDRAI,IRDEVP,IRDLIN
-          INTEGER,POINTER          :: IRDGEO,IRDSTR,IRDSTG,IRDAUX
+          INTEGER,POINTER:: ITMP
+          INTEGER,POINTER:: IPTFLG
+          INTEGER,POINTER:: IRDBND
+          INTEGER,POINTER:: IRDRAI
+          INTEGER,POINTER:: IRDEVP
+          INTEGER,POINTER:: IRDLIN
+          INTEGER,POINTER:: IRDGEO
+          INTEGER,POINTER:: IRDSTR
+          INTEGER,POINTER:: IRDSTG
+          INTEGER,POINTER:: IRDAUX
           DOUBLEPRECISION,DIMENSION(:,:), POINTER  :: BFCNV
           INTEGER,POINTER          :: ICALCQAQ
           INTEGER,POINTER          :: NBDITEMS
@@ -810,6 +831,7 @@
       END MODULE GWFSWRMODULE
 
       MODULE GWFSWRINTERFACE
+        IMPLICIT NONE
         INTERFACE
 !-----------ASSUMED SHAPE INTERFACE FOR SORTING A PASSED VECTOR
           SUBROUTINE SSWR_SORT(V)
@@ -882,34 +904,60 @@
       INTEGER, INTENT(IN) :: Igrid
 !     + + + LOCAL DEFINITIONS + + +
       CHARACTER (LEN= 40) :: csolver(3)
+      SAVE :: CSOLVER
       CHARACTER (LEN= 20) :: cmethod(4)
+      SAVE :: CMETHOD
       CHARACTER (LEN= 20) :: cswght(0:1)
+      SAVE :: CSWGHT
       CHARACTER (LEN= 20) :: cdscale(0:2)
+      SAVE :: CDSCALE
       CHARACTER (LEN= 20) :: ciciqm(-1:1)
+      SAVE :: CICIQM
       CHARACTER (LEN= 20) :: cipc(0:4)
+      SAVE :: CIPC
       CHARACTER (LEN= 20) :: cscale(0:2)
+      SAVE :: CSCALE
       CHARACTER (LEN= 20) :: ctab(0:5)
+      SAVE :: CTAB
       CHARACTER (LEN= 10) :: cobs
       CHARACTER (LEN= 20) :: cintp(3)
+      SAVE :: CINTP
       CHARACTER (LEN=200) :: line
-      CHARACTER (LEN= 20) :: ctabtype, ctabintp
-      INTEGER :: iut, iclose
-      INTEGER :: i, j, k, n
+      CHARACTER(LEN=20):: ctabtype
+      CHARACTER(LEN=20):: ctabintp
+      INTEGER:: iut
+      INTEGER:: iclose
+      INTEGER:: i
+      INTEGER:: j
+      INTEGER:: k
+      INTEGER:: n
       INTEGER :: icnt
       INTEGER :: itab
-      INTEGER :: irch, irg
-      INTEGER :: nconn, iconn
-      INTEGER :: lloc, istart, istop, ival
+      INTEGER:: irch
+      INTEGER:: irg
+      INTEGER:: nconn
+      INTEGER:: iconn
+      INTEGER:: lloc
+      INTEGER:: istart
+      INTEGER:: istop
+      INTEGER:: ival
       INTEGER :: idw
       INTEGER :: ierr
       INTEGER :: iu
-      INTEGER :: itabunit, ntabrch
+      INTEGER:: itabunit
+      INTEGER:: ntabrch
       INTEGER :: maxcores = 1
       REAL :: r
-      REAL :: rt, totim
-      REAL :: t0, t1, tf, tp0, tp1
+      REAL:: rt
+      REAL:: totim
+      REAL:: t0
+      REAL:: t1
+      REAL:: tf
+      REAL:: tp0
+      REAL:: tp1
       REAL, ALLOCATABLE, DIMENSION(:,:) :: rlist
-      REAL :: tim1, tim2
+      REAL:: tim1
+      REAL:: tim2
 !     + + + LOCAL TYPE FOR SWR1 OPTIONS
       TYPE toptions
         CHARACTER (LEN=35) :: coption
@@ -956,6 +1004,7 @@
      &     toptions('USE_GLOBAL_TOLA                    ', 0, 0, 33),&
      &     toptions('USE_ABSOLUTE_TOLA                  ', 0, 0, 32),&
      &     toptions('END                                ', 0, 0,  0) /)
+      SAVE :: SWROPTIONS
 !     + + + FUNCTIONS + + +
       DOUBLEPRECISION :: SSWR_R2D
 !     + + + DATA + + +
@@ -2232,38 +2281,61 @@
       CHARACTER (LEN=10), DIMENSION( 8) :: creach
       CHARACTER (LEN=10), DIMENSION(11) :: cstruct
       CHARACTER (LEN=50), DIMENSION( 2) :: clustor
+      SAVE :: CLUSTOR
       CHARACTER (LEN=30), DIMENSION( 6) :: cstrbc
+      SAVE :: CSTRBC
       CHARACTER (LEN=14), DIMENSION(:), ALLOCATABLE :: ccerch
       CHARACTER (LEN=05), DIMENSION(:), ALLOCATABLE :: crg
       CHARACTER (LEN=05), DIMENSION(:), ALLOCATABLE :: cce
       CHARACTER (LEN=05), DIMENSION(:), ALLOCATABLE :: cia
       CHARACTER (LEN=05), DIMENSION(:), ALLOCATABLE :: ciu
-      INTEGER :: iut, iclose
-      INTEGER :: i, j, k, n
+      INTEGER:: iut
+      INTEGER:: iclose
+      INTEGER:: i
+      INTEGER:: j
+      INTEGER:: k
+      INTEGER:: n
       INTEGER :: kk
       INTEGER :: irch
       INTEGER :: nc
-      INTEGER :: irchstg, istrrch, istrnum, istrtype, istrconn, istrbc
+      INTEGER:: irchstg
+      INTEGER:: istrrch
+      INTEGER:: istrnum
+      INTEGER:: istrtype
+      INTEGER:: istrconn
+      INTEGER:: istrbc
       INTEGER :: irchaux
       INTEGER :: nstpstr
       INTEGER :: ibndfail
       INTEGER :: isa
       INTEGER :: irg
-      INTEGER :: lloc, istart, istop, ival, indx
+      INTEGER:: lloc
+      INTEGER:: istart
+      INTEGER:: istop
+      INTEGER:: ival
+      INTEGER:: indx
       INTEGER :: ierr
-      INTEGER :: isfrseg, isfrrch, isfrstrm
-      INTEGER :: istr11, istrm0
-      INTEGER :: ierr11, ierrstrm
+      INTEGER:: isfrseg
+      INTEGER:: isfrrch
+      INTEGER:: isfrstrm
+      INTEGER:: istr11
+      INTEGER:: istrm0
+      INTEGER:: ierr11
+      INTEGER:: ierrstrm
       INTEGER :: istrpts
       INTEGER :: ird
       REAL :: r
       CHARACTER (LEN=10), DIMENSION(:), ALLOCATABLE :: cstage
       INTEGER, DIMENSION(:), ALLOCATABLE :: iconstant
-      INTEGER, DIMENSION(:), ALLOCATABLE :: iinactive, iactive
+      INTEGER,DIMENSION(:),ALLOCATABLE:: iinactive
+      INTEGER,DIMENSION(:),ALLOCATABLE:: iactive
       INTEGER :: iotherrch
       INTEGER, DIMENSION(:), ALLOCATABLE :: istage
       DOUBLEPRECISION, DIMENSION(:), ALLOCATABLE :: dstage
-      INTEGER :: igeonum, igeotype, igcndop, ngeopts
+      INTEGER:: igeonum
+      INTEGER:: igeotype
+      INTEGER:: igcndop
+      INTEGER:: ngeopts
       DOUBLEPRECISION :: gmanning, gwidth, gbelev, gsslope
       DOUBLEPRECISION :: gcnd, glk, gcndln
       DOUBLEPRECISION :: getextd
@@ -2271,15 +2343,18 @@
       DOUBLEPRECISION, DIMENSION(:,:), ALLOCATABLE :: geostor
       DOUBLEPRECISION, DIMENSION(:), ALLOCATABLE :: ug
       REAL, DIMENSION(:,:), ALLOCATABLE :: rlist
-      INTEGER, DIMENSION(:), ALLOCATABLE :: inewstr, istrerr
+      INTEGER,DIMENSION(:),ALLOCATABLE:: inewstr
+      INTEGER,DIMENSION(:),ALLOCATABLE:: istrerr
       CHARACTER (LEN=24) :: aname(4)
+      SAVE :: ANAME
       INTEGER :: ird2d
       REAL, DIMENSION(:,:), ALLOCATABLE :: r2d
       REAL, DIMENSION(:,:), ALLOCATABLE :: stage2d
       DOUBLEPRECISION :: fact
       DOUBLEPRECISION :: rbot
       DOUBLEPRECISION :: dlen
-      REAL :: tim1, tim2
+      REAL:: tim1
+      REAL:: tim2
 !     + + + FUNCTIONS + + +
       DOUBLEPRECISION :: SSWR_R2D
       INTEGER         :: SSWR_CHKSTR
@@ -4187,7 +4262,8 @@
       INTEGER :: irch
       INTEGER :: irg
       DOUBLE PRECISION FRAC
-      REAL :: tim1, tim2
+      REAL:: tim1
+      REAL:: tim2
 !     ------------------------------------------------------------------
       CALL SGWF2SWR7PNT(Igrid)
 !
@@ -4308,7 +4384,8 @@
         INTEGER :: irch
         INTEGER :: ioffset
         DOUBLEPRECISION :: d
-        REAL :: tim1, tim2
+        REAL:: tim1
+        REAL:: tim2
 !       + + + FUNCTIONS + + +
 !       + + + CODE + + +
 !
@@ -4401,7 +4478,8 @@
         INTEGER :: irch
         INTEGER :: ioffset
         DOUBLEPRECISION :: d
-        REAL :: tim1, tim2
+        REAL:: tim1
+        REAL:: tim2
 !       + + + FUNCTIONS + + +
 !       + + + CODE + + +
 !
@@ -4496,7 +4574,8 @@
         REAL, INTENT(IN), OPTIONAL :: Rtim
 !       + + + LOCAL DEFINITIONS + + +
         INTEGER :: n
-        REAL :: tim1, tim2
+        REAL:: tim1
+        REAL:: tim2
 !       + + + FUNCTIONS + + +
         INTEGER SSWR_TIMEINDEX
 !       + + + CODE + + +
@@ -4545,9 +4624,13 @@
 !     + + + LOCAL DEFINITIONS + + +
       LOGICAL :: checkresult
       LOGICAL :: rhsonly
-      INTEGER :: i, k, n
+      INTEGER:: i
+      INTEGER:: k
+      INTEGER:: n
       INTEGER :: kact
-      INTEGER :: ir, jc, kl
+      INTEGER:: ir
+      INTEGER:: jc
+      INTEGER:: kl
       INTEGER :: irch
       INTEGER :: irg
       INTEGER :: ipos
@@ -4572,9 +4655,13 @@
       DOUBLEPRECISION :: fmax0
       DOUBLEPRECISION :: dtscale
       DOUBLEPRECISION :: ge, gwet, getextd
-      REAL            :: stpend, swrtot, ttot, dt
+      REAL:: stpend
+      REAL:: swrtot
+      REAL:: ttot
+      REAL:: dt
       REAL            :: dtlast
-      REAL :: tim1, tim2
+      REAL:: tim1
+      REAL:: tim2
       DOUBLEPRECISION :: rc, hc
       DOUBLEPRECISION :: rs
       DOUBLEPRECISION :: q
@@ -5293,12 +5380,14 @@
 !     + + + LOCAL DEFINITIONS + + +
       INTEGER :: irch
       INTEGER :: irg
-      INTEGER :: k, n
+      INTEGER:: k
+      INTEGER:: n
       DOUBLEPRECISION :: ssdv, gs, gs0, v, v0, dv
       DOUBLEPRECISION :: dtscale
       DOUBLEPRECISION :: bfcrit
       DOUBLEPRECISION :: bt, bavg
-      REAL :: tim1, tim2
+      REAL:: tim1
+      REAL:: tim2
       DOUBLEPRECISION :: tt
       DOUBLEPRECISION :: pswrbf, pmfbf
       DOUBLEPRECISION :: nswrbf, nmfbf
@@ -5543,19 +5632,30 @@
       INTEGER, INTENT(IN) :: Igrid
 !     + + + LOCAL DEFINITIONS + + +
       LOGICAL :: rhsonly
-      INTEGER :: ibd, ibdlbl
-      INTEGER :: kl, ir, jc
-      INTEGER :: kact, kk
-      INTEGER :: i, j, k, n
+      INTEGER:: ibd
+      INTEGER:: ibdlbl
+      INTEGER:: kl
+      INTEGER:: ir
+      INTEGER:: jc
+      INTEGER:: kact
+      INTEGER:: kk
+      INTEGER:: i
+      INTEGER:: j
+      INTEGER:: k
+      INTEGER:: n
       INTEGER :: irch
       INTEGER :: irg
       INTEGER :: iprn
       INTEGER :: iu
       INTEGER :: iaux
       INTEGER :: ival
-      REAL :: rin, rout, rate
-      REAL :: qaqincin,  qaqcumin
-      REAL :: qaqincout, qaqcumout
+      REAL:: rin
+      REAL:: rout
+      REAL:: rate
+      REAL:: qaqincin
+      REAL:: qaqcumin
+      REAL:: qaqincout
+      REAL:: qaqcumout
       DOUBLEPRECISION :: rs, q
       DOUBLEPRECISION :: dtscale
       DOUBLEPRECISION :: h0, h1, h, s
@@ -5566,8 +5666,10 @@
       DOUBLEPRECISION :: ratin, ratout, rrate, tsrate
 !     !DOUBLEPRECISION, DIMENSION(NLAY) :: layrate
       DOUBLEPRECISION :: swrtot, dt, t0
-      REAL :: tim1, tim2
+      REAL:: tim1
+      REAL:: tim2
       CHARACTER (LEN=16) :: text(2)
+      SAVE :: TEXT
       CHARACTER (LEN=15) :: cline(5)
       DATA text(1) /'     SWR LEAKAGE'/
       DATA text(2) /'        SWR GWET'/
@@ -6664,9 +6766,16 @@
 !       + + + DUMMY ARGUMENTS + + +
         DOUBLE PRECISION, DIMENSION(:), INTENT(INOUT) :: V
 !       + + + LOCAL DEFINITIONS + + +
-        INTEGER, PARAMETER :: nn=15, nstack=50
+        INTEGER,PARAMETER:: nn=15
+        INTEGER,PARAMETER:: nstack=50
         DOUBLE PRECISION :: a
-        INTEGER :: n, k, i, j, jstack, l, r
+        INTEGER:: n
+        INTEGER:: k
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: jstack
+        INTEGER:: l
+        INTEGER:: r
         INTEGER, DIMENSION(nstack) :: istack
 !       + + + FUNCTIONS + + +
 !       + + + CODE + + +
@@ -6832,7 +6941,8 @@
         REAL, INTENT(IN) :: Z
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER         :: i
-        REAL            :: dx, dydx
+        REAL:: dx
+        REAL:: dydx
 !     + + + CODE + + +
         v = 0.0E0
 !---------BELOW BOTTOM OF RANGE - SET TO LOWEST VALUE
@@ -6918,11 +7028,16 @@
 !     + + + DUMMY ARGUMENTS + + +
 !     + + + LOCAL DEFINITIONS + + +
         CHARACTER (LEN=14), DIMENSION(:), ALLOCATABLE :: ccerch
-        INTEGER :: i, n
+        INTEGER:: i
+        INTEGER:: n
         INTEGER :: nn
-        INTEGER :: irch1, irch2
-        INTEGER :: nconn1, nconn2, iconn2
-        INTEGER :: icount, ifound
+        INTEGER:: irch1
+        INTEGER:: irch2
+        INTEGER:: nconn1
+        INTEGER:: nconn2
+        INTEGER:: iconn2
+        INTEGER:: icount
+        INTEGER:: ifound
         DOUBLEPRECISION, DIMENSION(:), ALLOCATABLE :: dconnlist
 !     + + + FUNCTIONS + + +
 !     + + + INPUT FORMATS + + +
@@ -7024,16 +7139,22 @@
         IMPLICIT NONE
 !     + + + DUMMY ARGUMENTS + + +
 !     + + + LOCAL DEFINITIONS + + +
-        CHARACTER (LEN=2) :: croutetype1, croutetype2
-        INTEGER :: i, n
+        CHARACTER(LEN=2):: croutetype1
+        CHARACTER(LEN=2):: croutetype2
+        INTEGER:: i
+        INTEGER:: n
         INTEGER :: irch
         INTEGER :: ios
         INTEGER :: icount
         INTEGER :: nn
-        INTEGER :: irg1, irg2
-        INTEGER :: iconn, imaxconn
-        INTEGER :: irch1, irch2
-        INTEGER :: iroutetype1, iroutetype2
+        INTEGER:: irg1
+        INTEGER:: irg2
+        INTEGER:: iconn
+        INTEGER:: imaxconn
+        INTEGER:: irch1
+        INTEGER:: irch2
+        INTEGER:: iroutetype1
+        INTEGER:: iroutetype2
         INTEGER, DIMENSION(:), ALLOCATABLE :: irgnumlist
         DOUBLEPRECISION, DIMENSION(:), ALLOCATABLE :: drgnumlist
         INTEGER, DIMENSION(:), ALLOCATABLE :: irgconn
@@ -7194,23 +7315,37 @@
         IMPLICIT NONE
 !     + + + DUMMY ARGUMENTS + + +
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j, n
-        INTEGER :: ii, jj, nn
-        INTEGER :: nbw, iusercm
-        INTEGER :: i0, i1
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: n
+        INTEGER:: ii
+        INTEGER:: jj
+        INTEGER:: nn
+        INTEGER:: nbw
+        INTEGER:: iusercm
+        INTEGER:: i0
+        INTEGER:: i1
         INTEGER :: icol
-        INTEGER :: ist, ict
-        INTEGER :: irg, irgn, irch, jrch
-        INTEGER :: irchconn, jrchconn
+        INTEGER:: ist
+        INTEGER:: ict
+        INTEGER:: irg
+        INTEGER:: irgn
+        INTEGER:: irch
+        INTEGER:: jrch
+        INTEGER:: irchconn
+        INTEGER:: jrchconn
         INTEGER :: istrrch0
         INTEGER :: istr
         INTEGER :: innz
         INTEGER :: ilen
         INTEGER :: ihbw
         INTEGER :: irchconnrg
-        INTEGER :: istrconn, irch2, irchconn2
+        INTEGER:: istrconn
+        INTEGER:: irch2
+        INTEGER:: irchconn2
         INTEGER :: isolrg
-        INTEGER, DIMENSION(:), ALLOCATABLE :: irchc, irchn
+        INTEGER,DIMENSION(:),ALLOCATABLE:: irchc
+        INTEGER,DIMENSION(:),ALLOCATABLE:: irchn
         INTEGER, DIMENSION(:), ALLOCATABLE :: iimpc
         INTEGER, DIMENSION(:), ALLOCATABLE :: icon
         DOUBLEPRECISION, DIMENSION(:), ALLOCATABLE :: dcolptr
@@ -7223,11 +7358,15 @@
         INTEGER, DIMENSION(:), ALLOCATABLE :: jat
         INTEGER, DIMENSION(:), ALLOCATABLE :: ismapt
         INTEGER, DIMENSION(:), ALLOCATABLE :: icmapt
-        INTEGER :: nstr, nend
+        INTEGER:: nstr
+        INTEGER:: nend
         INTEGER :: iconn
-        INTEGER :: ic, nc
+        INTEGER:: ic
+        INTEGER:: nc
         INTEGER :: iwk
-        INTEGER :: ijlu, ijw, iwlu
+        INTEGER:: ijlu
+        INTEGER:: ijw
+        INTEGER:: iwlu
 !     + + + FUNCTIONS + + +
         INTEGER :: GSOL_ADJ_PERM_BANDWIDTH
 !     + + + OUTPUT FORMATS + + +
@@ -7843,7 +7982,8 @@
         INTEGER, DIMENSION(IRDSTG) :: Istage
         DOUBLEPRECISION, DIMENSION(IRDSTG) :: Dstage
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, n
+        INTEGER:: i
+        INTEGER:: n
         INTEGER :: irch
         INTEGER :: irg
         INTEGER :: ismin
@@ -7927,15 +8067,20 @@
         IMPLICIT NONE
 !     + + + DUMMY ARGUMENTS + + +
         INTEGER, INTENT(IN) :: Irch
-        INTEGER, INTENT(IN) :: Igeotype, Igcndop, Ngeopts
+        INTEGER,INTENT(IN):: Igeotype
+        INTEGER,INTENT(IN):: Igcndop
+        INTEGER,INTENT(IN):: Ngeopts
         DOUBLEPRECISION, INTENT(IN) :: Gmanning,Gwidth,Gbelev,Gsslope
         DOUBLEPRECISION, INTENT(IN) :: Gcnd
         DOUBLEPRECISION, INTENT(IN) :: Glk,Gcndln
         DOUBLEPRECISION, INTENT(IN) :: Getextd
         DOUBLEPRECISION, INTENT(IN), DIMENSION(ngeopts,5) :: Geostor
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j
-        INTEGER :: ir, jc, nlen
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: ir
+        INTEGER:: jc
+        INTEGER:: nlen
         INTEGER :: ipos
         DOUBLEPRECISION  :: zg, gzshift
         DOUBLEPRECISION  :: gtelev
@@ -8274,9 +8419,13 @@
 !     + + + DUMMY ARGUMENTS + + +
         INTEGER, INTENT(IN) :: irch
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: k, kk, k0
-        INTEGER :: ir, jc
-        INTEGER :: ktop, kbot
+        INTEGER:: k
+        INTEGER:: kk
+        INTEGER:: k0
+        INTEGER:: ir
+        INTEGER:: jc
+        INTEGER:: ktop
+        INTEGER:: kbot
         DOUBLEPRECISION :: e
         DOUBLEPRECISION :: rtop, rbot
         DOUBLEPRECISION :: zgtop, zgbot
@@ -8339,7 +8488,8 @@
         IMPLICIT NONE
 !     + + + DUMMY ARGUMENTS + + +
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j
+        INTEGER:: i
+        INTEGER:: j
         INTEGER :: n
         INTEGER :: nlen
         INTEGER :: irch
@@ -8406,7 +8556,8 @@
         IMPLICIT NONE
 !     + + + DUMMY ARGUMENTS + + +
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j
+        INTEGER:: i
+        INTEGER:: j
         INTEGER :: irch
         DOUBLEPRECISION :: e
         DOUBLEPRECISION :: s
@@ -8524,7 +8675,8 @@
         DOUBLEPRECISION, INTENT(INOUT) :: P
         DOUBLEPRECISION, INTENT(INOUT) :: R
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, n
+        INTEGER:: i
+        INTEGER:: n
         DOUBLEPRECISION :: bot, s
         DOUBLEPRECISION :: celength, dlen, fact
         DOUBLEPRECISION :: rb, ra, rp, rr
@@ -8562,11 +8714,20 @@
 !     + + + DUMMY ARGUMENTS + + +
 !     + + + LOCAL DEFINITIONS + + +
         CHARACTER (LEN=24) :: aname(3)
+        SAVE :: ANAME
         CHARACTER (LEN=200) :: line
-        INTEGER :: lloc, istart, istop, ival
+        INTEGER:: lloc
+        INTEGER:: istart
+        INTEGER:: istop
+        INTEGER:: ival
         INTEGER :: iu
-        INTEGER :: itmp, irdimap, irdrmult, irdrval
-        INTEGER :: i, j, k
+        INTEGER:: itmp
+        INTEGER:: irdimap
+        INTEGER:: irdrmult
+        INTEGER:: irdrval
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
         REAL    :: r
 !     + + + INTERFACE + + +
 !     + + + FUNCTIONS + + +
@@ -8631,7 +8792,8 @@
 !     + + + DUMMY ARGUMENTS + + +
         INTEGER, INTENT(IN) :: Igrid
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j
+        INTEGER:: i
+        INTEGER:: j
         INTEGER :: irch
         REAL :: r
 !     + + + INTERFACE + + +
@@ -8673,10 +8835,12 @@
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER :: icnvg
         INTEGER :: n
-        INTEGER :: ots, its
+        INTEGER:: ots
+        INTEGER:: its
         INTEGER :: ia
         INTEGER :: icheck
-        INTEGER :: i, j
+        INTEGER:: i
+        INTEGER:: j
         DOUBLEPRECISION :: deltaf, deltafi, deltax
         DOUBLEPRECISION :: fn, fn0
         DOUBLEPRECISION :: fni
@@ -9007,9 +9171,12 @@
         DOUBLEPRECISION, DIMENSION(NSOLRG),  INTENT(IN)     :: Vs
         DOUBLEPRECISION, DIMENSION(JAC%NNZ),  INTENT(INOUT) :: Df
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: ic0, ic1
-        INTEGER :: i, n
-        INTEGER :: ii, nn
+        INTEGER:: ic0
+        INTEGER:: ic1
+        INTEGER:: i
+        INTEGER:: n
+        INTEGER:: ii
+        INTEGER:: nn
         DOUBLEPRECISION :: f
         DOUBLEPRECISION :: dc
 !     + + + FUNCTIONS + + +
@@ -9182,7 +9349,8 @@
         DOUBLEPRECISION, DIMENSION(NRCHGRP), INTENT(IN)    :: Ps
         DOUBLEPRECISION, DIMENSION(NREACHES), INTENT(INOUT) :: S
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j
+        INTEGER:: i
+        INTEGER:: j
         INTEGER :: irch
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
@@ -9248,7 +9416,8 @@
         DOUBLEPRECISION, INTENT(IN)    :: Crflow
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER :: nr
-        INTEGER :: irch, irg
+        INTEGER:: irch
+        INTEGER:: irg
         DOUBLEPRECISION :: linf, uinf, einf
         DOUBLEPRECISION :: qpos, qneg
         DOUBLEPRECISION :: v0
@@ -9369,14 +9538,22 @@
         REAL, INTENT(IN)    :: Qaqincout
 !     + + + LOCAL DEFINITIONS + + +
         CHARACTER (LEN=16), DIMENSION(9) :: bdtext
-        CHARACTER (LEN=17)   :: val1, val2
-        CHARACTER (LEN=17)   :: val3, val4
-        INTEGER              :: i, n
+        SAVE :: BDTEXT
+        CHARACTER(LEN=17):: val1
+        CHARACTER(LEN=17):: val2
+        CHARACTER(LEN=17):: val3
+        CHARACTER(LEN=17):: val4
+        INTEGER:: i
+        INTEGER:: n
         INTEGER              :: ia
-        INTEGER              :: irch, irg
+        INTEGER:: irch
+        INTEGER:: irg
         INTEGER              :: iacc
-        INTEGER              :: ir, jc, kl
-        INTEGER              :: kact, kk
+        INTEGER:: ir
+        INTEGER:: jc
+        INTEGER:: kl
+        INTEGER:: kact
+        INTEGER:: kk
         DOUBLEPRECISION      :: q
         DOUBLEPRECISION      :: dtscale
         DOUBLEPRECISION      :: rs
@@ -9387,20 +9564,31 @@
         DOUBLEPRECISION      :: cv
         DOUBLEPRECISION      :: qm2ch
         DOUBLEPRECISION      :: ratin,ratout
-        REAL                 :: incin,incout
+        REAL:: incin
+        REAL:: incout
         DOUBLEPRECISION      :: incavg,incp
-        REAL                 :: cumin,cumout,cumavg,cump
-        REAL                 :: cumswr1, incswr1
-        REAL                 :: cummfchswr1, incmfchswr1
-        REAL                 :: cummf, incmf
-        REAL                 :: cumiaswr1, inciaswr1
-        REAL                 :: cummfavg, incmfavg
+        REAL:: cumin
+        REAL:: cumout
+        REAL:: cumavg
+        REAL:: cump
+        REAL:: cumswr1
+        REAL:: incswr1
+        REAL:: cummfchswr1
+        REAL:: incmfchswr1
+        REAL:: cummf
+        REAL:: incmf
+        REAL:: cumiaswr1
+        REAL:: inciaswr1
+        REAL:: cummfavg
+        REAL:: incmfavg
         DOUBLEPRECISION, DIMENSION(NBDITEMS) :: incrate, tsrate
         DOUBLEPRECISION, DIMENSION(NBDITEMS) :: rratin, rratout
         DOUBLEPRECISION :: qaqrate, b
         DOUBLEPRECISION :: mfchqaqrate
-        REAL :: qaqratin, qaqratout
-        REAL :: mfchqaqratin, mfchqaqratout
+        REAL:: qaqratin
+        REAL:: qaqratout
+        REAL:: mfchqaqratin
+        REAL:: mfchqaqratout
 !     + + + FUNCTIONS + + +
         CHARACTER (LEN=17) :: SSWR_BDCHAR
         DOUBLEPRECISION :: SSWR_CALC_QM
@@ -9705,7 +9893,8 @@
         CHARACTER (LEN=224)  :: dataline
         CHARACTER (LEN=5128) :: line
         CHARACTER (LEN=5)    :: cval
-        INTEGER              :: i, n
+        INTEGER:: i
+        INTEGER:: n
         INTEGER              :: iu
         INTEGER              :: irg
         INTEGER              :: ic
@@ -9922,7 +10111,8 @@
         INTEGER, INTENT(IN) :: Kstp
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER              :: iu
-        INTEGER              :: i, n
+        INTEGER:: i
+        INTEGER:: n
         INTEGER              :: ip
         INTEGER              :: iobs
         DOUBLEPRECISION      :: swrtot, dt
@@ -10048,14 +10238,21 @@
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER              :: iu
         INTEGER              :: iriv
-        INTEGER              :: i, j, n
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: n
         INTEGER              :: ip
         INTEGER              :: irch
         INTEGER              :: irg
-        INTEGER              :: kl, ir, jc
-        INTEGER              :: mxactr, itmp
-        INTEGER              :: iobs, iobstype
-        INTEGER              :: k0, k1
+        INTEGER:: kl
+        INTEGER:: ir
+        INTEGER:: jc
+        INTEGER:: mxactr
+        INTEGER:: itmp
+        INTEGER:: iobs
+        INTEGER:: iobstype
+        INTEGER:: k0
+        INTEGER:: k1
         DOUBLEPRECISION      :: swrtot, dt
         DOUBLEPRECISION      :: pfact
         DOUBLEPRECISION      :: q, rs
@@ -10310,12 +10507,18 @@
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER              :: iu
         INTEGER              :: n
-        INTEGER              :: irg, ic
+        INTEGER:: irg
+        INTEGER:: ic
         INTEGER              :: irch
-        INTEGER              :: nconn, nrgout, ntconn
+        INTEGER:: nconn
+        INTEGER:: nrgout
+        INTEGER:: ntconn
         INTEGER              :: ip
         INTEGER              :: iobstype
-        INTEGER              :: iobs, i, j, ic0
+        INTEGER:: iobs
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: ic0
         DOUBLEPRECISION      :: swrtot, dt
         DOUBLEPRECISION      :: qm
         DOUBLEPRECISION      :: pfact
@@ -10496,13 +10699,15 @@
         INTEGER, INTENT(IN) :: Kstp
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER              :: iu
-        INTEGER              :: i, n
+        INTEGER:: i
+        INTEGER:: n
         INTEGER              :: ip
         INTEGER              :: irch
         INTEGER              :: istr
         INTEGER              :: istrtype
         INTEGER              :: istrconn
-        INTEGER              :: iobs, iobstype
+        INTEGER:: iobs
+        INTEGER:: iobstype
         INTEGER              :: istrobs
         DOUBLEPRECISION      :: swrtot, dt
         DOUBLEPRECISION      :: pfact
@@ -10734,7 +10939,8 @@
         INTEGER, INTENT(IN) :: Kstp
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER              :: iu
-        INTEGER              :: iobs, n
+        INTEGER:: iobs
+        INTEGER:: n
         DOUBLEPRECISION      :: pfact, afact
         DOUBLEPRECISION      :: swrtot, dt
 !     + + + FUNCTIONS + + +
@@ -10816,7 +11022,9 @@
         INTEGER, INTENT(IN) :: Kper
         INTEGER, INTENT(IN) :: Kstp
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER              :: i, j, n
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: n
         INTEGER              :: irg
         INTEGER              :: jc
         INTEGER              :: locdfr
@@ -11344,7 +11552,8 @@
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER :: irch
         INTEGER :: kl
-        INTEGER :: irow, jcol
+        INTEGER:: irow
+        INTEGER:: jcol
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
         DO irch = 1, NREACHES
@@ -11419,8 +11628,11 @@
         DOUBLEPRECISION, INTENT(IN)   :: Rs
 !     + + + LOCAL DEFINITIONS + + +
         LOGICAL :: rhsonly
-        INTEGER :: k,kk,kact
-        INTEGER :: irow, jcol !ROW, COLUMN
+        INTEGER:: k
+        INTEGER:: kk
+        INTEGER:: kact
+        INTEGER:: irow  !ROW, COLUMN
+        INTEGER:: jcol
         DOUBLEPRECISION :: dh
         DOUBLEPRECISION :: trs, wps
         DOUBLEPRECISION :: twp
@@ -11613,8 +11825,11 @@
         DOUBLEPRECISION, INTENT(IN)   :: Rs
 !     + + + LOCAL DEFINITIONS + + +
         LOGICAL :: rhsonly
-        INTEGER :: k,kk,kact
-        INTEGER :: irow, jcol !ROW, COLUMN
+        INTEGER:: k
+        INTEGER:: kk
+        INTEGER:: kact
+        INTEGER:: irow  !ROW, COLUMN
+        INTEGER:: jcol
         DOUBLEPRECISION :: trs, wps
         DOUBLEPRECISION :: twp
         DOUBLEPRECISION :: length
@@ -11772,8 +11987,10 @@
         DOUBLEPRECISION, DIMENSION(NRCHGRP), INTENT(IN)   :: P
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER :: ns
-        INTEGER :: istrconn, istrtype
-        INTEGER :: isfr, iseg
+        INTEGER:: istrconn
+        INTEGER:: istrtype
+        INTEGER:: isfr
+        INTEGER:: iseg
         DOUBLEPRECISION :: q, qt
         DOUBLEPRECISION :: qsfr
 !     + + + FUNCTIONS + + +
@@ -12122,7 +12339,9 @@
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER :: n
         INTEGER :: itab
-        REAL    :: r, rmin, rmax
+        REAL:: r
+        REAL:: rmin
+        REAL:: rmax
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
         rmin   = 1.0E+09
@@ -12192,7 +12411,8 @@
         REAL, INTENT(IN)   :: Rtime0
         REAL, INTENT(IN)   :: Rtime1
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: n, nr
+        INTEGER:: n
+        INTEGER:: nr
         INTEGER :: irch
         REAL :: t
         DOUBLEPRECISION :: v
@@ -12293,7 +12513,9 @@
         REAL, INTENT(IN)   :: Rtime0
         REAL, INTENT(IN)   :: Rtime1
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: n, nn, nr
+        INTEGER:: n
+        INTEGER:: nn
+        INTEGER:: nr
         INTEGER :: irch
         INTEGER :: istrtype
         INTEGER :: itab
@@ -12369,12 +12591,17 @@
 !     + + + DUMMY ARGUMENTS + + +
         DOUBLEPRECISION, DIMENSION(NRCHGRP), INTENT(IN)   :: P
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: n, nn, nr
-        INTEGER :: irch, icrch
-        INTEGER :: irg, iconn
+        INTEGER:: n
+        INTEGER:: nn
+        INTEGER:: nr
+        INTEGER:: irch
+        INTEGER:: icrch
+        INTEGER:: irg
+        INTEGER:: iconn
         INTEGER :: istrtype
         INTEGER :: istrlo
-        INTEGER :: istrostg, irg2
+        INTEGER:: istrostg
+        INTEGER:: irg2
         INTEGER :: istrtstype
         DOUBLEPRECISION :: strcrit, strcrito, strinv
         DOUBLEPRECISION :: strrt, strmax
@@ -12744,12 +12971,18 @@
         INTEGER :: nc
         INTEGER :: ic
         INTEGER :: imult
-        INTEGER :: i, j
-        INTEGER :: ia, ja
-        INTEGER :: istrrch, jstrrch
-        INTEGER :: irowi, irowj
-        INTEGER :: jcoli, jcolj
-        INTEGER :: irgi, irgj
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: ia
+        INTEGER:: ja
+        INTEGER:: istrrch
+        INTEGER:: jstrrch
+        INTEGER:: irowi
+        INTEGER:: irowj
+        INTEGER:: jcoli
+        INTEGER:: jcolj
+        INTEGER:: irgi
+        INTEGER:: irgj
         DOUBLEPRECISION :: mult
         DOUBLEPRECISION :: si, sj
         DOUBLEPRECISION :: q
@@ -12857,12 +13090,18 @@
         INTEGER :: nc
         INTEGER :: ic
         INTEGER :: imult
-        INTEGER :: i, j
-        INTEGER :: ia, ja
-        INTEGER :: istrrch, jstrrch
-        INTEGER :: irowi, irowj
-        INTEGER :: jcoli, jcolj
-        INTEGER :: irgi, irgj
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: ia
+        INTEGER:: ja
+        INTEGER:: istrrch
+        INTEGER:: jstrrch
+        INTEGER:: irowi
+        INTEGER:: irowj
+        INTEGER:: jcoli
+        INTEGER:: jcolj
+        INTEGER:: irgi
+        INTEGER:: irgj
         DOUBLEPRECISION :: mult
         DOUBLEPRECISION :: si, sj
         DOUBLEPRECISION :: q
@@ -13134,10 +13373,14 @@
         USE GWFSWRINTERFACE, ONLY: SSWR_LININT, SSWR_CALC_DPTHFACT
         IMPLICIT NONE
 !     + + + DUMMY ARGUMENTS + + +
-        INTEGER, INTENT(IN) :: I, J
-        INTEGER, INTENT(IN) :: Irowi, Irowj
-        INTEGER, INTENT(IN) :: Jcoli, Jcolj
-        INTEGER, INTENT(IN) :: Icei, Icej
+        INTEGER,INTENT(IN):: I
+        INTEGER,INTENT(IN):: J
+        INTEGER,INTENT(IN):: Irowi
+        INTEGER,INTENT(IN):: Irowj
+        INTEGER,INTENT(IN):: Jcoli
+        INTEGER,INTENT(IN):: Jcolj
+        INTEGER,INTENT(IN):: Icei
+        INTEGER,INTENT(IN):: Icej
         DOUBLEPRECISION, INTENT(IN) :: Si, Sj
         DOUBLEPRECISION, INTENT(IN) :: Sleni, Slenj
         DOUBLEPRECISION, DIMENSION(NRCHGRP), INTENT(IN) :: Gs
@@ -13451,7 +13694,8 @@
         DOUBLEPRECISION, DIMENSION(NRCHGRP), INTENT(INOUT) :: X
 !     + + + LOCAL DEFINITIONS + + +      
         DOUBLEPRECISION, PARAMETER :: dgold = 0.3819660D0
-        INTEGER :: ib, ibtc
+        INTEGER:: ib
+        INTEGER:: ibtc
         DOUBLEPRECISION :: bepsilon
         DOUBLEPRECISION :: pa, pb, pd
         DOUBLEPRECISION :: lu, lv, lw, lx
@@ -13600,7 +13844,8 @@
         DOUBLEPRECISION, DIMENSION(NSOLRG),  INTENT(IN)    :: S
         DOUBLEPRECISION, DIMENSION(NRCHGRP), INTENT(INOUT) :: F
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j
+        INTEGER:: i
+        INTEGER:: j
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
         DO i = 1, NSOLRG
@@ -13620,7 +13865,8 @@
         DOUBLEPRECISION, DIMENSION(NRCHGRP), INTENT(IN)    :: F
         DOUBLEPRECISION, DIMENSION(NSOLRG),  INTENT(INOUT) :: S
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j
+        INTEGER:: i
+        INTEGER:: j
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
         DO i = 1, NRCHGRP
@@ -13647,10 +13893,12 @@
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER :: nunopn
         INTEGER :: i
-        INTEGER :: istart, istop
+        INTEGER:: istart
+        INTEGER:: istop
         INTEGER :: lloc
         REAL    :: r
-        CHARACTER (LEN=200) :: line, fname
+        CHARACTER(LEN=200):: line
+        CHARACTER(LEN=200):: fname
 !     + + + FUNCTIONS + + +
 !     + + + DATA + + +
         DATA nunopn/9999/
@@ -13712,14 +13960,17 @@
         INTEGER :: nunopn
         INTEGER :: in
         INTEGER :: i
-        INTEGER :: istart, istop
+        INTEGER:: istart
+        INTEGER:: istop
         INTEGER :: lloc
         INTEGER :: iclose
         INTEGER :: nread
-        INTEGER :: ii, jj
+        INTEGER:: ii
+        INTEGER:: jj
         REAL :: r
         REAL :: gfac
-        CHARACTER (LEN=200) :: line, fname
+        CHARACTER(LEN=200):: line
+        CHARACTER(LEN=200):: fname
 !     + + + FUNCTIONS + + +
 !     + + + DATA + + +
         DATA nunopn/99/
@@ -13816,7 +14067,9 @@
         INTEGER, INTENT(IN) :: L
         INTEGER, INTENT(IN) :: Ira
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, k, n
+        INTEGER:: i
+        INTEGER:: k
+        INTEGER:: n
         INTEGER :: id
         TYPE tsoln
           TYPE (TQAQNWT),   DIMENSION(:,:), ALLOCATABLE :: qaqnwt
@@ -14013,9 +14266,14 @@
 !     + + + DUMMY ARGUMENTS + + +
         REAL, DIMENSION(NCOL,NROW,NLAY), INTENT(IN) :: DVZ
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: ir, jc, kl
-        INTEGER :: irch, irg
-        INTEGER :: np, ns, nt
+        INTEGER:: ir
+        INTEGER:: jc
+        INTEGER:: kl
+        INTEGER:: irch
+        INTEGER:: irg
+        INTEGER:: np
+        INTEGER:: ns
+        INTEGER:: nt
         INTEGER :: ifirst
         INTEGER :: istrtype
         DOUBLEPRECISION :: z
@@ -14115,7 +14373,9 @@
         INTEGER, INTENT(IN) :: Irch
         DOUBLEPRECISION, DIMENSION(NRCHGRP), INTENT(IN)   :: P
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: istrtype, istrdir, istrbc
+        INTEGER:: istrtype
+        INTEGER:: istrdir
+        INTEGER:: istrbc
         INTEGER :: isfrstrm
         DOUBLEPRECISION :: strtop, strbot
         DOUBLEPRECISION :: strcd, strcd2, strcd3
@@ -14124,9 +14384,12 @@
         DOUBLEPRECISION :: strmax
         DOUBLEPRECISION :: strwsmo
         INTEGER :: idsrch
-        INTEGER :: irchrg, idsrchrg
-        INTEGER :: irowi, irowj
-        INTEGER :: jcoli, jcolj
+        INTEGER:: irchrg
+        INTEGER:: idsrchrg
+        INTEGER:: irowi
+        INTEGER:: irowj
+        INTEGER:: jcoli
+        INTEGER:: jcolj
         DOUBLEPRECISION :: rbot
         DOUBLEPRECISION :: stage, dstage
         DOUBLEPRECISION :: strlen, strlen2
@@ -14329,10 +14592,14 @@
         USE GWFSWRINTERFACE, ONLY: SSWR_LININT
         IMPLICIT NONE
 !     + + + DUMMY ARGUMENTS + + +
-        INTEGER, INTENT(IN) :: I, J
-        INTEGER, INTENT(IN) :: Irowi, Irowj
-        INTEGER, INTENT(IN) :: Jcoli, Jcolj
-        INTEGER, INTENT(IN) :: Icei, Icej
+        INTEGER,INTENT(IN):: I
+        INTEGER,INTENT(IN):: J
+        INTEGER,INTENT(IN):: Irowi
+        INTEGER,INTENT(IN):: Irowj
+        INTEGER,INTENT(IN):: Jcoli
+        INTEGER,INTENT(IN):: Jcolj
+        INTEGER,INTENT(IN):: Icei
+        INTEGER,INTENT(IN):: Icej
         DOUBLEPRECISION, INTENT(IN) :: Si, Sj
         DOUBLEPRECISION, INTENT(INOUT) :: B, A
 !     + + + LOCAL DEFINITIONS + + +
@@ -14401,9 +14668,12 @@
         CHARACTER (LEN=200) :: line
         INTEGER :: iut
         INTEGER :: itmp
-        INTEGER :: i, n
+        INTEGER:: i
+        INTEGER:: n
         INTEGER :: ios
-        INTEGER :: kkper, kkstp, kkswr
+        INTEGER:: kkper
+        INTEGER:: kkstp
+        INTEGER:: kkswr
         INTEGER :: idata
         INTEGER :: irch
         REAL    :: r
@@ -14510,13 +14780,18 @@
 !     + + + LOCAL DEFINITIONS + + +
         CHARACTER (LEN=200) :: line
         INTEGER :: iut
-        INTEGER :: lloc, istart, istop
+        INTEGER:: lloc
+        INTEGER:: istart
+        INTEGER:: istop
         INTEGER :: iv
         INTEGER :: i
         INTEGER :: kwargs
-        REAL    :: rv, rt
-        REAL    :: toffset, tscale
-        REAL    :: offset, scale
+        REAL:: rv
+        REAL:: rt
+        REAL:: toffset
+        REAL:: tscale
+        REAL:: offset
+        REAL:: scale
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
         i       = 0
@@ -14637,9 +14912,12 @@
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER :: intp
         INTEGER :: ipos
-        REAL            :: dt, tinc
+        REAL:: dt
+        REAL:: tinc
         REAL            :: rv
-        REAL            :: t0, t1, t
+        REAL:: t0
+        REAL:: t1
+        REAL:: t
         DOUBLEPRECISION :: v0, v1, v, vinc
         DOUBLEPRECISION :: vc
 !     + + + FUNCTIONS + + +
@@ -14713,8 +14991,10 @@
 !     + + + LOCAL DEFINITIONS + + +
         INTEGER :: n
         INTEGER :: ifound
-        INTEGER :: isfrseg, iseg
-        INTEGER :: isfrrch, irch
+        INTEGER:: isfrseg
+        INTEGER:: iseg
+        INTEGER:: isfrrch
+        INTEGER:: irch
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
         ifound = IZERO
@@ -14744,10 +15024,12 @@
         INTEGER, INTENT(IN) :: Kkper
         INTEGER, INTENT(IN) :: Kkstp
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, n
+        INTEGER:: i
+        INTEGER:: n
         INTEGER :: irch
         INTEGER :: iprncnvg
-        INTEGER :: nfail, ipos
+        INTEGER:: nfail
+        INTEGER:: ipos
         INTEGER :: iloc
         DOUBLEPRECISION :: swrin, swrout
         DOUBLEPRECISION :: mfin, mfout
@@ -14996,8 +15278,11 @@
         DOUBLEPRECISION, INTENT(INOUT) :: Nvalue
 !       + + + LOCAL DEFINITIONS + + +
         LOGICAL :: rhsonly
-        INTEGER :: n, kl, kk
-        INTEGER :: ir, jc
+        INTEGER:: n
+        INTEGER:: kl
+        INTEGER:: kk
+        INTEGER:: ir
+        INTEGER:: jc
         INTEGER :: kact
         INTEGER :: irch
         REAL :: rate
@@ -15111,18 +15396,27 @@
         DOUBLEPRECISION, INTENT(IN) :: Dl
         DOUBLEPRECISION, DIMENSION(NRCHGRP), INTENT(IN) :: P
 !       + + + LOCAL DEFINITIONS + + +
-        INTEGER         :: irow, icol
-        INTEGER         :: jrow, jcol
+        INTEGER:: irow
+        INTEGER:: icol
+        INTEGER:: jrow
+        INTEGER:: jcol
         INTEGER         :: ixcon
         INTEGER         :: ieval
-        INTEGER         :: isgn, isgnm1, isgnp1
-        INTEGER         :: irchrow, irchcol
-        INTEGER         :: jrowm1, jrowp1
-        INTEGER         :: jcolm1, jcolp1
-        INTEGER         :: jrchm1, jrchp1
+        INTEGER:: isgn
+        INTEGER:: isgnm1
+        INTEGER:: isgnp1
+        INTEGER:: irchrow
+        INTEGER:: irchcol
+        INTEGER:: jrowm1
+        INTEGER:: jrowp1
+        INTEGER:: jcolm1
+        INTEGER:: jcolp1
+        INTEGER:: jrchm1
+        INTEGER:: jrchp1
         INTEGER         :: jc
         INTEGER         :: jrch
-        INTEGER         :: jrgm1, jrgp1
+        INTEGER:: jrgm1
+        INTEGER:: jrgp1
         DOUBLEPRECISION :: sfmag
         DOUBLEPRECISION :: ds
         DOUBLEPRECISION :: sf
@@ -15277,13 +15571,20 @@
         DOUBLEPRECISION, INTENT(IN) :: Dl
         DOUBLEPRECISION, DIMENSION(NRCHGRP), INTENT(IN) :: P
 !       + + + LOCAL DEFINITIONS + + +
-        INTEGER         :: irow, icol
-        INTEGER         :: jrow, jcol
-        INTEGER         :: iirow, iicol
-        INTEGER         :: irch43, irch12
-        INTEGER         :: irch41, irch32
-        INTEGER         :: iirow1, iirow2
-        INTEGER         :: iicol1, iicol2
+        INTEGER:: irow
+        INTEGER:: icol
+        INTEGER:: jrow
+        INTEGER:: jcol
+        INTEGER:: iirow
+        INTEGER:: iicol
+        INTEGER:: irch43
+        INTEGER:: irch12
+        INTEGER:: irch41
+        INTEGER:: irch32
+        INTEGER:: iirow1
+        INTEGER:: iirow2
+        INTEGER:: iicol1
+        INTEGER:: iicol2
         INTEGER         :: irchconn
         INTEGER         :: irg
         DOUBLEPRECISION :: ds, sf
@@ -15544,11 +15845,15 @@
 !       + + + DUMMY ARGUMENTS + + +
         DOUBLEPRECISION, DIMENSION(NRCHGRP), INTENT(IN) :: Ps
 !       + + + LOCAL DEFINITIONS + + +
-        INTEGER         :: i, j
+        INTEGER:: i
+        INTEGER:: j
         INTEGER         :: ic
-        INTEGER         :: irgi, irgj
-        INTEGER         :: irowi, jcoli
-        INTEGER         :: irowj, jcolj
+        INTEGER:: irgi
+        INTEGER:: irgj
+        INTEGER:: irowi
+        INTEGER:: jcoli
+        INTEGER:: irowj
+        INTEGER:: jcolj
         DOUBLEPRECISION :: dli, dlj, dl
         DOUBLEPRECISION :: si, sj
         DOUBLEPRECISION :: sfm
@@ -15601,7 +15906,8 @@
         REAL, INTENT(INOUT) :: Rtot
         REAL, INTENT(INOUT) :: Rt
 !       + + + LOCAL DEFINITIONS + + +
-        INTEGER         :: i, n
+        INTEGER:: i
+        INTEGER:: n
 !       + + + FUNCTIONS + + +
 !       + + + INPUT FORMATS + + +
 !       + + + OUTPUT FORMATS + + +
@@ -15640,7 +15946,8 @@
 !     + + + LOCAL DEFINITIONS + + +
       INTEGER :: irch
       INTEGER :: irg
-      INTEGER :: k, n
+      INTEGER:: k
+      INTEGER:: n
       DOUBLEPRECISION :: dtscale
       DOUBLEPRECISION :: pswrbf, pmfbf
       DOUBLEPRECISION :: nswrbf, nmfbf
@@ -15707,7 +16014,8 @@
       DOUBLEPRECISION, INTENT(INOUT) :: Dstage
 !     + + + LOCAL DEFINITIONS + + +
       INTEGER :: n
-      INTEGER :: i0, i1
+      INTEGER:: i0
+      INTEGER:: i1
       REAL :: rt
       DOUBLEPRECISION :: dsum
       DOUBLEPRECISION :: denom
@@ -15768,8 +16076,12 @@
       REAL, INTENT(IN)    :: Rtim
 !     + + + LOCAL DEFINITIONS + + +
       INTEGER :: n
-      INTEGER :: jl, jm, ju
-      REAL    :: tl, tm, tu
+      INTEGER:: jl
+      INTEGER:: jm
+      INTEGER:: ju
+      REAL:: tl
+      REAL:: tm
+      REAL:: tu
 !     + + + FUNCTIONS + + +
 !     + + + INPUT FORMATS + + +
 !     + + + OUTPUT FORMATS + + +

@@ -1,11 +1,28 @@
       MODULE GWFDRTMODULE
-        INTEGER,SAVE,POINTER   ::NDRTCL,MXDRT,NDRTVL,NDRTNP,IDRTCB
-        INTEGER,SAVE,POINTER   ::NPDRT,IDRTPB,IDRTFL,NRFLOW,NOPRDT
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: NDRTCL
+        INTEGER,SAVE,POINTER:: MXDRT
+        INTEGER,SAVE,POINTER:: NDRTVL
+        INTEGER,SAVE,POINTER:: NDRTNP
+        INTEGER,SAVE,POINTER:: IDRTCB
+        INTEGER,SAVE,POINTER:: NPDRT
+        INTEGER,SAVE,POINTER:: IDRTPB
+        INTEGER,SAVE,POINTER:: IDRTFL
+        INTEGER,SAVE,POINTER:: NRFLOW
+        INTEGER,SAVE,POINTER:: NOPRDT
         REAL,         SAVE, DIMENSION(:,:), POINTER ::DRTF
         CHARACTER*16, SAVE, DIMENSION(:),   POINTER ::DRTAUX
       TYPE GWFDRTTYPE
-        INTEGER, POINTER   ::NDRTCL,MXDRT,NDRTVL,NDRTNP,IDRTCB
-        INTEGER, POINTER   ::NPDRT,IDRTPB,IDRTFL,NRFLOW,NOPRDT
+        INTEGER,POINTER:: NDRTCL
+        INTEGER,POINTER:: MXDRT
+        INTEGER,POINTER:: NDRTVL
+        INTEGER,POINTER:: NDRTNP
+        INTEGER,POINTER:: IDRTCB
+        INTEGER,POINTER:: NPDRT
+        INTEGER,POINTER:: IDRTPB
+        INTEGER,POINTER:: IDRTFL
+        INTEGER,POINTER:: NRFLOW
+        INTEGER,POINTER:: NOPRDT
         REAL,         DIMENSION(:,:), POINTER ::DRTF
         CHARACTER*16, DIMENSION(:),   POINTER ::DRTAUX
       END TYPE
@@ -24,6 +41,27 @@
       USE GLOBAL,       ONLY:IOUT,NCOL,NROW,NLAY,IFREFM
       USE GWFDRTMODULE, ONLY:NDRTCL,MXDRT,NDRTVL,NDRTNP,IDRTCB,NPDRT,&
      &                       IDRTPB,IDRTFL,NRFLOW,NOPRDT,DRTF,DRTAUX
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IB
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: IP
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: ITERPU
+      INTEGER :: K
+      INTEGER :: LB
+      INTEGER :: LLOC
+      INTEGER :: LSTBEG
+      INTEGER :: LSTSUM
+      INTEGER :: MXADRT
+      INTEGER :: MXL
+      INTEGER :: N
+      INTEGER :: NAUX
+      INTEGER :: NLST
+      INTEGER :: NUMINST
+      REAL :: R
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
       ALLOCATE(NDRTCL,MXDRT,NDRTVL,NDRTNP,IDRTCB)
@@ -153,6 +191,18 @@
       USE GWFDRTMODULE, ONLY:NDRTCL,MXDRT,NDRTVL,NDRTNP,NPDRT,&
      &                       IDRTPB,IDRTFL,NRFLOW,NOPRDT,DRTF,DRTAUX
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: IOUTU
+      INTEGER :: ITERPU
+      INTEGER :: ITMP
+      INTEGER :: MXADRT
+      INTEGER :: N
+      INTEGER :: NAUX
+      INTEGER :: NP
+      INTEGER :: NREAD
       CALL SGWF2DRT7PNT(IGRID)
 !
 !1------READ ITMP (NUMBER OF DRAINS OR FLAG TO REUSE DATA) AND
@@ -242,6 +292,19 @@
       USE GLOBAL,       ONLY:HNEW,HCOF,RHS,IBOUND
       USE GWFDRTMODULE, ONLY:NDRTCL,DRTF,IDRTFL
 !
+      IMPLICIT NONE
+      REAL :: C
+      REAL :: EL
+      REAL :: H
+      INTEGER :: IC
+      INTEGER :: ICR
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: ILR
+      INTEGER :: IR
+      INTEGER :: IRR
+      INTEGER :: L
+      REAL :: RFPROP
       DOUBLE PRECISION EEL
 !     ------------------------------------------------------------------
       CALL SGWF2DRT7PNT(IGRID)
@@ -302,8 +365,38 @@
       USE GWFDRTMODULE, ONLY: DRTF,NDRTCL,MXDRT,IDRTCB,NDRTVL,IDRTFL,&
      &                        NRFLOW,DRTAUX
 !
-      DOUBLE PRECISION HHNEW,EEL,CC,CEL,RATIN,RATOUT,QQ
+      IMPLICIT NONE
+      REAL :: C
+      REAL :: EL
+      INTEGER :: IBD
+      INTEGER :: IBDLBL
+      INTEGER :: IC
+      INTEGER :: ICR
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: ILR
+      INTEGER :: IR
+      INTEGER :: IRR
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: L
+      INTEGER :: NAUX
+      REAL :: Q
+      REAL :: QIN
+      REAL :: QQIN
+      REAL :: RFPROP
+      REAL :: RIN
+      REAL :: ROUT
+      REAL :: ZERO
+      DOUBLE PRECISION HHNEW
+      DOUBLE PRECISION EEL
+      DOUBLE PRECISION CC
+      DOUBLE PRECISION CEL
+      DOUBLE PRECISION RATIN
+      DOUBLE PRECISION RATOUT
+      DOUBLE PRECISION QQ
       CHARACTER*16 TEXT
+      SAVE :: TEXT
       DATA TEXT /'    DRAINS (DRT)'/
 !     ------------------------------------------------------------------
       CALL SGWF2DRT7PNT(IGRID)
@@ -445,10 +538,55 @@
 !     return-flow recipient cells.  NAUX of the values in the list are
 !     optional -- auxiliary data.
 !     ******************************************************************
-      CHARACTER*57 LABEL1, LABEL2, LABEL3
+      IMPLICIT NONE
+      REAL :: DRTF
+      INTEGER :: I
+      INTEGER :: ICLOSE
+      INTEGER :: IDRTFL
+      INTEGER :: IDUM
+      INTEGER :: IERR
+      INTEGER :: IFREFM
+      INTEGER :: II
+      INTEGER :: ILOC
+      INTEGER :: IN
+      INTEGER :: INPACK
+      INTEGER :: IOUT
+      INTEGER :: IR
+      INTEGER :: ISCLOC1
+      INTEGER :: ISCLOC2
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: ITERP
+      INTEGER :: J
+      INTEGER :: JJ
+      INTEGER :: JR
+      INTEGER :: K
+      INTEGER :: KR
+      INTEGER :: LLOC
+      INTEGER :: LSTBEG
+      INTEGER :: MXDRT
+      INTEGER :: N
+      INTEGER :: NAUX
+      INTEGER :: NCAUX
+      INTEGER :: NCOL
+      INTEGER :: NDRTVL
+      INTEGER :: NLAY
+      INTEGER :: NLIST
+      INTEGER :: NN
+      INTEGER :: NREAD1
+      INTEGER :: NREAD2
+      INTEGER :: NROW
+      INTEGER :: NUNOPN
+      REAL :: R
+      REAL :: RFP
+      REAL :: SFAC
+      CHARACTER*57 LABEL1
+      CHARACTER*57 LABEL2
+      CHARACTER*57 LABEL3
       CHARACTER*16 DRTAUX(NCAUX)
       DIMENSION DRTF(NDRTVL,MXDRT)
-      CHARACTER*200 LINE,FNAME
+      CHARACTER*200 LINE
+      CHARACTER*200 FNAME
       DATA NUNOPN/99/
       INCLUDE 'openspec.inc'
 !     ------------------------------------------------------------------
@@ -673,12 +811,58 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
-      CHARACTER*3 PACK, PTYP
+      IMPLICIT NONE
+      REAL :: DRTF
+      INTEGER :: I
+      INTEGER :: IC
+      INTEGER :: IDRTFL
+      INTEGER :: IDUM
+      INTEGER :: II
+      INTEGER :: III
+      INTEGER :: IL
+      INTEGER :: ILOC
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: IOUTU
+      INTEGER :: IP
+      INTEGER :: IPVL
+      INTEGER :: IPVL1
+      INTEGER :: IPVL2
+      INTEGER :: IR
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: J
+      INTEGER :: JJ
+      INTEGER :: JR
+      INTEGER :: K
+      INTEGER :: KI
+      INTEGER :: KR
+      INTEGER :: LLOC
+      INTEGER :: MXADRT
+      INTEGER :: MXDRT
+      INTEGER :: NAUX
+      INTEGER :: NCAUX
+      INTEGER :: NDRTCL
+      INTEGER :: NDRTVL
+      INTEGER :: NI
+      INTEGER :: NLST
+      INTEGER :: NN
+      INTEGER :: NREAD
+      INTEGER :: NUMINST
+      REAL :: RDUM
+      REAL :: RFP
+      CHARACTER*3 PACK
+      CHARACTER*3 PTYP
       DIMENSION DRTF(NDRTVL,MXDRT)
-      CHARACTER*57 LABEL1, LABEL2, LABEL3
+      CHARACTER*57 LABEL1
+      CHARACTER*57 LABEL2
+      CHARACTER*57 LABEL3
       CHARACTER*16 DRTAUX(NCAUX)
       CHARACTER*200 LINE
-      CHARACTER*10 CTMP1, CTMP2, CTMP3, CTMP4
+      CHARACTER*10 CTMP1
+      CHARACTER*10 CTMP2
+      CHARACTER*10 CTMP3
+      CHARACTER*10 CTMP4
 !     ------------------------------------------------------------------
 500   FORMAT(/,' Parameter:  ',A)
 510   FORMAT(1X,'Parameter type conflict:',/&
@@ -830,6 +1014,8 @@
 !  Deallocate DRT MEMORY
       USE GWFDRTMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         CALL SGWF2DRT7PNT(IGRID)
         DEALLOCATE(NDRTCL)
         DEALLOCATE(MXDRT)
@@ -850,6 +1036,8 @@
 !  Change DRT data to a different grid.
       USE GWFDRTMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         NDRTCL=>GWFDRTDAT(IGRID)%NDRTCL
         MXDRT=>GWFDRTDAT(IGRID)%MXDRT
         NDRTVL=>GWFDRTDAT(IGRID)%NDRTVL
@@ -869,6 +1057,8 @@
 !  Save DRT data for a grid.
       USE GWFDRTMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         GWFDRTDAT(IGRID)%NDRTCL=>NDRTCL
         GWFDRTDAT(IGRID)%MXDRT=>MXDRT
         GWFDRTDAT(IGRID)%NDRTVL=>NDRTVL

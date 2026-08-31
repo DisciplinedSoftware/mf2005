@@ -1,11 +1,24 @@
       MODULE GWFRIVMODULE
-        INTEGER,SAVE,POINTER  ::NRIVER,MXRIVR,NRIVVL,IRIVCB,IPRRIV
-        INTEGER,SAVE,POINTER  ::NPRIV,IRIVPB,NNPRIV
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: NRIVER
+        INTEGER,SAVE,POINTER:: MXRIVR
+        INTEGER,SAVE,POINTER:: NRIVVL
+        INTEGER,SAVE,POINTER:: IRIVCB
+        INTEGER,SAVE,POINTER:: IPRRIV
+        INTEGER,SAVE,POINTER:: NPRIV
+        INTEGER,SAVE,POINTER:: IRIVPB
+        INTEGER,SAVE,POINTER:: NNPRIV
         CHARACTER(LEN=16),SAVE, DIMENSION(:),   POINTER     ::RIVAUX
         REAL,             SAVE, DIMENSION(:,:), POINTER     ::RIVR
       TYPE GWFRIVTYPE
-        INTEGER,POINTER  ::NRIVER,MXRIVR,NRIVVL,IRIVCB,IPRRIV
-        INTEGER,POINTER  ::NPRIV,IRIVPB,NNPRIV
+        INTEGER,POINTER:: NRIVER
+        INTEGER,POINTER:: MXRIVR
+        INTEGER,POINTER:: NRIVVL
+        INTEGER,POINTER:: IRIVCB
+        INTEGER,POINTER:: IPRRIV
+        INTEGER,POINTER:: NPRIV
+        INTEGER,POINTER:: IRIVPB
+        INTEGER,POINTER:: NNPRIV
         CHARACTER(LEN=16), DIMENSION(:),   POINTER     ::RIVAUX
         REAL,              DIMENSION(:,:), POINTER     ::RIVR
       END TYPE
@@ -24,6 +37,25 @@
       USE GWFRIVMODULE, ONLY:NRIVER,MXRIVR,NRIVVL,IRIVCB,IPRRIV,NPRIV,&
      &                       IRIVPB,NNPRIV,RIVAUX,RIVR
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: IP
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: K
+      INTEGER :: LLOC
+      INTEGER :: LSTBEG
+      INTEGER :: LSTSUM
+      INTEGER :: MXACTR
+      INTEGER :: MXPR
+      INTEGER :: N
+      INTEGER :: NAUX
+      INTEGER :: NINLST
+      INTEGER :: NLST
+      INTEGER :: NUMINST
+      REAL :: R
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
 !
@@ -133,6 +165,16 @@
       USE GWFRIVMODULE, ONLY:NRIVER,MXRIVR,NRIVVL,IPRRIV,NPRIV,&
      &                       IRIVPB,NNPRIV,RIVAUX,RIVR
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: IOUTU
+      INTEGER :: ITMP
+      INTEGER :: MXACTR
+      INTEGER :: N
+      INTEGER :: NAUX
+      INTEGER :: NP
+      INTEGER :: NREAD
       CALL SGWF2RIV7PNT(IGRID)
 !
 !1------READ ITMP (NUMBER OF RIVER REACHES OR FLAG TO REUSE DATA) AND
@@ -210,6 +252,15 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,       ONLY:IBOUND,HNEW,RHS,HCOF
       USE GWFRIVMODULE, ONLY:NRIVER,RIVR
+      IMPLICIT NONE
+      REAL :: CRIV
+      REAL :: HRIV
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: IR
+      INTEGER :: L
+      REAL :: RBOT
       DOUBLE PRECISION RRBOT
 !     ------------------------------------------------------------------
       CALL SGWF2RIV7PNT(IGRID)
@@ -261,8 +312,33 @@
      &                      VBVL,VBNM
       USE GWFRIVMODULE,ONLY:NRIVER,IRIVCB,RIVR,NRIVVL,RIVAUX
 !
-      DOUBLE PRECISION HHNEW,CHRIV,RRBOT,CCRIV,RATIN,RATOUT,RRATE
+      IMPLICIT NONE
+      REAL :: CRIV
+      REAL :: HRIV
+      INTEGER :: IBD
+      INTEGER :: IBDLBL
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: IR
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: L
+      INTEGER :: NAUX
+      REAL :: RATE
+      REAL :: RBOT
+      REAL :: RIN
+      REAL :: ROUT
+      REAL :: ZERO
+      DOUBLE PRECISION HHNEW
+      DOUBLE PRECISION CHRIV
+      DOUBLE PRECISION RRBOT
+      DOUBLE PRECISION CCRIV
+      DOUBLE PRECISION RATIN
+      DOUBLE PRECISION RATOUT
+      DOUBLE PRECISION RRATE
       CHARACTER*16 TEXT
+      SAVE :: TEXT
       DATA TEXT /'   RIVER LEAKAGE'/
 !     ------------------------------------------------------------------
       CALL SGWF2RIV7PNT(IGRID)
@@ -384,6 +460,8 @@
 !  Deallocate RIV MEMORY
       USE GWFRIVMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         CALL SGWF2RIV7PNT(IGRID)
         DEALLOCATE(NRIVER)
         DEALLOCATE(MXRIVR)
@@ -402,6 +480,8 @@
 !  Change river data to a different grid.
       USE GWFRIVMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         NRIVER=>GWFRIVDAT(IGRID)%NRIVER
         MXRIVR=>GWFRIVDAT(IGRID)%MXRIVR
         NRIVVL=>GWFRIVDAT(IGRID)%NRIVVL
@@ -419,6 +499,8 @@
 !  Save river data for a grid.
       USE GWFRIVMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         GWFRIVDAT(IGRID)%NRIVER=>NRIVER
         GWFRIVDAT(IGRID)%MXRIVR=>MXRIVR
         GWFRIVDAT(IGRID)%NRIVVL=>NRIVVL

@@ -1,6 +1,13 @@
       MODULE GWFMNW2MODULE
-        INTEGER,SAVE,POINTER  ::NMNW2,MNWMAX,NMNWVL,IWL2CB,MNWPRNT
-        INTEGER,SAVE,POINTER  ::NODTOT,INTTOT,NTOTNOD
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: NMNW2
+        INTEGER,SAVE,POINTER:: MNWMAX
+        INTEGER,SAVE,POINTER:: NMNWVL
+        INTEGER,SAVE,POINTER:: IWL2CB
+        INTEGER,SAVE,POINTER:: MNWPRNT
+        INTEGER,SAVE,POINTER:: NODTOT
+        INTEGER,SAVE,POINTER:: INTTOT
+        INTEGER,SAVE,POINTER:: NTOTNOD
         DOUBLE PRECISION, SAVE,POINTER :: SMALL
         CHARACTER(LEN=20),SAVE, DIMENSION(:),   POINTER     ::WELLID
         CHARACTER(LEN=16),SAVE, DIMENSION(:),   POINTER     ::MNWAUX
@@ -10,8 +17,14 @@
         DOUBLE PRECISION, SAVE, DIMENSION(:,:), POINTER     ::MNWINT
         DOUBLE PRECISION, SAVE, DIMENSION(:,:,:), POINTER     ::CapTable
       TYPE GWFMNWTYPE
-        INTEGER,POINTER  ::NMNW2,MNWMAX,NMNWVL,IWL2CB,MNWPRNT
-        INTEGER,POINTER  ::NODTOT,INTTOT,NTOTNOD
+        INTEGER,POINTER:: NMNW2
+        INTEGER,POINTER:: MNWMAX
+        INTEGER,POINTER:: NMNWVL
+        INTEGER,POINTER:: IWL2CB
+        INTEGER,POINTER:: MNWPRNT
+        INTEGER,POINTER:: NODTOT
+        INTEGER,POINTER:: INTTOT
+        INTEGER,POINTER:: NTOTNOD
         DOUBLE PRECISION, POINTER :: SMALL
         CHARACTER(LEN=20), DIMENSION(:),   POINTER     ::WELLID
         CHARACTER(LEN=16), DIMENSION(:),   POINTER     ::MNWAUX
@@ -42,6 +55,15 @@
 !-LFK     2                       CapTable,SMALL,NTOTNOD,WELLID
      &                       CapTable,SMALL,NTOTNOD,WELLID,LIMQ
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NAUX
+      REAL :: R
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
 !
@@ -168,14 +190,88 @@
       USE PCGMODULE,ONLY:HCLOSEPCG
 !      USE GMGMODULE,ONLY:HCLOSEGMG
 !     ------------------------------------------------------------------
-      INTEGER Qlimit,QCUT,firstnode,lastnode,&
-     & PUMPLAY,PUMPROW,PUMPCOL,PUMPLOC,PPFLAG,PUMPCAP
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IAUX
+      INTEGER :: IC
+      INTEGER :: ICLAST
+      INTEGER :: ID
+      INTEGER :: IFOUND
+      INTEGER :: IGRID
+      INTEGER :: IGWTUNIT
+      INTEGER :: IINT
+      INTEGER :: IL
+      INTEGER :: IN
+      INTEGER :: INDEX
+      INTEGER :: INODE
+      INTEGER :: INTNODES
+      INTEGER :: INTNUM
+      INTEGER :: IR
+      INTEGER :: IREAD
+      INTEGER :: IRLAST
+      INTEGER :: ITMP
+      INTEGER :: IUDE4
+      INTEGER :: IUGMG
+      INTEGER :: IULMG
+      INTEGER :: IUPCG
+      INTEGER :: IUSIP
+      INTEGER :: IUSOR
+      INTEGER :: IW
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: MNWID
+      INTEGER :: NAUX
+      INTEGER :: NDALT
+      INTEGER :: NINTVL
+      INTEGER :: NNODES
+      INTEGER :: NOD
+      INTEGER :: NODECOUNT
+      INTEGER :: NODNUM
+      INTEGER Qlimit
+      INTEGER QCUT
+      INTEGER firstnode
+      INTEGER lastnode
+      INTEGER PUMPLAY
+      INTEGER PUMPROW
+      INTEGER PUMPCOL
+      INTEGER PUMPLOC
+      INTEGER PPFLAG
+      INTEGER PUMPCAP
       DOUBLE PRECISION CapMult
-      DOUBLE PRECISION Rw,Rskin,Kskin,B,C,P,CWC,RwNode,RskinNode,&
-     & KskinNode,BNode,CNode,PNode,CWCNode,Ztop,Zbotm,Zbotmlast,&
-     & Zpump,Hlim,Qfrcmn,Qfrcmx,Qdes,Cprime,PP,&
-     & Qtemp,Hlift,LIFTq0,LIFTqdes,LIFTn,Qn,HWtol
-      CHARACTER*20 WELLNAME,LOSSTYPE
+      DOUBLE PRECISION Rw
+      DOUBLE PRECISION Rskin
+      DOUBLE PRECISION Kskin
+      DOUBLE PRECISION B
+      DOUBLE PRECISION C
+      DOUBLE PRECISION P
+      DOUBLE PRECISION CWC
+      DOUBLE PRECISION RwNode
+      DOUBLE PRECISION RskinNode
+      DOUBLE PRECISION KskinNode
+      DOUBLE PRECISION BNode
+      DOUBLE PRECISION CNode
+      DOUBLE PRECISION PNode
+      DOUBLE PRECISION CWCNode
+      DOUBLE PRECISION Ztop
+      DOUBLE PRECISION Zbotm
+      DOUBLE PRECISION Zbotmlast
+      DOUBLE PRECISION Zpump
+      DOUBLE PRECISION Hlim
+      DOUBLE PRECISION Qfrcmn
+      DOUBLE PRECISION Qfrcmx
+      DOUBLE PRECISION Qdes
+      DOUBLE PRECISION Cprime
+      DOUBLE PRECISION PP
+      DOUBLE PRECISION Qtemp
+      DOUBLE PRECISION Hlift
+      DOUBLE PRECISION LIFTq0
+      DOUBLE PRECISION LIFTqdes
+      DOUBLE PRECISION LIFTn
+      DOUBLE PRECISION Qn
+      DOUBLE PRECISION HWtol
+      CHARACTER*20 WELLNAME
+      CHARACTER*20 LOSSTYPE
 !
       CALL SGWF2MNW2PNT(IGRID)
 !
@@ -1869,10 +1965,40 @@
 !-LFK     2                       CapTable,SMALL,WELLID
      &                       CapTable,SMALL,WELLID,LIMQ
 !     ------------------------------------------------------------------
-      INTEGER firstnode,lastnode,nd
-      DOUBLE PRECISION qoff,qon,qdes,csum,chsum,qact,Qsmall,&
-     & hwell,verysmall,hlim,qpot,cond,ratio,hmax,hsim,&
-     & QCUT,qnet,hhnew
+      IMPLICIT NONE
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: INODE
+      INTEGER :: IPOLE
+      INTEGER :: IR
+      INTEGER :: ITFLAG
+      INTEGER :: IW
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NNODES
+      INTEGER firstnode
+      INTEGER lastnode
+      INTEGER nd
+      DOUBLE PRECISION qoff
+      DOUBLE PRECISION qon
+      DOUBLE PRECISION qdes
+      DOUBLE PRECISION csum
+      DOUBLE PRECISION chsum
+      DOUBLE PRECISION qact
+      DOUBLE PRECISION Qsmall
+      DOUBLE PRECISION hwell
+      DOUBLE PRECISION verysmall
+      DOUBLE PRECISION hlim
+      DOUBLE PRECISION qpot
+      DOUBLE PRECISION cond
+      DOUBLE PRECISION ratio
+      DOUBLE PRECISION hmax
+      DOUBLE PRECISION hsim
+      DOUBLE PRECISION QCUT
+      DOUBLE PRECISION qnet
+      DOUBLE PRECISION hhnew
 !
       CALL SGWF2MNW2PNT(IGRID)
 !
@@ -2112,10 +2238,42 @@
      &                       CapTable,SMALL,WELLID,LIMQ
 !     ------------------------------------------------------------------
 
-      INTEGER PUMPCAP,firstnode,lastnode
-      DOUBLE PRECISION verysmall,qdes,hlim,hwell,qact,&
-     & cond,dhc2w,hmax,hsim,ratio,qactCap,Hlift,&
-     & CapMult,lastQ,qtemp,temppct,lastH,htemp,HWtol,hhnew
+      IMPLICIT NONE
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: INODE
+      INTEGER :: IQSLV
+      INTEGER :: IR
+      INTEGER :: ITFLAG
+      INTEGER :: IW
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NNODES
+      INTEGER PUMPCAP
+      INTEGER firstnode
+      INTEGER lastnode
+      DOUBLE PRECISION verysmall
+      DOUBLE PRECISION qdes
+      DOUBLE PRECISION hlim
+      DOUBLE PRECISION hwell
+      DOUBLE PRECISION qact
+      DOUBLE PRECISION cond
+      DOUBLE PRECISION dhc2w
+      DOUBLE PRECISION hmax
+      DOUBLE PRECISION hsim
+      DOUBLE PRECISION ratio
+      DOUBLE PRECISION qactCap
+      DOUBLE PRECISION Hlift
+      DOUBLE PRECISION CapMult
+      DOUBLE PRECISION lastQ
+      DOUBLE PRECISION qtemp
+      DOUBLE PRECISION temppct
+      DOUBLE PRECISION lastH
+      DOUBLE PRECISION htemp
+      DOUBLE PRECISION HWtol
+      DOUBLE PRECISION hhnew
 !
       CALL SGWF2MNW2PNT(IGRID)
 !
@@ -2394,16 +2552,54 @@
 !-LFK     2                       SMALL,WELLID,NTOTNOD
      &                       SMALL,WELLID,NTOTNOD,LIMQ
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION ratin,ratout,hhnew,DryTest,&
-     & q,qdes,hlim,hwell,s,sNL,sL,qnet,qin,qout,verysmall,hcell
-      INTEGER firstnode,lastnode
+      IMPLICIT NONE
+      INTEGER :: IBD
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: IMULT
+      INTEGER :: INODE
+      INTEGER :: IOC
+      INTEGER :: IOCH
+      INTEGER :: IR
+      INTEGER :: ISEEPFLG
+      INTEGER :: IW
+      INTEGER :: IWELDRY
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NAUX
+      INTEGER :: ND
+      INTEGER :: NTOTHEADER
+      INTEGER :: NUMNDDEL
+      REAL :: R1
+      REAL :: R2
+      DOUBLE PRECISION ratin
+      DOUBLE PRECISION ratout
+      DOUBLE PRECISION hhnew
+      DOUBLE PRECISION DryTest
+      DOUBLE PRECISION q
+      DOUBLE PRECISION qdes
+      DOUBLE PRECISION hlim
+      DOUBLE PRECISION hwell
+      DOUBLE PRECISION s
+      DOUBLE PRECISION sNL
+      DOUBLE PRECISION sL
+      DOUBLE PRECISION qnet
+      DOUBLE PRECISION qin
+      DOUBLE PRECISION qout
+      DOUBLE PRECISION verysmall
+      DOUBLE PRECISION hcell
+      INTEGER firstnode
+      INTEGER lastnode
       CHARACTER*16 text
 !-lfk  10/10/2012
       CHARACTER*25 ctext1
-      CHARACTER*23 ctext2,ctext3
+      CHARACTER*23 ctext2
+      CHARACTER*23 ctext3
       CHARACTER*32 ctext4
       CHARACTER*15 ctext5
-      CHARACTER*24 ctext6,CTEXT7
+      CHARACTER*24 ctext6
+      CHARACTER*24 CTEXT7
 !
       CALL SGWF2MNW2PNT(IGRID)
 !             ----+----1----+-
@@ -2741,9 +2937,38 @@
      &                       NODTOT,MNW2,MNWNOD,&
      &                       SMALL,WELLID
 !     ------------------------------------------------------------------
-      INTEGER firstnode,lastnode
-      DOUBLE PRECISION verysmall,dx,dy,top,bot,ah,dxp,Txp,dxm,Txm,dyp,&
-     & Typ,dym,Tym,Txx,div,Tyy,upper,TempKX,thick
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: INODE
+      INTEGER :: ISS
+      INTEGER :: IW
+      INTEGER :: IX
+      INTEGER :: IY
+      INTEGER :: IZ
+      INTEGER :: KPER
+      REAL :: SS
+      INTEGER firstnode
+      INTEGER lastnode
+      DOUBLE PRECISION verysmall
+      DOUBLE PRECISION dx
+      DOUBLE PRECISION dy
+      DOUBLE PRECISION top
+      DOUBLE PRECISION bot
+      DOUBLE PRECISION ah
+      DOUBLE PRECISION dxp
+      DOUBLE PRECISION Txp
+      DOUBLE PRECISION dxm
+      DOUBLE PRECISION Txm
+      DOUBLE PRECISION dyp
+      DOUBLE PRECISION Typ
+      DOUBLE PRECISION dym
+      DOUBLE PRECISION Tym
+      DOUBLE PRECISION Txx
+      DOUBLE PRECISION div
+      DOUBLE PRECISION Tyy
+      DOUBLE PRECISION upper
+      DOUBLE PRECISION TempKX
+      DOUBLE PRECISION thick
       REAL Kz
 !
       ISS=ISSFLG(KPER)
@@ -2888,9 +3113,29 @@
      &                       NODTOT,MNW2,MNWNOD,&
      &                       WELLID
 !     ------------------------------------------------------------------
-      INTEGER firstnode,lastnode
-      DOUBLE PRECISION verysmall,dx,dy,top,bot,ah,&
-     & Txx,Tyy,upper,TempKX,thick
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: INODE
+      INTEGER :: ISS
+      INTEGER :: IW
+      INTEGER :: IX
+      INTEGER :: IY
+      INTEGER :: IZ
+      INTEGER :: KPER
+      REAL :: SS
+      INTEGER firstnode
+      INTEGER lastnode
+      DOUBLE PRECISION verysmall
+      DOUBLE PRECISION dx
+      DOUBLE PRECISION dy
+      DOUBLE PRECISION top
+      DOUBLE PRECISION bot
+      DOUBLE PRECISION ah
+      DOUBLE PRECISION Txx
+      DOUBLE PRECISION Tyy
+      DOUBLE PRECISION upper
+      DOUBLE PRECISION TempKX
+      DOUBLE PRECISION thick
       REAL Kz
 !
       CALL SGWF2MNW2PNT(IGRID)
@@ -3016,7 +3261,18 @@
      &                       NODTOT,MNW2,MNWNOD,&
      &                       WELLID
 !     ------------------------------------------------------------------
-      INTEGER firstnode,lastnode
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: INODE
+      INTEGER :: ISS
+      INTEGER :: IW
+      INTEGER :: IX
+      INTEGER :: IY
+      INTEGER :: IZ
+      INTEGER :: KPER
+      REAL :: SS
+      INTEGER firstnode
+      INTEGER lastnode
       DOUBLE PRECISION verysmall,dx,dy,top,bot,ah,&
 !-LFK     & Txx,Tyy,upper,TempKX,thick
      & Txx,Tyy,upper,TempKX,thick,KY
@@ -3114,14 +3370,79 @@
       USE GWFMNW2MODULE, ONLY:NMNW2,MNWMAX,MNWPRNT,MNWINT,INTTOT,&
      &                       NODTOT,MNW2,MNWNOD,SMALL,WELLID
 
+      IMPLICIT NONE
+      REAL :: ALPHA2
+      REAL :: ALPHA3
+      REAL :: HWELL
+      INTEGER :: IGRID
+      INTEGER :: IINT
+      INTEGER :: INODE
+      INTEGER :: IPPC
+      INTEGER :: IPR
+      INTEGER :: IRECALC
+      INTEGER :: ISOLNFLAG
+      INTEGER :: ISS
+      INTEGER :: ITFLAG
+      INTEGER :: IW
+      INTEGER :: IX
+      INTEGER :: IY
+      INTEGER :: IZ
+      INTEGER :: LOSSTYPE
+      INTEGER :: NNODES
+      INTEGER :: NOD
+      REAL :: T1
+      REAL :: T2
       CHARACTER*10 ctext
 !-lfk      CHARACTER*9 ctext
-      INTEGER firstnode,lastnode,firstint,lastint,&
-     & kstp,kiter,kper,nd,PPFLAG
-      DOUBLE PRECISION verysmall,cond,dx,dy,top,bot,thck,&
-     & Txx,Tyy,rw,Qact,Rskin,Kskin,B,C,CF,PLoss,cel2wel2,alpha,&
-     & Kz,totlength,lengthint,ratio,CWC,ztop,zbotm,dhp,SS,Skin,&
-     & ZPD,ZPL,ABC,ABCD,lengthratio,T,Kh,QQ,dpp,topscreen,bottomscreen
+      INTEGER firstnode
+      INTEGER lastnode
+      INTEGER firstint
+      INTEGER lastint
+      INTEGER kstp
+      INTEGER kiter
+      INTEGER kper
+      INTEGER nd
+      INTEGER PPFLAG
+      DOUBLE PRECISION verysmall
+      DOUBLE PRECISION cond
+      DOUBLE PRECISION dx
+      DOUBLE PRECISION dy
+      DOUBLE PRECISION top
+      DOUBLE PRECISION bot
+      DOUBLE PRECISION thck
+      DOUBLE PRECISION Txx
+      DOUBLE PRECISION Tyy
+      DOUBLE PRECISION rw
+      DOUBLE PRECISION Qact
+      DOUBLE PRECISION Rskin
+      DOUBLE PRECISION Kskin
+      DOUBLE PRECISION B
+      DOUBLE PRECISION C
+      DOUBLE PRECISION CF
+      DOUBLE PRECISION PLoss
+      DOUBLE PRECISION cel2wel2
+      DOUBLE PRECISION alpha
+      DOUBLE PRECISION Kz
+      DOUBLE PRECISION totlength
+      DOUBLE PRECISION lengthint
+      DOUBLE PRECISION ratio
+      DOUBLE PRECISION CWC
+      DOUBLE PRECISION ztop
+      DOUBLE PRECISION zbotm
+      DOUBLE PRECISION dhp
+      DOUBLE PRECISION SS
+      DOUBLE PRECISION Skin
+      DOUBLE PRECISION ZPD
+      DOUBLE PRECISION ZPL
+      DOUBLE PRECISION ABC
+      DOUBLE PRECISION ABCD
+      DOUBLE PRECISION lengthratio
+      DOUBLE PRECISION T
+      DOUBLE PRECISION Kh
+      DOUBLE PRECISION QQ
+      DOUBLE PRECISION dpp
+      DOUBLE PRECISION topscreen
+      DOUBLE PRECISION bottomscreen
 !
       CALL SGWF2MNW2PNT(IGRID)
       ISS=ISSFLG(KPER)
@@ -3730,8 +4051,29 @@
 !--LFK
       INTEGER ISEGFLG
 !
-      DOUBLE PRECISION pi,verysmall,rw,Txx,Tyy,yx4,xy4,ro,dx,dy,Tpi2,A,&
-     & Ploss,B,Rskin,Kskin,C,Cf,Q,thck,T,Tskin,Skin
+      DOUBLE PRECISION pi
+      DOUBLE PRECISION verysmall
+      DOUBLE PRECISION rw
+      DOUBLE PRECISION Txx
+      DOUBLE PRECISION Tyy
+      DOUBLE PRECISION yx4
+      DOUBLE PRECISION xy4
+      DOUBLE PRECISION ro
+      DOUBLE PRECISION dx
+      DOUBLE PRECISION dy
+      DOUBLE PRECISION Tpi2
+      DOUBLE PRECISION A
+      DOUBLE PRECISION Ploss
+      DOUBLE PRECISION B
+      DOUBLE PRECISION Rskin
+      DOUBLE PRECISION Kskin
+      DOUBLE PRECISION C
+      DOUBLE PRECISION Cf
+      DOUBLE PRECISION Q
+      DOUBLE PRECISION thck
+      DOUBLE PRECISION T
+      DOUBLE PRECISION Tskin
+      DOUBLE PRECISION Skin
 !     ------------------------------------------------------------------
 !
       pi = 3.1415926535897932D0
@@ -3838,10 +4180,43 @@
       USE GWFMNW2MODULE, ONLY:NMNW2,MNWMAX,MNWPRNT,&
 !-LFK     1                       NODTOT,MNW2,MNWNOD,SMALL,WELLID
      &                       NODTOT,MNW2,MNWNOD,SMALL,WELLID,LIMQ
-      INTEGER firstnode,lastnode,nd
-      DOUBLE PRECISION qdes,qact,csum,chsum,Qseep,&
-     & hwell,hlim,verysmall,hmax,hsim,bottom,qcut,qoff,qon,qsmall,&
-     & qpot,cond,ratio
+      IMPLICIT NONE
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: INODE
+      INTEGER :: IPOLE
+      INTEGER :: IR
+      INTEGER :: ISEEPCHK
+      INTEGER :: ISEEPFLG
+      INTEGER :: IW
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSEEP
+      INTEGER :: KSTP
+      INTEGER :: NNODES
+      REAL :: SEEPCHK
+      INTEGER firstnode
+      INTEGER lastnode
+      INTEGER nd
+      DOUBLE PRECISION qdes
+      DOUBLE PRECISION qact
+      DOUBLE PRECISION csum
+      DOUBLE PRECISION chsum
+      DOUBLE PRECISION Qseep
+      DOUBLE PRECISION hwell
+      DOUBLE PRECISION hlim
+      DOUBLE PRECISION verysmall
+      DOUBLE PRECISION hmax
+      DOUBLE PRECISION hsim
+      DOUBLE PRECISION bottom
+      DOUBLE PRECISION qcut
+      DOUBLE PRECISION qoff
+      DOUBLE PRECISION qon
+      DOUBLE PRECISION qsmall
+      DOUBLE PRECISION qpot
+      DOUBLE PRECISION cond
+      DOUBLE PRECISION ratio
 !
       verysmall = 1.D-25
 !-LFK   initialize MNWNOD(15,IW) TO HIGH VALUE
@@ -4235,8 +4610,24 @@
 !
       USE GLOBAL,       ONLY:IOUT
       USE GWFMNW2MODULE, ONLY:MNWMAX,MNW2,MNWNOD
-      integer firstnode,lastnode,PUMPLOC
-      double precision Qnet,diff,q
+      IMPLICIT NONE
+      INTEGER :: IC
+      INTEGER :: ICP
+      INTEGER :: IFOUND
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: ILP
+      INTEGER :: INODE
+      INTEGER :: IR
+      INTEGER :: IRP
+      INTEGER :: IW
+      INTEGER :: NODEPUMP
+      integer firstnode
+      integer lastnode
+      integer PUMPLOC
+      double precision Qnet
+      double precision diff
+      double precision q
 !
       CALL SGWF2MNW2PNT(IGRID)
 !   QBH (MNWNOD(27,m) is flow between nodes (saved at upper face) in borehole
@@ -4329,10 +4720,38 @@
      &                       CapTable,SMALL,WELLID
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      INTEGER :: IDONE
+      INTEGER :: IGRID
+      INTEGER :: IMFLG
+      INTEGER :: INODE
+      INTEGER :: IPR
+      INTEGER :: IS_INTERSECTION
+      INTEGER :: IVERT1
+      INTEGER :: IVERT2
+      INTEGER :: IW
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: LOSSTYPE
+      INTEGER :: NNODES
+      INTEGER :: NOD
+      REAL :: ZSEG1
+      REAL :: ZSEG2
       ALLOCATABLE ivert1(:),ivert2(:),zseg1(:),zseg2(:)
-      INTEGER Wel1flag,QSUMflag,BYNDflag
-      INTEGER L1,R1,C1,L2,R2,C2,L,R,C,&
-     & firstnode,lastnode
+      INTEGER Wel1flag
+      INTEGER QSUMflag
+      INTEGER BYNDflag
+      INTEGER L1
+      INTEGER R1
+      INTEGER C1
+      INTEGER L2
+      INTEGER R2
+      INTEGER C2
+      INTEGER L
+      INTEGER R
+      INTEGER C
+      INTEGER firstnode
+      INTEGER lastnode
       REAL&
      & x1face1,x1face2,y1face1,y1face2,z1face1,z1face2,&
      & x1face,y1face,z1face,&
@@ -4343,13 +4762,52 @@
      & zi,yi,xi,zi2,yi2,xi2,t1,b1&
 !-LFK
      & ,za,ya,xa,zb,yb,xb
-      DOUBLE PRECISION z1,y1,x1,z2,y2,x2,top1,bot1,top2,bot2,&
-     & betweennodes,omega_opp,omega,theta_opp,theta_hyp,&
-     & theta,thck1,thck2,lw,cel2wel2SEG,dx1,dx2,dy1,dy2,&
-     & cel2wel2,alpha,T,Kh,Kz,Txx1,Tyy1
-      DOUBLE PRECISION&
-     & Txx,Tyy,rw,Rskin,Kskin,B,Cf,PLoss,Qact,cond1,cond2,cond,Skin
-      DOUBLE PRECISION dgr_to_rad,pi
+      DOUBLE PRECISION z1
+      DOUBLE PRECISION y1
+      DOUBLE PRECISION x1
+      DOUBLE PRECISION z2
+      DOUBLE PRECISION y2
+      DOUBLE PRECISION x2
+      DOUBLE PRECISION top1
+      DOUBLE PRECISION bot1
+      DOUBLE PRECISION top2
+      DOUBLE PRECISION bot2
+      DOUBLE PRECISION betweennodes
+      DOUBLE PRECISION omega_opp
+      DOUBLE PRECISION omega
+      DOUBLE PRECISION theta_opp
+      DOUBLE PRECISION theta_hyp
+      DOUBLE PRECISION theta
+      DOUBLE PRECISION thck1
+      DOUBLE PRECISION thck2
+      DOUBLE PRECISION lw
+      DOUBLE PRECISION cel2wel2SEG
+      DOUBLE PRECISION dx1
+      DOUBLE PRECISION dx2
+      DOUBLE PRECISION dy1
+      DOUBLE PRECISION dy2
+      DOUBLE PRECISION cel2wel2
+      DOUBLE PRECISION alpha
+      DOUBLE PRECISION T
+      DOUBLE PRECISION Kh
+      DOUBLE PRECISION Kz
+      DOUBLE PRECISION Txx1
+      DOUBLE PRECISION Tyy1
+      DOUBLE PRECISION Txx
+      DOUBLE PRECISION Tyy
+      DOUBLE PRECISION rw
+      DOUBLE PRECISION Rskin
+      DOUBLE PRECISION Kskin
+      DOUBLE PRECISION B
+      DOUBLE PRECISION Cf
+      DOUBLE PRECISION PLoss
+      DOUBLE PRECISION Qact
+      DOUBLE PRECISION cond1
+      DOUBLE PRECISION cond2
+      DOUBLE PRECISION cond
+      DOUBLE PRECISION Skin
+      DOUBLE PRECISION dgr_to_rad
+      DOUBLE PRECISION pi
       ALLOCATE(ivert1(NODTOT),ivert2(NODTOT),zseg1(NODTOT),&
      & zseg2(NODTOT))
 ! convert degree trig func modified from http://techpubs.sgi.com
@@ -5107,7 +5565,8 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,       ONLY:IOUT
       IMPLICIT NONE
-      INTEGER LOSSTYPE,i
+      INTEGER LOSSTYPE
+      INTEGER i
       CHARACTER*20 WELLNAME
       DOUBLE PRECISION pi,verysmall,rw,Txx,Tyy,yx4,xy4,ro,dx,dy,Tpi2,A,&
 !-lfk     & Ploss,B,Rskin,Kskin,C,Cf,Q,thck,T,Tskin,x1,x2,x3,x4,
@@ -5262,9 +5721,24 @@
       USE GWFMNW2MODULE, ONLY:NMNW2,MNWMAX,NMNWVL,IWL2CB,MNWPRNT,&
      &                       NODTOT,INTTOT,MNWAUX,MNW2,MNWNOD,MNWINT,&
      &                       CapTable,SMALL,WELLID
+      IMPLICIT NONE
+      INTEGER :: IDONE
+      INTEGER :: IFIRSTL
+      INTEGER :: IGRID
+      INTEGER :: INDEX
+      INTEGER :: ISECONDL
+      INTEGER :: IW
       INTEGER PUMPCAP
-      DOUBLE PRECISION qactCap,LIFTact,Hlift,hwell,m,b,&
-     & L1,L2,Q1,Q2
+      DOUBLE PRECISION qactCap
+      DOUBLE PRECISION LIFTact
+      DOUBLE PRECISION Hlift
+      DOUBLE PRECISION hwell
+      DOUBLE PRECISION m
+      DOUBLE PRECISION b
+      DOUBLE PRECISION L1
+      DOUBLE PRECISION L2
+      DOUBLE PRECISION Q1
+      DOUBLE PRECISION Q2
       DOUBLE PRECISION CapMult
 ! 
 !
@@ -5360,7 +5834,78 @@
 !
 !---SPECIFICATIONS
 !
-      IMPLICIT DOUBLE PRECISION (A-H, O-Z)
+      IMPLICIT NONE
+      DOUBLE PRECISION :: ASC
+      DOUBLE PRECISION :: AT
+      DOUBLE PRECISION :: BB
+      DOUBLE PRECISION :: BETAW
+      DOUBLE PRECISION :: DDPP
+      DOUBLE PRECISION :: DDPPOLD
+      DOUBLE PRECISION :: DDTEST
+      DOUBLE PRECISION :: EPSILON
+      DOUBLE PRECISION :: EXPMAX
+      DOUBLE PRECISION :: F1
+      DOUBLE PRECISION :: F2
+      DOUBLE PRECISION :: GAMMA
+      DOUBLE PRECISION :: HD
+      DOUBLE PRECISION :: HKR
+      DOUBLE PRECISION :: HKZ
+      INTEGER :: IAQ
+      INTEGER :: IDPR
+      INTEGER :: IDRA
+      INTEGER :: IFORMAT
+      INTEGER :: IMEAS
+      INTEGER :: IOWS
+      INTEGER :: IPWD
+      INTEGER :: IPWS
+      INTEGER :: IRUN
+      INTEGER :: ISOLNFLAG
+      INTEGER :: ITS
+      INTEGER :: KK
+      INTEGER :: NALPHA
+      INTEGER :: NGAMMA
+      INTEGER :: NLC
+      INTEGER :: NMAX
+      INTEGER :: NOBWC
+      INTEGER :: NOX
+      INTEGER :: NS
+      INTEGER :: NT
+      INTEGER :: NTMS
+      INTEGER :: NTSPW
+      DOUBLE PRECISION :: PI
+      DOUBLE PRECISION :: QQ
+      DOUBLE PRECISION :: R
+      DOUBLE PRECISION :: RC
+      DOUBLE PRECISION :: RD
+      DOUBLE PRECISION :: RDSQ
+      DOUBLE PRECISION :: RERRNR
+      DOUBLE PRECISION :: RERRSUM
+      DOUBLE PRECISION :: RHDFP
+      DOUBLE PRECISION :: RHDPP
+      DOUBLE PRECISION :: RTD
+      DOUBLE PRECISION :: RW
+      DOUBLE PRECISION :: RWD
+      DOUBLE PRECISION :: SIGMA
+      DOUBLE PRECISION :: SS
+      DOUBLE PRECISION :: SW
+      DOUBLE PRECISION :: TD
+      DOUBLE PRECISION :: TDLAST
+      DOUBLE PRECISION :: TLAST
+      DOUBLE PRECISION :: V
+      DOUBLE PRECISION :: WD
+      DOUBLE PRECISION :: WDP
+      DOUBLE PRECISION :: XDD
+      DOUBLE PRECISION :: XKD
+      DOUBLE PRECISION :: XLD
+      DOUBLE PRECISION :: XLN2
+      DOUBLE PRECISION :: Z1
+      DOUBLE PRECISION :: Z2
+      DOUBLE PRECISION :: ZD
+      DOUBLE PRECISION :: ZD1
+      DOUBLE PRECISION :: ZD2
+      DOUBLE PRECISION :: ZP
+      DOUBLE PRECISION :: ZPD
+      DOUBLE PRECISION :: ZPL
       DIMENSION GAMMA(5)
 !
 !---COMMON STATEMENTS
@@ -5598,8 +6143,21 @@
 !
        SUBROUTINE LINVST(V,NS)
 !---SPECIFICATIONS
-       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
-       DIMENSION G(20),V(20),HS(20)
+       IMPLICIT NONE
+       DOUBLE PRECISION :: FI
+       DOUBLE PRECISION :: G
+       DOUBLE PRECISION :: HS
+       INTEGER :: IS
+       INTEGER :: K1
+       INTEGER :: K2
+       INTEGER :: KS
+       INTEGER :: NH
+       INTEGER :: NS
+       DOUBLE PRECISION :: SN
+       DOUBLE PRECISION :: V
+       DIMENSION G(20)
+       DIMENSION V(20)
+       DIMENSION HS(20)
 !
        G(1)=1.D0
        NH=NS/2
@@ -5649,7 +6207,29 @@
 !
        SUBROUTINE LTST1(TD,HDT)
 !---SPECIFICATIONS
-       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+       IMPLICIT NONE
+       DOUBLE PRECISION :: BESSK0
+       DOUBLE PRECISION :: CA
+       DOUBLE PRECISION :: EXPMAX
+       DOUBLE PRECISION :: HDT
+       INTEGER :: I
+       INTEGER :: IDRA
+       INTEGER :: KK
+       INTEGER :: NGAMMA
+       INTEGER :: NMAX
+       INTEGER :: NS
+       INTEGER :: NTMS
+       DOUBLE PRECISION :: PDL
+       DOUBLE PRECISION :: PP
+       DOUBLE PRECISION :: RD
+       DOUBLE PRECISION :: RE0
+       DOUBLE PRECISION :: TD
+       DOUBLE PRECISION :: V
+       DOUBLE PRECISION :: XLN2
+       DOUBLE PRECISION :: XP
+       DOUBLE PRECISION :: ZD
+       DOUBLE PRECISION :: ZD1
+       DOUBLE PRECISION :: ZD2
 !---COMMON STATEMENTS
       COMMON /PAR2/ NGAMMA,IDRA,NS,KK,NMAX,NTMS
       COMMON /PAR9/ V(20),XLN2,EXPMAX
@@ -5687,7 +6267,77 @@
 !
        SUBROUTINE LTST2(TD,HD)
 !---SPECIFICATIONS
-       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+       IMPLICIT NONE
+       DOUBLE PRECISION :: A
+       DOUBLE PRECISION :: A0
+       DOUBLE PRECISION :: BESSK0
+       DOUBLE PRECISION :: BESSK1
+       DOUBLE PRECISION :: BETAW
+       DOUBLE PRECISION :: DA
+       DOUBLE PRECISION :: DB
+       DOUBLE PRECISION :: DENOM
+       DOUBLE PRECISION :: E
+       DOUBLE PRECISION :: E0
+       DOUBLE PRECISION :: ERRA
+       DOUBLE PRECISION :: ERRE
+       DOUBLE PRECISION :: EXPMAX
+       DOUBLE PRECISION :: GAMMA
+       DOUBLE PRECISION :: HD
+       INTEGER :: I
+       INTEGER :: IDPR
+       INTEGER :: IDRA
+       INTEGER :: IOWS
+       INTEGER :: IPWD
+       INTEGER :: IPWS
+       INTEGER :: IRUN
+       INTEGER :: KK
+       INTEGER :: NGAMMA
+       INTEGER :: NMAX
+       INTEGER :: NNN
+       INTEGER :: NOBWC
+       INTEGER :: NS
+       INTEGER :: NTMS
+       DOUBLE PRECISION :: PDL
+       DOUBLE PRECISION :: PI
+       DOUBLE PRECISION :: PP
+       DOUBLE PRECISION :: Q0
+       DOUBLE PRECISION :: Q0RD
+       DOUBLE PRECISION :: QN
+       DOUBLE PRECISION :: QNRD
+       DOUBLE PRECISION :: R
+       DOUBLE PRECISION :: RD
+       DOUBLE PRECISION :: RE0
+       DOUBLE PRECISION :: RE0X
+       DOUBLE PRECISION :: RE1
+       DOUBLE PRECISION :: RERRNR
+       DOUBLE PRECISION :: RERRSUM
+       DOUBLE PRECISION :: SIGMA
+       DOUBLE PRECISION :: SINES
+       DOUBLE PRECISION :: SLUGF
+       DOUBLE PRECISION :: SUMA
+       DOUBLE PRECISION :: SUME
+       DOUBLE PRECISION :: SUMTA
+       DOUBLE PRECISION :: SUMTE
+       DOUBLE PRECISION :: SW
+       DOUBLE PRECISION :: TD
+       DOUBLE PRECISION :: TDLAST
+       DOUBLE PRECISION :: TLAST
+       DOUBLE PRECISION :: V
+       DOUBLE PRECISION :: WD
+       DOUBLE PRECISION :: WDP
+       DOUBLE PRECISION :: XDD
+       DOUBLE PRECISION :: XDEN
+       DOUBLE PRECISION :: XLD
+       DOUBLE PRECISION :: XLN2
+       DOUBLE PRECISION :: XNPI
+       DOUBLE PRECISION :: XNUM
+       DOUBLE PRECISION :: XP
+       DOUBLE PRECISION :: Z1
+       DOUBLE PRECISION :: Z2
+       DOUBLE PRECISION :: ZD
+       DOUBLE PRECISION :: ZD1
+       DOUBLE PRECISION :: ZD2
+       DOUBLE PRECISION :: ZP
       DIMENSION GAMMA(5)
 !---COMMON STATEMENTS
       COMMON /PAR1/ IPWD,IRUN,IPWS,NOBWC,IOWS,IDPR
@@ -5864,8 +6514,24 @@
 !    OF THE SECOND KIND. SOURCE: PRESS AND OTHERS (1992).
       DOUBLE PRECISION FUNCTION BESSK0(X)
 !---SPECIFICATIONS
-      DOUBLE PRECISION X,Y,P1,P2,P3,P4,P5,P6,P7,&
-     &    Q1,Q2,Q3,Q4,Q5,Q6,Q7,BESSI0
+      IMPLICIT NONE
+      DOUBLE PRECISION X
+      DOUBLE PRECISION Y
+      DOUBLE PRECISION P1
+      DOUBLE PRECISION P2
+      DOUBLE PRECISION P3
+      DOUBLE PRECISION P4
+      DOUBLE PRECISION P5
+      DOUBLE PRECISION P6
+      DOUBLE PRECISION P7
+      DOUBLE PRECISION Q1
+      DOUBLE PRECISION Q2
+      DOUBLE PRECISION Q3
+      DOUBLE PRECISION Q4
+      DOUBLE PRECISION Q5
+      DOUBLE PRECISION Q6
+      DOUBLE PRECISION Q7
+      DOUBLE PRECISION BESSI0
       DATA P1,P2,P3,P4,P5,P6,P7/-0.57721566D0,0.42278420D0,0.23069756D0,&
      &    0.3488590D-1,0.262698D-2,0.10750D-3,0.74D-5/
       DATA Q1,Q2,Q3,Q4,Q5,Q6,Q7/1.25331414D0,-0.7832358D-1,0.2189568D-1,&
@@ -5899,8 +6565,26 @@
 !    OF THE FIRST KIND. SOURCE: PRESS AND OTHERS (1992).
       DOUBLE PRECISION FUNCTION BESSI0(X)
 !---SPECIFICATIONS
-      DOUBLE PRECISION X,Y,AX,P1,P2,P3,P4,P5,P6,P7,&
-     &    Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9
+      IMPLICIT NONE
+      DOUBLE PRECISION X
+      DOUBLE PRECISION Y
+      DOUBLE PRECISION AX
+      DOUBLE PRECISION P1
+      DOUBLE PRECISION P2
+      DOUBLE PRECISION P3
+      DOUBLE PRECISION P4
+      DOUBLE PRECISION P5
+      DOUBLE PRECISION P6
+      DOUBLE PRECISION P7
+      DOUBLE PRECISION Q1
+      DOUBLE PRECISION Q2
+      DOUBLE PRECISION Q3
+      DOUBLE PRECISION Q4
+      DOUBLE PRECISION Q5
+      DOUBLE PRECISION Q6
+      DOUBLE PRECISION Q7
+      DOUBLE PRECISION Q8
+      DOUBLE PRECISION Q9
       DATA P1,P2,P3,P4,P5,P6,P7/1.0D0,3.5156229D0,3.0899424D0,1.2067492D&
      &0,&
      &    0.2659732D0,0.360768D-1,0.45813D-2/
@@ -5934,8 +6618,24 @@
 !    OF THE SECOND KIND. SOURCE: PRESS AND OTHERS (1992).
       DOUBLE PRECISION FUNCTION BESSK1(X)
 !---SPECIFICATIONS
-      DOUBLE PRECISION X,Y,P1,P2,P3,P4,P5,P6,P7,&
-     &    Q1,Q2,Q3,Q4,Q5,Q6,Q7,BESSI1
+      IMPLICIT NONE
+      DOUBLE PRECISION X
+      DOUBLE PRECISION Y
+      DOUBLE PRECISION P1
+      DOUBLE PRECISION P2
+      DOUBLE PRECISION P3
+      DOUBLE PRECISION P4
+      DOUBLE PRECISION P5
+      DOUBLE PRECISION P6
+      DOUBLE PRECISION P7
+      DOUBLE PRECISION Q1
+      DOUBLE PRECISION Q2
+      DOUBLE PRECISION Q3
+      DOUBLE PRECISION Q4
+      DOUBLE PRECISION Q5
+      DOUBLE PRECISION Q6
+      DOUBLE PRECISION Q7
+      DOUBLE PRECISION BESSI1
       DATA P1,P2,P3,P4,P5,P6,P7/1.0D0,0.15443144D0,-0.67278579D0,&
      &    -0.18156897D0,-0.1919402D-1,-0.110404D-2,-0.4686D-4/
       DATA Q1,Q2,Q3,Q4,Q5,Q6,Q7/1.25331414D0,0.23498619D0,-0.3655620D-1,&
@@ -5969,8 +6669,26 @@
 !    OF THE FIRST KIND. SOURCE: PRESS AND OTHERS (1992).
       DOUBLE PRECISION FUNCTION BESSI1(X)
 !---SPECIFICATIONS
-      DOUBLE PRECISION X,Y,AX,P1,P2,P3,P4,P5,P6,P7,&
-     &    Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9
+      IMPLICIT NONE
+      DOUBLE PRECISION X
+      DOUBLE PRECISION Y
+      DOUBLE PRECISION AX
+      DOUBLE PRECISION P1
+      DOUBLE PRECISION P2
+      DOUBLE PRECISION P3
+      DOUBLE PRECISION P4
+      DOUBLE PRECISION P5
+      DOUBLE PRECISION P6
+      DOUBLE PRECISION P7
+      DOUBLE PRECISION Q1
+      DOUBLE PRECISION Q2
+      DOUBLE PRECISION Q3
+      DOUBLE PRECISION Q4
+      DOUBLE PRECISION Q5
+      DOUBLE PRECISION Q6
+      DOUBLE PRECISION Q7
+      DOUBLE PRECISION Q8
+      DOUBLE PRECISION Q9
       DATA P1,P2,P3,P4,P5,P6,P7/0.5D0,0.87890594D0,0.51498869D0,&
      &    0.15084934D0,0.2658733D-1,0.301532D-2,0.32411D-3/
       DATA Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9/0.39894228D0,-0.3988024D-1,&
@@ -5995,6 +6713,8 @@
 !  Deallocate MNW MEMORY
       USE GWFMNW2MODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         CALL SGWF2MNW2PNT(IGRID)
         DEALLOCATE(NMNW2)
         DEALLOCATE(MNWMAX)
@@ -6018,6 +6738,8 @@
 !  Change MNW data to a different grid.
       USE GWFMNW2MODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         NMNW2=>GWFMNWDAT(IGRID)%NMNW2
         MNWMAX=>GWFMNWDAT(IGRID)%MNWMAX
         NMNWVL=>GWFMNWDAT(IGRID)%NMNWVL
@@ -6041,6 +6763,8 @@
 !  Save MNW2 data for a grid.
       USE GWFMNW2MODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         GWFMNWDAT(IGRID)%NMNW2=>NMNW2
         GWFMNWDAT(IGRID)%MNWMAX=>MNWMAX
         GWFMNWDAT(IGRID)%NMNWVL=>NMNWVL

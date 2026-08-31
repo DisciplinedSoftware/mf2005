@@ -1,5 +1,10 @@
       MODULE GWFRESMODULE
-        INTEGER, SAVE,POINTER   ::NRES,IRESCB,NRESOP,IRESPT,NPTS
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: NRES
+        INTEGER,SAVE,POINTER:: IRESCB
+        INTEGER,SAVE,POINTER:: NRESOP
+        INTEGER,SAVE,POINTER:: IRESPT
+        INTEGER,SAVE,POINTER:: NPTS
         INTEGER, SAVE, DIMENSION(:,:), POINTER ::IRES
         INTEGER, SAVE, DIMENSION(:,:), POINTER ::IRESL
         REAL,    SAVE, DIMENSION(:,:), POINTER ::BRES
@@ -8,7 +13,11 @@
         REAL,    SAVE, DIMENSION(:),   POINTER ::HRES
         REAL,    SAVE, DIMENSION(:,:), POINTER ::HRESSE
       TYPE GWFRESTYPE
-        INTEGER,POINTER   ::NRES,IRESCB,NRESOP,IRESPT,NPTS
+        INTEGER,POINTER:: NRES
+        INTEGER,POINTER:: IRESCB
+        INTEGER,POINTER:: NRESOP
+        INTEGER,POINTER:: IRESPT
+        INTEGER,POINTER:: NPTS
         INTEGER,  DIMENSION(:,:), POINTER ::IRES
         INTEGER,  DIMENSION(:,:), POINTER ::IRESL
         REAL,     DIMENSION(:,:), POINTER ::BRES
@@ -36,7 +45,24 @@
       USE GWFRESMODULE, ONLY:NRES,IRESCB,NRESOP,IRESPT,NPTS,&
      &                       IRES,IRESL,BRES,CRES,BBRES,HRES,HRESSE
 !
+      IMPLICIT NONE
+      REAL :: AREA
+      REAL :: DEL
+      REAL :: ELMAX
+      REAL :: ELMIN
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: J
+      INTEGER :: KK
+      INTEGER :: N
+      INTEGER :: NCELL
+      INTEGER :: NP
+      REAL :: STAGE
+      REAL :: TAREA
+      REAL :: VOL
       CHARACTER*24 ANAME(5)
+      SAVE :: ANAME
       DATA ANAME(1) /'      RESERVOIR LOCATION'/
       DATA ANAME(2) /'   RESERVOIR LAYER INDEX'/
       DATA ANAME(3) /'RESERVOIR LAND SURF ELEV'/
@@ -207,6 +233,10 @@
 !     ------------------------------------------------------------------
       USE GWFRESMODULE, ONLY:NRES,HRESSE
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: N
       CALL SGWF2RES7PNT(IGRID)
 !
       DO 80 N=1,NRES
@@ -228,6 +258,20 @@
       USE GWFBASMODULE, ONLY:PERTIM,TOTIM
       USE GWFRESMODULE, ONLY:NRES,IRESPT,HRES,HRESSE,IRES,BRES
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: AREA
+      REAL :: FRAC
+      REAL :: HEND
+      REAL :: HSTART
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: J
+      INTEGER :: KKPER
+      INTEGER :: KKSTP
+      INTEGER :: N
+      REAL :: STAGE
+      REAL :: TAREA
+      REAL :: VOL
       CALL SGWF2RES7PNT(IGRID)
 !
 !1------COMPUTE PROPORTION OF STRESS PERIOD TO END OF THIS TIME STEP
@@ -279,6 +323,19 @@
       USE GLOBAL,       ONLY:NCOL,NROW,NLAY,IBOUND,HNEW,HCOF,RHS
       USE GWFRESMODULE, ONLY:NRES,NRESOP,IRES,IRESL,BRES,CRES,BBRES,HRES
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: CR
+      REAL :: HHNEW
+      REAL :: HR
+      INTEGER :: I
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: IR
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: NR
+      REAL :: RBOT
       CALL SGWF2RES7PNT(IGRID)
 !
 !1------PROCESS EACH ACTIVE RESERVOIR CELL
@@ -347,7 +404,27 @@
       USE GWFRESMODULE, ONLY: NRES,NRESOP,IRESCB,IRES,IRESL,BRES,CRES,&
      &                        BBRES,HRES
 !
+      IMPLICIT NONE
+      REAL :: CR
+      REAL :: HHNEW
+      REAL :: HR
+      INTEGER :: I
+      INTEGER :: IBD
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: IR
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: NR
+      REAL :: RATE
+      REAL :: RATIN
+      REAL :: RATOUT
+      REAL :: RBOT
       CHARACTER*16 TEXT
+      SAVE :: TEXT
       DATA TEXT/' RESERV. LEAKAGE'/
 !     ------------------------------------------------------------------
       CALL SGWF2RES7PNT(IGRID)
@@ -453,6 +530,8 @@
 !  Deallocate RES MEMORY
       USE GWFRESMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         CALL SGWF2RES7PNT(IGRID)
         DEALLOCATE(NRES)
         DEALLOCATE(IRESCB)
@@ -473,6 +552,8 @@
 !  Change RES data to a different grid.
       USE GWFRESMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         NRES=>GWFRESDAT(IGRID)%NRES
         IRESCB=>GWFRESDAT(IGRID)%IRESCB
         NRESOP=>GWFRESDAT(IGRID)%NRESOP
@@ -492,6 +573,8 @@
 !  Save RES data for a grid.
       USE GWFRESMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         GWFRESDAT(IGRID)%NRES=>NRES
         GWFRESDAT(IGRID)%IRESCB=>IRESCB
         GWFRESDAT(IGRID)%NRESOP=>NRESOP

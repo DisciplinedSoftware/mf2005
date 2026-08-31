@@ -6,6 +6,15 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
+      IMPLICIT NONE
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NP
+      REAL :: R
       CHARACTER*(*) LINE
 !     ------------------------------------------------------------------
 !
@@ -41,9 +50,37 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IACT
+      INTEGER :: IB
+      INTEGER :: ILFLG
+      INTEGER :: IM1
+      INTEGER :: IM2
+      INTEGER :: IN
+      INTEGER :: INST
+      INTEGER :: IOUT
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: ITERP
+      INTEGER :: ITVP
+      INTEGER :: IZ1
+      INTEGER :: IZ2
+      INTEGER :: J
+      INTEGER :: KK
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NCLU
+      INTEGER :: NI
+      INTEGER :: NP
+      INTEGER :: NUMINST
+      REAL :: PV
+      REAL :: R
       CHARACTER*(*) PTYP
       CHARACTER*200 LINE
-      CHARACTER*10 PN,CTMP1,CTMP2
+      CHARACTER*10 PN
+      CHARACTER*10 CTMP1
+      CHARACTER*10 CTMP2
 !     ------------------------------------------------------------------
 !
 !1------Read a parameter definition line and decode the parameter name,
@@ -276,6 +313,17 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
+      IMPLICIT NONE
+      INTEGER :: II
+      INTEGER :: ILAY
+      INTEGER :: INIT
+      INTEGER :: IOUT
+      INTEGER :: IP
+      INTEGER :: IPF
+      INTEGER :: NCOL
+      INTEGER :: NROW
+      INTEGER :: NSUB
+      REAL :: ZZ
       DIMENSION ZZ(NCOL,NROW)
       CHARACTER*(*) PTYP
       CHARACTER*24 ANAME
@@ -322,11 +370,39 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IDUM
+      INTEGER :: II
+      INTEGER :: ILAY
+      INTEGER :: ILOC
+      INTEGER :: IN
+      INTEGER :: INIT
+      INTEGER :: IOUT
+      INTEGER :: IP
+      INTEGER :: IPF
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: KI
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NCOL
+      INTEGER :: NI
+      INTEGER :: NP
+      INTEGER :: NROW
+      INTEGER :: NSUB
+      INTEGER :: NUMINST
+      REAL :: RDUM
+      REAL :: ZZ
       DIMENSION ZZ(NCOL,NROW)
-      CHARACTER*(*) PTYP,PACK
+      CHARACTER*(*) PTYP
+      CHARACTER*(*) PACK
       CHARACTER*24 ANAME
       CHARACTER*200 LINE
-      CHARACTER*10 CTMP1,CTMP2,CTMP3,CTMP4
+      CHARACTER*10 CTMP1
+      CHARACTER*10 CTMP2
+      CHARACTER*10 CTMP3
+      CHARACTER*10 CTMP4
 !     ------------------------------------------------------------------
 !
 !1------Set initialization flag to cause USUB2D to initialize ZZ to 0.
@@ -444,6 +520,27 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
+      IMPLICIT NONE
+      REAL :: AA
+      INTEGER :: I
+      INTEGER :: IC
+      INTEGER :: ICSTART
+      INTEGER :: ICSTOP
+      INTEGER :: ILAY
+      INTEGER :: INIT
+      INTEGER :: IP
+      INTEGER :: IZ
+      INTEGER :: J
+      INTEGER :: JJ
+      INTEGER :: MLT
+      INTEGER :: NCLU
+      INTEGER :: NCOL
+      INTEGER :: NI
+      INTEGER :: NROW
+      INTEGER :: NSUB
+      INTEGER :: NUMINST
+      REAL :: ZERO
+      REAL :: ZZ
       DIMENSION ZZ(NCOL,NROW)
 !     ------------------------------------------------------------------
 !
@@ -528,6 +625,16 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
+      IMPLICIT NONE
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: LLOC
+      INTEGER :: MXL
+      INTEGER :: N
+      INTEGER :: NP
+      REAL :: R
       CHARACTER*(*) LINE
 !     ------------------------------------------------------------------
 !
@@ -561,9 +668,28 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
-      CHARACTER*(*) PACK,PTYPX
+      IMPLICIT NONE
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: ITERP
+      INTEGER :: LLOC
+      INTEGER :: LSTSUM
+      INTEGER :: MXLST
+      INTEGER :: N
+      INTEGER :: NI
+      INTEGER :: NLST
+      INTEGER :: NP
+      INTEGER :: NUMINST
+      REAL :: PV
+      REAL :: R
+      CHARACTER*(*) PACK
+      CHARACTER*(*) PTYPX
       CHARACTER*4 PTYP
-      CHARACTER*10 PN,CTMP1,CTMP2
+      CHARACTER*10 PN
+      CHARACTER*10 CTMP1
+      CHARACTER*10 CTMP2
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
 !
@@ -716,7 +842,22 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
-      CHARACTER*10 CTMP1,CTMP2
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: ILOC
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: IP
+      INTEGER :: IPL4
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: ITERP
+      INTEGER :: J
+      INTEGER :: LLOC
+      INTEGER :: N
+      REAL :: R
+      CHARACTER*10 CTMP1
+      CHARACTER*10 CTMP2
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
 !
@@ -768,12 +909,50 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
-      CHARACTER*(*) PACK,PTYP
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IC
+      INTEGER :: IDUM
+      INTEGER :: II
+      INTEGER :: III
+      INTEGER :: IL
+      INTEGER :: ILOC
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: IOUTU
+      INTEGER :: IP
+      INTEGER :: IPVL
+      INTEGER :: IPVL1
+      INTEGER :: IPVL2
+      INTEGER :: IR
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: J
+      INTEGER :: JJ
+      INTEGER :: KI
+      INTEGER :: LLOC
+      INTEGER :: LSTDIM
+      INTEGER :: LSTVL
+      INTEGER :: MXLST
+      INTEGER :: NAUX
+      INTEGER :: NCAUX
+      INTEGER :: NI
+      INTEGER :: NLST
+      INTEGER :: NREAD
+      INTEGER :: NTOT
+      INTEGER :: NUMINST
+      REAL :: RDUM
+      REAL :: RLIST
+      CHARACTER*(*) PACK
+      CHARACTER*(*) PTYP
       DIMENSION RLIST(LSTVL,LSTDIM)
       CHARACTER*(*) LABEL
       CHARACTER*16 CAUX(NCAUX)
       CHARACTER*200 LINE
-      CHARACTER*10 CTMP1,CTMP2,CTMP3,CTMP4
+      CHARACTER*10 CTMP1
+      CHARACTER*10 CTMP2
+      CHARACTER*10 CTMP3
+      CHARACTER*10 CTMP4
 !     ------------------------------------------------------------------
 !
 !1------The LIST file unit is the absolute value of IOUTU.  
@@ -906,6 +1085,8 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
+      IMPLICIT NONE
+      INTEGER :: I
       CHARACTER*(*) PTYP
 !     ------------------------------------------------------------------
 !
@@ -927,9 +1108,30 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
-      CHARACTER*(*) PACK,PTYP
+      IMPLICIT NONE
+      INTEGER :: IBEG
+      INTEGER :: IDUM
+      INTEGER :: IEND
+      INTEGER :: ILOC
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: IP
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: KI
+      INTEGER :: LLOC
+      INTEGER :: NI
+      INTEGER :: NLST
+      INTEGER :: NUMINST
+      REAL :: PV
+      REAL :: RDUM
+      CHARACTER*(*) PACK
+      CHARACTER*(*) PTYP
       CHARACTER*200 LINE
-      CHARACTER*10 CTMP1,CTMP2,CTMP3,CTMP4
+      CHARACTER*10 CTMP1
+      CHARACTER*10 CTMP2
+      CHARACTER*10 CTMP3
+      CHARACTER*10 CTMP4
 !     ------------------------------------------------------------------
 !
 !1------Read the parameter name.
@@ -1033,6 +1235,20 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IC
+      INTEGER :: IERR
+      INTEGER :: IOUT
+      INTEGER :: IP
+      INTEGER :: IZ
+      INTEGER :: IZA
+      INTEGER :: IZI
+      INTEGER :: J
+      INTEGER :: LAY
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NROW
       INTEGER IBOUND(NCOL,NROW,NLAY)
       REAL BUFF(NCOL,NROW)
       CHARACTER*4 PTYP
@@ -1123,8 +1339,15 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
-      CHARACTER*(*) PNAME,PTYP,CPACK
-      CHARACTER*10 CTMP1,CTMP2
+      IMPLICIT NONE
+      INTEGER :: IFOUND
+      INTEGER :: IOUT
+      INTEGER :: IP
+      CHARACTER*(*) PNAME
+      CHARACTER*(*) PTYP
+      CHARACTER*(*) CPACK
+      CHARACTER*10 CTMP1
+      CHARACTER*10 CTMP2
 !     ------------------------------------------------------------------
 !
 !1------Abort if parameter name is blank.

@@ -1,5 +1,12 @@
       MODULE OBSBASMODULE
-         INTEGER, SAVE,POINTER ::ITS,NH,MAXM,MOBS,IUHOBSV,IDRY,JDRY
+         IMPLICIT NONE
+         INTEGER,SAVE,POINTER:: ITS
+         INTEGER,SAVE,POINTER:: NH
+         INTEGER,SAVE,POINTER:: MAXM
+         INTEGER,SAVE,POINTER:: MOBS
+         INTEGER,SAVE,POINTER:: IUHOBSV
+         INTEGER,SAVE,POINTER:: IDRY
+         INTEGER,SAVE,POINTER:: JDRY
          INTEGER, SAVE,POINTER ::IPRT
          REAL,    SAVE,POINTER ::HOBDRY
          INTEGER, SAVE, DIMENSION(:,:), POINTER ::NDER
@@ -17,7 +24,13 @@
          REAL,    SAVE, DIMENSION(:,:), POINTER ::RINT
          CHARACTER*12,SAVE,DIMENSION(:),POINTER ::OBSNAM
        TYPE OBSBASTYPE
-         INTEGER,  POINTER    ::ITS,NH,MAXM,MOBS,IUHOBSV,IDRY,JDRY
+         INTEGER,POINTER:: ITS
+         INTEGER,POINTER:: NH
+         INTEGER,POINTER:: MAXM
+         INTEGER,POINTER:: MOBS
+         INTEGER,POINTER:: IUHOBSV
+         INTEGER,POINTER:: IDRY
+         INTEGER,POINTER:: JDRY
          INTEGER,  POINTER    ::IPRT
          REAL,     POINTER    ::HOBDRY
          INTEGER,  DIMENSION(:,:), POINTER ::NDER
@@ -67,6 +80,33 @@
      &                  NPER,NSTP,PERLEN,TSMULT,ISSFLG,IOUT,ITRSS
       USE OBSBASMODULE
 !
+      IMPLICIT NONE
+      REAL :: DUM
+      INTEGER :: I
+      INTEGER :: IDUM
+      INTEGER :: IERR
+      INTEGER :: IGRID
+      INTEGER :: IREFSP
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: ITT
+      INTEGER :: IUHDOB
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: KK
+      INTEGER :: LLOC
+      INTEGER :: M
+      INTEGER :: ML
+      INTEGER :: ML1
+      INTEGER :: N
+      INTEGER :: NBASE
+      INTEGER :: NL
+      INTEGER :: NT
+      REAL :: ONEN
+      REAL :: TOFFSET
+      REAL :: TOMULTH
+      REAL :: TPR
+      REAL :: ZERO
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
 !
@@ -369,6 +409,23 @@
       USE GLOBAL, ONLY: NCOL,NROW,NLAY,DELR,DELC,IBOUND,HNEW,&
      &                  NPER,NSTP,PERLEN,TSMULT,ISSFLG,IOUT
       USE OBSBASMODULE
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: II
+      INTEGER :: IO
+      INTEGER :: IUHDOB
+      INTEGER :: JJ
+      INTEGER :: JO
+      INTEGER :: K
+      INTEGER :: KK
+      INTEGER :: M
+      INTEGER :: ML
+      INTEGER :: MLL
+      INTEGER :: MM
+      INTEGER :: N
+      INTEGER :: N1
+      REAL :: PROP
+      REAL :: ZERO
       DOUBLE PRECISION V
 !     ------------------------------------------------------------------
       CALL SOBS2BAS7PNT(IUHDOB,IGRID)
@@ -533,7 +590,13 @@
 !     ------------------------------------------------------------------
       USE GLOBAL, ONLY: IOUT
       USE OBSBASMODULE
-      DOUBLE PRECISION  SQ,SUMSQ
+      IMPLICIT NONE
+      REAL :: DIFF
+      INTEGER :: IGRID
+      INTEGER :: IUHDOB
+      INTEGER :: N
+      DOUBLE PRECISION SQ
+      DOUBLE PRECISION SUMSQ
 !     ------------------------------------------------------------------
       CALL SOBS2BAS7PNT(IUHDOB,IGRID)
 !
@@ -580,6 +643,17 @@
       USE OBSBASMODULE
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: I1
+      INTEGER :: IBI
+      INTEGER :: IBIJ
+      INTEGER :: IBJ
+      INTEGER :: J
+      INTEGER :: J1
+      INTEGER :: K
+      INTEGER :: ML
+      INTEGER :: N
       K = NDER(1,N)
       IF (K.LT.0) K = MLAY(1,ML)
       I = NDER(2,N)
@@ -623,8 +697,33 @@
 !     ******************************************************************
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION NDER(5), DELR(NCOL), DELC(NROW), IBOUND(NCOL,NROW,NLAY),&
-     &          RINT(4)
+      IMPLICIT NONE
+      REAL :: COFF
+      REAL :: DELC
+      REAL :: DELR
+      INTEGER :: I
+      INTEGER :: I1
+      INTEGER :: IBI
+      INTEGER :: IBIJ
+      INTEGER :: IBJ
+      INTEGER :: IBOUND
+      INTEGER :: IOFF
+      INTEGER :: J
+      INTEGER :: J1
+      INTEGER :: JOFF
+      INTEGER :: K
+      INTEGER :: MLAY
+      INTEGER :: NCOL
+      INTEGER :: NDER
+      INTEGER :: NLAY
+      INTEGER :: NROW
+      REAL :: RINT
+      REAL :: ROFF
+      DIMENSION NDER(5)
+      DIMENSION DELR(NCOL)
+      DIMENSION DELC(NROW)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION RINT(4)
 !     ------------------------------------------------------------------
 !
       K = NDER(1)
@@ -669,7 +768,32 @@
 !     ******************************************************************
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION DELR(NCOL), DELC(NROW), RINT(4)
+      IMPLICIT NONE
+      REAL :: A
+      REAL :: COFF
+      REAL :: DC
+      REAL :: DCF
+      REAL :: DELC
+      REAL :: DELR
+      REAL :: DR
+      REAL :: DRF
+      INTEGER :: I
+      INTEGER :: I1
+      INTEGER :: IBI
+      INTEGER :: IBIJ
+      INTEGER :: IBJ
+      INTEGER :: IOFF
+      INTEGER :: IR
+      INTEGER :: J
+      INTEGER :: J1
+      INTEGER :: JOFF
+      INTEGER :: NCOL
+      INTEGER :: NROW
+      REAL :: RINT
+      REAL :: ROFF
+      DIMENSION DELR(NCOL)
+      DIMENSION DELC(NROW)
+      DIMENSION RINT(4)
 !     ------------------------------------------------------------------
       A=0.
 !
@@ -753,11 +877,35 @@
 !     ******************************************************************
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: IOUT
+      INTEGER :: ITRSS
+      INTEGER :: J
+      REAL :: OBSTIME
+      REAL :: TDIFF
+      REAL :: TOLERANCE
+      REAL :: ZERO
       CHARACTER*(*) ID
-      INTEGER IREFSP, ISSFLG, ITR1ST, NPER, NSTP, NUMTS
-      REAL DELT, ENDTIME, PERLEN, TIME, TOFF1, TOFFMULT, TOFFSET,&
-     &     TOMULT, TSMULT
-      DIMENSION NSTP(NPER), PERLEN(NPER), TSMULT(NPER), ISSFLG(NPER)
+      INTEGER IREFSP
+      INTEGER ISSFLG
+      INTEGER ITR1ST
+      INTEGER NPER
+      INTEGER NSTP
+      INTEGER NUMTS
+      REAL DELT
+      REAL ENDTIME
+      REAL PERLEN
+      REAL TIME
+      REAL TOFF1
+      REAL TOFFMULT
+      REAL TOFFSET
+      REAL TOMULT
+      REAL TSMULT
+      DIMENSION NSTP(NPER)
+      DIMENSION PERLEN(NPER)
+      DIMENSION TSMULT(NPER)
+      DIMENSION ISSFLG(NPER)
 !     ------------------------------------------------------------------
       ZERO=0.
 !
@@ -897,7 +1045,15 @@
 !     ******************************************************************
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION H(NOBS),HOBS(NOBS)
+      IMPLICIT NONE
+      REAL :: H
+      REAL :: HOBS
+      INTEGER :: IUOBSSV
+      INTEGER :: LABEL
+      INTEGER :: N
+      INTEGER :: NOBS
+      DIMENSION H(NOBS)
+      DIMENSION HOBS(NOBS)
       CHARACTER*(*) OBSNAM(NOBS)
 !     ------------------------------------------------------------------
 !
@@ -922,6 +1078,9 @@
 !  Deallocate OBSBAS memory
       USE OBSBASMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IUHDOB
       CALL SOBS2BAS7PNT(IUHDOB,IGRID)
       DEALLOCATE(ITS)
       IF(IUHDOB.LE.0) RETURN
@@ -955,6 +1114,9 @@
 !  Change OBSBAS data to a different grid.
       USE OBSBASMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IUHDOB
       ITS=>OBSBASDAT(IGRID)%ITS
       IF(IUHDOB.LE.0) RETURN
 !
@@ -988,6 +1150,9 @@
       USE OBSBASMODULE
 !
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IUHDOB
       OBSBASDAT(IGRID)%ITS=>ITS
       IF(IUHDOB.LE.0) RETURN
 !

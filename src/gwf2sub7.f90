@@ -1,9 +1,20 @@
       MODULE GWFSUBMODULE
-        INTEGER,SAVE,POINTER ::IIBSCB,ITMIN,NNDB,NDB,NMZ,NN,ND2,IDSAVE
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: IIBSCB
+        INTEGER,SAVE,POINTER:: ITMIN
+        INTEGER,SAVE,POINTER:: NNDB
+        INTEGER,SAVE,POINTER:: NDB
+        INTEGER,SAVE,POINTER:: NMZ
+        INTEGER,SAVE,POINTER:: NN
+        INTEGER,SAVE,POINTER:: ND2
+        INTEGER,SAVE,POINTER:: IDSAVE
         INTEGER,SAVE,POINTER ::IDBIT !JDH 08/16/2019
-        REAL,   SAVE,POINTER ::AC1,AC2
-        LOGICAL,SAVE,POINTER ::NDF,NNDF
-        INTEGER,SAVE, DIMENSION(:),   POINTER ::ISBOCF,ISBOCU
+        REAL,SAVE,POINTER:: AC1
+        REAL,SAVE,POINTER:: AC2
+        LOGICAL,SAVE,POINTER:: NDF
+        LOGICAL,SAVE,POINTER:: NNDF
+        INTEGER,SAVE,DIMENSION(:),POINTER:: ISBOCF
+        INTEGER,SAVE,DIMENSION(:),POINTER:: ISBOCU
         LOGICAL,SAVE, DIMENSION(:,:), POINTER ::OCFLGS
         LOGICAL,SAVE, DIMENSION(:),   POINTER ::OCLAY
         INTEGER,SAVE, DIMENSION(:),   POINTER ::ILSYS
@@ -27,11 +38,21 @@
         REAL,   SAVE, DIMENSION(:,:), POINTER ::DP
         REAL,   SAVE, DIMENSION(:,:), POINTER ::DVB
       TYPE GWFSUBTYPE
-        INTEGER, POINTER  ::IIBSCB,ITMIN,NNDB,NDB,NMZ,NN,ND2,IDSAVE
+        INTEGER,POINTER:: IIBSCB
+        INTEGER,POINTER:: ITMIN
+        INTEGER,POINTER:: NNDB
+        INTEGER,POINTER:: NDB
+        INTEGER,POINTER:: NMZ
+        INTEGER,POINTER:: NN
+        INTEGER,POINTER:: ND2
+        INTEGER,POINTER:: IDSAVE
         INTEGER, POINTER  ::IDBIT !JDH 08/16/2019
-        REAL,    POINTER  ::AC1,AC2
-        LOGICAL, POINTER  ::NDF,NNDF
-        INTEGER, DIMENSION(:),   POINTER ::ISBOCF,ISBOCU
+        REAL,POINTER:: AC1
+        REAL,POINTER:: AC2
+        LOGICAL,POINTER:: NDF
+        LOGICAL,POINTER:: NNDF
+        INTEGER,DIMENSION(:),POINTER:: ISBOCF
+        INTEGER,DIMENSION(:),POINTER:: ISBOCU
         LOGICAL, DIMENSION(:,:), POINTER ::OCFLGS
         LOGICAL, DIMENSION(:),   POINTER ::OCLAY
         INTEGER, DIMENSION(:),   POINTER ::ILSYS
@@ -78,8 +99,57 @@
      &                      DH,DHP,DHC,DZ,HC,SCE,SCV,DCOM,&
      &                      A1,A2,BB,SUB,DP,DVB
 !
+      IMPLICIT NONE
+      REAL :: ANNI
+      REAL :: AREA
+      INTEGER :: I
+      INTEGER :: IBUFF
+      INTEGER :: IC
+      INTEGER :: IDREST
+      INTEGER :: IFL
+      INTEGER :: IGRID
+      INTEGER :: ILOC
+      INTEGER :: IN
+      INTEGER :: IR
+      INTEGER :: ISP1
+      INTEGER :: ISP2
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: ISUBOC
+      INTEGER :: J
+      INTEGER :: J1
+      INTEGER :: J2
+      INTEGER :: JTS1
+      INTEGER :: JTS2
+      INTEGER :: K
+      INTEGER :: KQ
+      INTEGER :: L
+      INTEGER :: LAYNUM
+      INTEGER :: LLOC
+      INTEGER :: LOC1
+      INTEGER :: LOC2
+      INTEGER :: LOC3
+      INTEGER :: LOC4
+      INTEGER :: N
+      INTEGER :: N1
+      INTEGER :: N2
+      INTEGER :: NCR
+      INTEGER :: ND1
+      INTEGER :: NL
+      INTEGER :: NND1
+      INTEGER :: NND2
+      INTEGER :: NNSUM
+      INTEGER :: NOCLIN
+      INTEGER :: NP
+      INTEGER :: NQ
+      INTEGER :: NQR
+      INTEGER :: NS
+      INTEGER :: NSTPT
+      REAL :: R
+      REAL :: ZERO
       DIMENSION IFL(13)
       CHARACTER*24 ANAME(10)
+      SAVE :: ANAME
       CHARACTER*200 LINE
       DATA ANAME(1) /'   PRECONSOLIDATION HEAD'/
       DATA ANAME(2) /'ELASTIC INTERBED STORAGE'/
@@ -600,6 +670,21 @@
      &                        NDF,NNDF,NNDB,NDB,NN
 !
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: HTMP
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IR
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KQ
+      INTEGER :: LOC2
+      INTEGER :: LOC3
+      INTEGER :: N1
+      INTEGER :: N2
+      INTEGER :: NCR
+      INTEGER :: NQ
+      INTEGER :: NQR
       CALL SGWF2SUB7PNT(IGRID)
 !
 !1------RETURN IF THIS IS NOT THE SECOND STRESS PERIOD OR IF THE FIRST
@@ -670,7 +755,50 @@
      &                        BB,NDF,NNDF,AC1,AC2,ITMIN,NN,&
      &                        NDB,NNDB,NMZ,&
      &                        IDBIT !jdh 08/16/2019
+      IMPLICIT NONE
+      REAL :: AREA
+      REAL :: CI
+      REAL :: DZZ
+      REAL :: F
+      REAL :: HAQ
+      REAL :: HCTMP
+      REAL :: HHC
+      REAL :: HHNEW
+      REAL :: HHOLD
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IR
+      INTEGER :: ISIP
+      INTEGER :: K
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KQ
+      INTEGER :: L1
+      INTEGER :: L2
+      INTEGER :: LOC2
+      INTEGER :: LOC3
+      INTEGER :: LOC4
+      INTEGER :: LOCT
+      INTEGER :: N
+      INTEGER :: NCR
+      INTEGER :: NEND
+      INTEGER :: NQ
+      INTEGER :: NQR
+      INTEGER :: NZONE
+      REAL :: RATES
+      REAL :: RHO1
+      REAL :: RHO2
+      REAL :: RNB2
+      REAL :: SBGN
+      REAL :: SEND
+      REAL :: SSE
+      REAL :: SSV
+      REAL :: STR1
+      REAL :: STRGS
+      REAL :: TLED
+      REAL :: VV
       LOGICAL ICHK
+      SAVE :: ICHK
       INTEGER :: IITER
       REAL, PARAMETER :: ZERO = 0.0
       REAL, PARAMETER :: ONE = 1.0
@@ -851,7 +979,49 @@
       USE GWFSUBMODULE ,ONLY: RNB,LN,LDN,HC,SCE,SCV,SUB,DHP,DH,DHC,&
      &                        NZ,DZ,DCOM,DP,DVB,NDF,NNDF,NN,ND2,NDB,&
      &                        NNDB,NMZ,IIBSCB
+      IMPLICIT NONE
+      REAL :: AREA
+      REAL :: COND
+      REAL :: HD1
+      REAL :: HHC
+      REAL :: HHNEW
+      REAL :: HHOLD
+      INTEGER :: IBD
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IR
+      INTEGER :: K
+      INTEGER :: KPER
+      INTEGER :: KQ
+      INTEGER :: KSTP
+      INTEGER :: L1
+      INTEGER :: L2
+      INTEGER :: LOC2
+      INTEGER :: LOC3
+      INTEGER :: LOC4
+      INTEGER :: LOCT
+      INTEGER :: N
+      INTEGER :: NCR
+      INTEGER :: NQ
+      INTEGER :: NQR
+      REAL :: RATB
+      REAL :: RATBSM
+      REAL :: RATIN
+      REAL :: RATOUT
+      REAL :: RATS
+      REAL :: RNB2
+      REAL :: SBGN
+      REAL :: SEND
+      REAL :: STOIN
+      REAL :: STOUT
+      REAL :: STR1
+      REAL :: STRG
+      REAL :: STRGS
+      REAL :: STRGT
+      REAL :: TLED
+      REAL :: ZERO
       CHARACTER*16 TEXT(2)
+      SAVE :: TEXT
 !
       DATA TEXT(1) /'INST. IB STORAGE'/
       DATA TEXT(2) /'DELAY IB STORAGE'/
@@ -1066,7 +1236,42 @@
       USE GWFSUBMODULE ,ONLY: LN,LDN,SUB,HC,RNB,DCOM,DHC,DVB,NDF,NNDF,&
      &                        NTSSUM,OCFLGS,OCLAY,ILSYS,ISBOCF,ISBOCU,&
      &                        NN,NNDB,NDB
+      IMPLICIT NONE
+      REAL :: DISCR
+      REAL :: DISCV
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: IR
+      INTEGER :: K
+      INTEGER :: KKL
+      INTEGER :: KL
+      INTEGER :: KPER
+      INTEGER :: KQ
+      INTEGER :: KS
+      INTEGER :: KS1
+      INTEGER :: KSTP
+      INTEGER :: LOC2
+      INTEGER :: LOC4
+      INTEGER :: LOCT
+      INTEGER :: LOCT3
+      INTEGER :: N
+      INTEGER :: NCR
+      INTEGER :: NEND
+      INTEGER :: NL
+      INTEGER :: NL1
+      INTEGER :: NNSTP
+      INTEGER :: NS
+      INTEGER :: NSYS
+      REAL :: SUMBR
+      REAL :: SUMBV
+      REAL :: SUMR
+      REAL :: SUMSR
+      REAL :: SUMSV
+      REAL :: SUMV
+      REAL :: ZERO
       CHARACTER*16 TEXT(7)
+      SAVE :: TEXT
       LOGICAL IBDPR
       DATA TEXT&
      &  /'      SUBSIDENCE',      'LAYER COMPACTION',&
@@ -1417,7 +1622,28 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE GWFSUBMODULE ,ONLY:A1,A2,BB
-      DIMENSION DH(NN),DHP(NN),DHC(NN)
+      IMPLICIT NONE
+      REAL :: CHN
+      REAL :: CI
+      REAL :: CI2
+      REAL :: DH
+      REAL :: DHC
+      REAL :: DHP
+      REAL :: DS
+      REAL :: DZ
+      REAL :: HAQ
+      REAL :: HC
+      REAL :: HD
+      INTEGER :: N
+      INTEGER :: NN
+      INTEGER :: NN1
+      REAL :: SS
+      REAL :: SSE
+      REAL :: SSV
+      REAL :: TLED
+      DIMENSION DH(NN)
+      DIMENSION DHP(NN)
+      DIMENSION DHC(NN)
 !     ------------------------------------------------------------------
 !
 !1------INITIALIZE
@@ -1469,7 +1695,27 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE GWFSUBMODULE ,ONLY:A1,A2,BB
-      DIMENSION DH(NN),DHP(NN),DHC(NN)
+      IMPLICIT NONE
+      REAL :: CI
+      REAL :: CI2
+      REAL :: DH
+      REAL :: DHC
+      REAL :: DHP
+      REAL :: DS
+      REAL :: DZ
+      REAL :: HAQ
+      REAL :: HC
+      REAL :: HD
+      INTEGER :: N
+      INTEGER :: NN
+      INTEGER :: NN1
+      REAL :: SS
+      REAL :: SSE
+      REAL :: SSV
+      REAL :: TLED
+      DIMENSION DH(NN)
+      DIMENSION DHP(NN)
+      DIMENSION DHC(NN)
 !     ------------------------------------------------------------------
 !
 !1------INITIALIZE
@@ -1523,6 +1769,13 @@
 !     ------------------------------------------------------------------
 !
 !1------TRIANGULARIZE LEFT-HAND SIDE MATRIX
+      IMPLICIT NONE
+      REAL :: C
+      REAL :: F
+      INTEGER :: I
+      INTEGER :: N
+      INTEGER :: NN
+      INTEGER :: NN1
       NN1=NN-1
       DO 30 N=1,NN1
       F=1./A1(N)
@@ -1548,7 +1801,18 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION BUFF(NCOL,NROW),D(ND)
+      IMPLICIT NONE
+      REAL :: BUFF
+      REAL :: D
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: L
+      INTEGER :: LOC
+      INTEGER :: NCOL
+      INTEGER :: ND
+      INTEGER :: NROW
+      DIMENSION BUFF(NCOL,NROW)
+      DIMENSION D(ND)
 !     ------------------------------------------------------------------
       L=LOC-1
       DO 10 I=1,NROW
@@ -1567,6 +1831,9 @@
 !     ------------------------------------------------------------------
       USE GWFSUBMODULE ,ONLY: DH,DHC,NDF,ND2,IDSAVE
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: N
       CALL SGWF2SUB7PNT(IGRID)
 !
 !1-----PROCESS IF SAVE OPTION SELECTED AND DELAY INTERBEDS EXIST
@@ -1593,6 +1860,8 @@
       USE GWFSUBMODULE
 !     ------------------------------------------------------------------
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       DEALLOCATE (GWFSUBDAT(IGRID)%IIBSCB)
       DEALLOCATE (GWFSUBDAT(IGRID)%ITMIN)
       DEALLOCATE (GWFSUBDAT(IGRID)%NNDB)
@@ -1638,6 +1907,8 @@
 !  Change SUB data to a different grid.
       USE GWFSUBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       IIBSCB=>GWFSUBDAT(IGRID)%IIBSCB
       ITMIN=>GWFSUBDAT(IGRID)%ITMIN
       NNDB=>GWFSUBDAT(IGRID)%NNDB
@@ -1682,6 +1953,8 @@
 !  Save SUB data for a grid.
       USE GWFSUBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       GWFSUBDAT(IGRID)%IIBSCB=>IIBSCB
       GWFSUBDAT(IGRID)%ITMIN=>ITMIN
       GWFSUBDAT(IGRID)%NNDB=>NNDB

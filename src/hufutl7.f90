@@ -9,6 +9,14 @@
 !     ------------------------------------------------------------------
       USE PARAMMODULE, ONLY:IPCLST,IZON,RMLT
 !
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: ICL
+      INTEGER :: J
+      INTEGER :: JJ
+      INTEGER :: NM
+      INTEGER :: NZ
+      REAL :: RMLT0
       RMLT0=1.0
       IF (NZ.GT.0) THEN
         RMLT0=0.
@@ -40,9 +48,32 @@
 !     ------------------------------------------------------------------
       USE PARAMMODULE
       USE GWFHUFMODULE, ONLY:HGUNAM
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: ILFLG
+      INTEGER :: IM1
+      INTEGER :: IM2
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: ITERP
+      INTEGER :: IZ1
+      INTEGER :: IZ2
+      INTEGER :: J
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NDHUF
+      INTEGER :: NHUF
+      INTEGER :: NP
+      INTEGER :: NU
+      REAL :: PV
+      REAL :: R
       CHARACTER*(*) PTYP
       CHARACTER*200 LINE
-      CHARACTER*10 PN,CTMP1,CTMP2
+      CHARACTER*10 PN
+      CHARACTER*10 CTMP1
+      CHARACTER*10 CTMP2
 !     ------------------------------------------------------------------
 !
       ILFLG=1
@@ -218,6 +249,19 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: NCOL
+      INTEGER :: ND
+      INTEGER :: NL
+      INTEGER :: NLAY
+      INTEGER :: NM
+      INTEGER :: NP
+      INTEGER :: NROW
+      INTEGER :: NZ
+      REAL :: RMLT0
+      REAL :: VDHD
       DIMENSION VDHD(NCOL,NROW,NLAY)
 !     ------------------------------------------------------------------
 
@@ -254,7 +298,23 @@
 !     ------------------------------------------------------------------
       USE PARAMMODULE
       USE GWFHUFMODULE, ONLY:NHUF,HUFTHK
-      CHARACTER*4 PTYPE,PTEMP
+      IMPLICIT NONE
+      REAL :: HUFARRAY
+      INTEGER :: I
+      INTEGER :: IOUT
+      INTEGER :: IP1
+      INTEGER :: IP2
+      INTEGER :: J
+      INTEGER :: ND
+      INTEGER :: NM
+      INTEGER :: NNU
+      INTEGER :: NP
+      INTEGER :: NU
+      INTEGER :: NZ
+      REAL :: RMLT0
+      REAL :: THCKU
+      CHARACTER*4 PTYPE
+      CHARACTER*4 PTEMP
       DIMENSION HUFARRAY(NHUF)
 !
 ! Loop through parameters
@@ -303,6 +363,16 @@
 !     Return adjusted top and bottom of unit in ATOP & ABOT
 !     ******************************************************************
 !
+      IMPLICIT NONE
+      REAL :: ABOT
+      REAL :: ATOP
+      REAL :: BOT
+      REAL :: BOTU
+      REAL :: THCK
+      REAL :: THKU
+      REAL :: TOP
+      REAL :: TOPL
+      REAL :: TOPU
       ABOT=0.0
       ATOP=0.0
       TOPL=TOP
@@ -339,9 +409,22 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: AM1
+      REAL :: AM2
+      REAL :: ARRAY1
+      REAL :: ARRAY2
+      REAL :: ARRAY3
+      INTEGER :: I
+      INTEGER :: J
+      INTEGER :: NCOL
+      INTEGER :: NROW
       CHARACTER*1 CHAR
-      REAL M1, M2
-      DIMENSION ARRAY1(NCOL,NROW),ARRAY2(NCOL,NROW),ARRAY3(NCOL,NROW)
+      REAL M1
+      REAL M2
+      DIMENSION ARRAY1(NCOL,NROW)
+      DIMENSION ARRAY2(NCOL,NROW)
+      DIMENSION ARRAY3(NCOL,NROW)
 !
       AM1 = M1
       AM2 = M2
@@ -398,6 +481,16 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: A
+      INTEGER :: I
+      INTEGER :: ILAY
+      INTEGER :: IOUT
+      INTEGER :: IPRN
+      INTEGER :: J
+      INTEGER :: NCOL
+      INTEGER :: NROW
+      REAL :: TMP
       DIMENSION A(NCOL,NROW)
       CHARACTER*(*) ANAME
       CHARACTER*(*) HGUNAM

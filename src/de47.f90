@@ -1,8 +1,26 @@
       MODULE DE4MODULE
-        INTEGER,SAVE,POINTER  ::MXUP,MXLOW,MXEQ,MXBW,ITMX,ID4DIR
-        INTEGER,SAVE,POINTER  ::NITERDE4,IFREQ,IPRD4,MUTD4,ID4DIM
-        INTEGER,SAVE,POINTER  ::NBWL,NUPL,NLOWL,NLOW,NEQ,NUP,NBW
-        REAL   ,SAVE,POINTER  ::ACCLDE4,HCLOSEDE4,DELTL
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: MXUP
+        INTEGER,SAVE,POINTER:: MXLOW
+        INTEGER,SAVE,POINTER:: MXEQ
+        INTEGER,SAVE,POINTER:: MXBW
+        INTEGER,SAVE,POINTER:: ITMX
+        INTEGER,SAVE,POINTER:: ID4DIR
+        INTEGER,SAVE,POINTER:: NITERDE4
+        INTEGER,SAVE,POINTER:: IFREQ
+        INTEGER,SAVE,POINTER:: IPRD4
+        INTEGER,SAVE,POINTER:: MUTD4
+        INTEGER,SAVE,POINTER:: ID4DIM
+        INTEGER,SAVE,POINTER:: NBWL
+        INTEGER,SAVE,POINTER:: NUPL
+        INTEGER,SAVE,POINTER:: NLOWL
+        INTEGER,SAVE,POINTER:: NLOW
+        INTEGER,SAVE,POINTER:: NEQ
+        INTEGER,SAVE,POINTER:: NUP
+        INTEGER,SAVE,POINTER:: NBW
+        REAL,SAVE,POINTER:: ACCLDE4
+        REAL,SAVE,POINTER:: HCLOSEDE4
+        REAL,SAVE,POINTER:: DELTL
         INTEGER,          SAVE, POINTER, DIMENSION(:,:)   ::IUPPNT
         INTEGER,          SAVE, POINTER, DIMENSION(:,:,:) ::IEQPNT
         REAL,             SAVE, POINTER, DIMENSION(:,:)   ::AU
@@ -11,10 +29,27 @@
         REAL,             SAVE, POINTER, DIMENSION(:)     ::HDCGDE4
         INTEGER,          SAVE, POINTER, DIMENSION(:,:)   ::LRCHDE4
       TYPE DE4TYPE
-        INTEGER,POINTER  ::MXUP,MXLOW,MXEQ,MXBW,ITMX,ID4DIR
-        INTEGER,POINTER  ::NITERDE4,IFREQ,IPRD4,MUTD4,ID4DIM
-        INTEGER,POINTER  ::NBWL,NUPL,NLOWL,NLOW,NEQ,NUP,NBW
-        REAL   ,POINTER  ::ACCLDE4,HCLOSEDE4,DELTL
+        INTEGER,POINTER:: MXUP
+        INTEGER,POINTER:: MXLOW
+        INTEGER,POINTER:: MXEQ
+        INTEGER,POINTER:: MXBW
+        INTEGER,POINTER:: ITMX
+        INTEGER,POINTER:: ID4DIR
+        INTEGER,POINTER:: NITERDE4
+        INTEGER,POINTER:: IFREQ
+        INTEGER,POINTER:: IPRD4
+        INTEGER,POINTER:: MUTD4
+        INTEGER,POINTER:: ID4DIM
+        INTEGER,POINTER:: NBWL
+        INTEGER,POINTER:: NUPL
+        INTEGER,POINTER:: NLOWL
+        INTEGER,POINTER:: NLOW
+        INTEGER,POINTER:: NEQ
+        INTEGER,POINTER:: NUP
+        INTEGER,POINTER:: NBW
+        REAL,POINTER:: ACCLDE4
+        REAL,POINTER:: HCLOSEDE4
+        REAL,POINTER:: DELTL
         INTEGER,           POINTER, DIMENSION(:,:)   ::IUPPNT
         INTEGER,           POINTER, DIMENSION(:,:,:) ::IEQPNT
         REAL,              POINTER, DIMENSION(:,:)   ::AU
@@ -36,6 +71,20 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,   ONLY:IOUT,NCOL,NROW,NLAY
       USE DE4MODULE
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: INDE4
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: LLOC
+      INTEGER :: MXITER
+      INTEGER :: NBWGRD
+      INTEGER :: NHALFL
+      INTEGER :: NHALFU
+      INTEGER :: NODES
+      REAL :: ONE
+      REAL :: R
+      REAL :: ZERO
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
       ALLOCATE(MXUP,MXLOW,MXEQ,MXBW,ITMX,ID4DIR)
@@ -204,16 +253,108 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION HNEW(NCOL,NROW,NLAY),AU(ID4DIM,MXUP),AL(MXBW,MXLOW),&
-     &          IEQPNT(NCOL,NROW,NLAY),IUPPNT(ID4DIM,MXUP),D4B(MXEQ),&
-     &          CR(NCOL,NROW,NLAY),CC(NCOL,NROW,NLAY),&
-     &          CV(NCOL,NROW,NLAY),HCOF(NCOL,NROW,NLAY),&
-     &          RHS(NCOL,NROW,NLAY),IBOUND(NCOL,NROW,NLAY),&
-     &          LRCHDE4(3,ITMX),HDCGDE4(ITMX)
+      IMPLICIT NONE
+      REAL :: ACCLDE4
+      REAL :: AL
+      REAL :: AU
+      REAL :: BIG
+      REAL :: BIGA
+      REAL :: CBK
+      REAL :: CC
+      REAL :: CDN
+      REAL :: CFR
+      REAL :: CLF
+      REAL :: CND
+      REAL :: CR
+      REAL :: CRT
+      REAL :: CUP
+      REAL :: CV
+      REAL :: D4B
+      REAL :: DELT
+      REAL :: DELTL
+      REAL :: DH
+      REAL :: HCLOSEDE4
+      REAL :: HCOF
+      REAL :: HDCGDE4
+      INTEGER :: I
+      INTEGER :: IBIG
+      INTEGER :: IBOUND
+      INTEGER :: ICNVG
+      INTEGER :: ID4DIM
+      INTEGER :: ID4DIR
+      INTEGER :: IDIR
+      SAVE :: IDIR
+      INTEGER :: IEQ
+      INTEGER :: IEQPNT
+      INTEGER :: IERR
+      INTEGER :: IFREQ
+      INTEGER :: II
+      INTEGER :: IOUT
+      INTEGER :: IPRD4
+      INTEGER :: IR
+      INTEGER :: IRR
+      INTEGER :: ITMX
+      INTEGER :: ITYPE
+      INTEGER :: IUPPNT
+      INTEGER :: J
+      INTEGER :: JBIG
+      INTEGER :: K
+      INTEGER :: KBIG
+      INTEGER :: KITER
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      INTEGER :: L
+      INTEGER :: LRCHDE4
+      INTEGER :: M
+      INTEGER :: MNN
+      INTEGER :: MUTD4
+      INTEGER :: MXBW
+      INTEGER :: MXEQ
+      INTEGER :: MXITER
+      INTEGER :: MXLOW
+      INTEGER :: MXN
+      INTEGER :: MXUP
+      INTEGER :: N
+      INTEGER :: NBW
+      INTEGER :: NBWL
+      INTEGER :: NCOL
+      INTEGER :: NEQ
+      INTEGER :: NIT
+      INTEGER :: NITERDE4
+      INTEGER :: NLAY
+      INTEGER :: NLOW
+      INTEGER :: NLOWL
+      INTEGER :: NROW
+      INTEGER :: NSTP
+      INTEGER :: NUP
+      INTEGER :: NUPL
+      REAL :: RHS
+      REAL :: TCHK
+      REAL :: ZERO
+      DIMENSION HNEW(NCOL,NROW,NLAY)
+      DIMENSION AU(ID4DIM,MXUP)
+      DIMENSION AL(MXBW,MXLOW)
+      DIMENSION IEQPNT(NCOL,NROW,NLAY)
+      DIMENSION IUPPNT(ID4DIM,MXUP)
+      DIMENSION D4B(MXEQ)
+      DIMENSION CR(NCOL,NROW,NLAY)
+      DIMENSION CC(NCOL,NROW,NLAY)
+      DIMENSION CV(NCOL,NROW,NLAY)
+      DIMENSION HCOF(NCOL,NROW,NLAY)
+      DIMENSION RHS(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
+      DIMENSION LRCHDE4(3,ITMX)
+      DIMENSION HDCGDE4(ITMX)
 !
-      DOUBLE PRECISION HNEW,EE,COND,RR,DDH
+      DOUBLE PRECISION HNEW
+      DOUBLE PRECISION EE
+      DOUBLE PRECISION COND
+      DOUBLE PRECISION RR
+      DOUBLE PRECISION DDH
 !
-      DIMENSION CND(6),IEQ(6),IDIR(6,6)
+      DIMENSION CND(6)
+      DIMENSION IEQ(6)
+      DIMENSION IDIR(6,6)
 !      SAVE DELTL,NBWL,NUPL,NLOWL,NLOW,NEQ,NUP,NBW
       DATA IDIR/1,2,3,4,5,6,&
      &          2,1,3,4,6,5,&
@@ -515,7 +656,27 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION IEQPNT(NCOL,NROW,NLAY), IBOUND(NCOL,NROW,NLAY)
+      IMPLICIT NONE
+      INTEGER :: I
+      INTEGER :: I1
+      INTEGER :: I2
+      INTEGER :: IBOUND
+      INTEGER :: ID4DIR
+      INTEGER :: IEQPNT
+      INTEGER :: J
+      INTEGER :: K
+      INTEGER :: K1
+      INTEGER :: K2
+      INTEGER :: N
+      INTEGER :: NCOL
+      INTEGER :: NEQ
+      INTEGER :: NLAY
+      INTEGER :: NLOW
+      INTEGER :: NPLANE
+      INTEGER :: NROW
+      INTEGER :: NUP
+      DIMENSION IEQPNT(NCOL,NROW,NLAY)
+      DIMENSION IBOUND(NCOL,NROW,NLAY)
 !     ------------------------------------------------------------------
 !
 !1------CALCULATE MAXIMUM PLANE NUMBER AND INITIALIZE EQUATION POINTERS.
@@ -784,7 +945,36 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION AU(ID4DIM,NUP),AL(MXBW,NLOW),IUPPNT(ID4DIM,NUP),D4B(NEQ)
+      IMPLICIT NONE
+      REAL :: AL
+      REAL :: AU
+      REAL :: C
+      REAL :: C1
+      REAL :: D4B
+      INTEGER :: I
+      INTEGER :: ID4DIM
+      INTEGER :: IJDH
+      INTEGER :: IR
+      INTEGER :: ITYPE
+      INTEGER :: IUPPNT
+      INTEGER :: J
+      INTEGER :: JJ
+      INTEGER :: K
+      INTEGER :: KL
+      INTEGER :: L
+      INTEGER :: LR
+      INTEGER :: MXBW
+      INTEGER :: NBW
+      INTEGER :: NEQ
+      INTEGER :: NLOW
+      INTEGER :: NLOWM1
+      INTEGER :: NUP
+      REAL :: ONE
+      REAL :: ZERO
+      DIMENSION AU(ID4DIM,NUP)
+      DIMENSION AL(MXBW,NLOW)
+      DIMENSION IUPPNT(ID4DIM,NUP)
+      DIMENSION D4B(NEQ)
 !     ------------------------------------------------------------------
 !
 !1------DEFINE CONSTANTS.
@@ -888,7 +1078,17 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
-      DIMENSION HDCGDE4(NUMIT), LRCHDE4(3,NUMIT)
+      IMPLICIT NONE
+      REAL :: HDCGDE4
+      INTEGER :: I
+      INTEGER :: IOUT
+      INTEGER :: J
+      INTEGER :: LRCHDE4
+      INTEGER :: NCOL
+      INTEGER :: NROW
+      INTEGER :: NUMIT
+      DIMENSION HDCGDE4(NUMIT)
+      DIMENSION LRCHDE4(3,NUMIT)
 !     ------------------------------------------------------------------
 !
       IF (NCOL.LE.999 .AND. NROW.LE.999) THEN
@@ -913,6 +1113,8 @@
 !  Deallocate DE4 data
       USE DE4MODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       DEALLOCATE(DE4DAT(IGRID)%MXUP)
       DEALLOCATE(DE4DAT(IGRID)%MXLOW)
       DEALLOCATE(DE4DAT(IGRID)%MXEQ)
@@ -948,6 +1150,8 @@
 !  Set pointers to DE4 data for grid.
       USE DE4MODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       MXUP=>DE4DAT(IGRID)%MXUP
       MXLOW=>DE4DAT(IGRID)%MXLOW
       MXEQ=>DE4DAT(IGRID)%MXEQ
@@ -983,6 +1187,8 @@
 !  Save pointers to DE4 data.
       USE DE4MODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       DE4DAT(IGRID)%MXUP=>MXUP
       DE4DAT(IGRID)%MXLOW=>MXLOW
       DE4DAT(IGRID)%MXEQ=>MXEQ

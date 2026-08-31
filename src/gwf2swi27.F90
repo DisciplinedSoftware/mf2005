@@ -8,12 +8,32 @@
 #define REAL_SWI REAL 
 #endif
       MODULE GWFSWIMODULE
+        IMPLICIT NONE
         TYPE TSWIDE4
-          INTEGER  :: MXITER,NODES,NHALFU,NHALFL,NBWGRD
-          INTEGER  :: MXUP,MXLOW,MXEQ,MXBW,ITMX,ID4DIR
-          INTEGER  :: NITERDE4,IFREQ,ID4DIM
-          INTEGER  :: NBWL,NUPL,NLOWL,NLOW,NEQ,NUP,NBW
-          REAL     :: ACCLDE4,HCLOSEDE4,DELTL
+          INTEGER:: MXITER
+          INTEGER:: NODES
+          INTEGER:: NHALFU
+          INTEGER:: NHALFL
+          INTEGER:: NBWGRD
+          INTEGER:: MXUP
+          INTEGER:: MXLOW
+          INTEGER:: MXEQ
+          INTEGER:: MXBW
+          INTEGER:: ITMX
+          INTEGER:: ID4DIR
+          INTEGER:: NITERDE4
+          INTEGER:: IFREQ
+          INTEGER:: ID4DIM
+          INTEGER:: NBWL
+          INTEGER:: NUPL
+          INTEGER:: NLOWL
+          INTEGER:: NLOW
+          INTEGER:: NEQ
+          INTEGER:: NUP
+          INTEGER:: NBW
+          REAL:: ACCLDE4
+          REAL:: HCLOSEDE4
+          REAL:: DELTL
           INTEGER,          ALLOCATABLE, DIMENSION(:,:)   :: IUPPNT
           INTEGER,          ALLOCATABLE, DIMENSION(:,:,:) :: IEQPNT
           REAL,             ALLOCATABLE, DIMENSION(:,:)   :: AU
@@ -24,9 +44,16 @@
         END TYPE TSWIDE4
 
         TYPE TSWIPCG
-          INTEGER :: MXITER,NODES
-          INTEGER :: ITER1,NPCOND,NBPOL,NITER
-          REAL    :: ZCLOSEPCG,RCLOSEPCG,RELAXPCG,DAMPPCG
+          INTEGER:: MXITER
+          INTEGER:: NODES
+          INTEGER:: ITER1
+          INTEGER:: NPCOND
+          INTEGER:: NBPOL
+          INTEGER:: NITER
+          REAL:: ZCLOSEPCG
+          REAL:: RCLOSEPCG
+          REAL:: RELAXPCG
+          REAL:: DAMPPCG
           REAL    :: DAMPPCGT
           INTEGER :: IHCOFADD = 1
           DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:,:,:) :: VPCG
@@ -53,7 +80,10 @@
         REAL, PARAMETER :: SWISMALL = 0.001
         REAL, PARAMETER :: SWILOCK = 0.001
 !         SWI DIMENSIONS
-        INTEGER, SAVE, POINTER :: NSRF,ISTRAT,NSWIOPT,NZONES
+        INTEGER,SAVE,POINTER:: NSRF
+        INTEGER,SAVE,POINTER:: ISTRAT
+        INTEGER,SAVE,POINTER:: NSWIOPT
+        INTEGER,SAVE,POINTER:: NZONES
         INTEGER, SAVE, POINTER :: IFIXED
 !         SWI ADAPTIVE TIME STEP
         INTEGER, SAVE, POINTER :: NADPTFLG
@@ -71,14 +101,19 @@
 !         SWI OUTPUT
         INTEGER, SAVE, POINTER :: NOBS
         INTEGER, SAVE, POINTER :: IOBSHEADER
-        INTEGER, SAVE, POINTER :: ISWIZT,ISWICB,ISWIOBS
+        INTEGER,SAVE,POINTER:: ISWIZT
+        INTEGER,SAVE,POINTER:: ISWICB
+        INTEGER,SAVE,POINTER:: ISWIOBS
         INTEGER, SAVE, POINTER :: NLAYSWI
 !         SOLVER
         INTEGER, SAVE, POINTER :: NSOLVER
         INTEGER, SAVE, POINTER :: IPRSOL
         INTEGER, SAVE, POINTER :: MUTSOL
 !         SWI PARAMETERS
-        REAL, SAVE, POINTER    :: TOESLOPE,TIPSLOPE,ALPHA,BETA
+        REAL,SAVE,POINTER:: TOESLOPE
+        REAL,SAVE,POINTER:: TIPSLOPE
+        REAL,SAVE,POINTER:: ALPHA
+        REAL,SAVE,POINTER:: BETA
         INTEGER, SAVE, DIMENSION(:), POINTER :: ICONV
         INTEGER, SAVE, DIMENSION(:,:), POINTER :: IBO
         REAL_SWI, SAVE, DIMENSION(:,:), POINTER :: SWIHCOF
@@ -130,7 +165,10 @@
 
         TYPE GWFSWITYPE
 !           SWI DIMENSIONS
-          INTEGER, POINTER :: NSRF,ISTRAT,NSWIOPT,NZONES
+          INTEGER,POINTER:: NSRF
+          INTEGER,POINTER:: ISTRAT
+          INTEGER,POINTER:: NSWIOPT
+          INTEGER,POINTER:: NZONES
           INTEGER, POINTER :: IFIXED
 !           SWI ADAPTIVE TIME STEP
           INTEGER, POINTER :: NADPTFLG
@@ -148,14 +186,19 @@
 !           SWI OUTPUT
           INTEGER, POINTER :: NOBS
           INTEGER, POINTER :: IOBSHEADER
-          INTEGER, POINTER :: ISWIZT,ISWICB,ISWIOBS
+          INTEGER,POINTER:: ISWIZT
+          INTEGER,POINTER:: ISWICB
+          INTEGER,POINTER:: ISWIOBS
           INTEGER, POINTER :: NLAYSWI
 !           SOLVER
           INTEGER, POINTER :: NSOLVER
           INTEGER, POINTER :: IPRSOL
           INTEGER, POINTER :: MUTSOL
 !           SWI PARAMETERS
-          REAL, POINTER    :: TOESLOPE,TIPSLOPE,ALPHA,BETA
+          REAL,POINTER:: TOESLOPE
+          REAL,POINTER:: TIPSLOPE
+          REAL,POINTER:: ALPHA
+          REAL,POINTER:: BETA
           INTEGER, DIMENSION(:), POINTER :: ICONV
           INTEGER, DIMENSION(:,:), POINTER :: IBO
           REAL_SWI, DIMENSION(:,:), POINTER :: SWIHCOF
@@ -233,18 +276,28 @@
         INTEGER, INTENT(IN) :: Igrid
 !       + + + LOCAL DEFINITIONS + + +
         CHARACTER*200 :: line
-        INTEGER :: lloc, istart, istop
+        INTEGER:: lloc
+        INTEGER:: istart
+        INTEGER:: istop
         INTEGER :: iadptflg
         INTEGER :: ierr
-        INTEGER :: i, j, k, n
-        INTEGER :: iz, kk
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
+        INTEGER:: n
+        INTEGER:: iz
+        INTEGER:: kk
         INTEGER :: itmem
         INTEGER :: ic
         REAL :: r
         REAL :: d
-        REAL :: bbot, ttop, z
+        REAL:: bbot
+        REAL:: ttop
+        REAL:: z
         CHARACTER*40, DIMENSION(2) :: csolver
+        SAVE :: CSOLVER
         CHARACTER*24, DIMENSION(4) :: ANAME
+        SAVE :: ANAME
         CHARACTER*24 :: ZETANAME
 !       + + + DATA + + +
         DATA csolver /'                     DIRECT SOLVER (DE4)',&
@@ -940,10 +993,14 @@
         INTEGER, INTENT(IN) :: Kkper
         INTEGER, INTENT(IN) :: Igrid
 !       + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j, k, ierr
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
+        INTEGER:: ierr
         INTEGER :: iz
         INTEGER :: iz0
-        REAL :: ttop, bbot
+        REAL:: ttop
+        REAL:: bbot
         DOUBLEPRECISION :: h
         DOUBLEPRECISION :: dtop, dbot
 !     ------------------------------------------------------------------
@@ -1048,14 +1105,20 @@
         INTEGER, INTENT(IN) :: Kkiter
         INTEGER, INTENT(IN) :: Igrid
 !       + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j, k
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
         INTEGER :: iz
         INTEGER :: iswi
         INTEGER :: izrev
-        REAL :: sumthickrf, sumthickff
-        REAL :: dzeta1, dzeta2
-        REAL :: thickrf, thickff
-        REAL :: sumswicr, sumswicc
+        REAL:: sumthickrf
+        REAL:: sumthickff
+        REAL:: dzeta1
+        REAL:: dzeta2
+        REAL:: thickrf
+        REAL:: thickff
+        REAL:: sumswicr
+        REAL:: sumswicc
         REAL :: headdiff
         REAL :: switfact
         REAL :: r
@@ -1439,31 +1502,57 @@
         INTEGER, INTENT(IN) :: Igrid
 !       + + + LOCAL DEFINITIONS + + +
         CHARACTER (LEN=16), DIMENSION(5) :: bdtext
-        CHARACTER (LEN=17)   :: val1, val2
+        SAVE :: BDTEXT
+        CHARACTER(LEN=17):: val1
+        CHARACTER(LEN=17):: val2
         INTEGER :: iozeta
         INTEGER :: iu
-        INTEGER :: ibd, ibdlbl
-        INTEGER :: i, j, k, n
+        INTEGER:: ibd
+        INTEGER:: ibdlbl
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
+        INTEGER:: n
         INTEGER :: kk
         INTEGER :: ib
-        INTEGER :: iz, iz2
+        INTEGER:: iz
+        INTEGER:: iz2
         INTEGER :: izrev
         INTEGER :: iusezone
         REAL :: t
         REAL :: q
         DOUBLEPRECISION :: qbnd, qch, qstor, qcstor, qint, qtt, qmix
-        REAL :: t0, b0
-        REAL :: bt, ht
+        REAL:: t0
+        REAL:: b0
+        REAL:: bt
+        REAL:: ht
         DOUBLEPRECISION :: db, dh
         REAL :: z
-        REAL :: zero, rate, rin, rout
-        DOUBLE PRECISION :: dzero, ratin, ratout, rrate
-        REAL :: incin,incout
-        REAL :: cumin,cumout
-        REAL :: incavg,incp
-        REAL :: cumavg,cump
+        REAL:: zero
+        REAL:: rate
+        REAL:: rin
+        REAL:: rout
+        DOUBLE PRECISION:: dzero
+        DOUBLE PRECISION:: ratin
+        DOUBLE PRECISION:: ratout
+        DOUBLE PRECISION:: rrate
+        REAL:: incin
+        REAL:: incout
+        REAL:: cumin
+        REAL:: cumout
+        REAL:: incavg
+        REAL:: incp
+        REAL:: cumavg
+        REAL:: cump
         CHARACTER*16               :: ZETANAME
-        CHARACTER*16, DIMENSION(1) :: textflf, textfrf, textfff, textch
+        CHARACTER*16,DIMENSION(1):: textflf
+        SAVE :: TEXTFLF
+        CHARACTER*16,DIMENSION(1):: textfrf
+        SAVE :: TEXTFRF
+        CHARACTER*16,DIMENSION(1):: textfff
+        SAVE :: TEXTFFF
+        CHARACTER*16,DIMENSION(1):: textch
+        SAVE :: TEXTCH
         CHARACTER*15               :: cobs
 !       + + + FUNCTIONS + + +
         CHARACTER (LEN=17) :: SSWI2_BDCHAR
@@ -1920,8 +2009,14 @@
         USE GLOBAL,      ONLY:BOTM,LBOTM
         IMPLICIT NONE
 !       + + + DUMMY ARGUMENTS + + +
-        INTEGER, INTENT(IN) :: J,I,K,IZ
-        INTEGER, INTENT(IN) :: NCOL,NROW,NLAY,NZONES
+        INTEGER,INTENT(IN):: J
+        INTEGER,INTENT(IN):: I
+        INTEGER,INTENT(IN):: K
+        INTEGER,INTENT(IN):: IZ
+        INTEGER,INTENT(IN):: NCOL
+        INTEGER,INTENT(IN):: NROW
+        INTEGER,INTENT(IN):: NLAY
+        INTEGER,INTENT(IN):: NZONES
         REAL, INTENT(INOUT) :: Q
         DOUBLEPRECISION, DIMENSION(NCOL,NROW,NLAY), INTENT(IN) :: HNEW
         REAL, DIMENSION(NCOL,NROW,NLAY,NZONES+1), INTENT(IN) :: ZETA
@@ -1989,8 +2084,14 @@
         USE GLOBAL,      ONLY:BOTM,LBOTM
         IMPLICIT NONE
 !       + + + DUMMY ARGUMENTS + + +
-        INTEGER, INTENT(IN) :: J,I,K,IZ
-        INTEGER, INTENT(IN) :: NCOL,NROW,NLAY,NZONES
+        INTEGER,INTENT(IN):: J
+        INTEGER,INTENT(IN):: I
+        INTEGER,INTENT(IN):: K
+        INTEGER,INTENT(IN):: IZ
+        INTEGER,INTENT(IN):: NCOL
+        INTEGER,INTENT(IN):: NROW
+        INTEGER,INTENT(IN):: NLAY
+        INTEGER,INTENT(IN):: NZONES
         REAL, INTENT(INOUT) :: Q
         DOUBLEPRECISION, DIMENSION(NCOL,NROW,NLAY), INTENT(IN) :: HNEW
         REAL, DIMENSION(NCOL,NROW,NLAY,NZONES+1), INTENT(IN) :: ZETA
@@ -2055,8 +2156,10 @@
 !     ------------------------------------------------------------------
         IMPLICIT NONE
 !       + + + DUMMY ARGUMENTS + + +
-        INTEGER, INTENT(IN) :: J,I
-        INTEGER, INTENT(IN) :: NCOL,NROW
+        INTEGER,INTENT(IN):: J
+        INTEGER,INTENT(IN):: I
+        INTEGER,INTENT(IN):: NCOL
+        INTEGER,INTENT(IN):: NROW
         INTEGER, DIMENSION(NCOL,NROW), INTENT(IN) :: IPOS
         REAL, INTENT(IN) :: FAC
         REAL_SWI, DIMENSION(NCOL,NROW), INTENT(INOUT) :: B
@@ -2109,8 +2212,10 @@
 !     ------------------------------------------------------------------
         IMPLICIT NONE
 !       + + + DUMMY ARGUMENTS + + +
-        INTEGER, INTENT(IN) :: J,I
-        INTEGER, INTENT(IN) :: NCOL,NROW
+        INTEGER,INTENT(IN):: J
+        INTEGER,INTENT(IN):: I
+        INTEGER,INTENT(IN):: NCOL
+        INTEGER,INTENT(IN):: NROW
         INTEGER, DIMENSION(NCOL,NROW), INTENT(IN) :: IPOS
         REAL, INTENT(IN) :: FAC
         REAL_SWI, DIMENSION(NCOL,NROW), INTENT(INOUT) :: B
@@ -2175,16 +2280,34 @@
         INTEGER, INTENT(IN) :: Kkper
 !       + + + LOCAL DEFINITIONS + + +
         CHARACTER*24 :: ZETANAME
-        INTEGER :: i, j, k
-        INTEGER :: iz, iz2, iz3
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
+        INTEGER:: iz
+        INTEGER:: iz2
+        INTEGER:: iz3
         INTEGER :: izrev
         INTEGER :: icount
         INTEGER :: iplz
-        REAL :: zt, zb, zetac, zdiff, zetaavg
+        REAL:: zt
+        REAL:: zb
+        REAL:: zetac
+        REAL:: zdiff
+        REAL:: zetaavg
         DOUBLEPRECISION :: qztop, sszxa, dz
         REAL :: t2
-        REAL :: s0, s1, s2, d0, d1, d2, dzeta1, dzeta2, b2, dzetamax
-        INTEGER :: kk1, kk2
+        REAL:: s0
+        REAL:: s1
+        REAL:: s2
+        REAL:: d0
+        REAL:: d1
+        REAL:: d2
+        REAL:: dzeta1
+        REAL:: dzeta2
+        REAL:: b2
+        REAL:: dzetamax
+        INTEGER:: kk1
+        INTEGER:: kk2
         DOUBLEPRECISION :: ht1, ht2
         DOUBLEPRECISION :: bt1, bt2
 !     + + + FUNCTIONS + + +
@@ -2256,16 +2379,34 @@
         INTEGER, INTENT(IN) :: Kkper
 !       + + + LOCAL DEFINITIONS + + +
         CHARACTER*24 :: ZETANAME
-        INTEGER :: i, j, k
-        INTEGER :: iz, iz2, iz3
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
+        INTEGER:: iz
+        INTEGER:: iz2
+        INTEGER:: iz3
         INTEGER :: izrev
         INTEGER :: icount
         INTEGER :: iplz
-        REAL :: zt, zb, zetac, zdiff, zetaavg
+        REAL:: zt
+        REAL:: zb
+        REAL:: zetac
+        REAL:: zdiff
+        REAL:: zetaavg
         DOUBLEPRECISION :: qztop, sszxa, dz
         REAL :: t2
-        REAL :: s0, s1, s2, d0, d1, d2, dzeta1, dzeta2, b2, dzetamax
-        INTEGER :: kk1, kk2
+        REAL:: s0
+        REAL:: s1
+        REAL:: s2
+        REAL:: d0
+        REAL:: d1
+        REAL:: d2
+        REAL:: dzeta1
+        REAL:: dzeta2
+        REAL:: b2
+        REAL:: dzetamax
+        INTEGER:: kk1
+        INTEGER:: kk2
         DOUBLEPRECISION :: ht1, ht2
         DOUBLEPRECISION :: bt1, bt2
 !     + + + FUNCTIONS + + +
@@ -2374,16 +2515,34 @@
         INTEGER, INTENT(IN) :: Kkper
 !       + + + LOCAL DEFINITIONS + + +
         CHARACTER*24 :: ZETANAME
-        INTEGER :: i, j, k
-        INTEGER :: iz, iz2, iz3
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
+        INTEGER:: iz
+        INTEGER:: iz2
+        INTEGER:: iz3
         INTEGER :: izrev
         INTEGER :: icount
         INTEGER :: iplz
-        REAL :: zt, zb, zetac, zdiff, zetaavg
+        REAL:: zt
+        REAL:: zb
+        REAL:: zetac
+        REAL:: zdiff
+        REAL:: zetaavg
         DOUBLEPRECISION :: qztop, sszxa, dz
         REAL :: t2
-        REAL :: s0, s1, s2, d0, d1, d2, dzeta1, dzeta2, b2, dzetamax
-        INTEGER :: kk1, kk2
+        REAL:: s0
+        REAL:: s1
+        REAL:: s2
+        REAL:: d0
+        REAL:: d1
+        REAL:: d2
+        REAL:: dzeta1
+        REAL:: dzeta2
+        REAL:: b2
+        REAL:: dzetamax
+        INTEGER:: kk1
+        INTEGER:: kk2
         DOUBLEPRECISION :: ht1, ht2
         DOUBLEPRECISION :: bt1, bt2
 !     + + + FUNCTIONS + + +
@@ -2645,16 +2804,34 @@
 !       + + + DUMMY ARGUMENTS + + +
 !       + + + LOCAL DEFINITIONS + + +
         CHARACTER*24 :: ZETANAME
-        INTEGER :: i, j, k
-        INTEGER :: iz, iz2, iz3
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
+        INTEGER:: iz
+        INTEGER:: iz2
+        INTEGER:: iz3
         INTEGER :: izrev
         INTEGER :: icount
         INTEGER :: iplz
-        REAL :: zt, zb, zetac, zdiff, zetaavg
+        REAL:: zt
+        REAL:: zb
+        REAL:: zetac
+        REAL:: zdiff
+        REAL:: zetaavg
         DOUBLEPRECISION :: qztop, sszxa, dz
         REAL :: t2
-        REAL :: s0, s1, s2, d0, d1, d2, dzeta1, dzeta2, b2, dzetamax
-        INTEGER :: kk1, kk2
+        REAL:: s0
+        REAL:: s1
+        REAL:: s2
+        REAL:: d0
+        REAL:: d1
+        REAL:: d2
+        REAL:: dzeta1
+        REAL:: dzeta2
+        REAL:: b2
+        REAL:: dzetamax
+        INTEGER:: kk1
+        INTEGER:: kk2
         DOUBLEPRECISION :: ht1, ht2
         DOUBLEPRECISION :: bt1, bt2
 !     + + + FUNCTIONS + + +
@@ -2702,16 +2879,34 @@
 !       + + + DUMMY ARGUMENTS + + +
 !       + + + LOCAL DEFINITIONS + + +
         CHARACTER*24 :: ZETANAME
-        INTEGER :: i, j, k
-        INTEGER :: iz, iz2, iz3
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
+        INTEGER:: iz
+        INTEGER:: iz2
+        INTEGER:: iz3
         INTEGER :: izrev
         INTEGER :: icount
         INTEGER :: iplz
-        REAL :: zt, zb, zetac, zdiff, zetaavg
+        REAL:: zt
+        REAL:: zb
+        REAL:: zetac
+        REAL:: zdiff
+        REAL:: zetaavg
         DOUBLEPRECISION :: qztop, sszxa, dz
         REAL :: t2
-        REAL :: s0, s1, s2, d0, d1, d2, dzeta1, dzeta2, b2, dzetamax
-        INTEGER :: kk1, kk2
+        REAL:: s0
+        REAL:: s1
+        REAL:: s2
+        REAL:: d0
+        REAL:: d1
+        REAL:: d2
+        REAL:: dzeta1
+        REAL:: dzeta2
+        REAL:: b2
+        REAL:: dzetamax
+        INTEGER:: kk1
+        INTEGER:: kk2
         DOUBLEPRECISION :: ht1, ht2
         DOUBLEPRECISION :: bt1, bt2
 !     + + + FUNCTIONS + + +
@@ -2778,16 +2973,35 @@
         INTEGER, INTENT(IN) :: Kkper
 !       + + + LOCAL DEFINITIONS + + +
         CHARACTER*24 :: ZETANAME
-        INTEGER :: i, j, k
-        INTEGER :: iz, iz2, iz3
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
+        INTEGER:: iz
+        INTEGER:: iz2
+        INTEGER:: iz3
         INTEGER :: izrev
         INTEGER :: icount
         INTEGER :: iplz
-        REAL :: zt, zb, zetac, zdiff, zetaavg
+        REAL:: zt
+        REAL:: zb
+        REAL:: zetac
+        REAL:: zdiff
+        REAL:: zetaavg
         DOUBLEPRECISION :: qztop, sszxa, dz
-        REAL :: t1, t2
-        REAL :: s0, s1, s2, d0, d1, d2, dzeta1, dzeta2, b2, dzetamax
-        INTEGER :: kk1, kk2
+        REAL:: t1
+        REAL:: t2
+        REAL:: s0
+        REAL:: s1
+        REAL:: s2
+        REAL:: d0
+        REAL:: d1
+        REAL:: d2
+        REAL:: dzeta1
+        REAL:: dzeta2
+        REAL:: b2
+        REAL:: dzetamax
+        INTEGER:: kk1
+        INTEGER:: kk2
         DOUBLEPRECISION :: ht1, ht2
         DOUBLEPRECISION :: bt1, bt2
 !     + + + FUNCTIONS + + +
@@ -3274,13 +3488,20 @@
 !     + + + DUMMY ARGUMENTS + + +
       INTEGER, INTENT(IN) :: ITOTAL
 !     + + + LOCAL DEFINITIONS + + +
-      INTEGER :: i, j, k
+      INTEGER:: i
+      INTEGER:: j
+      INTEGER:: k
       INTEGER :: kk
       REAL            :: zero
       DOUBLEPRECISION :: dzero
       REAL            :: rtotal
       REAL            :: hdiff
-      REAL            :: chch1, chch2, chch3, chch4, chch5, chch6
+      REAL:: chch1
+      REAL:: chch2
+      REAL:: chch3
+      REAL:: chch4
+      REAL:: chch5
+      REAL:: chch6
       REAL            :: rate
       DOUBLEPRECISION :: hd
       DOUBLEPRECISION :: b1,h1
@@ -3466,14 +3687,23 @@
         INTEGER, INTENT(IN) :: Kkstp
         INTEGER, INTENT(IN) :: Kkper
 !       + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j, k
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
         INTEGER :: kk
-        INTEGER :: iz, iz2
-        INTEGER :: iusezone, iactive
-        INTEGER :: ksoliter, kksoliter
-        INTEGER :: ierr, icnvg
-        REAL :: q, qztop, qzbot
-        REAL :: nuontop, nubelbot
+        INTEGER:: iz
+        INTEGER:: iz2
+        INTEGER:: iusezone
+        INTEGER:: iactive
+        INTEGER:: ksoliter
+        INTEGER:: kksoliter
+        INTEGER:: ierr
+        INTEGER:: icnvg
+        REAL:: q
+        REAL:: qztop
+        REAL:: qzbot
+        REAL:: nuontop
+        REAL:: nubelbot
         REAL :: rclose
         DOUBLEPRECISION :: dt, ht
 !
@@ -3821,12 +4051,23 @@
         IMPLICIT NONE
 !       + + + DUMMY ARGUMENTS + + +
 !       + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j, k
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
         INTEGER :: iz
         INTEGER :: kk
-        REAL :: top, bot, h, aqb, zoldc
-        REAL :: zt, zb, zetac, zcalc
-        REAL :: rvl, dist, b
+        REAL:: top
+        REAL:: bot
+        REAL:: h
+        REAL:: aqb
+        REAL:: zoldc
+        REAL:: zt
+        REAL:: zb
+        REAL:: zetac
+        REAL:: zcalc
+        REAL:: rvl
+        REAL:: dist
+        REAL:: b
         REAL :: tv
           IADPTMOD = 0
           rvl      = 1.0 / ADPTFCT
@@ -3977,13 +4218,17 @@
 !     + + + DUMMY ARGUMENTS + + +
         REAL, INTENT(INOUT), DIMENSION(NCOL,NROW,NLAY,NZONES+1) :: A
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j, k, iz
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
+        INTEGER:: iz
         DOUBLEPRECISION :: switfact
         DOUBLEPRECISION :: t1, t0
         DOUBLEPRECISION :: b1, b0
         DOUBLEPRECISION :: sszxa
         REAL :: small
-        REAL :: h0, h0dry
+        REAL:: h0
+        REAL:: h0dry
         REAL :: rb
         DOUBLEPRECISION :: dsmall
         DOUBLEPRECISION :: dhnoflo, dhdry
@@ -4081,10 +4326,16 @@
 !     + + + DUMMY ARGUMENTS + + +
         REAL, INTENT(INOUT), DIMENSION(NCOL,NROW,NLAY,NZONES+1) :: A
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j, k, iz
-        INTEGER :: izu, izl
-        REAL :: nuuppertop, nuupperbot
-        REAL :: nulowertop, nulowerbot
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
+        INTEGER:: iz
+        INTEGER:: izu
+        INTEGER:: izl
+        REAL:: nuuppertop
+        REAL:: nuupperbot
+        REAL:: nulowertop
+        REAL:: nulowerbot
         DOUBLEPRECISION :: switfact
         DOUBLEPRECISION :: ht, ht2
         DOUBLEPRECISION :: db, db2
@@ -4171,14 +4422,21 @@
         DOUBLEPRECISION, INTENT(INOUT) :: V
         DOUBLEPRECISION, INTENT(INOUT) :: Vc
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: kk, kt
+        INTEGER:: kk
+        INTEGER:: kt
         INTEGER :: ic
         REAL :: zero
         REAL :: one
         REAL :: tled
-        REAL :: rh, rh0, rt, rb
-        REAL :: sv, sv1, sv2
-        REAL :: sold, snew
+        REAL:: rh
+        REAL:: rh0
+        REAL:: rt
+        REAL:: rb
+        REAL:: sv
+        REAL:: sv1
+        REAL:: sv2
+        REAL:: sold
+        REAL:: snew
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
         zero  = 0.
@@ -4244,9 +4502,12 @@
         INTEGER, INTENT(IN) :: Klay
         INTEGER, INTENT(IN) :: Init
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j
+        INTEGER:: i
+        INTEGER:: j
         INTEGER :: iz
-        DOUBLE PRECISION :: dtop, dbot, h
+        DOUBLE PRECISION:: dtop
+        DOUBLE PRECISION:: dbot
+        DOUBLE PRECISION:: h
         REAL :: rval
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
@@ -4314,7 +4575,10 @@
         IMPLICIT NONE
 !     + + + DUMMY ARGUMENTS + + +
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j, k, iz
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: k
+        INTEGER:: iz
         INTEGER :: kk
         DOUBLEPRECISION :: db,ht
 !     + + + FUNCTIONS + + +

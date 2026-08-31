@@ -1,8 +1,19 @@
       MODULE GWFHFBMODULE
-        INTEGER, POINTER  ::MXHFB,NHFB,IPRHFB,NHFBNP,NPHFB,IHFBPB
+        IMPLICIT NONE
+        INTEGER,POINTER:: MXHFB
+        INTEGER,POINTER:: NHFB
+        INTEGER,POINTER:: IPRHFB
+        INTEGER,POINTER:: NHFBNP
+        INTEGER,POINTER:: NPHFB
+        INTEGER,POINTER:: IHFBPB
         REAL,    DIMENSION(:,:), POINTER   ::HFB
       TYPE GWFHFBTYPE
-        INTEGER, POINTER  ::MXHFB,NHFB,IPRHFB,NHFBNP,NPHFB,IHFBPB
+        INTEGER,POINTER:: MXHFB
+        INTEGER,POINTER:: NHFB
+        INTEGER,POINTER:: IPRHFB
+        INTEGER,POINTER:: NHFBNP
+        INTEGER,POINTER:: NPHFB
+        INTEGER,POINTER:: IHFBPB
         REAL,    DIMENSION(:,:), POINTER   ::HFB
       END TYPE
       TYPE(GWFHFBTYPE), SAVE    ::GWFHFBDAT(10)
@@ -20,7 +31,26 @@
      &                      DELR,DELC,IOUT
       USE GWFHFBMODULE,ONLY:MXHFB,NHFB,IPRHFB,NHFBNP,NPHFB,IHFBPB,HFB
 !
-      INTEGER INHFB, MXACTFB
+      IMPLICIT NONE
+      REAL :: DUM
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: IOUTU
+      INTEGER :: IP
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: K
+      INTEGER :: LLOC
+      INTEGER :: LSTBEG
+      INTEGER :: LSTSUM
+      INTEGER :: MXFBP
+      INTEGER :: N
+      INTEGER :: NACTHFB
+      INTEGER :: NLST
+      INTEGER :: NUMINST
+      REAL :: R
+      INTEGER INHFB
+      INTEGER MXACTFB
       CHARACTER*16 AUX(1)
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
@@ -152,6 +182,19 @@
 !     ------------------------------------------------------------------
 !
 !1------Set pointers to the specified grid.
+      IMPLICIT NONE
+      REAL :: HCDW
+      REAL :: HD1
+      REAL :: HD2
+      INTEGER :: I1
+      INTEGER :: I2
+      INTEGER :: IGRID
+      INTEGER :: II
+      INTEGER :: J1
+      INTEGER :: J2
+      INTEGER :: K
+      REAL :: TDW
+      REAL :: THKAVG
       CALL SGWF2HFB7PNT(IGRID)
 !
 !2------FOR EACH BARRIER, MODIFY HORIZONTAL BRANCH CONDUCTANCES IF LAYER
@@ -255,6 +298,18 @@
 !     ------------------------------------------------------------------
 !
 !1------INITIALIZE ERROR FLAG TO ZERO.
+      IMPLICIT NONE
+      INTEGER :: I1
+      INTEGER :: I2
+      INTEGER :: IERFLG
+      INTEGER :: II
+      INTEGER :: J1
+      INTEGER :: J2
+      INTEGER :: K
+      REAL :: TDW
+      REAL :: TH0
+      REAL :: TH1
+      REAL :: THKAVG
       IERFLG=0
 !
 !2----DO FOR EACH BARRIER IN RANGE.
@@ -333,6 +388,17 @@
 !     ------------------------------------------------------------------
 !
 !1----INITIALIZE ERROR FLAG TO ZERO.
+      IMPLICIT NONE
+      INTEGER :: I1
+      INTEGER :: I2
+      INTEGER :: IB1
+      INTEGER :: IB2
+      INTEGER :: ID
+      INTEGER :: IERFLG
+      INTEGER :: II
+      INTEGER :: J1
+      INTEGER :: J2
+      INTEGER :: JD
       IERFLG=0
 !
 !2----CHECK EACH BARRIER IN RANGE.
@@ -375,10 +441,44 @@
 !
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
+      REAL :: FACTOR
+      REAL :: HFB
+      INTEGER :: I
+      INTEGER :: I1
+      INTEGER :: I2
+      INTEGER :: ICLOSE
+      INTEGER :: IDUM
+      INTEGER :: II
+      INTEGER :: IN
+      INTEGER :: INPACK
+      INTEGER :: IOUT
+      INTEGER :: IPRFLG
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: J
+      INTEGER :: J1
+      INTEGER :: J2
+      INTEGER :: K
+      INTEGER :: LLOC
+      INTEGER :: LSTBEG
+      INTEGER :: MXHFB
+      INTEGER :: N
+      INTEGER :: NBUF
+      INTEGER :: NCOL
+      INTEGER :: NLAY
+      INTEGER :: NLIST
+      INTEGER :: NN
+      INTEGER :: NROW
+      INTEGER :: NUNOPN
+      REAL :: R
+      REAL :: SFAC
       CHARACTER*(*) LABEL
       DIMENSION HFB(7,MXHFB)
-      CHARACTER*200 LINE,FNAME
+      CHARACTER*200 LINE
+      CHARACTER*200 FNAME
       CHARACTER*1 DASH(120)
+      SAVE :: DASH
       DATA DASH/120*'-'/
       DATA NUNOPN/99/
       INCLUDE 'openspec.inc'
@@ -485,11 +585,41 @@
 !        SPECIFICATIONS:
 !     ------------------------------------------------------------------
       USE PARAMMODULE
-      CHARACTER*(*) PACK,PTYP
+      IMPLICIT NONE
+      REAL :: HFB
+      INTEGER :: I
+      INTEGER :: IC1
+      INTEGER :: IC2
+      INTEGER :: IDUM
+      INTEGER :: II
+      INTEGER :: III
+      INTEGER :: IL
+      INTEGER :: IN
+      INTEGER :: IOUT
+      INTEGER :: IOUTU
+      INTEGER :: IP
+      INTEGER :: IR1
+      INTEGER :: IR2
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: J
+      INTEGER :: LLOC
+      INTEGER :: LSTVL
+      INTEGER :: MXACTFB
+      INTEGER :: MXHFB
+      INTEGER :: NHFB
+      INTEGER :: NI
+      INTEGER :: NLST
+      REAL :: RDUM
+      CHARACTER*(*) PACK
+      CHARACTER*(*) PTYP
       DIMENSION HFB(LSTVL,MXHFB)
       CHARACTER*(*) LABEL
       CHARACTER*200 LINE
-      CHARACTER*10 CTMP1,CTMP2,CTMP3,CTMP4
+      CHARACTER*10 CTMP1
+      CHARACTER*10 CTMP2
+      CHARACTER*10 CTMP3
+      CHARACTER*10 CTMP4
 !     ------------------------------------------------------------------
 !
 !1------The Listing File file unit is the absolute value of IOUTU.  
@@ -591,6 +721,8 @@
 !  Deallocate HFB data for a grid.
       USE GWFHFBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         DEALLOCATE(GWFHFBDAT(IGRID)%MXHFB)
         DEALLOCATE(GWFHFBDAT(IGRID)%NHFB)
         DEALLOCATE(GWFHFBDAT(IGRID)%IPRHFB)
@@ -605,6 +737,8 @@
 !  Set pointers to HFB data for a grid.
       USE GWFHFBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         MXHFB=>GWFHFBDAT(IGRID)%MXHFB
         NHFB=>GWFHFBDAT(IGRID)%NHFB
         IPRHFB=>GWFHFBDAT(IGRID)%IPRHFB
@@ -619,6 +753,8 @@
 !  Save pointers to HFB data for a grid.
       USE GWFHFBMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         GWFHFBDAT(IGRID)%MXHFB=>MXHFB
         GWFHFBDAT(IGRID)%NHFB=>NHFB
         GWFHFBDAT(IGRID)%IPRHFB=>IPRHFB

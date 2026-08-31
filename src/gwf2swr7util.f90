@@ -1,5 +1,6 @@
 !
       MODULE GSOLILUTINTERFACE
+        IMPLICIT NONE
         INTERFACE
           SUBROUTINE EXPANDILUT( IWK, ISZ, JLU, ALU )
             INTEGER, INTENT(INOUT) :: IWK
@@ -39,9 +40,13 @@
         DOUBLEPRECISION, PARAMETER :: DZERO = 0.0D0
         DOUBLEPRECISION, PARAMETER :: DONE  = 1.0D0
         DOUBLEPRECISION, PARAMETER :: NEARZERO = 1.0D-20
-        INTEGER :: i, j, n, nn
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: n
+        INTEGER:: nn
         INTEGER :: npiv
-        INTEGER :: ic0, ic1
+        INTEGER:: ic0
+        INTEGER:: ic1
         DOUBLEPRECISION :: d, t, tm
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
@@ -175,9 +180,14 @@
         DOUBLEPRECISION, PARAMETER :: DZERO = 0.0D0
         DOUBLEPRECISION, PARAMETER :: DONE  = 1.0D0
         DOUBLEPRECISION, PARAMETER :: NEARZERO = 1.0D-20
-        INTEGER :: i, j, l, n, nn
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: l
+        INTEGER:: n
+        INTEGER:: nn
         INTEGER :: ihbp
-        INTEGER :: ic0, ic1
+        INTEGER:: ic0
+        INTEGER:: ic1
         DOUBLEPRECISION :: t, tm
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
@@ -283,7 +293,9 @@
         INTEGER, DIMENSION(NR), INTENT(IN)                :: PINDEX
         DOUBLEPRECISION, DIMENSION(NR), INTENT(INOUT)     :: X
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, l, n
+        INTEGER:: i
+        INTEGER:: l
+        INTEGER:: n
         DOUBLEPRECISION :: t
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
@@ -737,8 +749,11 @@
         DOUBLEPRECISION, PARAMETER :: delta = 1.0D-03
 !        INTEGER :: i, n, ii, nn
 !        INTEGER :: ots, igmr, irst
-        INTEGER :: i, n, ii
-        INTEGER :: igmr, irst
+        INTEGER:: i
+        INTEGER:: n
+        INTEGER:: ii
+        INTEGER:: igmr
+        INTEGER:: irst
         INTEGER :: irel
         DOUBLEPRECISION :: sum
         DOUBLEPRECISION :: deltax
@@ -930,9 +945,12 @@
         DOUBLEPRECISION, DIMENSION(NR),  INTENT(INOUT) :: DSCALE
         DOUBLEPRECISION, DIMENSION(NR),  INTENT(INOUT) :: DSCALE2
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, n
-        INTEGER :: id, jc
-        INTEGER :: i0, i1
+        INTEGER:: i
+        INTEGER:: n
+        INTEGER:: id
+        INTEGER:: jc
+        INTEGER:: i0
+        INTEGER:: i1
         DOUBLEPRECISION :: v, c1, c2
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
@@ -1174,11 +1192,18 @@
 !     + + + LOCAL DEFINITIONS + + +
         DOUBLEPRECISION, PARAMETER :: DZERO = 0.0D0
         DOUBLEPRECISION, PARAMETER :: DONE  = 1.0D0
-        INTEGER :: ic0, ic1, id0, iu1
-        INTEGER :: j, n
-        INTEGER :: jj, jj0, jj1
+        INTEGER:: ic0
+        INTEGER:: ic1
+        INTEGER:: id0
+        INTEGER:: iu1
+        INTEGER:: j
+        INTEGER:: n
+        INTEGER:: jj
+        INTEGER:: jj0
+        INTEGER:: jj1
 !        INTEGER :: jpos, jrow, jw
-        INTEGER :: jrow, jw
+        INTEGER:: jrow
+        INTEGER:: jw
 !        INTEGER, DIMENSION(NR)  :: id, iw
         DOUBLEPRECISION :: milumult
         DOUBLEPRECISION :: rs
@@ -1291,8 +1316,10 @@
         DOUBLEPRECISION, DIMENSION(NR),    INTENT(IN)    :: R
         DOUBLEPRECISION, DIMENSION(NR),    INTENT(INOUT) :: D
 !     + + + LOCAL DEFINITIONS + + +
-        INTEGER :: ic0, ic1
-        INTEGER :: j, n
+        INTEGER:: ic0
+        INTEGER:: ic1
+        INTEGER:: j
+        INTEGER:: n
         DOUBLEPRECISION :: sum
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
@@ -1358,13 +1385,18 @@
         DOUBLEPRECISION, PARAMETER :: DZERO = 0.0D0
         DOUBLEPRECISION, PARAMETER :: DONE  = 1.0D0
         DOUBLEPRECISION :: sum
-        INTEGER :: ic0, ic1
+        INTEGER:: ic0
+        INTEGER:: ic1
         INTEGER :: icol
-        INTEGER :: m, n
-        INTEGER :: n0, iblksize
+        INTEGER:: m
+        INTEGER:: n
+        INTEGER:: n0
+        INTEGER:: iblksize
         INTEGER :: i
-        INTEGER :: istart, iend
-        INTEGER :: jstart, jend
+        INTEGER:: istart
+        INTEGER:: iend
+        INTEGER:: jstart
+        INTEGER:: jend
         INTEGER :: jlen
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
@@ -1420,8 +1452,11 @@
         DOUBLEPRECISION, DIMENSION(NIAC),     INTENT(IN)    :: D1
         DOUBLEPRECISION, DIMENSION(IBLKSIZE), INTENT(INOUT) :: D2
 !         + + + LOCAL DEFINITIONS + + +
-        INTEGER :: i, j
-        INTEGER :: j0, j1, jcol
+        INTEGER:: i
+        INTEGER:: j
+        INTEGER:: j0
+        INTEGER:: j1
+        INTEGER:: jcol
         DOUBLEPRECISION, PARAMETER :: dzero = 0.0d0
 !         + + + FUNCTIONS + + +
 !         + + + CODE + + +
@@ -1452,7 +1487,8 @@
         INTEGER :: n
         INTEGER :: n0
         INTEGER :: i
-        INTEGER :: iblksize, istart
+        INTEGER:: iblksize
+        INTEGER:: istart
         DOUBLEPRECISION, PARAMETER :: DZERO = 0.0D0
 !     + + + FUNCTIONS + + +
 !     + + + CODE + + +
@@ -1630,7 +1666,20 @@
       INTEGER, INTENT(INOUT) :: IWK
 !----------------------------------------------------------------------
 !     LOCALS
-      INTEGER :: ju0,k,j1,j2,j,ii,i,lenl,lend,lenu,jj,jrow,jpos,len
+      INTEGER:: ju0
+      INTEGER:: k
+      INTEGER:: j1
+      INTEGER:: j2
+      INTEGER:: j
+      INTEGER:: ii
+      INTEGER:: i
+      INTEGER:: lenl
+      INTEGER:: lend
+      INTEGER:: lenu
+      INTEGER:: jj
+      INTEGER:: jrow
+      INTEGER:: jpos
+      INTEGER:: len
       INTEGER :: lennonzero
       INTEGER :: iv
       DOUBLEPRECISION :: t, tnorm
@@ -2024,7 +2073,14 @@
       implicit none
       integer n
       doubleprecision a(*),alu(*),w(n+1),droptol
-      integer ja(*),ia(n+1),jlu(*),ju(n),jw(2*n),lfil,iwk,ierr
+      integer ja(*)
+      integer ia(n+1)
+      integer jlu(*)
+      integer ju(n)
+      integer jw(2*n)
+      integer lfil
+      integer iwk
+      integer ierr
 !----------------------------------------------------------------------*
 !                      *** ILUT preconditioner ***                     *
 !      incomplete LU factorization with dual truncation mechanism      *
@@ -2108,7 +2164,19 @@
 ! (however, fill-in is then mpredictible).                             *
 !----------------------------------------------------------------------*
 !     locals
-      integer ju0,k,j1,j2,j,ii,i,lenl,lenu,jj,jrow,jpos,len
+      integer ju0
+      integer k
+      integer j1
+      integer j2
+      integer j
+      integer ii
+      integer i
+      integer lenl
+      integer lenu
+      integer jj
+      integer jrow
+      integer jpos
+      integer len
       doubleprecision tnorm, t, abs, s, fact
       if (lfil .lt. 0) goto 998
 !-----------------------------------------------------------------------
@@ -2374,7 +2442,9 @@
 !-----------------------------------------------------------------------
       subroutine lusol(n, y, x, alu, jlu, ju)
         doubleprecision x(n), y(n), alu(*)
-      integer n, jlu(*), ju(*)
+      integer n
+      integer jlu(*)
+      integer ju(*)
 !-----------------------------------------------------------------------
 !
 ! This routine solves the system (LU) x = y, 
@@ -2398,7 +2468,8 @@
 !-----------------------------------------------------------------------
 ! local variables
 !
-        integer i,k
+        integer i
+        integer k
 !
 ! forward solve
 !
@@ -2425,7 +2496,9 @@
 !----------------------------------------------------------------------- 
         subroutine qsplit(a,ind,n,ncut)
         doubleprecision a(n)
-        integer ind(n), n, ncut
+        integer ind(n)
+        integer n
+        integer ncut
 !-----------------------------------------------------------------------
 !     does a quick-sort split of a real array.
 !     on input a(1:n). is a real array
@@ -2437,7 +2510,9 @@
 !     ind(1:n) is an integer array which permuted in the same way as a(*).
 !-----------------------------------------------------------------------
         doubleprecision tmp, abskey
-        integer itmp, first, last
+        integer itmp
+        integer first
+        integer last
 !-----
         first = 1
         last = n

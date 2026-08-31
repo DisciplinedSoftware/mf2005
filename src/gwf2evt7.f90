@@ -1,13 +1,18 @@
       MODULE GWFEVTMODULE
-        INTEGER, SAVE, POINTER                 ::NEVTOP,IEVTCB
-        INTEGER, SAVE, POINTER                 ::NPEVT,IEVTPF
+        IMPLICIT NONE
+        INTEGER,SAVE,POINTER:: NEVTOP
+        INTEGER,SAVE,POINTER:: IEVTCB
+        INTEGER,SAVE,POINTER:: NPEVT
+        INTEGER,SAVE,POINTER:: IEVTPF
         REAL,    SAVE,   DIMENSION(:,:),  POINTER      ::EVTR
         REAL,    SAVE,   DIMENSION(:,:),  POINTER      ::EXDP
         REAL,    SAVE,   DIMENSION(:,:),  POINTER      ::SURF
         INTEGER, SAVE,   DIMENSION(:,:),  POINTER      ::IEVT
       TYPE GWFEVTTYPE
-        INTEGER,  POINTER                 ::NEVTOP,IEVTCB
-        INTEGER,  POINTER                 ::NPEVT,IEVTPF
+        INTEGER,POINTER:: NEVTOP
+        INTEGER,POINTER:: IEVTCB
+        INTEGER,POINTER:: NPEVT
+        INTEGER,POINTER:: IEVTPF
         REAL,       DIMENSION(:,:),  POINTER      ::EVTR
         REAL,       DIMENSION(:,:),  POINTER      ::EXDP
         REAL,       DIMENSION(:,:),  POINTER      ::SURF
@@ -29,6 +34,15 @@
       USE GWFEVTMODULE,ONLY:NEVTOP,IEVTCB,NPEVT,IEVTPF,EVTR,EXDP,SURF,&
      &                      IEVT
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: K
+      INTEGER :: LLOC
+      INTEGER :: N
+      REAL :: R
       CHARACTER*200 LINE
       CHARACTER*4 PTYP
 !     ------------------------------------------------------------------
@@ -112,7 +126,17 @@
       USE GLOBAL,      ONLY:IOUT,NCOL,NROW,NLAY,DELR,DELC,IFREFM
       USE GWFEVTMODULE,ONLY:NEVTOP,NPEVT,IEVTPF,EVTR,EXDP,SURF,IEVT
 !
+      IMPLICIT NONE
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IN
+      INTEGER :: INEVTR
+      INTEGER :: INEXDP
+      INTEGER :: INIEVT
+      INTEGER :: INSURF
+      INTEGER :: IR
       CHARACTER*24 ANAME(4)
+      SAVE :: ANAME
 !
       DATA ANAME(1) /'          ET LAYER INDEX'/
       DATA ANAME(2) /'              ET SURFACE'/
@@ -238,7 +262,18 @@
       USE GLOBAL,      ONLY:NCOL,NROW,NLAY,IBOUND,HNEW,RHS,HCOF
       USE GWFEVTMODULE,ONLY:NEVTOP,EVTR,EXDP,SURF,IEVT
 !
-      DOUBLE PRECISION HH,SS,XX,DD
+      IMPLICIT NONE
+      REAL :: C
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: IR
+      REAL :: S
+      REAL :: X
+      DOUBLE PRECISION HH
+      DOUBLE PRECISION SS
+      DOUBLE PRECISION XX
+      DOUBLE PRECISION DD
 !     ------------------------------------------------------------------
 !
 !1------SET POINTERS FOR THE CURRENT GRID.
@@ -304,8 +339,30 @@
       USE GWFBASMODULE,ONLY:MSUM,VBVL,VBNM,ICBCFL,DELT,PERTIM,TOTIM
       USE GWFEVTMODULE,ONLY:NEVTOP,IEVTCB,EVTR,EXDP,SURF,IEVT
 !
-      DOUBLE PRECISION RATOUT,QQ,HH,SS,DD,XX,HHCOF,RRHS
+      IMPLICIT NONE
+      REAL :: C
+      INTEGER :: IBD
+      INTEGER :: IC
+      INTEGER :: IGRID
+      INTEGER :: IL
+      INTEGER :: IR
+      INTEGER :: KPER
+      INTEGER :: KSTP
+      REAL :: Q
+      REAL :: ROUT
+      REAL :: S
+      REAL :: X
+      REAL :: ZERO
+      DOUBLE PRECISION RATOUT
+      DOUBLE PRECISION QQ
+      DOUBLE PRECISION HH
+      DOUBLE PRECISION SS
+      DOUBLE PRECISION DD
+      DOUBLE PRECISION XX
+      DOUBLE PRECISION HHCOF
+      DOUBLE PRECISION RRHS
       CHARACTER*16 TEXT
+      SAVE :: TEXT
       DATA TEXT /'              ET'/
 !     ------------------------------------------------------------------
 !
@@ -405,6 +462,8 @@
 !  Deallocate EVT MEMORY
       USE GWFEVTMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         DEALLOCATE(GWFEVTDAT(IGRID)%NEVTOP)
         DEALLOCATE(GWFEVTDAT(IGRID)%IEVTCB)
         DEALLOCATE(GWFEVTDAT(IGRID)%NPEVT)
@@ -420,6 +479,8 @@
 !  Set pointers to EVT data for grid.
       USE GWFEVTMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         NEVTOP=>GWFEVTDAT(IGRID)%NEVTOP
         IEVTCB=>GWFEVTDAT(IGRID)%IEVTCB
         NPEVT=>GWFEVTDAT(IGRID)%NPEVT
@@ -435,6 +496,8 @@
 !  Save pointers to EVT data for grid.
       USE GWFEVTMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
         GWFEVTDAT(IGRID)%NEVTOP=>NEVTOP
         GWFEVTDAT(IGRID)%IEVTCB=>IEVTCB
         GWFEVTDAT(IGRID)%NPEVT=>NPEVT

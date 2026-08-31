@@ -1,5 +1,10 @@
       MODULE OBSSTRMODULE
-         INTEGER, SAVE, POINTER  ::NQST,NQCST,NQTST,IUSTOBSV,IPRT
+         IMPLICIT NONE
+         INTEGER,SAVE,POINTER:: NQST
+         INTEGER,SAVE,POINTER:: NQCST
+         INTEGER,SAVE,POINTER:: NQTST
+         INTEGER,SAVE,POINTER:: IUSTOBSV
+         INTEGER,SAVE,POINTER:: IPRT
          INTEGER, SAVE, DIMENSION(:),   POINTER ::NQOBST
          INTEGER, SAVE, DIMENSION(:),   POINTER ::NQCLST
          INTEGER, SAVE, DIMENSION(:),   POINTER ::IOBTS
@@ -10,7 +15,11 @@
          REAL,    SAVE, DIMENSION(:,:), POINTER ::QCELL
          CHARACTER*12,SAVE,DIMENSION(:),POINTER ::OBSNAM
       TYPE OBSSTRTYPE
-         INTEGER, POINTER  ::NQST,NQCST,NQTST,IUSTOBSV,IPRT
+         INTEGER,POINTER:: NQST
+         INTEGER,POINTER:: NQCST
+         INTEGER,POINTER:: NQTST
+         INTEGER,POINTER:: IUSTOBSV
+         INTEGER,POINTER:: IPRT
          INTEGER,     DIMENSION(:),   POINTER ::NQOBST
          INTEGER,     DIMENSION(:),   POINTER ::NQCLST
          INTEGER,     DIMENSION(:),   POINTER ::IOBTS
@@ -45,6 +54,32 @@
 !     ------------------------------------------------------------------
       USE GLOBAL,  ONLY:IOUT,NPER,NSTP,PERLEN,TSMULT,ISSFLG,ITRSS
       USE OBSSTRMODULE
+      IMPLICIT NONE
+      REAL :: DUM
+      INTEGER :: I
+      INTEGER :: IDUM
+      INTEGER :: IERR
+      INTEGER :: IFCTFLG
+      INTEGER :: IGRID
+      INTEGER :: IQ
+      INTEGER :: IREFSP
+      INTEGER :: ISTART
+      INTEGER :: ISTOP
+      INTEGER :: IUST
+      INTEGER :: IUSTOB
+      INTEGER :: J
+      INTEGER :: L
+      INTEGER :: LLOC
+      INTEGER :: N
+      INTEGER :: NC
+      INTEGER :: NC1
+      INTEGER :: NC2
+      INTEGER :: NT
+      INTEGER :: NT1
+      INTEGER :: NT2
+      REAL :: TOFFSET
+      REAL :: TOMULTST
+      REAL :: ZERO
       CHARACTER*200 LINE
 !     ------------------------------------------------------------------
       ALLOCATE(NQST,NQCST,NQTST,IUSTOBSV,IPRT)
@@ -202,7 +237,36 @@
       USE GWFSTRMODULE, ONLY:NSTREM,STRM,ISTRM
       USE OBSBASMODULE,ONLY:ITS
       USE OBSSTRMODULE
-      DOUBLE PRECISION HHNEW, C, HB , RBOT
+      IMPLICIT NONE
+      REAL :: FLWCEL
+      INTEGER :: I
+      INTEGER :: IGRID
+      INTEGER :: II
+      INTEGER :: IQ
+      INTEGER :: IR
+      INTEGER :: IRBOT
+      INTEGER :: IS
+      INTEGER :: ISTRF
+      INTEGER :: JJ
+      INTEGER :: JRBOT
+      INTEGER :: K
+      INTEGER :: KK
+      INTEGER :: KRBOT
+      INTEGER :: MNB
+      INTEGER :: N
+      INTEGER :: NB
+      INTEGER :: NC
+      INTEGER :: NC1
+      INTEGER :: NC2
+      INTEGER :: NT
+      INTEGER :: NT1
+      INTEGER :: NT2
+      REAL :: TFACT
+      REAL :: ZERO
+      DOUBLE PRECISION HHNEW
+      DOUBLE PRECISION C
+      DOUBLE PRECISION HB
+      DOUBLE PRECISION RBOT
 !     ------------------------------------------------------------------
       CALL SGWF2STR7PNT(IGRID)
       CALL SOBS2STR7PNT(IGRID)
@@ -360,7 +424,12 @@
 !     ------------------------------------------------------------------
       USE GLOBAL, ONLY: IOUT
       USE OBSSTRMODULE
-      DOUBLE PRECISION SQ,SUMSQ
+      IMPLICIT NONE
+      REAL :: DIFF
+      INTEGER :: IGRID
+      INTEGER :: N
+      DOUBLE PRECISION SQ
+      DOUBLE PRECISION SUMSQ
 !     ------------------------------------------------------------------
       CALL SOBS2STR7PNT(IGRID)
 !
@@ -394,6 +463,8 @@
 !  Deallocate OBSSTR memory
       USE OBSSTRMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       CALL SOBS2STR7PNT(IGRID)
       DEALLOCATE(NQST)
       DEALLOCATE(NQCST)
@@ -416,6 +487,8 @@
 !  Change OBSSTR data to a different grid.
       USE OBSSTRMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       NQST=>OBSSTRDAT(IGRID)%NQST
       NQCST=>OBSSTRDAT(IGRID)%NQCST
       NQTST=>OBSSTRDAT(IGRID)%NQTST
@@ -437,6 +510,8 @@
 !  Save OBSSTR data for a grid.
       USE OBSSTRMODULE
 !
+      IMPLICIT NONE
+      INTEGER :: IGRID
       OBSSTRDAT(IGRID)%NQST=>NQST
       OBSSTRDAT(IGRID)%NQCST=>NQCST
       OBSSTRDAT(IGRID)%NQTST=>NQTST

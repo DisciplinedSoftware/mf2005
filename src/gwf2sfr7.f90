@@ -8,13 +8,21 @@
       USE GLOBAL,ONLY:BOTM,IBOUND,LBOTM
       implicit none
       type check_bot
-        integer ltype,irchnum,iflag,iunit
+        integer ltype
+        integer irchnum
+        integer iflag
+        integer iunit
       end type check_bot
       public check_bot
       CONTAINS
       FUNCTION ICHKSTRBOT(self)
       type (check_bot), intent(in) :: self
-      INTEGER JRCH,IRCH,KRCH,JSEG,ISEG,ICHKSTRBOT
+      INTEGER JRCH
+      INTEGER IRCH
+      INTEGER KRCH
+      INTEGER JSEG
+      INTEGER ISEG
+      INTEGER ICHKSTRBOT
       ICHKSTRBOT = 0
       KRCH = ISTRM(1,self%IRCHNUM)
       IRCH = ISTRM(2,self%IRCHNUM)
@@ -70,26 +78,77 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER In, Iunitbcf, Iunitlpf, Iunithuf, Iunitgwt, Nsol, Iouts,&
-     &        Iunituzf, Igrid
+      INTEGER In
+      INTEGER Iunitbcf
+      INTEGER Iunitlpf
+      INTEGER Iunithuf
+      INTEGER Iunitgwt
+      INTEGER Nsol
+      INTEGER Iouts
+      INTEGER Iunituzf
+      INTEGER Igrid
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
       CHARACTER*200 line
 !IFACE
       CHARACTER*8 face
-      INTEGER iface,ndash
-      INTEGER lloc, istart, istop, nparseg, i, ii, nlst, lb, ichk, icalc
-      INTEGER nseg, nreach, krch, irch, jrch, jseg, ireach, ksfropt
-      INTEGER krck, irck, jrck, jsegck, ireachck, kkptflg, ib
-      INTEGER lstsum, lstbeg, numinst, idum(1), ip, iterp, mstrmar
-      INTEGER nssar, nstrmar, NPP, MXVL, IRFG
+      INTEGER iface
+      INTEGER ndash
+      INTEGER lloc
+      INTEGER istart
+      INTEGER istop
+      INTEGER nparseg
+      INTEGER i
+      INTEGER ii
+      INTEGER nlst
+      INTEGER lb
+      INTEGER ichk
+      INTEGER icalc
+      INTEGER nseg
+      INTEGER nreach
+      INTEGER krch
+      INTEGER irch
+      INTEGER jrch
+      INTEGER jseg
+      INTEGER ireach
+      INTEGER ksfropt
+      INTEGER krck
+      INTEGER irck
+      INTEGER jrck
+      INTEGER jsegck
+      INTEGER ireachck
+      INTEGER kkptflg
+      INTEGER ib
+      INTEGER lstsum
+      INTEGER lstbeg
+      INTEGER numinst
+      INTEGER idum(1)
+      INTEGER ip
+      INTEGER iterp
+      INTEGER mstrmar
+      INTEGER nssar
+      INTEGER nstrmar
+      INTEGER NPP
+      INTEGER MXVL
+      INTEGER IRFG
 !      INTEGER intchk, Iostat
 !!      INTEGER nssar, nstrmar, Ltyp, NPP, MXVL, IRFG, ITRFLG
-      INTEGER k, kkrch, IERR, IFLG
-      REAL r, seglen, sumlen, thsslpe, thislpe, uhcslpe, rchlen, dist
+      INTEGER k
+      INTEGER kkrch
+      INTEGER IERR
+      INTEGER IFLG
+      REAL r
+      REAL seglen
+      REAL sumlen
+      REAL thsslpe
+      REAL thislpe
+      REAL uhcslpe
+      REAL rchlen
+      REAL dist
       REAL epsslpe
       character(len=16)  :: text        = 'SFR2'
+      SAVE :: TEXT
       logical :: found
 !     ------------------------------------------------------------------
       Version_sfr = 'gwf2sfr7.f 2017-08-01 09:55:00Z'
@@ -961,14 +1020,23 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER, INTENT(IN) :: In, Iout
-      INTEGER, INTENT(INOUT) :: IRFG,NPP,MXVL
+      INTEGER,INTENT(IN):: In
+      INTEGER,INTENT(IN):: Iout
+      INTEGER,INTENT(INOUT):: IRFG
+      INTEGER,INTENT(INOUT):: NPP
+      INTEGER,INTENT(INOUT):: MXVL
       character(len=16)  :: text
       CHARACTER(LEN=200)::LINE
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      INTEGER intchk, Iostat, LLOC,ISTART,ISTOP,I,IHEADER
+      INTEGER intchk
+      INTEGER Iostat
+      INTEGER LLOC
+      INTEGER ISTART
+      INTEGER ISTOP
+      INTEGER I
+      INTEGER IHEADER
       logical :: found
       real :: R
 !     ------------------------------------------------------------------
@@ -1146,11 +1214,15 @@
       IMPLICIT NONE
 !     ------------------------------------------------------------------
 !     SPECIFICATIONS:
-      INTEGER Iunitlpf, Iunithuf
+      INTEGER Iunitlpf
+      INTEGER Iunithuf
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      INTEGER ichk, irck, jrck, krck
+      INTEGER ichk
+      INTEGER irck
+      INTEGER jrck
+      INTEGER krck
 !     ------------------------------------------------------------------
 !
 !1------SET UHC EQUAL TO VKA IF STREAM IS IN ACTIVE CELL.
@@ -1209,24 +1281,106 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER Kkper, Kkstp, In, Iunitgwt, Iunitlak, Nsol, Iouts, Igrid
-      Integer Iunitbcf, Iunitlpf, Iunithuf, Iunituzf
+      INTEGER Kkper
+      INTEGER Kkstp
+      INTEGER In
+      INTEGER Iunitgwt
+      INTEGER Iunitlak
+      INTEGER Nsol
+      INTEGER Iouts
+      INTEGER Igrid
+      Integer Iunitbcf
+      Integer Iunitlpf
+      Integer Iunithuf
+      Integer Iunituzf
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION h, sbot
-      REAL avdpth, avhc, avthk, bottom, dist, dpslpe, dpth1, dpth2,&
-     &     dpthlw, dndiff, eldn, elslpe, etsw, flw1, flw2, flwlw,&
-     &     hcslpe, pptsw,rchlen, rough, roughbnk, roughch, runoff,&
-     &     seglen, strlen, sumlen, thkslpe, top, wdslpe, wdth1, wdth2,&
-     &     wdthlw, width, updiff, zero
-      INTEGER i, ic, icalc, ichk, icp, iflginit, ii, ik, il, ilay, ip,&
-     &        ipt, ir, irch, irp, isoptflg, iss, istep, istsg, iwvcnt,&
-     &        jj, jk, k5, k6, k7, kk, ksfropt, kss, ktot, l, lstbeg,&
-     &        nseg, nstrpts,krck,irck,jrck,ireachck, j, numval,iunitnum,&
-     &        ierr,IFLG,LLOC,istart,istop
+      DOUBLE PRECISION h
+      DOUBLE PRECISION sbot
+      REAL avdpth
+      REAL avhc
+      REAL avthk
+      REAL bottom
+      REAL dist
+      REAL dpslpe
+      REAL dpth1
+      REAL dpth2
+      REAL dpthlw
+      REAL dndiff
+      REAL eldn
+      REAL elslpe
+      REAL etsw
+      REAL flw1
+      REAL flw2
+      REAL flwlw
+      REAL hcslpe
+      REAL pptsw
+      REAL rchlen
+      REAL rough
+      REAL roughbnk
+      REAL roughch
+      REAL runoff
+      REAL seglen
+      REAL strlen
+      REAL sumlen
+      REAL thkslpe
+      REAL top
+      REAL wdslpe
+      REAL wdth1
+      REAL wdth2
+      REAL wdthlw
+      REAL width
+      REAL updiff
+      REAL zero
+      INTEGER i
+      INTEGER ic
+      INTEGER icalc
+      INTEGER ichk
+      INTEGER icp
+      INTEGER iflginit
+      INTEGER ii
+      INTEGER ik
+      INTEGER il
+      INTEGER ilay
+      INTEGER ip
+      INTEGER ipt
+      INTEGER ir
+      INTEGER irch
+      INTEGER irp
+      INTEGER isoptflg
+      INTEGER iss
+      INTEGER istep
+      INTEGER istsg
+      INTEGER iwvcnt
+      INTEGER jj
+      INTEGER jk
+      INTEGER k5
+      INTEGER k6
+      INTEGER k7
+      INTEGER kk
+      INTEGER ksfropt
+      INTEGER kss
+      INTEGER ktot
+      INTEGER l
+      INTEGER lstbeg
+      INTEGER nseg
+      INTEGER nstrpts
+      INTEGER krck
+      INTEGER irck
+      INTEGER jrck
+      INTEGER ireachck
+      INTEGER j
+      INTEGER numval
+      INTEGER iunitnum
+      INTEGER ierr
+      INTEGER IFLG
+      INTEGER LLOC
+      INTEGER istart
+      INTEGER istop
       CHARACTER(LEN=200)::LINE
-      REAL TTIME,TRATE
+      REAL TTIME
+      REAL TRATE
 !     ------------------------------------------------------------------
 !
 !-------SET POINTERS FOR CURRENT GRID.
@@ -2062,34 +2216,147 @@
 !     -----------------------------------------------------------------
 !     ARGUMENTS
 !     -----------------------------------------------------------------
-      INTEGER Kkiter, Kkper, Iunitlak, Igrid, Kkstp, Iunitrch,&
-     &        Iunituzf
+      INTEGER Kkiter
+      INTEGER Kkper
+      INTEGER Iunitlak
+      INTEGER Igrid
+      INTEGER Kkstp
+      INTEGER Iunitrch
+      INTEGER Iunituzf
 !     -----------------------------------------------------------------
 !     LOCAL VARIABLES
 !     -----------------------------------------------------------------
-      DOUBLE PRECISION cstr, cstr1, cstr2, dbleak, dlet1, dlet2, dlfh,&
-     &                 dlh, dlpp1, dlpp2, dlwp1, dlwp2, depth, depthx,&
-     &                 depthp, deptha, depthb, depthc, depthd, depth1,&
-     &                 depth2, dlkstr, deps, et1, et2, fhstr1, fhstr2,&
-     &                 flobot, flobot1, flobot2, flowc, flowin, flowot,&
-     &                 flwmdpta, flwmdptb, flwmdptc, flwmdptd, flwmdpt1,&
-     &                 flwmdpt2, flwmpt, h, hstr, pp1, pp2, sbot, slope,&
-     &                 strleak, strtop, trbflw, upflw, wetperm,&
-     &                 wetperma, wetpermb, wetpermc, wetpermd, wetperm1,&
-     &                 wetperm2, wetpermp, wetpermx, width, widtha,&
-     &                 widthb, widthc, widthd, width1, width2, widthp,&
-     &                 widthx, bwdth, cdpth, fdpth, awdth, f1, f2, fp,&
-     &                 enpt1, enpt2, flwen1, flwen2, flwp, flobotp,&
-     &                 flobotold, flwpetp, flwx, flwmpt2, flwest,&
-     &                 flwpet1, flwpet2, err, dlhold, precip, etstr,&
-     &                 runof, runoff, qa, qb, qc, qd, hstrave, fbot
-      DOUBLE PRECISION fbcheck, hld, totflwt, sbdthk, thetas, epsilon,&
-     &                 thr, thet1, dvrsn, fact,&
-     &                 depthtr, dwdh, wetpermsmooth,cstrsmooth
+      DOUBLE PRECISION cstr
+      DOUBLE PRECISION cstr1
+      DOUBLE PRECISION cstr2
+      DOUBLE PRECISION dbleak
+      DOUBLE PRECISION dlet1
+      DOUBLE PRECISION dlet2
+      DOUBLE PRECISION dlfh
+      DOUBLE PRECISION dlh
+      DOUBLE PRECISION dlpp1
+      DOUBLE PRECISION dlpp2
+      DOUBLE PRECISION dlwp1
+      DOUBLE PRECISION dlwp2
+      DOUBLE PRECISION depth
+      DOUBLE PRECISION depthx
+      DOUBLE PRECISION depthp
+      DOUBLE PRECISION deptha
+      DOUBLE PRECISION depthb
+      DOUBLE PRECISION depthc
+      DOUBLE PRECISION depthd
+      DOUBLE PRECISION depth1
+      DOUBLE PRECISION depth2
+      DOUBLE PRECISION dlkstr
+      DOUBLE PRECISION deps
+      DOUBLE PRECISION et1
+      DOUBLE PRECISION et2
+      DOUBLE PRECISION fhstr1
+      DOUBLE PRECISION fhstr2
+      DOUBLE PRECISION flobot
+      DOUBLE PRECISION flobot1
+      DOUBLE PRECISION flobot2
+      DOUBLE PRECISION flowc
+      DOUBLE PRECISION flowin
+      DOUBLE PRECISION flowot
+      DOUBLE PRECISION flwmdpta
+      DOUBLE PRECISION flwmdptb
+      DOUBLE PRECISION flwmdptc
+      DOUBLE PRECISION flwmdptd
+      DOUBLE PRECISION flwmdpt1
+      DOUBLE PRECISION flwmdpt2
+      DOUBLE PRECISION flwmpt
+      DOUBLE PRECISION h
+      DOUBLE PRECISION hstr
+      DOUBLE PRECISION pp1
+      DOUBLE PRECISION pp2
+      DOUBLE PRECISION sbot
+      DOUBLE PRECISION slope
+      DOUBLE PRECISION strleak
+      DOUBLE PRECISION strtop
+      DOUBLE PRECISION trbflw
+      DOUBLE PRECISION upflw
+      DOUBLE PRECISION wetperm
+      DOUBLE PRECISION wetperma
+      DOUBLE PRECISION wetpermb
+      DOUBLE PRECISION wetpermc
+      DOUBLE PRECISION wetpermd
+      DOUBLE PRECISION wetperm1
+      DOUBLE PRECISION wetperm2
+      DOUBLE PRECISION wetpermp
+      DOUBLE PRECISION wetpermx
+      DOUBLE PRECISION width
+      DOUBLE PRECISION widtha
+      DOUBLE PRECISION widthb
+      DOUBLE PRECISION widthc
+      DOUBLE PRECISION widthd
+      DOUBLE PRECISION width1
+      DOUBLE PRECISION width2
+      DOUBLE PRECISION widthp
+      DOUBLE PRECISION widthx
+      DOUBLE PRECISION bwdth
+      DOUBLE PRECISION cdpth
+      DOUBLE PRECISION fdpth
+      DOUBLE PRECISION awdth
+      DOUBLE PRECISION f1
+      DOUBLE PRECISION f2
+      DOUBLE PRECISION fp
+      DOUBLE PRECISION enpt1
+      DOUBLE PRECISION enpt2
+      DOUBLE PRECISION flwen1
+      DOUBLE PRECISION flwen2
+      DOUBLE PRECISION flwp
+      DOUBLE PRECISION flobotp
+      DOUBLE PRECISION flobotold
+      DOUBLE PRECISION flwpetp
+      DOUBLE PRECISION flwx
+      DOUBLE PRECISION flwmpt2
+      DOUBLE PRECISION flwest
+      DOUBLE PRECISION flwpet1
+      DOUBLE PRECISION flwpet2
+      DOUBLE PRECISION err
+      DOUBLE PRECISION dlhold
+      DOUBLE PRECISION precip
+      DOUBLE PRECISION etstr
+      DOUBLE PRECISION runof
+      DOUBLE PRECISION runoff
+      DOUBLE PRECISION qa
+      DOUBLE PRECISION qb
+      DOUBLE PRECISION qc
+      DOUBLE PRECISION qd
+      DOUBLE PRECISION hstrave
+      DOUBLE PRECISION fbot
+      DOUBLE PRECISION fbcheck
+      DOUBLE PRECISION hld
+      DOUBLE PRECISION totflwt
+      DOUBLE PRECISION sbdthk
+      DOUBLE PRECISION thetas
+      DOUBLE PRECISION epsilon
+      DOUBLE PRECISION thr
+      DOUBLE PRECISION thet1
+      DOUBLE PRECISION dvrsn
+      DOUBLE PRECISION fact
+      DOUBLE PRECISION depthtr
+      DOUBLE PRECISION dwdh
+      DOUBLE PRECISION wetpermsmooth
+      DOUBLE PRECISION cstrsmooth
 !      DOUBLE PRECISION rhsh1, rhsh2, hcofh1, hcofh2
-      REAL areamax, avhc, errold, fks, ha, qcnst, seep,&
-     &     stgon, strlen, roughch, roughbnk, widthch, deltinc, qlat,&
-     &     fltest, Transient_bd
+      REAL areamax
+      REAL avhc
+      REAL errold
+      REAL fks
+      REAL ha
+      REAL qcnst
+      REAL seep
+      REAL stgon
+      REAL strlen
+      REAL roughch
+      REAL roughbnk
+      REAL widthch
+      REAL deltinc
+      REAL qlat
+      REAL fltest
+      REAL Transient_bd
 !!     +     fltest, Transient_bd, dvt, dum, totdum  !CJM
 !      real fin, fout
       INTEGER i, ibflg, ic, icalc, idivseg, iflg, iic, iic2, iic3, iic4,&
@@ -3574,39 +3841,134 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER Kkstp, Kkper, Iunitgwt, Iunitlak, Iunitgage, Iunituzf,&
-     &        Iunitrch !cjm (added Iunitrch)
-      INTEGER Igrid, Nsol
+      INTEGER Kkstp  !cjm (added Iunitrch)
+      INTEGER Kkper
+      INTEGER Iunitgwt
+      INTEGER Iunitlak
+      INTEGER Iunitgage
+      INTEGER Iunituzf
+      INTEGER Iunitrch
+      INTEGER Igrid
+      INTEGER Nsol
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      REAL areamax, avhc, fks, ha, rin, rout, strlen,&
-     &     zero, sfrbudg_in, sfrbudg_out, qlat, deltinc, qcnst, rtime,&
-     &     fltest, Transient_bd, Transient_bd_tot !!, dvt  !cjm (added dvt)
+      REAL areamax  !!, dvt  !cjm (added dvt)
+      REAL avhc
+      REAL fks
+      REAL ha
+      REAL rin
+      REAL rout
+      REAL strlen
+      REAL zero
+      REAL sfrbudg_in
+      REAL sfrbudg_out
+      REAL qlat
+      REAL deltinc
+      REAL qcnst
+      REAL rtime
+      REAL fltest
+      REAL Transient_bd
+      REAL Transient_bd_tot
 !IFACE
       REAL xface(1)
       INTEGER naux
-      INTEGER i, ibd, iblst, ibdlbl, ibdst, ibstlb, ic, icalc, idivseg,&
-     &        il, ilay, iout1, iout2, iprior, iprvsg, ir, istsg, itrib,&
-     &        iwidthcheck, kss, l, lk, ll, nreach, numdelt, maxwav,&
-     &        icalccheck, iss, lsub, irt, itstr, imassroute, lfold
-      INTEGER illake, LAKID
+      INTEGER i
+      INTEGER ibd
+      INTEGER iblst
+      INTEGER ibdlbl
+      INTEGER ibdst
+      INTEGER ibstlb
+      INTEGER ic
+      INTEGER icalc
+      INTEGER idivseg
+      INTEGER il
+      INTEGER ilay
+      INTEGER iout1
+      INTEGER iout2
+      INTEGER iprior
+      INTEGER iprvsg
+      INTEGER ir
+      INTEGER istsg
+      INTEGER itrib
+      INTEGER iwidthcheck
+      SAVE :: IWIDTHCHECK
+      INTEGER kss
+      INTEGER l
+      INTEGER lk
+      INTEGER ll
+      INTEGER nreach
+      INTEGER numdelt
+      INTEGER maxwav
+      INTEGER icalccheck
+      INTEGER iss
+      INTEGER lsub
+      INTEGER irt
+      INTEGER itstr
+      INTEGER imassroute
+      INTEGER lfold
+      INTEGER illake
+      INTEGER LAKID
 !!      INTEGER irr, icc, icount  !cjm
-      DOUBLE PRECISION h, hstr, sbot, cstr, ratin, ratout, flowin,&
-     &                 flobot, flow, flowot, sbdthk, upflw, trbflw,&
-     &                 width, wetperm, runof, runoff, precip, etstr,&
-     &                 slope, cdpth, fdpth, hdiff, grad, depth,&
-     &                 hld, fbcheck, totflwt, totdelstor, totuzstor,&
-     &                 thetas, epsilon, thr, qa, qb, qc, qd, awdth,&
-     &                 bwdth, gwflow, dvrsn, fbot, depthtr, strtop,&
-     &                 dwdh, fact
+      DOUBLE PRECISION h
+      DOUBLE PRECISION hstr
+      DOUBLE PRECISION sbot
+      DOUBLE PRECISION cstr
+      DOUBLE PRECISION ratin
+      DOUBLE PRECISION ratout
+      DOUBLE PRECISION flowin
+      DOUBLE PRECISION flobot
+      DOUBLE PRECISION flow
+      DOUBLE PRECISION flowot
+      DOUBLE PRECISION sbdthk
+      DOUBLE PRECISION upflw
+      DOUBLE PRECISION trbflw
+      DOUBLE PRECISION width
+      DOUBLE PRECISION wetperm
+      DOUBLE PRECISION runof
+      DOUBLE PRECISION runoff
+      DOUBLE PRECISION precip
+      DOUBLE PRECISION etstr
+      DOUBLE PRECISION slope
+      DOUBLE PRECISION cdpth
+      DOUBLE PRECISION fdpth
+      DOUBLE PRECISION hdiff
+      DOUBLE PRECISION grad
+      DOUBLE PRECISION depth
+      DOUBLE PRECISION hld
+      DOUBLE PRECISION fbcheck
+      DOUBLE PRECISION totflwt
+      DOUBLE PRECISION totdelstor
+      DOUBLE PRECISION totuzstor
+      DOUBLE PRECISION thetas
+      DOUBLE PRECISION epsilon
+      DOUBLE PRECISION thr
+      DOUBLE PRECISION qa
+      DOUBLE PRECISION qb
+      DOUBLE PRECISION qc
+      DOUBLE PRECISION qd
+      DOUBLE PRECISION awdth
+      DOUBLE PRECISION bwdth
+      DOUBLE PRECISION gwflow
+      DOUBLE PRECISION dvrsn
+      DOUBLE PRECISION fbot
+      DOUBLE PRECISION depthtr
+      DOUBLE PRECISION strtop
+      DOUBLE PRECISION dwdh
+      DOUBLE PRECISION fact
       EXTERNAL CALC_XSA
       DOUBLE PRECISION CALC_XSA
 !     ------------------------------------------------------------------
 !     LOCAL STATIC VARIABLES
 !     ------------------------------------------------------------------
-      CHARACTER*16 text, strtxt, txtlst
+      CHARACTER*16 text
+      SAVE :: TEXT
+      CHARACTER*16 strtxt
+      SAVE :: STRTXT
+      CHARACTER*16 txtlst
+      SAVE :: TXTLST
       CHARACTER*16 auxtxt(1)
+      SAVE :: AUXTXT
       DATA text/'  STREAM LEAKAGE'/
       DATA strtxt/'STREAMFLOW OUT  '/
       DATA txtlst/'STREAM LISTING  '/
@@ -4429,15 +4791,37 @@
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      INTEGER icalc, istsg, l, lk, nreach, nstrpts, kkiter
-      REAL    roughch, roughbnk, widthch
-      DOUBLE PRECISION finc, strbdtop, dlkstr1, dlkstr2, slope, cdpth,&
-     &                 fdpth, flwdlk1, flwdlk2, wdthlk1, wdthlk2,&
-     &                 wetperm1, wetperm2, width1, width2
+      INTEGER icalc
+      INTEGER istsg
+      INTEGER l
+      INTEGER lk
+      INTEGER nreach
+      INTEGER nstrpts
+      INTEGER kkiter
+      REAL roughch
+      REAL roughbnk
+      REAL widthch
+      DOUBLE PRECISION finc
+      DOUBLE PRECISION strbdtop
+      DOUBLE PRECISION dlkstr1
+      DOUBLE PRECISION dlkstr2
+      DOUBLE PRECISION slope
+      DOUBLE PRECISION cdpth
+      DOUBLE PRECISION fdpth
+      DOUBLE PRECISION flwdlk1
+      DOUBLE PRECISION flwdlk2
+      DOUBLE PRECISION wdthlk1
+      DOUBLE PRECISION wdthlk2
+      DOUBLE PRECISION wetperm1
+      DOUBLE PRECISION wetperm2
+      DOUBLE PRECISION width1
+      DOUBLE PRECISION width2
 !     ------------------------------------------------------------------
 !     LOCAL STATIC VARIABLES
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION FIVE_THIRDS, DPMAXLK, delh
+      DOUBLE PRECISION FIVE_THIRDS
+      DOUBLE PRECISION DPMAXLK
+      DOUBLE PRECISION delh
       PARAMETER (FIVE_THIRDS=5.0D0/3.0D0)
       PARAMETER (DPMAXLK=10.0D0)
 !
@@ -4528,11 +4912,13 @@
 !     ARGUMENTS
 !     ------------------------------------------------------------------
       INTEGER Iprior
-      DOUBLE PRECISION  Upflw, Dvrsn
+      DOUBLE PRECISION Upflw
+      DOUBLE PRECISION Dvrsn
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION dif, prcnt
+      DOUBLE PRECISION dif
+      DOUBLE PRECISION prcnt
 !     ------------------------------------------------------------------
 !1------IF IPRIOR IS ZERO THEN FLOW DIVERTED CAN BE ALL OF
 !         STREAMFLOW UP TO SPECIFIED FLOW.
@@ -4583,14 +4969,29 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER Kkper, Kkstp
+      INTEGER Kkper
+      INTEGER Kkstp
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      REAL adiffr, adiffv, bigvl1, bigvl2, diffr, diffv, prcntdifr,&
-     &     prcntdifv, small, totrin, totrot, totvin, totvot
-      CHARACTER*17 text1, text2, text3
-      CHARACTER*18 val1, val2
+      REAL adiffr
+      REAL adiffv
+      REAL bigvl1
+      REAL bigvl2
+      REAL diffr
+      REAL diffv
+      REAL prcntdifr
+      REAL prcntdifv
+      REAL small
+      REAL totrin
+      REAL totrot
+      REAL totvin
+      REAL totvot
+      CHARACTER*17 text1
+      CHARACTER*17 text2
+      CHARACTER*17 text3
+      CHARACTER*18 val1
+      CHARACTER*18 val2
 !     ------------------------------------------------------------------
       text1 = '      STREAM LOSS'
       text2 = 'CHANGE IN STORAGE'
@@ -4762,16 +5163,39 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      REAL Roughbnk, Roughch
-      INTEGER Iprndpth, Istsg, Itstr, Nreach
-      DOUBLE PRECISION Flow, Slope, Wetperm, Depth, Totwdth
+      REAL Roughbnk
+      REAL Roughch
+      INTEGER Iprndpth
+      INTEGER Istsg
+      INTEGER Itstr
+      INTEGER Nreach
+      DOUBLE PRECISION Flow
+      DOUBLE PRECISION Slope
+      DOUBLE PRECISION Wetperm
+      DOUBLE PRECISION Depth
+      DOUBLE PRECISION Totwdth
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      INTEGER i, iflg
-      DOUBLE PRECISION flow1, flow2, flow3, y0, ymin, xnum, dnom, stage,&
-     &                 depth1, depth2, depth3, f1, f2, f3, err1, err2,&
-     &                 err3
+      INTEGER i
+      INTEGER iflg
+      DOUBLE PRECISION flow1
+      DOUBLE PRECISION flow2
+      DOUBLE PRECISION flow3
+      DOUBLE PRECISION y0
+      DOUBLE PRECISION ymin
+      DOUBLE PRECISION xnum
+      DOUBLE PRECISION dnom
+      DOUBLE PRECISION stage
+      DOUBLE PRECISION depth1
+      DOUBLE PRECISION depth2
+      DOUBLE PRECISION depth3
+      DOUBLE PRECISION f1
+      DOUBLE PRECISION f2
+      DOUBLE PRECISION f3
+      DOUBLE PRECISION err1
+      DOUBLE PRECISION err2
+      DOUBLE PRECISION err3
 !     ------------------------------------------------------------------
 !
 !1------INITIALIZE VARIABLES TO ZERO.
@@ -4936,18 +5360,48 @@
 !     -------------------------------------------------------------------
 !     ARGUMENTS
 !     -------------------------------------------------------------------
-      REAL Roughbnk, Roughch
+      REAL Roughbnk
+      REAL Roughch
       INTEGER Istsg
-      DOUBLE PRECISION Flow, Wetperm, Totwdth, Depth, Slope
+      DOUBLE PRECISION Flow
+      DOUBLE PRECISION Wetperm
+      DOUBLE PRECISION Totwdth
+      DOUBLE PRECISION Depth
+      DOUBLE PRECISION Slope
 !     -------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     -------------------------------------------------------------------
-      REAL fac, r, rough, subarea, wtprm
-      INTEGER i, ii, j
-      DOUBLE PRECISION xleft, yleft, dpthleft, dpthrght, xright, yright,&
-     &                 x0, y0, x1, y1, wtprm1, wtprm2, wtprm3, width1,&
-     &                 width2, width3, width, subarea1, subarea2,&
-     &                 subarea3, subflow1, subflow2, subflow3
+      REAL fac
+      REAL r
+      REAL rough
+      REAL subarea
+      REAL wtprm
+      INTEGER i
+      INTEGER ii
+      INTEGER j
+      DOUBLE PRECISION xleft
+      DOUBLE PRECISION yleft
+      DOUBLE PRECISION dpthleft
+      DOUBLE PRECISION dpthrght
+      DOUBLE PRECISION xright
+      DOUBLE PRECISION yright
+      DOUBLE PRECISION x0
+      DOUBLE PRECISION y0
+      DOUBLE PRECISION x1
+      DOUBLE PRECISION y1
+      DOUBLE PRECISION wtprm1
+      DOUBLE PRECISION wtprm2
+      DOUBLE PRECISION wtprm3
+      DOUBLE PRECISION width1
+      DOUBLE PRECISION width2
+      DOUBLE PRECISION width3
+      DOUBLE PRECISION width
+      DOUBLE PRECISION subarea1
+      DOUBLE PRECISION subarea2
+      DOUBLE PRECISION subarea3
+      DOUBLE PRECISION subflow1
+      DOUBLE PRECISION subflow2
+      DOUBLE PRECISION subflow3
 !     -------------------------------------------------------------------
 !
 !1------INITIALIZE VARIABLES TO ZERO.
@@ -5079,15 +5533,37 @@
 !     -------------------------------------------------------------------
 !     ARGUMENTS
 !     -------------------------------------------------------------------
-      INTEGER Istsg, Nstrpts
-      DOUBLE PRECISION Flow, Depth, Width
+      INTEGER Istsg
+      INTEGER Nstrpts
+      DOUBLE PRECISION Flow
+      DOUBLE PRECISION Depth
+      DOUBLE PRECISION Width
 !     -------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     -------------------------------------------------------------------
-      INTEGER iflwlw, istghi, istglw, istp, iwthhi, iwthlw
-      DOUBLE PRECISION flwlw, flwhi, stglw, stghi, wthlw, wthhi, dflwlw,&
-     &                 dflwhi, dstglw, dstghi, dwthlw, dwthhi, dlgflw,&
-     &                 dlgsls, dlgslw, dlgstg, dlgwth
+      INTEGER iflwlw
+      INTEGER istghi
+      INTEGER istglw
+      INTEGER istp
+      INTEGER iwthhi
+      INTEGER iwthlw
+      DOUBLE PRECISION flwlw
+      DOUBLE PRECISION flwhi
+      DOUBLE PRECISION stglw
+      DOUBLE PRECISION stghi
+      DOUBLE PRECISION wthlw
+      DOUBLE PRECISION wthhi
+      DOUBLE PRECISION dflwlw
+      DOUBLE PRECISION dflwhi
+      DOUBLE PRECISION dstglw
+      DOUBLE PRECISION dstghi
+      DOUBLE PRECISION dwthlw
+      DOUBLE PRECISION dwthhi
+      DOUBLE PRECISION dlgflw
+      DOUBLE PRECISION dlgsls
+      DOUBLE PRECISION dlgslw
+      DOUBLE PRECISION dlgstg
+      DOUBLE PRECISION dlgwth
 !     -------------------------------------------------------------------
 !
 !1------DEFINE RANGE OF FLOW, DEPTH, AND WIDTH FROM RATING TABLE.
@@ -5172,15 +5648,40 @@
 !     -------------------------------------------------------------------
 !     ARGUMENTS
 !     -------------------------------------------------------------------
-      INTEGER Istsg, Itb, Kkiter, Nreach, Nstrpts
-      DOUBLE PRECISION Flow, Depth, Width
+      INTEGER Istsg
+      INTEGER Itb
+      INTEGER Kkiter
+      INTEGER Nreach
+      INTEGER Nstrpts
+      DOUBLE PRECISION Flow
+      DOUBLE PRECISION Depth
+      DOUBLE PRECISION Width
 !     -------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     -------------------------------------------------------------------
-      INTEGER iflwhi, iflwlw, istglw, istp, iwthhi, iwthlw
-      DOUBLE PRECISION flwlw, flwhi, stglw, stghi, wthlw, wthhi, dflwlw,&
-     &                 dflwhi, dstglw, dstghi, dwthlw, dwthhi, dlgflw,&
-     &                 dlgslf, dlgslw, dlgstg, dlgwth
+      INTEGER iflwhi
+      INTEGER iflwlw
+      INTEGER istglw
+      INTEGER istp
+      INTEGER iwthhi
+      INTEGER iwthlw
+      DOUBLE PRECISION flwlw
+      DOUBLE PRECISION flwhi
+      DOUBLE PRECISION stglw
+      DOUBLE PRECISION stghi
+      DOUBLE PRECISION wthlw
+      DOUBLE PRECISION wthhi
+      DOUBLE PRECISION dflwlw
+      DOUBLE PRECISION dflwhi
+      DOUBLE PRECISION dstglw
+      DOUBLE PRECISION dstghi
+      DOUBLE PRECISION dwthlw
+      DOUBLE PRECISION dwthhi
+      DOUBLE PRECISION dlgflw
+      DOUBLE PRECISION dlgslf
+      DOUBLE PRECISION dlgslw
+      DOUBLE PRECISION dlgstg
+      DOUBLE PRECISION dlgwth
 !!      REAL dum, totdum
 !     -------------------------------------------------------------------
 !
@@ -5281,16 +5782,44 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER Iunitgwt, Ichk, In, Ischk, Lstbeg, Nischk, Nlst, Kkper
-      INTEGER Nsol, Iunituzf
+      INTEGER Iunitgwt
+      INTEGER Ichk
+      INTEGER In
+      INTEGER Ischk
+      INTEGER Lstbeg
+      INTEGER Nischk
+      INTEGER Nlst
+      INTEGER Kkper
+      INTEGER Nsol
+      INTEGER Iunituzf
       DIMENSION Ischk(Nischk)
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      INTEGER icalc, idum, ii, iqseg, isol, iupseg, jj, jk, lstend, n,&
-     &        noutseg, nseg, nstrpts, i, k, istart, istop,sgnm,nmcl,&
-     &        J,LLOC
-      REAL dum, totdum, R
+      INTEGER icalc
+      INTEGER idum
+      INTEGER ii
+      INTEGER iqseg
+      INTEGER isol
+      INTEGER iupseg
+      INTEGER jj
+      INTEGER jk
+      INTEGER lstend
+      INTEGER n
+      INTEGER noutseg
+      INTEGER nseg
+      INTEGER nstrpts
+      INTEGER i
+      INTEGER k
+      INTEGER istart
+      INTEGER istop
+      INTEGER sgnm
+      INTEGER nmcl
+      INTEGER J
+      INTEGER LLOC
+      REAL dum
+      REAL totdum
+      REAL R
       CHARACTER(LEN=200)::LINE
 !     ------------------------------------------------------------------
 !
@@ -5576,17 +6105,38 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER In, Iunitgwt, Nsol
+      INTEGER In
+      INTEGER Iunitgwt
+      INTEGER Nsol
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
       REAL rdum
-      INTEGER icalc, idum, iloc, ip, iqseg, isol, istart, istop, iupseg,&
-     &        jend, jj, ki, lloc, lstend, ni, nlst, nseg, nstrpts,&
-     &        numinst, lstbeg
+      INTEGER icalc
+      INTEGER idum
+      INTEGER iloc
+      INTEGER ip
+      INTEGER iqseg
+      INTEGER isol
+      INTEGER istart
+      INTEGER istop
+      INTEGER iupseg
+      INTEGER jend
+      INTEGER jj
+      INTEGER ki
+      INTEGER lloc
+      INTEGER lstend
+      INTEGER ni
+      INTEGER nlst
+      INTEGER nseg
+      INTEGER nstrpts
+      INTEGER numinst
+      INTEGER lstbeg
       CHARACTER*4 package
       CHARACTER*200 line
-      CHARACTER*10 pname, ctmp3, ctmp4
+      CHARACTER*10 pname
+      CHARACTER*10 ctmp3
+      CHARACTER*10 ctmp4
 !     ------------------------------------------------------------------
 !
       package = 'SFR '
@@ -5756,12 +6306,26 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER Nlst, Lstbeg, Iunitgwt, Kkper, Nsol, Iouts
+      INTEGER Nlst
+      INTEGER Lstbeg
+      INTEGER Iunitgwt
+      INTEGER Kkper
+      INTEGER Nsol
+      INTEGER Iouts
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      INTEGER i, icalc, iflg, ii, ipt, isol, jj, lstend, nn, nseg,&
-     &        nstrpts
+      INTEGER i
+      INTEGER icalc
+      INTEGER iflg
+      INTEGER ii
+      INTEGER ipt
+      INTEGER isol
+      INTEGER jj
+      INTEGER lstend
+      INTEGER nn
+      INTEGER nseg
+      INTEGER nstrpts
 !     ------------------------------------------------------------------
 !
       lstend = Nlst + Lstbeg - 1
@@ -6117,15 +6681,26 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      REAL Areamax, Avhc, Fks, Strlen
-      INTEGER  Nwavst(ISUZN), Maxwav
-      DOUBLE PRECISION Wetperm, Depth, Sbdthk, Fbcheck, Foldflbt
+      REAL Areamax
+      REAL Avhc
+      REAL Fks
+      REAL Strlen
+      INTEGER Nwavst(ISUZN)
+      INTEGER Maxwav
+      DOUBLE PRECISION Wetperm
+      DOUBLE PRECISION Depth
+      DOUBLE PRECISION Sbdthk
+      DOUBLE PRECISION Fbcheck
+      DOUBLE PRECISION Foldflbt
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      REAL flobotcheck, seep
-      INTEGER nstrailpls1, ii
-      DOUBLE PRECISION flobot, area
+      REAL flobotcheck
+      REAL seep
+      INTEGER nstrailpls1
+      INTEGER ii
+      DOUBLE PRECISION flobot
+      DOUBLE PRECISION area
 !     ------------------------------------------------------------------
       nstrailpls1 = 2*NSTRAIL + 1
       seep = Avhc*(1.0D0+(Depth)/(Sbdthk))
@@ -6160,17 +6735,38 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      REAL Avhc, Fks, Ha, Strlen
-      INTEGER Iwidthcheck, Nwavst(ISUZN), Icalc
-      DOUBLE PRECISION Flobot, Uzseep(ISUZN), Uzthst(NSTOTRL), Depth,&
-     &                 Uzwdth(ISUZN), Flow, Sbdthk, Wetper(ISUZN), Thr,&
-     &                 Thetas, Epsilon
+      REAL Avhc
+      REAL Fks
+      REAL Ha
+      REAL Strlen
+      INTEGER Iwidthcheck
+      INTEGER Nwavst(ISUZN)
+      INTEGER Icalc
+      DOUBLE PRECISION Flobot
+      DOUBLE PRECISION Uzseep(ISUZN)
+      DOUBLE PRECISION Uzthst(NSTOTRL)
+      DOUBLE PRECISION Depth
+      DOUBLE PRECISION Uzwdth(ISUZN)
+      DOUBLE PRECISION Flow
+      DOUBLE PRECISION Sbdthk
+      DOUBLE PRECISION Wetper(ISUZN)
+      DOUBLE PRECISION Thr
+      DOUBLE PRECISION Thetas
+      DOUBLE PRECISION Epsilon
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      REAL ftaken, porpress
-      INTEGER i, imoistcheck, iset, k, ntotuzn
-      DOUBLE PRECISION flobotleft, seepunsat, disconwidth, uzflobot
+      REAL ftaken
+      REAL porpress
+      INTEGER i
+      INTEGER imoistcheck
+      INTEGER iset
+      INTEGER k
+      INTEGER ntotuzn
+      DOUBLE PRECISION flobotleft
+      DOUBLE PRECISION seepunsat
+      DOUBLE PRECISION disconwidth
+      DOUBLE PRECISION uzflobot
 !     ------------------------------------------------------------------
       ntotuzn = NSTOTRL/ISUZN
       flobotleft = Flobot
@@ -6271,28 +6867,85 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER L, Il, Ir, Ic, Iwidthcheck, Ibd, Icalc, Imassroute
-      INTEGER Nwavst(ISUZN), Itrlst(NSTOTRL), Ltrlst(NSTOTRL)
+      INTEGER L
+      INTEGER Il
+      INTEGER Ir
+      INTEGER Ic
+      INTEGER Iwidthcheck
+      INTEGER Ibd
+      INTEGER Icalc
+      INTEGER Imassroute
+      INTEGER Nwavst(ISUZN)
+      INTEGER Itrlst(NSTOTRL)
+      INTEGER Ltrlst(NSTOTRL)
       INTEGER Iunitgage
-      REAL Fks, Strlen, Deltinc, Avdpt(NUMAVE), Avwat(NUMAVE),&
-     &     Wat1(NUMAVE)
-      DOUBLE PRECISION Uzwdth(ISUZN), Uzflwt(ISUZN), Uzolsflx(ISUZN),&
-     &                 Uzseep(ISUZN), Uzstor(ISUZN), Delstor(ISUZN),&
-     &                 Wetper(ISUZN)
-      DOUBLE PRECISION Uzspst(NSTOTRL), Uzflst(NSTOTRL),&
-     &                 Uzdpst(NSTOTRL), Uzthst(NSTOTRL)
-      DOUBLE PRECISION H, Hld, Thr, Thetas, Epsilon, Ratin, Ratout,&
-     &                 Flobot, Sbot, Totflwt, Totuzstor, Totdelstor,&
-     &                 Gwflow, uzinfiltot
+      REAL Fks
+      REAL Strlen
+      REAL Deltinc
+      REAL Avdpt(NUMAVE)
+      REAL Avwat(NUMAVE)
+      REAL Wat1(NUMAVE)
+      DOUBLE PRECISION Uzwdth(ISUZN)
+      DOUBLE PRECISION Uzflwt(ISUZN)
+      DOUBLE PRECISION Uzolsflx(ISUZN)
+      DOUBLE PRECISION Uzseep(ISUZN)
+      DOUBLE PRECISION Uzstor(ISUZN)
+      DOUBLE PRECISION Delstor(ISUZN)
+      DOUBLE PRECISION Wetper(ISUZN)
+      DOUBLE PRECISION Uzspst(NSTOTRL)
+      DOUBLE PRECISION Uzflst(NSTOTRL)
+      DOUBLE PRECISION Uzdpst(NSTOTRL)
+      DOUBLE PRECISION Uzthst(NSTOTRL)
+      DOUBLE PRECISION H
+      DOUBLE PRECISION Hld
+      DOUBLE PRECISION Thr
+      DOUBLE PRECISION Thetas
+      DOUBLE PRECISION Epsilon
+      DOUBLE PRECISION Ratin
+      DOUBLE PRECISION Ratout
+      DOUBLE PRECISION Flobot
+      DOUBLE PRECISION Sbot
+      DOUBLE PRECISION Totflwt
+      DOUBLE PRECISION Totuzstor
+      DOUBLE PRECISION Totdelstor
+      DOUBLE PRECISION Gwflow
+      DOUBLE PRECISION uzinfiltot
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      REAL depthinc, depthsave, fhold, hdif, htest1, htest2, seep,&
-     &     totalwc, totalwc1, uzstorhold, widthsave, ftheta1, ftheta2,&
-     &     eps_m1
-      INTEGER i, ick, icounter, iflag, ii, iset, j, jj, jk, k, kk,&
-     &        numwavhld, nwavecheck, iuznhold, ntotuzn, jm1
-      DOUBLE PRECISION strtop, fm, fluxdif
+      REAL depthinc
+      REAL depthsave
+      REAL fhold
+      REAL hdif
+      REAL htest1
+      REAL htest2
+      REAL seep
+      REAL totalwc
+      REAL totalwc1
+      REAL uzstorhold
+      REAL widthsave
+      REAL ftheta1
+      REAL ftheta2
+      REAL eps_m1
+      INTEGER i
+      INTEGER ick
+      INTEGER icounter
+      INTEGER iflag
+      INTEGER ii
+      INTEGER iset
+      INTEGER j
+      INTEGER jj
+      INTEGER jk
+      INTEGER k
+      INTEGER kk
+      INTEGER numwavhld
+      INTEGER nwavecheck
+      INTEGER iuznhold
+      INTEGER ntotuzn
+      INTEGER jm1
+      DOUBLE PRECISION strtop
+      DOUBLE PRECISION fm
+      DOUBLE PRECISION fluxdif
       INTEGER loop
       ALLOCATABLE loop(:)
       ALLOCATE (loop(ISUZN))
@@ -6926,23 +7579,50 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      REAL Fks, Seep, Deltinc
-      INTEGER L, Icalc
-      INTEGER Nwavst(ISUZN), Itrlst(NSTOTRL), Ltrlst(NSTOTRL)
-      INTEGER Itrlit(NSTOTRL), Ltrlit(NSTOTRL)
-      DOUBLE PRECISION Uzwdth(ISUZN), Uzflwt(ISUZN), Uzolsflx(ISUZN),&
-     &                 Uzseep(ISUZN), Sbot
-      DOUBLE PRECISION Uzspst(NSTOTRL), Uzflst(NSTOTRL),&
-     &                 Uzdpst(NSTOTRL), Uzthst(NSTOTRL)
-      DOUBLE PRECISION Uzspit(NSTOTRL), Uzflit(NSTOTRL),&
-     &                 Uzdpit(NSTOTRL), Uzthit(NSTOTRL)
-      DOUBLE PRECISION H, Hld, Thr, Thetas, Epsilon
+      REAL Fks
+      REAL Seep
+      REAL Deltinc
+      INTEGER L
+      INTEGER Icalc
+      INTEGER Nwavst(ISUZN)
+      INTEGER Itrlst(NSTOTRL)
+      INTEGER Ltrlst(NSTOTRL)
+      INTEGER Itrlit(NSTOTRL)
+      INTEGER Ltrlit(NSTOTRL)
+      DOUBLE PRECISION Uzwdth(ISUZN)
+      DOUBLE PRECISION Uzflwt(ISUZN)
+      DOUBLE PRECISION Uzolsflx(ISUZN)
+      DOUBLE PRECISION Uzseep(ISUZN)
+      DOUBLE PRECISION Sbot
+      DOUBLE PRECISION Uzspst(NSTOTRL)
+      DOUBLE PRECISION Uzflst(NSTOTRL)
+      DOUBLE PRECISION Uzdpst(NSTOTRL)
+      DOUBLE PRECISION Uzthst(NSTOTRL)
+      DOUBLE PRECISION Uzspit(NSTOTRL)
+      DOUBLE PRECISION Uzflit(NSTOTRL)
+      DOUBLE PRECISION Uzdpit(NSTOTRL)
+      DOUBLE PRECISION Uzthit(NSTOTRL)
+      DOUBLE PRECISION H
+      DOUBLE PRECISION Hld
+      DOUBLE PRECISION Thr
+      DOUBLE PRECISION Thetas
+      DOUBLE PRECISION Epsilon
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      INTEGER i, ick, iset, iwav, numwaves, iuzntemp, ntotuzn
-      DOUBLE PRECISION dlength, zoldist, totflux, surflux, oldsflx,&
-     &                 htest2
+      INTEGER i
+      INTEGER ick
+      INTEGER iset
+      INTEGER iwav
+      INTEGER numwaves
+      INTEGER iuzntemp
+      INTEGER ntotuzn
+      DOUBLE PRECISION dlength
+      DOUBLE PRECISION zoldist
+      DOUBLE PRECISION totflux
+      DOUBLE PRECISION surflux
+      DOUBLE PRECISION oldsflx
+      DOUBLE PRECISION htest2
 !     -----------------------------------------------------------------
 !
 !1------ROUTE WAVES THROUGH EACH UNSATURATED ZONE COMPARTMENT BENEATH
@@ -7030,19 +7710,42 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      REAL Fks, Seep, Deltinc
-      INTEGER Iwidthcheck, L, Icalc
-      INTEGER Nwavst(ISUZN), Itrlst(NSTOTRL), Ltrlst(NSTOTRL)
-      DOUBLE PRECISION Uzwdth(ISUZN), Uzflwt(ISUZN), Uzolsflx(ISUZN),&
-     &                 Uzseep(ISUZN)
-      DOUBLE PRECISION Uzspst(NSTOTRL), Uzflst(NSTOTRL),&
-     &                 Uzdpst(NSTOTRL), Uzthst(NSTOTRL)
-      DOUBLE PRECISION H, Hld, Thr, Thetas, Epsilon, Sbot
+      REAL Fks
+      REAL Seep
+      REAL Deltinc
+      INTEGER Iwidthcheck
+      INTEGER L
+      INTEGER Icalc
+      INTEGER Nwavst(ISUZN)
+      INTEGER Itrlst(NSTOTRL)
+      INTEGER Ltrlst(NSTOTRL)
+      DOUBLE PRECISION Uzwdth(ISUZN)
+      DOUBLE PRECISION Uzflwt(ISUZN)
+      DOUBLE PRECISION Uzolsflx(ISUZN)
+      DOUBLE PRECISION Uzseep(ISUZN)
+      DOUBLE PRECISION Uzspst(NSTOTRL)
+      DOUBLE PRECISION Uzflst(NSTOTRL)
+      DOUBLE PRECISION Uzdpst(NSTOTRL)
+      DOUBLE PRECISION Uzthst(NSTOTRL)
+      DOUBLE PRECISION H
+      DOUBLE PRECISION Hld
+      DOUBLE PRECISION Thr
+      DOUBLE PRECISION Thetas
+      DOUBLE PRECISION Epsilon
+      DOUBLE PRECISION Sbot
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      INTEGER i, ick, iset, numwaves, iuzntemp
-      DOUBLE PRECISION dlength, zoldist, totflux, surflux, oldsflx
+      INTEGER i
+      INTEGER ick
+      INTEGER iset
+      INTEGER numwaves
+      INTEGER iuzntemp
+      DOUBLE PRECISION dlength
+      DOUBLE PRECISION zoldist
+      DOUBLE PRECISION totflux
+      DOUBLE PRECISION surflux
+      DOUBLE PRECISION oldsflx
 !     -----------------------------------------------------------------
 !
 !1------ROUTE WAVES THROUGH EACH UNSATURATED ZONE COMPARTMENT BENEATH
@@ -7108,18 +7811,40 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER I, Jpnt, Numwaves, Itrwave(NSTOTRL), Ltrail(NSTOTRL)
-      REAL Fksat, Deltinc
-      DOUBLE PRECISION Depth(NSTOTRL), Theta(NSTOTRL), Flux(NSTOTRL),&
-     &                 Speed(NSTOTRL)
-      DOUBLE PRECISION Dlength, Zoldist, Totalflux, Surflux, Oldsflx,&
-     &                 Thetar, Thetas, Eps
+      INTEGER I
+      INTEGER Jpnt
+      INTEGER Numwaves
+      INTEGER Itrwave(NSTOTRL)
+      INTEGER Ltrail(NSTOTRL)
+      REAL Fksat
+      REAL Deltinc
+      DOUBLE PRECISION Depth(NSTOTRL)
+      DOUBLE PRECISION Theta(NSTOTRL)
+      DOUBLE PRECISION Flux(NSTOTRL)
+      DOUBLE PRECISION Speed(NSTOTRL)
+      DOUBLE PRECISION Dlength
+      DOUBLE PRECISION Zoldist
+      DOUBLE PRECISION Totalflux
+      DOUBLE PRECISION Surflux
+      DOUBLE PRECISION Oldsflx
+      DOUBLE PRECISION Thetar
+      DOUBLE PRECISION Thetas
+      DOUBLE PRECISION Eps
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION ffcheck, feps2, feps, time, fm, dlength2
+      DOUBLE PRECISION ffcheck
+      DOUBLE PRECISION feps2
+      DOUBLE PRECISION feps
+      DOUBLE PRECISION time
+      DOUBLE PRECISION fm
+      DOUBLE PRECISION dlength2
       REAL thetadif
-      INTEGER itester, j, jj, jm1, itrailflg
+      INTEGER itester
+      INTEGER j
+      INTEGER jj
+      INTEGER jm1
+      INTEGER itrailflg
 !     ------------------------------------------------------------------
       time = 0.0D0
       Totalflux = 0.0D0
@@ -7268,21 +7993,61 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER Itester, Jpnt, Numwaves, Itrailflg
-      INTEGER Itrwave(NSTOTRL), Ltrail(NSTOTRL)
-      REAL Fksat, Deltinc
-      DOUBLE PRECISION Depth(NSTOTRL), Theta(NSTOTRL), Flux(NSTOTRL),&
-     &                 Speed(NSTOTRL)
-      DOUBLE PRECISION Feps2, Totalflux, Surflux, Oldsflx, Thetar, Time
-      DOUBLE PRECISION Eps, Thetas
+      INTEGER Itester
+      INTEGER Jpnt
+      INTEGER Numwaves
+      INTEGER Itrailflg
+      INTEGER Itrwave(NSTOTRL)
+      INTEGER Ltrail(NSTOTRL)
+      REAL Fksat
+      REAL Deltinc
+      DOUBLE PRECISION Depth(NSTOTRL)
+      DOUBLE PRECISION Theta(NSTOTRL)
+      DOUBLE PRECISION Flux(NSTOTRL)
+      DOUBLE PRECISION Speed(NSTOTRL)
+      DOUBLE PRECISION Feps2
+      DOUBLE PRECISION Totalflux
+      DOUBLE PRECISION Surflux
+      DOUBLE PRECISION Oldsflx
+      DOUBLE PRECISION Thetar
+      DOUBLE PRECISION Time
+      DOUBLE PRECISION Eps
+      DOUBLE PRECISION Thetas
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION ffcheck, bottomtime, shortest, fcheck, fhold
-      DOUBLE PRECISION eps_m1, checktime(NSTOTRL), timenew, feps3
-      REAL big, comp1, comp2, diff, f7, f8, ftheta1, ftheta2
-      INTEGER idif, iflag, iflag2, iflx, iremove, itrwaveb, j, jj, k,&
-     &        kk, l, jpnwavesm1, jpntpkm1, jpntpkm2, more(NSTOTRL)
+      DOUBLE PRECISION ffcheck
+      DOUBLE PRECISION bottomtime
+      DOUBLE PRECISION shortest
+      DOUBLE PRECISION fcheck
+      DOUBLE PRECISION fhold
+      DOUBLE PRECISION eps_m1
+      DOUBLE PRECISION checktime(NSTOTRL)
+      DOUBLE PRECISION timenew
+      DOUBLE PRECISION feps3
+      REAL big
+      REAL comp1
+      REAL comp2
+      REAL diff
+      REAL f7
+      REAL f8
+      REAL ftheta1
+      REAL ftheta2
+      INTEGER idif
+      INTEGER iflag
+      INTEGER iflag2
+      INTEGER iflx
+      INTEGER iremove
+      INTEGER itrwaveb
+      INTEGER j
+      INTEGER jj
+      INTEGER k
+      INTEGER kk
+      INTEGER l
+      INTEGER jpnwavesm1
+      INTEGER jpntpkm1
+      INTEGER jpntpkm2
+      INTEGER more(NSTOTRL)
 !     ------------------------------------------------------------------
 !     ADDED FEPS3 TO LIMIT CHANGES IN WATER CONTENT.
       eps_m1 = Eps - 1.0D0
@@ -7741,15 +8506,36 @@
 !     ARGUMENTS
 !     ------------------------------------------------------------------
       REAL Fksat
-      INTEGER Numwaves, I, Jpnt, Itrwave(NSTOTRL), Ltrail(NSTOTRL)
-      DOUBLE PRECISION Speed(NSTOTRL), Flux(NSTOTRL), Depth(NSTOTRL),&
-     &                 Theta(NSTOTRL), Surflux, Thetar, Thetas, Eps
+      INTEGER Numwaves
+      INTEGER I
+      INTEGER Jpnt
+      INTEGER Itrwave(NSTOTRL)
+      INTEGER Ltrail(NSTOTRL)
+      DOUBLE PRECISION Speed(NSTOTRL)
+      DOUBLE PRECISION Flux(NSTOTRL)
+      DOUBLE PRECISION Depth(NSTOTRL)
+      DOUBLE PRECISION Theta(NSTOTRL)
+      DOUBLE PRECISION Surflux
+      DOUBLE PRECISION Thetar
+      DOUBLE PRECISION Thetas
+      DOUBLE PRECISION Eps
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      DOUBLE PRECISION smoist, smoistinc, ftrail, fhold, eps_m1
+      DOUBLE PRECISION smoist
+      DOUBLE PRECISION smoistinc
+      DOUBLE PRECISION ftrail
+      DOUBLE PRECISION fhold
+      DOUBLE PRECISION eps_m1
       REAL fnuminc
-      INTEGER j, jj, jk, kk, numtrail2, jpnwavesm1, jpnwavesm2, jpntpjm1
+      INTEGER j
+      INTEGER jj
+      INTEGER jk
+      INTEGER kk
+      INTEGER numtrail2
+      INTEGER jpnwavesm1
+      INTEGER jpnwavesm2
+      INTEGER jpntpjm1
 !     ------------------------------------------------------------------
       eps_m1 = Eps - 1.0D0
       THETAB = Theta(Jpnt)
@@ -7844,13 +8630,36 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER Istsg, L
+      INTEGER Istsg
+      INTEGER L
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      REAL area, area1, b, chap, ffmax, ffmin, finc, fmax, fmin, slope,&
-     &     stage, wethold, wetted, xinc, xmid, xx, y1, y2, yy
-      INTEGER i, ii, j, k, ll, mark(20)
+      REAL area
+      REAL area1
+      REAL b
+      REAL chap
+      REAL ffmax
+      REAL ffmin
+      REAL finc
+      REAL fmax
+      REAL fmin
+      REAL slope
+      REAL stage
+      REAL wethold
+      REAL wetted
+      REAL xinc
+      REAL xmid
+      REAL xx
+      REAL y1
+      REAL y2
+      REAL yy
+      INTEGER i
+      INTEGER ii
+      INTEGER j
+      INTEGER k
+      INTEGER ll
+      INTEGER mark(20)
       DOUBLE PRECISION dpthinc
       ALLOCATABLE dpthinc(:,:)
       ALLOCATE (dpthinc(ISUZN,NUZST))
@@ -7986,18 +8795,54 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER Icalc, Istsg, Nreach, L, Itstr
-      DOUBLE PRECISION Flobot, Slope, Cdpth, Fdpth, Width, Qa, Qb, Qc,&
-     &                 Qd, Awdth, Bwdth
-      REAL Qcnst, Strlen, Deltinc, Qlat, Chanstor
+      INTEGER Icalc
+      INTEGER Istsg
+      INTEGER Nreach
+      INTEGER L
+      INTEGER Itstr
+      DOUBLE PRECISION Flobot
+      DOUBLE PRECISION Slope
+      DOUBLE PRECISION Cdpth
+      DOUBLE PRECISION Fdpth
+      DOUBLE PRECISION Width
+      DOUBLE PRECISION Qa
+      DOUBLE PRECISION Qb
+      DOUBLE PRECISION Qc
+      DOUBLE PRECISION Qd
+      DOUBLE PRECISION Awdth
+      DOUBLE PRECISION Bwdth
+      REAL Qcnst
+      REAL Strlen
+      REAL Deltinc
+      REAL Qlat
+      REAL Chanstor
       INTRINSIC ABS, DABS
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      INTEGER i, maxiter, iprndpth
-      REAL w_1, stor
-      DOUBLE PRECISION qderiv, dq, delq, flobot2, tol, ab, ac, aa, ad1
-      DOUBLE PRECISION wetperm, depth, qd2, qd3, f11, f12, f1, f2, ad2
+      INTEGER i
+      INTEGER maxiter
+      INTEGER iprndpth
+      REAL w_1
+      REAL stor
+      DOUBLE PRECISION qderiv
+      DOUBLE PRECISION dq
+      DOUBLE PRECISION delq
+      DOUBLE PRECISION flobot2
+      DOUBLE PRECISION tol
+      DOUBLE PRECISION ab
+      DOUBLE PRECISION ac
+      DOUBLE PRECISION aa
+      DOUBLE PRECISION ad1
+      DOUBLE PRECISION wetperm
+      DOUBLE PRECISION depth
+      DOUBLE PRECISION qd2
+      DOUBLE PRECISION qd3
+      DOUBLE PRECISION f11
+      DOUBLE PRECISION f12
+      DOUBLE PRECISION f1
+      DOUBLE PRECISION f2
+      DOUBLE PRECISION ad2
 !     ------------------------------------------------------------------
       iprndpth = 0
       maxiter = 200
@@ -8169,15 +9014,27 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
-      INTEGER Icalc, Istsg, Nreach, Itstr
-      DOUBLE PRECISION Slope, Cdpth, Fdpth, Width, Qa,&
-     &                 Awdth, Bwdth
+      INTEGER Icalc
+      INTEGER Istsg
+      INTEGER Nreach
+      INTEGER Itstr
+      DOUBLE PRECISION Slope
+      DOUBLE PRECISION Cdpth
+      DOUBLE PRECISION Fdpth
+      DOUBLE PRECISION Width
+      DOUBLE PRECISION Qa
+      DOUBLE PRECISION Awdth
+      DOUBLE PRECISION Bwdth
       REAL Qcnst
 !     ------------------------------------------------------------------
 !     LOCAL VARIABLES
 !     ------------------------------------------------------------------
-      INTEGER maxiter, iprndpth
-      DOUBLE PRECISION aa, wetperm, depth, CALC_XSA
+      INTEGER maxiter
+      INTEGER iprndpth
+      DOUBLE PRECISION aa
+      DOUBLE PRECISION wetperm
+      DOUBLE PRECISION depth
+      DOUBLE PRECISION CALC_XSA
 !     ------------------------------------------------------------------
       iprndpth = 0
       maxiter = 200
@@ -8224,7 +9081,11 @@
       IMPLICIT NONE
       EXTERNAL FLOWTERP
       REAL FLOWTERP
-      INTEGER i, iseg, Iunitlak, istsg, lk
+      INTEGER i
+      INTEGER iseg
+      INTEGER Iunitlak
+      INTEGER istsg
+      INTEGER lk
 !     ------------------------------------------------------------------
 !
 !1------CALL LINEAR INTERPOLATION ROUTINE
@@ -8269,8 +9130,21 @@
 !!     +                        CLOSEZERO
       USE GWFBASMODULE, ONLY: DELT
       IMPLICIT NONE
-      REAL TIME, FLOW, TIMEBEG, TIMEND, TIMESTART, SUMFLOW, TOLF2
-      INTEGER INUM, IEND, ISTM1, ISTART, iflg, ISEG, NVAL, I
+      REAL TIME
+      REAL FLOW
+      REAL TIMEBEG
+      REAL TIMEND
+      REAL TIMESTART
+      REAL SUMFLOW
+      REAL TOLF2
+      INTEGER INUM
+      INTEGER IEND
+      INTEGER ISTM1
+      INTEGER ISTART
+      INTEGER iflg
+      INTEGER ISEG
+      INTEGER NVAL
+      INTEGER I
       TOLF2=1.0E-4
       FLOW = 0.0
       NVAL = ISFRLIST(2,INUM)
@@ -8325,7 +9199,14 @@
 ! h is the depth 
 ! dwdh is the derivative of width with respect to depth
       IMPLICIT NONE
-      DOUBLE PRECISION h, s, aa, ad, b, x, y, dwdh
+      DOUBLE PRECISION h
+      DOUBLE PRECISION s
+      DOUBLE PRECISION aa
+      DOUBLE PRECISION ad
+      DOUBLE PRECISION b
+      DOUBLE PRECISION x
+      DOUBLE PRECISION y
+      DOUBLE PRECISION dwdh
       smooth = 0.0D0
       s = 1.0d-5
       x = h
@@ -8356,6 +9237,7 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
       INTEGER IGRID
 !     ------------------------------------------------------------------
       DEALLOCATE (GWFSFRDAT(IGRID)%NSS)
@@ -8472,6 +9354,7 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
       INTEGER IGRID
 !     ------------------------------------------------------------------
       NFLOWTYPE=>GWFSFRDAT(IGRID)%NFLOWTYPE
@@ -8587,6 +9470,7 @@
 !     ------------------------------------------------------------------
 !     ARGUMENTS
 !     ------------------------------------------------------------------
+      IMPLICIT NONE
       INTEGER IGRID
 !     ------------------------------------------------------------------
       GWFSFRDAT(IGRID)%NFLOWTYPE=>NFLOWTYPE
