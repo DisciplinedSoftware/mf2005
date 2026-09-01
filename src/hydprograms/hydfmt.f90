@@ -508,25 +508,25 @@
       IMPLICIT NONE
       REAL :: DELTIM
       REAL :: FYY
-      INTEGER :: IDATE
-      INTEGER :: IDAYS
-      INTEGER :: ISTART
+      INTEGER, INTENT(INOUT) :: IDATE
+      INTEGER, INTENT(IN) :: IDAYS
+      INTEGER, INTENT(IN) :: ISTART
       INTEGER :: ISTY
-      INTEGER :: ITIME
+      INTEGER, INTENT(INOUT) :: ITIME
       INTEGER :: ITIME2
-      INTEGER :: ITMUNI
+      INTEGER, INTENT(IN) :: ITMUNI
       INTEGER :: IYY
       REAL :: REMTIM
-      REAL :: START
-      REAL :: TOTIM
+      REAL, INTENT(IN) :: START
+      REAL, INTENT(INOUT) :: TOTIM
       REAL :: YR
       REAL :: YY
-      CHARACTER TIMTYP*1
-      CHARACTER ELPTYP*1
+      CHARACTER(LEN=1), INTENT(IN) :: TIMTYP
+      CHARACTER(LEN=1), INTENT(IN) :: ELPTYP
       CHARACTER LEAPYR*1
       INTEGER DATE1
       INTEGER DAYS
-      LOGICAL FIRST
+      LOGICAL, INTENT(IN) :: FIRST
 !C
       COMMON /T/YR,LEAPYR
 !C
@@ -651,7 +651,7 @@
       INTEGER :: M
       INTEGER :: MONTH
       REAL :: YR
-      INTEGER DAT
+      INTEGER, INTENT(IN) :: DAT
       INTEGER YEAR
       INTEGER DAY
       INTEGER DAYM(12)
@@ -699,7 +699,7 @@
       INTEGER :: I
       INTEGER :: J
       INTEGER :: L
-      INTEGER DAYS
+      INTEGER, INTENT(IN) :: DAYS
       INTEGER DAYM(12,2)
       SAVE :: DAYM
       INTEGER YY
@@ -739,9 +739,9 @@
 !     ------------------------------------------------------------------
        IMPLICIT NONE
        INTEGER :: N
-       INTEGER DIMS
-       INTEGER LEN
-       CHARACTER STRING*80
+       INTEGER, INTENT(IN) :: DIMS
+       INTEGER, INTENT(INOUT) :: LEN
+       CHARACTER(LEN=80), INTENT(IN) :: STRING
        DO 10 N=DIMS,1,-1
        IF(STRING(N:N).NE.' ')GO TO 20
 10     CONTINUE
@@ -763,7 +763,7 @@
 !     ------------------------------------------------------------------
       IMPLICIT NONE
       INTEGER :: I
-      CHARACTER STRING*20
+      CHARACTER(LEN=20), INTENT(INOUT) :: STRING
       DO 10 I=1,20
       IF(STRING(I:I).NE.' ') GO TO 20
 10    CONTINUE
