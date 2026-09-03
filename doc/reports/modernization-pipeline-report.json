@@ -1,16 +1,38 @@
 {
-  "generated": "2026-09-01T09:34:35-04:00",
+  "generated": "2026-09-02T08:17:10-04:00",
   "project_root": "/home/pluck/Documents/DisciplinedSoftware/Modernization/code/mf2005",
   "configurations": [
     "gcc-release-single",
-    "gcc-release-double"
+    "gcc-release-double",
+    "gcc-debug-single",
+    "gcc-debug-double",
+    "gcc-debugoptimized-single",
+    "gcc-debugoptimized-double",
+    "gcc-plain-single",
+    "gcc-plain-double",
+    "gcc-minsize-single",
+    "gcc-minsize-double",
+    "gcc-custom-single",
+    "gcc-custom-double",
+    "intel-release-single",
+    "intel-release-double",
+    "intel-debug-single",
+    "intel-debug-double",
+    "intel-debugoptimized-single",
+    "intel-debugoptimized-double",
+    "intel-plain-single",
+    "intel-plain-double",
+    "intel-minsize-single",
+    "intel-minsize-double",
+    "intel-custom-single",
+    "intel-custom-double"
   ],
   "steps": [
     {
       "name": "calibrate",
       "status": "passed",
-      "seconds": 9.51,
-      "summary": "54 files x 2 configurations, noise floor clean",
+      "seconds": 118.022,
+      "summary": "54 files x 24 configurations, noise floor clean",
       "counts": {
         "clean": 54
       },
@@ -19,378 +41,378 @@
           "file": "de47.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gmg7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gmg7_c_interface.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2bas7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2bcf7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2chd7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2drn7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2drt7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2ets7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2evt7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2fhb7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2gag7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2ghb7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2hfb7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2huf7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2hydmod7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2ibs7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2lak7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2lpf7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2mnw17.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2mnw27.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2mnw2i7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2rch7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2res7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2riv7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2sfr7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2str7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2sub7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2swi27.F90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2swr7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2swr7util.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2swt7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2uzf1.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwf2wel7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwflakmodule.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwfsfrmodule.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "gwfuzfmodule.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "hufutl7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "hydprograms/hydfmt.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "lmt8.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "mf2005.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "mhc7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "obs2bas7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "obs2chd7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "obs2drn7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "obs2ghb7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "obs2riv7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "obs2str7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "parutl7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "pcg7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "pcgn2.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "pcgn_solve2.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "sip7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         },
         {
           "file": "utl7.f90",
           "status": "clean",
           "evidence": {
-            "configurations": 2
+            "configurations": 24
           }
         }
       ]
@@ -398,7 +420,7 @@
     {
       "name": "roundtrip",
       "status": "passed",
-      "seconds": 25.315,
+      "seconds": 25.223,
       "summary": "54 files re-emitted under gcc-release-single, all identical",
       "counts": {
         "clean": 54
@@ -786,12 +808,298 @@
     },
     {
       "name": "types",
-      "status": "failed",
-      "seconds": 39.76,
-      "summary": "GateError: lmt8.f90: -fdump-fortran-original failed (exit 1):\nf951: internal compiler error: show_code_node(): Bad statement code\n0x7b742f42a600 __libc_start_call_main\n\t../sysdeps/nptl/libc_start_call_main.h:59\n0x7b742f42a717 __libc_start_main_impl\n\t../csu/libc-start.c:360\nPlease submit a full bug report, with preprocessed source (by using -freport-bug).\nPlease include the complete backtrace with any bug report.\nSee <file:///usr/share/doc/gcc-15/README.Bugs> for instructions.",
+      "status": "skipped",
+      "seconds": 0.0,
+      "summary": "not selected",
       "counts": {},
       "items": []
+    },
+    {
+      "name": "single-decls",
+      "status": "passed-with-parked",
+      "seconds": 0.583,
+      "summary": "0 applied, 52 clean, 4 parked, 0 failed",
+      "counts": {
+        "clean": 52,
+        "parked": 4
+      },
+      "items": [
+        {
+          "file": "de47.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gmg7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gmg7_c_interface.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2bas7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2bcf7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2chd7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2drn7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2drt7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2ets7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2evt7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2fhb7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2gag7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2ghb7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2hfb7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2huf7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2hydmod7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2ibs7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2lak7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2lpf7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2mnw17.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2mnw27.f90",
+          "status": "parked",
+          "unit": "GWF2MNW27HUF",
+          "subject": "VERYSMALL",
+          "reason": "interleaved comments"
+        },
+        {
+          "file": "gwf2mnw27.f90",
+          "status": "parked",
+          "unit": "MNW2HORIZ",
+          "subject": "X1FACE1",
+          "reason": "interleaved comments"
+        },
+        {
+          "file": "gwf2mnw27.f90",
+          "status": "parked",
+          "unit": "CEL2WEL2SEG",
+          "subject": "PI",
+          "reason": "interleaved comments"
+        },
+        {
+          "file": "gwf2mnw2i7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2rch7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2res7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2riv7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2sfr7.f90",
+          "status": "parked",
+          "unit": "GWF2SFR7FM",
+          "subject": "I",
+          "reason": "interleaved comments"
+        },
+        {
+          "file": "gwf2str7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2sub7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2swi27.F90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2swr7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2swr7util.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2swt7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2uzf1.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwf2wel7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwflakmodule.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwfsfrmodule.f90",
+          "status": "clean"
+        },
+        {
+          "file": "gwfuzfmodule.f90",
+          "status": "clean"
+        },
+        {
+          "file": "hufutl7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "hydprograms/hydfmt.f90",
+          "status": "clean"
+        },
+        {
+          "file": "lmt8.f90",
+          "status": "clean"
+        },
+        {
+          "file": "mf2005.f90",
+          "status": "clean"
+        },
+        {
+          "file": "mhc7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "obs2bas7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "obs2chd7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "obs2drn7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "obs2ghb7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "obs2riv7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "obs2str7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "parutl7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "pcg7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "pcgn2.f90",
+          "status": "clean"
+        },
+        {
+          "file": "pcgn_solve2.f90",
+          "status": "clean"
+        },
+        {
+          "file": "sip7.f90",
+          "status": "clean"
+        },
+        {
+          "file": "utl7.f90",
+          "status": "clean"
+        }
+      ],
+      "legs": {
+        "leg_3": {
+          "kind": "grammar-identity",
+          "gate_falsifiability": "token-driven reconstruction is parse-preserving",
+          "instruments": [
+            "token-driven reconstruction"
+          ],
+          "description": "Entity-list parsing and per-entity reconstruction; no semantic fact inferred."
+        },
+        "leg_2": {
+          "form": "sourcemap-spans",
+          "certified": true
+        }
+      }
+    },
+    {
+      "name": "explicit-types",
+      "status": "failed",
+      "seconds": 1.639,
+      "summary": "GateError: lmt8.f90: -fdump-fortran-original failed (exit 1):\nf951: internal compiler error: show_code_node(): Bad statement code\n0x7c596ba2a600 __libc_start_call_main\n\t../sysdeps/nptl/libc_start_call_main.h:59\n0x7c596ba2a717 __libc_start_main_impl\n\t../csu/libc-start.c:360\nPlease submit a full bug report, with preprocessed source (by using -freport-bug).\nPlease include the complete backtrace with any bug report.\nSee <file:///usr/share/doc/gcc-15/README.Bugs> for instructions.",
+      "counts": {},
+      "items": [],
+      "legs": {
+        "leg_3": {
+          "kind": "single-oracle",
+          "gate_falsifiability": "wrong type breaks compile or moves object",
+          "instruments": [
+            "gfortran -fdump-fortran-original",
+            "fparser implicit-rule",
+            "lfortran ASR"
+          ],
+          "description": "Type derivation via gfortran dump oracle; fparser and lfortran kept as insurance (3-way agreement validates corpus consistency)."
+        },
+        "leg_2": {
+          "form": "sourcemap-spans",
+          "certified": true
+        }
+      }
     }
   ],
-  "stopped_on": "types"
+  "stopped_on": "explicit-types"
 }
