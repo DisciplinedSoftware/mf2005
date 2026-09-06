@@ -1,0 +1,5 @@
+{
+  // Limit fortls to the real sources. builds/build-logs holds ~59k gitignored
+  // copies of these files and fortls does not honor .gitignore.
+  "source_dirs": ["src/**"]
+}
